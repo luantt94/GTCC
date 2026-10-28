@@ -1,9 +1,16 @@
-"""Tab CẬP NHẬT WEB: chọn 1 hoặc nhiều file Excel rồi bấm 1 nút để đẩy số liệu
-giáo viên lên trang web (GitHub Pages).
+"""Tab NGUỒN DỮ LIỆU & CẬP NHẬT WEB: khai báo tất cả nguồn dữ liệu rồi bấm 1
+nút để đẩy lên trang web (GitHub Pages).
 
-Người dùng chỉ cần: chọn file Excel (nhớ lựa chọn cho lần sau), rồi bấm nút.
-Toàn bộ convert Excel -> JSON công khai -> git commit/push chạy ngầm,
-không cần biết gì về git.
+Nguồn dữ liệu gồm:
+- File Excel "BIÊN CHẾ XE KHÓA xxxx.xlsx" (mỗi khóa 1 file, thêm/xóa được)
+- File PDF "LICH HOC THUC HANH xxxx.pdf" (mỗi khóa 1 file, thêm/xóa được)
+- File DSGV_*.xml: danh sách TOÀN BỘ giáo viên (nguồn mã QR chính thức)
+- File DSXTL_*.xml: danh sách xe tập lái (đối chiếu biển số)
+- Thư mục giấy tờ xe tập lái (.docx/.pdf theo biển số)
+- Thư mục hồ sơ cá nhân giáo viên (.pdf theo tên)
+
+Người dùng không cần biết git: toàn bộ convert -> JSON công khai ->
+git commit/push chạy ngầm khi bấm nút "Cập nhật && Đăng lên web".
 """
 from pathlib import Path
 
@@ -13,6 +20,7 @@ from PySide6.QtWidgets import (
     QGroupBox,
     QHBoxLayout,
     QLabel,
+    QLineEdit,
     QListWidget,
     QMessageBox,
     QPushButton,
@@ -25,17 +33,102 @@ import publish_data
 import git_publish
 
 
+class _FileListPicker(QGroupBox):
+    """Khung: danh sách nhiều file + nút Thêm / Xóa mục chọn."""
+
+    def __init__(self, title, file_filter, parent=None):
+        super().__init__(title, parent)
+        self.file_filter = file_filter
+        layout = QVBoxLayout(self)
+
+        self.lst = QListWidget()
+        self.lst.setFixedHeight(90)
+        self.lst.setSelectionMode(QListWidget.SelectionMode.ExtendedSelection)
+        layout.addWidget(self.lst)
+
+        btn_row = QHBoxLayout()
+        btn_add = QPushButton("Thêm...")
+        btn_add.clicked.connect(self._on_add)
+        btn_row.addWidget(btn_add)
+        btn_remove = QPushButton("Xóa mục chọn")
+        btn_remove.clicked.connect(self._on_remove)
+        btn_row.addWidget(btn_remove)
+        btn_row.addStretch(1)
+        layout.addLayout(btn_row)
+
+    def _on_add(self):
+        existing = self.paths()
+        start_dir = str(Path(existing[0]).parent) if existing else ""
+        files, _ = QFileDialog.getOpenFileNames(
+            self, f"Chọn file - {self.title()}", start_dir, self.file_filter
+        )
+        if not files:
+            return
+        existing_set = set(existing)
+        for f in files:
+            if f not in existing_set:
+                self.lst.addItem(f)
+
+    def _on_remove(self):
+        for item in self.lst.selectedItems():
+            self.lst.takeItem(self.lst.row(item))
+
+    def paths(self):
+        return [self.lst.item(i).text() for i in range(self.lst.count())]
+
+    def set_paths(self, paths):
+        self.lst.clear()
+        for p in paths:
+            self.lst.addItem(str(p))
+
+
+class _SinglePathPicker(QGroupBox):
+    """Khung: 1 đường dẫn (file hoặc thư mục) + nút Chọn."""
+
+    def __init__(self, title, mode="file", file_filter="", parent=None):
+        super().__init__(title, parent)
+        self.mode = mode
+        self.file_filter = file_filter
+        layout = QHBoxLayout(self)
+        self.txt = QLineEdit()
+        self.txt.setReadOnly(True)
+        layout.addWidget(self.txt, 1)
+        btn = QPushButton("Chọn...")
+        btn.clicked.connect(self._on_choose)
+        layout.addWidget(btn)
+
+    def _on_choose(self):
+        if self.mode == "file":
+            start_dir = str(Path(self.txt.text()).parent) if self.txt.text() else ""
+            path, _ = QFileDialog.getOpenFileName(
+                self, f"Chọn file - {self.title()}", start_dir, self.file_filter
+            )
+        else:
+            start_dir = self.txt.text() or ""
+            path = QFileDialog.getExistingDirectory(
+                self, f"Chọn thư mục - {self.title()}", start_dir
+            )
+        if path:
+            self.txt.setText(path)
+
+    def path(self):
+        return self.txt.text().strip()
+
+    def set_path(self, path):
+        self.txt.setText(str(path) if path else "")
+
+
 class _PublishWorker(QThread):
     finished_ok = Signal(dict)
     finished_err = Signal(str)
 
-    def __init__(self, excel_paths, parent=None):
+    def __init__(self, sources, parent=None):
         super().__init__(parent)
-        self.excel_paths = excel_paths
+        self.sources = sources
 
     def run(self):
         try:
-            result = publish_data.run_pipeline(self.excel_paths)
+            result = publish_data.run_pipeline(self.sources)
             ok, message = git_publish.push_public_data(
                 f"Cập nhật số liệu giáo viên ({result['generated_at']})"
             )
@@ -50,40 +143,70 @@ class CapNhatWebTab(QWidget):
     def __init__(self, parent=None):
         super().__init__(parent)
         self.worker = None
-        self.excel_paths = publish_data.load_selected_excel_files()
         self._build_ui()
-        self._refresh_file_list()
+        self._load_sources()
 
     def _build_ui(self):
         outer = QVBoxLayout(self)
 
-        file_box = QGroupBox("File Excel nguồn (có thể chọn nhiều file, sẽ được gộp chung)")
-        file_layout = QVBoxLayout(file_box)
+        self.pick_bien_che = _FileListPicker(
+            'File Excel "BIÊN CHẾ XE KHÓA ..." (mỗi khóa 1 file)',
+            "Excel Files (*.xlsx)",
+        )
+        outer.addWidget(self.pick_bien_che)
 
-        self.lst_files = QListWidget()
-        self.lst_files.setFixedHeight(90)
-        file_layout.addWidget(self.lst_files)
+        self.pick_lich_hoc = _FileListPicker(
+            'File PDF "LICH HOC THUC HANH ..." (mỗi khóa 1 file)',
+            "PDF Files (*.pdf)",
+        )
+        outer.addWidget(self.pick_lich_hoc)
 
-        btn_row = QHBoxLayout()
-        btn_choose = QPushButton("Chọn file Excel...")
-        btn_choose.clicked.connect(self._on_choose_files)
-        btn_row.addWidget(btn_choose)
-        btn_row.addStretch(1)
-        file_layout.addLayout(btn_row)
+        row1 = QHBoxLayout()
+        self.pick_dsgv = _SinglePathPicker(
+            "Danh sách giáo viên (DSGV_*.xml)", mode="file", file_filter="XML Files (*.xml)"
+        )
+        row1.addWidget(self.pick_dsgv)
+        self.pick_dsxtl = _SinglePathPicker(
+            "Danh sách xe tập lái (DSXTL_*.xml)", mode="file", file_filter="XML Files (*.xml)"
+        )
+        row1.addWidget(self.pick_dsxtl)
+        outer.addLayout(row1)
 
-        outer.addWidget(file_box)
+        row2 = QHBoxLayout()
+        self.pick_xe_folder = _SinglePathPicker("Thư mục giấy tờ xe tập lái", mode="folder")
+        row2.addWidget(self.pick_xe_folder)
+        self.pick_ho_so_folder = _SinglePathPicker(
+            "Thư mục hồ sơ cá nhân giáo viên", mode="folder"
+        )
+        row2.addWidget(self.pick_ho_so_folder)
+        outer.addLayout(row2)
+
+        pass_box = QGroupBox(
+            "Mật khẩu xem hồ sơ cá nhân giáo viên (áp dụng cho mọi giáo viên)"
+        )
+        pass_layout = QHBoxLayout(pass_box)
+        self.txt_password = QLineEdit()
+        self.txt_password.setEchoMode(QLineEdit.EchoMode.Password)
+        self.txt_password.setPlaceholderText(
+            "Để trống = ẩn hoàn toàn mục hồ sơ cá nhân trên trang web"
+        )
+        settings = publish_data.load_app_settings()
+        self.txt_password.setText(settings.get("ho_so_password", ""))
+        pass_layout.addWidget(self.txt_password)
+        btn_save_password = QPushButton("Lưu mật khẩu")
+        btn_save_password.clicked.connect(self._on_save_password)
+        pass_layout.addWidget(btn_save_password)
+        outer.addWidget(pass_box)
 
         box = QGroupBox("Đăng số liệu giáo viên lên trang web")
         box_layout = QVBoxLayout(box)
-
         box_layout.addWidget(
             QLabel(
-                "Sau khi đã chọn đúng file Excel và lưu dữ liệu mới nhất, bấm nút\n"
-                "dưới đây để đăng số liệu lên trang web.\n"
-                "Mã QR của giáo viên không đổi, chỉ nội dung trang được cập nhật."
+                "Kiểm tra lại các nguồn dữ liệu ở trên rồi bấm nút dưới đây để\n"
+                "đăng số liệu lên trang web. Mã QR của mỗi giáo viên cố định\n"
+                "theo mã GV chính thức (DSGV), không đổi giữa các lần cập nhật."
             )
         )
-
         self.btn_publish = QPushButton("Cập nhật && Đăng lên web")
         self.btn_publish.clicked.connect(self._on_publish_clicked)
         box_layout.addWidget(self.btn_publish)
@@ -96,37 +219,55 @@ class CapNhatWebTab(QWidget):
         outer.addWidget(box)
         outer.addStretch(1)
 
-    def _refresh_file_list(self):
-        self.lst_files.clear()
-        if not self.excel_paths:
-            self.lst_files.addItem("(Chưa chọn file nào)")
-            return
-        for p in self.excel_paths:
-            self.lst_files.addItem(Path(p).name)
+    def _load_sources(self):
+        sources = publish_data.load_data_sources()
+        self.pick_bien_che.set_paths(sources.get("bien_che_files", []))
+        self.pick_lich_hoc.set_paths(sources.get("lich_hoc_files", []))
+        self.pick_dsgv.set_path(sources.get("dsgv_file", ""))
+        self.pick_dsxtl.set_path(sources.get("dsxtl_file", ""))
+        self.pick_xe_folder.set_path(sources.get("xe_folder", ""))
+        self.pick_ho_so_folder.set_path(sources.get("ho_so_folder", ""))
 
-    def _on_choose_files(self):
-        start_dir = str(Path(self.excel_paths[0]).parent) if self.excel_paths else ""
-        files, _ = QFileDialog.getOpenFileNames(
-            self, "Chọn file Excel", start_dir, "Excel Files (*.xlsx)"
+    def _current_sources(self):
+        return {
+            "bien_che_files": self.pick_bien_che.paths(),
+            "lich_hoc_files": self.pick_lich_hoc.paths(),
+            "dsgv_file": self.pick_dsgv.path(),
+            "dsxtl_file": self.pick_dsxtl.path(),
+            "xe_folder": self.pick_xe_folder.path(),
+            "ho_so_folder": self.pick_ho_so_folder.path(),
+        }
+
+    def _on_save_password(self):
+        settings = publish_data.load_app_settings()
+        settings["ho_so_password"] = self.txt_password.text().strip()
+        publish_data.save_app_settings(settings)
+        QMessageBox.information(
+            self,
+            "Đã lưu",
+            "Đã lưu mật khẩu. Bấm 'Cập nhật && Đăng lên web' để áp dụng lên trang web.",
         )
-        if not files:
-            return
-        self.excel_paths = files
-        publish_data.save_selected_excel_files(files)
-        self._refresh_file_list()
 
     def _on_publish_clicked(self):
-        if not self.excel_paths:
+        sources = self._current_sources()
+        if not sources["bien_che_files"]:
             QMessageBox.warning(
-                self, "Chưa chọn file", "Hãy bấm 'Chọn file Excel...' trước."
+                self, "Thiếu dữ liệu", "Hãy thêm ít nhất 1 file 'BIÊN CHẾ XE KHÓA ...'."
             )
             return
+        if not sources["dsgv_file"]:
+            QMessageBox.warning(
+                self, "Thiếu dữ liệu", "Hãy chọn file danh sách giáo viên (DSGV_*.xml)."
+            )
+            return
+
+        publish_data.save_data_sources(sources)
 
         self.btn_publish.setEnabled(False)
         self.btn_publish.setText("Đang cập nhật...")
         self.log.append("Đang xử lý, vui lòng chờ...")
 
-        self.worker = _PublishWorker(self.excel_paths)
+        self.worker = _PublishWorker(sources)
         self.worker.finished_ok.connect(self._on_done)
         self.worker.finished_err.connect(self._on_error)
         self.worker.start()
@@ -145,6 +286,10 @@ class CapNhatWebTab(QWidget):
                 "CẢNH BÁO: các mã khóa bị trùng giữa các file (lấy dữ liệu file sau cùng): "
                 + ", ".join(result["ma_khoa_trung"])
             )
+        if result.get("canh_bao"):
+            lines.append("CẢNH BÁO dữ liệu (kiểm tra lại nguồn):")
+            for w in result["canh_bao"]:
+                lines.append("  - " + w)
         if result["giao_vien_moi"]:
             lines.append("Giáo viên MỚI (đã tạo mã QR trong thư mục qr_codes/):")
             for name, tid in result["giao_vien_moi"]:

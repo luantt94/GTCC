@@ -1,5 +1,17 @@
-"""Chuyển dữ liệu từ 2 sheet PHÂN XE và LỊCH HỌC trong file Excel sang data.json
-để app PySide6 (sheet TRA CỨU) sử dụng để tra cứu.
+"""Đọc các file "BIÊN CHẾ XE KHÓA xxxx.xlsx" (mỗi khóa 1 file, xuất từ hệ
+thống quản lý) sang data.json dùng chung cho toàn bộ app.
+
+Mỗi file có 3 sheet:
+- "DS": chỉ có số thứ tự, không dùng.
+- "Sổ phân công GV": có cột "Thời gian" (Từ ngày... đến ngày...) theo khóa -
+  dùng để lấy tu_ngay/den_ngay (sheet chính không còn ghi ngày bắt đầu/kết
+  thúc trong tiêu đề như trước).
+- Sheet trùng tên mã lớp (vd "0626"): có dòng tiêu đề "BIÊN CHẾ XE KHÓA
+  <ma_khoa> (<lop>)" rồi tới bảng học viên, cột E "xe/Gv/Sđt" gộp 3 dòng
+  biển số / tên giáo viên / số điện thoại cho nhóm học viên đi theo xe đó.
+
+Không còn sheet lịch học thực hành theo buổi (lịch học giờ nằm ở file PDF
+riêng, xem attach_files.py) nên trường "lich_hoc" luôn để trống.
 """
 import json
 import re
@@ -8,12 +20,9 @@ from datetime import datetime
 from pathlib import Path
 
 import openpyxl
-from openpyxl.utils import get_column_letter
 
-EXCEL_FILE = "DÙNG QR CODE ĐỂ XUẤT DỮ LIỆU ĐÀO TẠO TỪ GIÁO VIÊN.xlsx"
-OUTPUT_FILE = "data.json"
-
-DAY_COLS = [chr(c) for c in range(ord("B"), ord("Q") + 1)]  # B..Q
+TITLE_RE = re.compile(r"BI[ÊE]N CH[ẾE] XE KH[ÓO]A\s+(\S+)\s*\(([^)]+)\)", re.UNICODE | re.IGNORECASE)
+PERIOD_RE = re.compile(r"T[ừu]\s*([0-9/]+).*?đ[ếe]n\s*([0-9/]+)", re.UNICODE | re.IGNORECASE | re.DOTALL)
 
 
 def clean_text(value):
@@ -21,40 +30,34 @@ def clean_text(value):
         return ""
     text = str(value).strip()
     # loại artifact kiểu "...TÊNB18:B20" lẫn vào nội dung do lỗi nhập liệu nguồn
-    # (PHÂN XE chỉ có cột A..F nên giới hạn ký tự cột A-F, tránh ăn nhầm chữ tên như "VY")
     text = re.sub(r"[A-F]{1,2}\d+:[A-F]{1,2}\d+$", "", text).strip()
     return text
 
 
-def parse_phan_xe(ws):
-    """Trả về dict: ma_khoa -> {lop, tu_ngay, den_ngay, groups:[...]}"""
-    courses = {}
-    current = None
-    current_group = None
+def _find_course_sheet(wb):
+    """Tìm sheet có dòng tiêu đề 'BIÊN CHẾ XE KHÓA ...'. Trả về (ws, title_text)."""
+    for ws in wb.worksheets:
+        for row in ws.iter_rows(min_row=1, max_row=min(ws.max_row, 10), max_col=1):
+            v = row[0].value
+            if v and str(v).strip().upper().startswith("BIÊN CHẾ XE KHÓA"):
+                return ws, str(v).strip()
+    return None, None
 
-    title_re = re.compile(
-        r"KHÓA\s+(\S+)\s*\(([^)]+)\)\s*\n\(Từ ngày:\s*([^\n]+?)\s*đến ngày:\s*([^)]+)\)",
-        re.UNICODE,
-    )
+
+def _parse_groups(ws):
+    """Đọc bảng học viên bắt đầu từ dòng có 'Stt' tới hết sheet.
+    Trả về list groups: [{giao_vien, xe, sdt, hoc_vien: [...]}]."""
+    groups = []
+    current_group = None
+    started = False
 
     for row in ws.iter_rows(min_row=1, max_row=ws.max_row, max_col=6):
         a_val = row[0].value
         a_str = str(a_val).strip() if a_val is not None else ""
 
-        if a_str.startswith("BIÊN CHẾ XE KHÓA"):
-            m = title_re.search(a_str)
-            if m:
-                ma_khoa, lop, tu_ngay, den_ngay = (g.strip() for g in m.groups())
-            else:
-                ma_khoa, lop, tu_ngay, den_ngay = a_str, "", "", ""
-            current = courses.setdefault(
-                ma_khoa,
-                {"ma_khoa": ma_khoa, "lop": lop, "tu_ngay": tu_ngay, "den_ngay": den_ngay, "groups": []},
-            )
-            current_group = None
-            continue
-
-        if a_str == "Stt" or current is None:
+        if not started:
+            if a_str == "Stt":
+                started = True
             continue
 
         if isinstance(a_val, (int, float)):
@@ -68,8 +71,8 @@ def parse_phan_xe(ws):
             if xe_gv_sdt and str(xe_gv_sdt).strip():
                 lines = [clean_text(x) for x in str(xe_gv_sdt).split("\n")]
                 lines = [x for x in lines if x]
-                giao_vien = lines[0] if len(lines) > 0 else ""
-                xe = lines[1] if len(lines) > 1 else ""
+                xe = lines[0] if len(lines) > 0 else ""
+                giao_vien = lines[1] if len(lines) > 1 else ""
                 sdt = lines[2] if len(lines) > 2 else ""
                 current_group = {
                     "giao_vien": giao_vien,
@@ -77,7 +80,7 @@ def parse_phan_xe(ws):
                     "sdt": sdt,
                     "hoc_vien": [],
                 }
-                current["groups"].append(current_group)
+                groups.append(current_group)
 
             if current_group is not None:
                 current_group["hoc_vien"].append(
@@ -90,111 +93,73 @@ def parse_phan_xe(ws):
                     }
                 )
 
-    return courses
+    return groups
 
 
-def parse_lich_hoc(ws):
-    """Trả về dict: ma_khoa -> {lop, hv_per_xe, lich_hoc: [...]}"""
-    courses = {}
-    current = None
-
-    title_re = re.compile(r"KHÓA\s+(\S+)\s*\(([^)]+)\)(?:\s*\((\d+)hv/xe\))?", re.UNICODE)
-
-    all_rows = {}
-    for row in ws.iter_rows(min_row=1, max_row=ws.max_row, max_col=ws.max_column):
-        r = row[0].row
-        all_rows[r] = {get_column_letter(cell.column): cell.value for cell in row}
-
-    for r in sorted(all_rows):
-        cells = all_rows[r]
-        a_val = cells.get("A")
-        a_str = str(a_val).strip() if a_val is not None else ""
-
-        if a_str.startswith("LỊCH HỌC THỰC HÀNH KHÓA"):
-            m = title_re.search(a_str)
-            if m:
-                ma_khoa, lop, hv_per_xe = m.groups()
-                ma_khoa, lop = ma_khoa.strip(), lop.strip()
-                hv_per_xe = int(hv_per_xe) if hv_per_xe else None
-            else:
-                ma_khoa, lop, hv_per_xe = a_str, "", None
-            current = courses.setdefault(
-                ma_khoa, {"ma_khoa": ma_khoa, "lop": lop, "hv_per_xe": hv_per_xe, "lich_hoc": []}
-            )
+def _find_period(wb, ma_khoa):
+    """Lấy (tu_ngay, den_ngay) từ sheet 'Sổ phân công GV' theo mã khóa."""
+    if "Sổ phân công GV" not in wb.sheetnames:
+        return "", ""
+    ws = wb["Sổ phân công GV"]
+    header_seen = False
+    for row in ws.iter_rows(values_only=True):
+        if not header_seen:
+            if row and str(row[0] or "").strip() == "Số TT":
+                header_seen = True
             continue
-
-        if "Thứ" in a_str and "Ngày" in a_str and current is not None:
-            header = cells
-            labels = all_rows.get(r + 1, {})
-            dates = all_rows.get(r + 2, {})
-            sang = all_rows.get(r + 3, {})
-            chieu = all_rows.get(r + 4, {})
-            toi = all_rows.get(r + 5, {})
-
-            for col in DAY_COLS:
-                date_val = dates.get(col)
-                if date_val in (None, ""):
-                    continue
-                if isinstance(date_val, datetime):
-                    date_iso = date_val.strftime("%Y-%m-%d")
-                else:
-                    date_iso = str(date_val)
-                current["lich_hoc"].append(
-                    {
-                        "date": date_iso,
-                        "thu": clean_text(header.get(col)),
-                        "label": clean_text(labels.get(col)),
-                        "sang": clean_text(sang.get(col)),
-                        "chieu": clean_text(chieu.get(col)),
-                        "toi": clean_text(toi.get(col)),
-                    }
-                )
-
-    return courses
+        if len(row) < 4:
+            continue
+        khoa = str(row[3] or "").strip()
+        if khoa == ma_khoa:
+            thoi_gian = str(row[2] or "")
+            m = PERIOD_RE.search(thoi_gian)
+            if m:
+                return m.group(1).strip(), m.group(2).strip()
+    return "", ""
 
 
-def merge(phan_xe_courses, lich_hoc_courses):
-    result = []
-    all_ma_khoa = set(phan_xe_courses) | set(lich_hoc_courses)
-    for ma_khoa in sorted(all_ma_khoa):
-        px = phan_xe_courses.get(ma_khoa, {})
-        lh = lich_hoc_courses.get(ma_khoa, {})
-        lop = px.get("lop") or lh.get("lop") or ""
-        groups = px.get("groups", [])
-        so_hoc_vien = sum(len(g["hoc_vien"]) for g in groups)
-        result.append(
-            {
-                "ma_khoa": ma_khoa,
-                "lop": lop,
-                "tu_ngay": px.get("tu_ngay", ""),
-                "den_ngay": px.get("den_ngay", ""),
-                "hv_per_xe": lh.get("hv_per_xe"),
-                "so_hoc_vien": so_hoc_vien,
-                "groups": groups,
-                "lich_hoc": sorted(lh.get("lich_hoc", []), key=lambda d: d["date"]),
-            }
+def load_course_from_file(path):
+    """Đọc 1 file 'BIÊN CHẾ XE KHÓA xxxx.xlsx', trả về 1 course dict."""
+    wb = openpyxl.load_workbook(path, data_only=True)
+    ws, title = _find_course_sheet(wb)
+    if ws is None:
+        raise ValueError(
+            f"Không tìm thấy dòng tiêu đề 'BIÊN CHẾ XE KHÓA ...' trong file: {path}"
         )
-    return result
 
+    m = TITLE_RE.search(title)
+    if m:
+        ma_khoa, lop = m.group(1).strip(), m.group(2).strip()
+    else:
+        ma_khoa, lop = title, ""
 
-def load_workbook_courses(excel_path):
-    """Đọc 1 file Excel, trả về list courses (đã merge PHÂN XE + LỊCH HỌC)."""
-    wb = openpyxl.load_workbook(excel_path, data_only=True)
-    phan_xe_courses = parse_phan_xe(wb["PHÂN XE"])
-    lich_hoc_courses = parse_lich_hoc(wb["LỊCH HỌC"])
-    return merge(phan_xe_courses, lich_hoc_courses)
+    groups = _parse_groups(ws)
+    so_hoc_vien = sum(len(g["hoc_vien"]) for g in groups)
+    tu_ngay, den_ngay = _find_period(wb, ma_khoa)
+
+    return {
+        "ma_khoa": ma_khoa,
+        "lop": lop,
+        "tu_ngay": tu_ngay,
+        "den_ngay": den_ngay,
+        "hv_per_xe": None,
+        "so_hoc_vien": so_hoc_vien,
+        "groups": groups,
+        "lich_hoc": [],  # lịch học giờ chỉ còn ở file PDF, xem attach_files.py
+    }
 
 
 def build_data(excel_paths):
-    """Đọc & gộp nhiều file Excel theo mã khóa. Nếu 2 file có cùng mã khóa,
-    file đọc sau sẽ ghi đè file đọc trước (trả thêm danh sách mã bị ghi đè)."""
+    """Đọc & gộp nhiều file 'BIÊN CHẾ XE KHÓA xxxx.xlsx' (mỗi file 1 khóa).
+    Nếu 2 file trùng mã khóa, file đọc sau ghi đè file đọc trước (trả thêm
+    danh sách mã bị ghi đè)."""
     courses_by_code = {}
     overwritten = []
     for path in excel_paths:
-        for c in load_workbook_courses(path):
-            if c["ma_khoa"] in courses_by_code:
-                overwritten.append(c["ma_khoa"])
-            courses_by_code[c["ma_khoa"]] = c
+        c = load_course_from_file(path)
+        if c["ma_khoa"] in courses_by_code:
+            overwritten.append(c["ma_khoa"])
+        courses_by_code[c["ma_khoa"]] = c
 
     courses = [courses_by_code[k] for k in sorted(courses_by_code)]
     data = {
@@ -206,11 +171,12 @@ def build_data(excel_paths):
 
 
 def main():
-    excel_path = Path(sys.argv[1]) if len(sys.argv) > 1 else Path(EXCEL_FILE)
-    output_path = Path(sys.argv[2]) if len(sys.argv) > 2 else Path(OUTPUT_FILE)
-
-    data, overwritten = build_data([excel_path])
-
+    paths = [Path(p) for p in sys.argv[1:]]
+    if not paths:
+        print("Dùng: python convert_excel_to_json.py <file1.xlsx> [file2.xlsx ...]")
+        sys.exit(1)
+    output_path = Path("data.json")
+    data, overwritten = build_data(paths)
     output_path.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
     print(f"OK: exported {len(data['courses'])} khoa -> {output_path}")
     if overwritten:

@@ -11,7 +11,7 @@ REPO_ROOT = APP_DIR.parent  # git root thực tế là D:\GTCC (docs/ nằm ở 
 
 FILES_TO_PUBLISH = [
     "docs/public_data.json",
-    "quanlygiaovien/teacher_ids.json",
+    "docs/files",
 ]
 
 
@@ -32,7 +32,7 @@ def push_public_data(commit_message):
     if not existing:
         return False, "Không có file dữ liệu công khai nào để cập nhật."
 
-    add = _run(["add", *existing])
+    add = _run(["add", "-A", "--", *existing])
     if add.returncode != 0:
         return False, f"Lỗi khi 'git add':\n{add.stderr}"
 

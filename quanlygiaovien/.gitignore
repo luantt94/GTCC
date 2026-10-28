@@ -6,8 +6,11 @@ data.json
 # Mã QR in cho giáo viên - chỉ cần lưu local để in lại khi cần
 qr_codes/
 
-# Đường dẫn file Excel đã chọn - đặc thù theo máy, không cần public
-selected_excel_files.json
+# Đường dẫn các nguồn dữ liệu đã chọn - đặc thù theo máy, không cần public
+data_sources.json
+
+# Mật khẩu xem hồ sơ cá nhân (chỉ lưu hash trong docs/public_data.json)
+app_settings.json
 
 __pycache__/
 *.pyc
