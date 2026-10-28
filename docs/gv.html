@@ -204,7 +204,7 @@ async function unlockFile(detail, relPath, expectedHash) {
 }
 
 function renderLichHoc(days) {
-  if (!days.length) return "<p style='color:#999;font-size:0.85rem;'>Chưa có lịch.</p>";
+  if (!days || !days.length) return "<p style='color:#999;font-size:0.85rem;'>Chưa có lịch.</p>";
   let html = "<table class='lich'><tr><th>Ngày</th><th>Thứ</th><th>Sáng</th><th>Chiều</th><th>Tối</th></tr>";
   for (const d of days) {
     const ngay = d.label ? `${d.label} (${d.date})` : d.date;
