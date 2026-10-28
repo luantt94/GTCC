@@ -1,45 +1,3830 @@
 {
-  "generated_at": "2026-10-28T07:43:22",
+  "generated_at": "2026-10-28T12:20:15",
   "teachers": {
     "GV008": {
       "ten": "Trần Minh Hải",
-      "so_hoc_vien": 5
+      "khoa_dang_day": [
+        {
+          "ma_khoa": "48002K262033",
+          "lop": "B.01K0826",
+          "tu_ngay": "11/9/2026",
+          "den_ngay": "30/11/2026",
+          "xe": "43A-389.36",
+          "sdt": "0935586869",
+          "so_hoc_vien": 5,
+          "hoc_vien": [
+            "TRẦN THỊ NAM GIANG",
+            "ĐINH THỊ HẢI LÝ",
+            "NGUYỄN MINH KHA",
+            "ĐẶNG THỊ THÙY TRANG",
+            "THÁI THỊ NHẬT HUYỀN"
+          ],
+          "lich_hoc": [
+            {
+              "date": "2026-09-29",
+              "thu": "T3",
+              "label": "Ngày 29",
+              "sang": "Số nguội",
+              "chieu": "Số nóng",
+              "toi": ""
+            },
+            {
+              "date": "2026-09-30",
+              "thu": "T4",
+              "label": "Ngày 30",
+              "sang": "Bãi phẳng",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-01",
+              "thu": "T5",
+              "label": "Ngày 01",
+              "sang": "Bãi phẳng",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-02",
+              "thu": "T6",
+              "label": "Ngày 02",
+              "sang": "Bãi phẳng",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-05",
+              "thu": "T2",
+              "label": "Ngày 05",
+              "sang": "Bãi phẳng",
+              "chieu": "Chữ chi",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-06",
+              "thu": "T3",
+              "label": "Ngày 06",
+              "sang": "Chữ chi",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-07",
+              "thu": "T4",
+              "label": "Ngày 07",
+              "sang": "Chữ chi",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-08",
+              "thu": "T5",
+              "label": "Ngày 08",
+              "sang": "Đ. Bằng",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-09",
+              "thu": "T6",
+              "label": "Ngày 09",
+              "sang": "Đ. Bằng",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-12",
+              "thu": "T2",
+              "label": "Ngày 12",
+              "sang": "Đ. Bằng",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-13",
+              "thu": "T3",
+              "label": "Ngày 13",
+              "sang": "Đ. Bằng",
+              "chieu": "DP (Cabin)",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-14",
+              "thu": "T4",
+              "label": "Ngày 14",
+              "sang": "DP (Cabin)",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-15",
+              "thu": "T5",
+              "label": "Ngày 15",
+              "sang": "Đ. Dốc\nĐ. Vòng",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-16",
+              "thu": "T6",
+              "label": "Ngày 16",
+              "sang": "Đ. Dốc\nĐ. Vòng",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-19",
+              "thu": "T2",
+              "label": "Ngày 19",
+              "sang": "Đ. Dốc\nĐ. Vòng",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-20",
+              "thu": "T3",
+              "label": "Ngày 20",
+              "sang": "Đ. Dốc\nĐ. Vòng",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-21",
+              "thu": "T4",
+              "label": "Ngày 21",
+              "sang": "Đ. Dốc\nĐ. Vòng",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-22",
+              "thu": "T5",
+              "label": "Ngày 22",
+              "sang": "Đ. Dốc\nĐ. Vòng",
+              "chieu": "Phức tạp",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-23",
+              "thu": "T6",
+              "label": "Ngày 23",
+              "sang": "Phức tạp",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-26",
+              "thu": "T2",
+              "label": "Ngày 26",
+              "sang": "Phức tạp",
+              "chieu": "",
+              "toi": "Ban đêm"
+            },
+            {
+              "date": "2026-10-27",
+              "thu": "T3",
+              "label": "Ngày 27",
+              "sang": "Phức tạp",
+              "chieu": "",
+              "toi": "Ban đêm"
+            },
+            {
+              "date": "2026-10-28",
+              "thu": "T4",
+              "label": "Ngày 28",
+              "sang": "Phức tạp",
+              "chieu": "",
+              "toi": "Ban đêm"
+            },
+            {
+              "date": "2026-10-29",
+              "thu": "T5",
+              "label": "Ngày 29",
+              "sang": "Có tải",
+              "chieu": "",
+              "toi": "Ban đêm"
+            },
+            {
+              "date": "2026-10-30",
+              "thu": "T6",
+              "label": "Ngày 30",
+              "sang": "Có tải",
+              "chieu": "",
+              "toi": "Ban đêm"
+            },
+            {
+              "date": "2026-11-02",
+              "thu": "T2",
+              "label": "Ngày 02",
+              "sang": "Có tải",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-03",
+              "thu": "T3",
+              "label": "Ngày 03",
+              "sang": "Có tải",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-04",
+              "thu": "T4",
+              "label": "Ngày 04",
+              "sang": "Có tải",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-05",
+              "thu": "T5",
+              "label": "Ngày 05",
+              "sang": "Cao tốc",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-06",
+              "thu": "T6",
+              "label": "Ngày 06",
+              "sang": "Cao tốc",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-09",
+              "thu": "T2",
+              "label": "Ngày 09",
+              "sang": "Hình TH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-10",
+              "thu": "T3",
+              "label": "Ngày 10",
+              "sang": "Hình TH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-11",
+              "thu": "T4",
+              "label": "Ngày 11",
+              "sang": "Hình TH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-12",
+              "thu": "T5",
+              "label": "Ngày 12",
+              "sang": "Hình TH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-13",
+              "thu": "T6",
+              "label": "Ngày 13",
+              "sang": "Hình TH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-16",
+              "thu": "T2",
+              "label": "Ngày 16",
+              "sang": "Hình TH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-17",
+              "thu": "T3",
+              "label": "Ngày 17",
+              "sang": "Hình TH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-18",
+              "thu": "T4",
+              "label": "Ngày 18",
+              "sang": "Hình TH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-19",
+              "thu": "T5",
+              "label": "Ngày 19",
+              "sang": "Hình TH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-20",
+              "thu": "T6",
+              "label": "Ngày 20",
+              "sang": "Hình TH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-23",
+              "thu": "T2",
+              "label": "Ngày 23",
+              "sang": "Hình TH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-24",
+              "thu": "T3",
+              "label": "Ngày 24",
+              "sang": "Nghỉ lễ",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-25",
+              "thu": "T4",
+              "label": "Ngày 25",
+              "sang": "Hình TH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-26",
+              "thu": "T5",
+              "label": "Ngày 26",
+              "sang": "Hình TH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-27",
+              "thu": "T6",
+              "label": "Ngày 27",
+              "sang": "Ôn luyện SH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-30",
+              "thu": "T2",
+              "label": "Ngày 30",
+              "sang": "Kiểm tra",
+              "chieu": "",
+              "toi": ""
+            }
+          ]
+        }
+      ]
     },
     "GV001": {
       "ten": "Huỳnh Ngọc Tân",
-      "so_hoc_vien": 5
+      "khoa_dang_day": [
+        {
+          "ma_khoa": "48002K262033",
+          "lop": "B.01K0826",
+          "tu_ngay": "11/9/2026",
+          "den_ngay": "30/11/2026",
+          "xe": "43A-902.78",
+          "sdt": "0901082777",
+          "so_hoc_vien": 5,
+          "hoc_vien": [
+            "LÊ THỊ DIỄM NGUYÊN",
+            "NGUYỄN VĂN TÂN",
+            "TRẦN THỊ THANH TÚ",
+            "ĐẶNG THỊ XUÂN QUỲNH",
+            "TRẦN HỒNG PHÚC"
+          ],
+          "lich_hoc": [
+            {
+              "date": "2026-09-29",
+              "thu": "T3",
+              "label": "Ngày 29",
+              "sang": "Số nguội",
+              "chieu": "Số nóng",
+              "toi": ""
+            },
+            {
+              "date": "2026-09-30",
+              "thu": "T4",
+              "label": "Ngày 30",
+              "sang": "Bãi phẳng",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-01",
+              "thu": "T5",
+              "label": "Ngày 01",
+              "sang": "Bãi phẳng",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-02",
+              "thu": "T6",
+              "label": "Ngày 02",
+              "sang": "Bãi phẳng",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-05",
+              "thu": "T2",
+              "label": "Ngày 05",
+              "sang": "Bãi phẳng",
+              "chieu": "Chữ chi",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-06",
+              "thu": "T3",
+              "label": "Ngày 06",
+              "sang": "Chữ chi",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-07",
+              "thu": "T4",
+              "label": "Ngày 07",
+              "sang": "Chữ chi",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-08",
+              "thu": "T5",
+              "label": "Ngày 08",
+              "sang": "Đ. Bằng",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-09",
+              "thu": "T6",
+              "label": "Ngày 09",
+              "sang": "Đ. Bằng",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-12",
+              "thu": "T2",
+              "label": "Ngày 12",
+              "sang": "Đ. Bằng",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-13",
+              "thu": "T3",
+              "label": "Ngày 13",
+              "sang": "Đ. Bằng",
+              "chieu": "DP (Cabin)",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-14",
+              "thu": "T4",
+              "label": "Ngày 14",
+              "sang": "DP (Cabin)",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-15",
+              "thu": "T5",
+              "label": "Ngày 15",
+              "sang": "Đ. Dốc\nĐ. Vòng",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-16",
+              "thu": "T6",
+              "label": "Ngày 16",
+              "sang": "Đ. Dốc\nĐ. Vòng",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-19",
+              "thu": "T2",
+              "label": "Ngày 19",
+              "sang": "Đ. Dốc\nĐ. Vòng",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-20",
+              "thu": "T3",
+              "label": "Ngày 20",
+              "sang": "Đ. Dốc\nĐ. Vòng",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-21",
+              "thu": "T4",
+              "label": "Ngày 21",
+              "sang": "Đ. Dốc\nĐ. Vòng",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-22",
+              "thu": "T5",
+              "label": "Ngày 22",
+              "sang": "Đ. Dốc\nĐ. Vòng",
+              "chieu": "Phức tạp",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-23",
+              "thu": "T6",
+              "label": "Ngày 23",
+              "sang": "Phức tạp",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-26",
+              "thu": "T2",
+              "label": "Ngày 26",
+              "sang": "Phức tạp",
+              "chieu": "",
+              "toi": "Ban đêm"
+            },
+            {
+              "date": "2026-10-27",
+              "thu": "T3",
+              "label": "Ngày 27",
+              "sang": "Phức tạp",
+              "chieu": "",
+              "toi": "Ban đêm"
+            },
+            {
+              "date": "2026-10-28",
+              "thu": "T4",
+              "label": "Ngày 28",
+              "sang": "Phức tạp",
+              "chieu": "",
+              "toi": "Ban đêm"
+            },
+            {
+              "date": "2026-10-29",
+              "thu": "T5",
+              "label": "Ngày 29",
+              "sang": "Có tải",
+              "chieu": "",
+              "toi": "Ban đêm"
+            },
+            {
+              "date": "2026-10-30",
+              "thu": "T6",
+              "label": "Ngày 30",
+              "sang": "Có tải",
+              "chieu": "",
+              "toi": "Ban đêm"
+            },
+            {
+              "date": "2026-11-02",
+              "thu": "T2",
+              "label": "Ngày 02",
+              "sang": "Có tải",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-03",
+              "thu": "T3",
+              "label": "Ngày 03",
+              "sang": "Có tải",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-04",
+              "thu": "T4",
+              "label": "Ngày 04",
+              "sang": "Có tải",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-05",
+              "thu": "T5",
+              "label": "Ngày 05",
+              "sang": "Cao tốc",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-06",
+              "thu": "T6",
+              "label": "Ngày 06",
+              "sang": "Cao tốc",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-09",
+              "thu": "T2",
+              "label": "Ngày 09",
+              "sang": "Hình TH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-10",
+              "thu": "T3",
+              "label": "Ngày 10",
+              "sang": "Hình TH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-11",
+              "thu": "T4",
+              "label": "Ngày 11",
+              "sang": "Hình TH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-12",
+              "thu": "T5",
+              "label": "Ngày 12",
+              "sang": "Hình TH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-13",
+              "thu": "T6",
+              "label": "Ngày 13",
+              "sang": "Hình TH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-16",
+              "thu": "T2",
+              "label": "Ngày 16",
+              "sang": "Hình TH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-17",
+              "thu": "T3",
+              "label": "Ngày 17",
+              "sang": "Hình TH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-18",
+              "thu": "T4",
+              "label": "Ngày 18",
+              "sang": "Hình TH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-19",
+              "thu": "T5",
+              "label": "Ngày 19",
+              "sang": "Hình TH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-20",
+              "thu": "T6",
+              "label": "Ngày 20",
+              "sang": "Hình TH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-23",
+              "thu": "T2",
+              "label": "Ngày 23",
+              "sang": "Hình TH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-24",
+              "thu": "T3",
+              "label": "Ngày 24",
+              "sang": "Nghỉ lễ",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-25",
+              "thu": "T4",
+              "label": "Ngày 25",
+              "sang": "Hình TH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-26",
+              "thu": "T5",
+              "label": "Ngày 26",
+              "sang": "Hình TH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-27",
+              "thu": "T6",
+              "label": "Ngày 27",
+              "sang": "Ôn luyện SH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-30",
+              "thu": "T2",
+              "label": "Ngày 30",
+              "sang": "Kiểm tra",
+              "chieu": "",
+              "toi": ""
+            }
+          ]
+        }
+      ]
     },
     "GV007": {
       "ten": "Nguyễn Văn Mỹ",
-      "so_hoc_vien": 5
+      "khoa_dang_day": [
+        {
+          "ma_khoa": "48002K262033",
+          "lop": "B.01K0826",
+          "tu_ngay": "11/9/2026",
+          "den_ngay": "30/11/2026",
+          "xe": "43A-825.18",
+          "sdt": "0905783887",
+          "so_hoc_vien": 5,
+          "hoc_vien": [
+            "LÊ THỊ THANH",
+            "NGUYỄN THỊ THU HIỀN",
+            "TRƯƠNG GIA HUY",
+            "NGUYỄN VÕ QUỲNH ANH",
+            "NGUYỄN DOÃN MINH TRÍ"
+          ],
+          "lich_hoc": [
+            {
+              "date": "2026-09-29",
+              "thu": "T3",
+              "label": "Ngày 29",
+              "sang": "Số nguội",
+              "chieu": "Số nóng",
+              "toi": ""
+            },
+            {
+              "date": "2026-09-30",
+              "thu": "T4",
+              "label": "Ngày 30",
+              "sang": "Bãi phẳng",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-01",
+              "thu": "T5",
+              "label": "Ngày 01",
+              "sang": "Bãi phẳng",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-02",
+              "thu": "T6",
+              "label": "Ngày 02",
+              "sang": "Bãi phẳng",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-05",
+              "thu": "T2",
+              "label": "Ngày 05",
+              "sang": "Bãi phẳng",
+              "chieu": "Chữ chi",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-06",
+              "thu": "T3",
+              "label": "Ngày 06",
+              "sang": "Chữ chi",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-07",
+              "thu": "T4",
+              "label": "Ngày 07",
+              "sang": "Chữ chi",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-08",
+              "thu": "T5",
+              "label": "Ngày 08",
+              "sang": "Đ. Bằng",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-09",
+              "thu": "T6",
+              "label": "Ngày 09",
+              "sang": "Đ. Bằng",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-12",
+              "thu": "T2",
+              "label": "Ngày 12",
+              "sang": "Đ. Bằng",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-13",
+              "thu": "T3",
+              "label": "Ngày 13",
+              "sang": "Đ. Bằng",
+              "chieu": "DP (Cabin)",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-14",
+              "thu": "T4",
+              "label": "Ngày 14",
+              "sang": "DP (Cabin)",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-15",
+              "thu": "T5",
+              "label": "Ngày 15",
+              "sang": "Đ. Dốc\nĐ. Vòng",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-16",
+              "thu": "T6",
+              "label": "Ngày 16",
+              "sang": "Đ. Dốc\nĐ. Vòng",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-19",
+              "thu": "T2",
+              "label": "Ngày 19",
+              "sang": "Đ. Dốc\nĐ. Vòng",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-20",
+              "thu": "T3",
+              "label": "Ngày 20",
+              "sang": "Đ. Dốc\nĐ. Vòng",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-21",
+              "thu": "T4",
+              "label": "Ngày 21",
+              "sang": "Đ. Dốc\nĐ. Vòng",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-22",
+              "thu": "T5",
+              "label": "Ngày 22",
+              "sang": "Đ. Dốc\nĐ. Vòng",
+              "chieu": "Phức tạp",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-23",
+              "thu": "T6",
+              "label": "Ngày 23",
+              "sang": "Phức tạp",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-26",
+              "thu": "T2",
+              "label": "Ngày 26",
+              "sang": "Phức tạp",
+              "chieu": "",
+              "toi": "Ban đêm"
+            },
+            {
+              "date": "2026-10-27",
+              "thu": "T3",
+              "label": "Ngày 27",
+              "sang": "Phức tạp",
+              "chieu": "",
+              "toi": "Ban đêm"
+            },
+            {
+              "date": "2026-10-28",
+              "thu": "T4",
+              "label": "Ngày 28",
+              "sang": "Phức tạp",
+              "chieu": "",
+              "toi": "Ban đêm"
+            },
+            {
+              "date": "2026-10-29",
+              "thu": "T5",
+              "label": "Ngày 29",
+              "sang": "Có tải",
+              "chieu": "",
+              "toi": "Ban đêm"
+            },
+            {
+              "date": "2026-10-30",
+              "thu": "T6",
+              "label": "Ngày 30",
+              "sang": "Có tải",
+              "chieu": "",
+              "toi": "Ban đêm"
+            },
+            {
+              "date": "2026-11-02",
+              "thu": "T2",
+              "label": "Ngày 02",
+              "sang": "Có tải",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-03",
+              "thu": "T3",
+              "label": "Ngày 03",
+              "sang": "Có tải",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-04",
+              "thu": "T4",
+              "label": "Ngày 04",
+              "sang": "Có tải",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-05",
+              "thu": "T5",
+              "label": "Ngày 05",
+              "sang": "Cao tốc",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-06",
+              "thu": "T6",
+              "label": "Ngày 06",
+              "sang": "Cao tốc",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-09",
+              "thu": "T2",
+              "label": "Ngày 09",
+              "sang": "Hình TH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-10",
+              "thu": "T3",
+              "label": "Ngày 10",
+              "sang": "Hình TH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-11",
+              "thu": "T4",
+              "label": "Ngày 11",
+              "sang": "Hình TH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-12",
+              "thu": "T5",
+              "label": "Ngày 12",
+              "sang": "Hình TH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-13",
+              "thu": "T6",
+              "label": "Ngày 13",
+              "sang": "Hình TH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-16",
+              "thu": "T2",
+              "label": "Ngày 16",
+              "sang": "Hình TH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-17",
+              "thu": "T3",
+              "label": "Ngày 17",
+              "sang": "Hình TH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-18",
+              "thu": "T4",
+              "label": "Ngày 18",
+              "sang": "Hình TH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-19",
+              "thu": "T5",
+              "label": "Ngày 19",
+              "sang": "Hình TH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-20",
+              "thu": "T6",
+              "label": "Ngày 20",
+              "sang": "Hình TH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-23",
+              "thu": "T2",
+              "label": "Ngày 23",
+              "sang": "Hình TH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-24",
+              "thu": "T3",
+              "label": "Ngày 24",
+              "sang": "Nghỉ lễ",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-25",
+              "thu": "T4",
+              "label": "Ngày 25",
+              "sang": "Hình TH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-26",
+              "thu": "T5",
+              "label": "Ngày 26",
+              "sang": "Hình TH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-27",
+              "thu": "T6",
+              "label": "Ngày 27",
+              "sang": "Ôn luyện SH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-30",
+              "thu": "T2",
+              "label": "Ngày 30",
+              "sang": "Kiểm tra",
+              "chieu": "",
+              "toi": ""
+            }
+          ]
+        }
+      ]
     },
     "GV005": {
       "ten": "Nguyễn Thành Trung",
-      "so_hoc_vien": 5
+      "khoa_dang_day": [
+        {
+          "ma_khoa": "48002K262033",
+          "lop": "B.01K0826",
+          "tu_ngay": "11/9/2026",
+          "den_ngay": "30/11/2026",
+          "xe": "43B-316.63",
+          "sdt": "0935 816193",
+          "so_hoc_vien": 5,
+          "hoc_vien": [
+            "NGUYỄN ĐÌNH KHÁNH VY",
+            "TRẦN HOA QUỲNH",
+            "ĐINH THỊ THU PHƯƠNG",
+            "ĐOÀN THỊ THANH XUÂN",
+            "NGUYỄN THỊ HỒNG THÚY"
+          ],
+          "lich_hoc": [
+            {
+              "date": "2026-09-29",
+              "thu": "T3",
+              "label": "Ngày 29",
+              "sang": "Số nguội",
+              "chieu": "Số nóng",
+              "toi": ""
+            },
+            {
+              "date": "2026-09-30",
+              "thu": "T4",
+              "label": "Ngày 30",
+              "sang": "Bãi phẳng",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-01",
+              "thu": "T5",
+              "label": "Ngày 01",
+              "sang": "Bãi phẳng",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-02",
+              "thu": "T6",
+              "label": "Ngày 02",
+              "sang": "Bãi phẳng",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-05",
+              "thu": "T2",
+              "label": "Ngày 05",
+              "sang": "Bãi phẳng",
+              "chieu": "Chữ chi",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-06",
+              "thu": "T3",
+              "label": "Ngày 06",
+              "sang": "Chữ chi",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-07",
+              "thu": "T4",
+              "label": "Ngày 07",
+              "sang": "Chữ chi",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-08",
+              "thu": "T5",
+              "label": "Ngày 08",
+              "sang": "Đ. Bằng",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-09",
+              "thu": "T6",
+              "label": "Ngày 09",
+              "sang": "Đ. Bằng",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-12",
+              "thu": "T2",
+              "label": "Ngày 12",
+              "sang": "Đ. Bằng",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-13",
+              "thu": "T3",
+              "label": "Ngày 13",
+              "sang": "Đ. Bằng",
+              "chieu": "DP (Cabin)",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-14",
+              "thu": "T4",
+              "label": "Ngày 14",
+              "sang": "DP (Cabin)",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-15",
+              "thu": "T5",
+              "label": "Ngày 15",
+              "sang": "Đ. Dốc\nĐ. Vòng",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-16",
+              "thu": "T6",
+              "label": "Ngày 16",
+              "sang": "Đ. Dốc\nĐ. Vòng",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-19",
+              "thu": "T2",
+              "label": "Ngày 19",
+              "sang": "Đ. Dốc\nĐ. Vòng",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-20",
+              "thu": "T3",
+              "label": "Ngày 20",
+              "sang": "Đ. Dốc\nĐ. Vòng",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-21",
+              "thu": "T4",
+              "label": "Ngày 21",
+              "sang": "Đ. Dốc\nĐ. Vòng",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-22",
+              "thu": "T5",
+              "label": "Ngày 22",
+              "sang": "Đ. Dốc\nĐ. Vòng",
+              "chieu": "Phức tạp",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-23",
+              "thu": "T6",
+              "label": "Ngày 23",
+              "sang": "Phức tạp",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-26",
+              "thu": "T2",
+              "label": "Ngày 26",
+              "sang": "Phức tạp",
+              "chieu": "",
+              "toi": "Ban đêm"
+            },
+            {
+              "date": "2026-10-27",
+              "thu": "T3",
+              "label": "Ngày 27",
+              "sang": "Phức tạp",
+              "chieu": "",
+              "toi": "Ban đêm"
+            },
+            {
+              "date": "2026-10-28",
+              "thu": "T4",
+              "label": "Ngày 28",
+              "sang": "Phức tạp",
+              "chieu": "",
+              "toi": "Ban đêm"
+            },
+            {
+              "date": "2026-10-29",
+              "thu": "T5",
+              "label": "Ngày 29",
+              "sang": "Có tải",
+              "chieu": "",
+              "toi": "Ban đêm"
+            },
+            {
+              "date": "2026-10-30",
+              "thu": "T6",
+              "label": "Ngày 30",
+              "sang": "Có tải",
+              "chieu": "",
+              "toi": "Ban đêm"
+            },
+            {
+              "date": "2026-11-02",
+              "thu": "T2",
+              "label": "Ngày 02",
+              "sang": "Có tải",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-03",
+              "thu": "T3",
+              "label": "Ngày 03",
+              "sang": "Có tải",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-04",
+              "thu": "T4",
+              "label": "Ngày 04",
+              "sang": "Có tải",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-05",
+              "thu": "T5",
+              "label": "Ngày 05",
+              "sang": "Cao tốc",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-06",
+              "thu": "T6",
+              "label": "Ngày 06",
+              "sang": "Cao tốc",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-09",
+              "thu": "T2",
+              "label": "Ngày 09",
+              "sang": "Hình TH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-10",
+              "thu": "T3",
+              "label": "Ngày 10",
+              "sang": "Hình TH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-11",
+              "thu": "T4",
+              "label": "Ngày 11",
+              "sang": "Hình TH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-12",
+              "thu": "T5",
+              "label": "Ngày 12",
+              "sang": "Hình TH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-13",
+              "thu": "T6",
+              "label": "Ngày 13",
+              "sang": "Hình TH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-16",
+              "thu": "T2",
+              "label": "Ngày 16",
+              "sang": "Hình TH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-17",
+              "thu": "T3",
+              "label": "Ngày 17",
+              "sang": "Hình TH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-18",
+              "thu": "T4",
+              "label": "Ngày 18",
+              "sang": "Hình TH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-19",
+              "thu": "T5",
+              "label": "Ngày 19",
+              "sang": "Hình TH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-20",
+              "thu": "T6",
+              "label": "Ngày 20",
+              "sang": "Hình TH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-23",
+              "thu": "T2",
+              "label": "Ngày 23",
+              "sang": "Hình TH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-24",
+              "thu": "T3",
+              "label": "Ngày 24",
+              "sang": "Nghỉ lễ",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-25",
+              "thu": "T4",
+              "label": "Ngày 25",
+              "sang": "Hình TH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-26",
+              "thu": "T5",
+              "label": "Ngày 26",
+              "sang": "Hình TH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-27",
+              "thu": "T6",
+              "label": "Ngày 27",
+              "sang": "Ôn luyện SH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-30",
+              "thu": "T2",
+              "label": "Ngày 30",
+              "sang": "Kiểm tra",
+              "chieu": "",
+              "toi": ""
+            }
+          ]
+        }
+      ]
     },
     "GV002": {
       "ten": "Lê Quang Nghĩa",
-      "so_hoc_vien": 3
+      "khoa_dang_day": [
+        {
+          "ma_khoa": "48002K262033",
+          "lop": "B.01K0826",
+          "tu_ngay": "11/9/2026",
+          "den_ngay": "30/11/2026",
+          "xe": "43A-877.49",
+          "sdt": "0935881851",
+          "so_hoc_vien": 3,
+          "hoc_vien": [
+            "ĐỖ THỊ PHƯƠNG DIỄM",
+            "NGUYỄN THỊ QUỲNH HƯƠNG",
+            "DƯƠNG HOÀNG QUỲNH TRANG"
+          ],
+          "lich_hoc": [
+            {
+              "date": "2026-09-29",
+              "thu": "T3",
+              "label": "Ngày 29",
+              "sang": "Số nguội",
+              "chieu": "Số nóng",
+              "toi": ""
+            },
+            {
+              "date": "2026-09-30",
+              "thu": "T4",
+              "label": "Ngày 30",
+              "sang": "Bãi phẳng",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-01",
+              "thu": "T5",
+              "label": "Ngày 01",
+              "sang": "Bãi phẳng",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-02",
+              "thu": "T6",
+              "label": "Ngày 02",
+              "sang": "Bãi phẳng",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-05",
+              "thu": "T2",
+              "label": "Ngày 05",
+              "sang": "Bãi phẳng",
+              "chieu": "Chữ chi",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-06",
+              "thu": "T3",
+              "label": "Ngày 06",
+              "sang": "Chữ chi",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-07",
+              "thu": "T4",
+              "label": "Ngày 07",
+              "sang": "Chữ chi",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-08",
+              "thu": "T5",
+              "label": "Ngày 08",
+              "sang": "Đ. Bằng",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-09",
+              "thu": "T6",
+              "label": "Ngày 09",
+              "sang": "Đ. Bằng",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-12",
+              "thu": "T2",
+              "label": "Ngày 12",
+              "sang": "Đ. Bằng",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-13",
+              "thu": "T3",
+              "label": "Ngày 13",
+              "sang": "Đ. Bằng",
+              "chieu": "DP (Cabin)",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-14",
+              "thu": "T4",
+              "label": "Ngày 14",
+              "sang": "DP (Cabin)",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-15",
+              "thu": "T5",
+              "label": "Ngày 15",
+              "sang": "Đ. Dốc\nĐ. Vòng",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-16",
+              "thu": "T6",
+              "label": "Ngày 16",
+              "sang": "Đ. Dốc\nĐ. Vòng",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-19",
+              "thu": "T2",
+              "label": "Ngày 19",
+              "sang": "Đ. Dốc\nĐ. Vòng",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-20",
+              "thu": "T3",
+              "label": "Ngày 20",
+              "sang": "Đ. Dốc\nĐ. Vòng",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-21",
+              "thu": "T4",
+              "label": "Ngày 21",
+              "sang": "Đ. Dốc\nĐ. Vòng",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-22",
+              "thu": "T5",
+              "label": "Ngày 22",
+              "sang": "Đ. Dốc\nĐ. Vòng",
+              "chieu": "Phức tạp",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-23",
+              "thu": "T6",
+              "label": "Ngày 23",
+              "sang": "Phức tạp",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-26",
+              "thu": "T2",
+              "label": "Ngày 26",
+              "sang": "Phức tạp",
+              "chieu": "",
+              "toi": "Ban đêm"
+            },
+            {
+              "date": "2026-10-27",
+              "thu": "T3",
+              "label": "Ngày 27",
+              "sang": "Phức tạp",
+              "chieu": "",
+              "toi": "Ban đêm"
+            },
+            {
+              "date": "2026-10-28",
+              "thu": "T4",
+              "label": "Ngày 28",
+              "sang": "Phức tạp",
+              "chieu": "",
+              "toi": "Ban đêm"
+            },
+            {
+              "date": "2026-10-29",
+              "thu": "T5",
+              "label": "Ngày 29",
+              "sang": "Có tải",
+              "chieu": "",
+              "toi": "Ban đêm"
+            },
+            {
+              "date": "2026-10-30",
+              "thu": "T6",
+              "label": "Ngày 30",
+              "sang": "Có tải",
+              "chieu": "",
+              "toi": "Ban đêm"
+            },
+            {
+              "date": "2026-11-02",
+              "thu": "T2",
+              "label": "Ngày 02",
+              "sang": "Có tải",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-03",
+              "thu": "T3",
+              "label": "Ngày 03",
+              "sang": "Có tải",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-04",
+              "thu": "T4",
+              "label": "Ngày 04",
+              "sang": "Có tải",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-05",
+              "thu": "T5",
+              "label": "Ngày 05",
+              "sang": "Cao tốc",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-06",
+              "thu": "T6",
+              "label": "Ngày 06",
+              "sang": "Cao tốc",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-09",
+              "thu": "T2",
+              "label": "Ngày 09",
+              "sang": "Hình TH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-10",
+              "thu": "T3",
+              "label": "Ngày 10",
+              "sang": "Hình TH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-11",
+              "thu": "T4",
+              "label": "Ngày 11",
+              "sang": "Hình TH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-12",
+              "thu": "T5",
+              "label": "Ngày 12",
+              "sang": "Hình TH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-13",
+              "thu": "T6",
+              "label": "Ngày 13",
+              "sang": "Hình TH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-16",
+              "thu": "T2",
+              "label": "Ngày 16",
+              "sang": "Hình TH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-17",
+              "thu": "T3",
+              "label": "Ngày 17",
+              "sang": "Hình TH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-18",
+              "thu": "T4",
+              "label": "Ngày 18",
+              "sang": "Hình TH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-19",
+              "thu": "T5",
+              "label": "Ngày 19",
+              "sang": "Hình TH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-20",
+              "thu": "T6",
+              "label": "Ngày 20",
+              "sang": "Hình TH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-23",
+              "thu": "T2",
+              "label": "Ngày 23",
+              "sang": "Hình TH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-24",
+              "thu": "T3",
+              "label": "Ngày 24",
+              "sang": "Nghỉ lễ",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-25",
+              "thu": "T4",
+              "label": "Ngày 25",
+              "sang": "Hình TH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-26",
+              "thu": "T5",
+              "label": "Ngày 26",
+              "sang": "Hình TH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-27",
+              "thu": "T6",
+              "label": "Ngày 27",
+              "sang": "Ôn luyện SH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-30",
+              "thu": "T2",
+              "label": "Ngày 30",
+              "sang": "Kiểm tra",
+              "chieu": "",
+              "toi": ""
+            }
+          ]
+        }
+      ]
     },
     "GV004": {
       "ten": "Nguyễn Bá Quýnh",
-      "so_hoc_vien": 5
+      "khoa_dang_day": [
+        {
+          "ma_khoa": "48002K262033",
+          "lop": "B.01K0826",
+          "tu_ngay": "11/9/2026",
+          "den_ngay": "30/11/2026",
+          "xe": "43A-909.03",
+          "sdt": "0903570001",
+          "so_hoc_vien": 5,
+          "hoc_vien": [
+            "HỨA THỊ LIÊN",
+            "HUỲNH THỊ ÁNH HUYỀN",
+            "TRẦN THỊ THANH THẢO",
+            "TRẦN ĐỖ ÁNH DƯƠNG",
+            "NGUYỄN THỊ NGỌC THÙY"
+          ],
+          "lich_hoc": [
+            {
+              "date": "2026-09-29",
+              "thu": "T3",
+              "label": "Ngày 29",
+              "sang": "Số nguội",
+              "chieu": "Số nóng",
+              "toi": ""
+            },
+            {
+              "date": "2026-09-30",
+              "thu": "T4",
+              "label": "Ngày 30",
+              "sang": "Bãi phẳng",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-01",
+              "thu": "T5",
+              "label": "Ngày 01",
+              "sang": "Bãi phẳng",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-02",
+              "thu": "T6",
+              "label": "Ngày 02",
+              "sang": "Bãi phẳng",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-05",
+              "thu": "T2",
+              "label": "Ngày 05",
+              "sang": "Bãi phẳng",
+              "chieu": "Chữ chi",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-06",
+              "thu": "T3",
+              "label": "Ngày 06",
+              "sang": "Chữ chi",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-07",
+              "thu": "T4",
+              "label": "Ngày 07",
+              "sang": "Chữ chi",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-08",
+              "thu": "T5",
+              "label": "Ngày 08",
+              "sang": "Đ. Bằng",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-09",
+              "thu": "T6",
+              "label": "Ngày 09",
+              "sang": "Đ. Bằng",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-12",
+              "thu": "T2",
+              "label": "Ngày 12",
+              "sang": "Đ. Bằng",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-13",
+              "thu": "T3",
+              "label": "Ngày 13",
+              "sang": "Đ. Bằng",
+              "chieu": "DP (Cabin)",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-14",
+              "thu": "T4",
+              "label": "Ngày 14",
+              "sang": "DP (Cabin)",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-15",
+              "thu": "T5",
+              "label": "Ngày 15",
+              "sang": "Đ. Dốc\nĐ. Vòng",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-16",
+              "thu": "T6",
+              "label": "Ngày 16",
+              "sang": "Đ. Dốc\nĐ. Vòng",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-19",
+              "thu": "T2",
+              "label": "Ngày 19",
+              "sang": "Đ. Dốc\nĐ. Vòng",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-20",
+              "thu": "T3",
+              "label": "Ngày 20",
+              "sang": "Đ. Dốc\nĐ. Vòng",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-21",
+              "thu": "T4",
+              "label": "Ngày 21",
+              "sang": "Đ. Dốc\nĐ. Vòng",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-22",
+              "thu": "T5",
+              "label": "Ngày 22",
+              "sang": "Đ. Dốc\nĐ. Vòng",
+              "chieu": "Phức tạp",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-23",
+              "thu": "T6",
+              "label": "Ngày 23",
+              "sang": "Phức tạp",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-26",
+              "thu": "T2",
+              "label": "Ngày 26",
+              "sang": "Phức tạp",
+              "chieu": "",
+              "toi": "Ban đêm"
+            },
+            {
+              "date": "2026-10-27",
+              "thu": "T3",
+              "label": "Ngày 27",
+              "sang": "Phức tạp",
+              "chieu": "",
+              "toi": "Ban đêm"
+            },
+            {
+              "date": "2026-10-28",
+              "thu": "T4",
+              "label": "Ngày 28",
+              "sang": "Phức tạp",
+              "chieu": "",
+              "toi": "Ban đêm"
+            },
+            {
+              "date": "2026-10-29",
+              "thu": "T5",
+              "label": "Ngày 29",
+              "sang": "Có tải",
+              "chieu": "",
+              "toi": "Ban đêm"
+            },
+            {
+              "date": "2026-10-30",
+              "thu": "T6",
+              "label": "Ngày 30",
+              "sang": "Có tải",
+              "chieu": "",
+              "toi": "Ban đêm"
+            },
+            {
+              "date": "2026-11-02",
+              "thu": "T2",
+              "label": "Ngày 02",
+              "sang": "Có tải",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-03",
+              "thu": "T3",
+              "label": "Ngày 03",
+              "sang": "Có tải",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-04",
+              "thu": "T4",
+              "label": "Ngày 04",
+              "sang": "Có tải",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-05",
+              "thu": "T5",
+              "label": "Ngày 05",
+              "sang": "Cao tốc",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-06",
+              "thu": "T6",
+              "label": "Ngày 06",
+              "sang": "Cao tốc",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-09",
+              "thu": "T2",
+              "label": "Ngày 09",
+              "sang": "Hình TH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-10",
+              "thu": "T3",
+              "label": "Ngày 10",
+              "sang": "Hình TH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-11",
+              "thu": "T4",
+              "label": "Ngày 11",
+              "sang": "Hình TH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-12",
+              "thu": "T5",
+              "label": "Ngày 12",
+              "sang": "Hình TH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-13",
+              "thu": "T6",
+              "label": "Ngày 13",
+              "sang": "Hình TH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-16",
+              "thu": "T2",
+              "label": "Ngày 16",
+              "sang": "Hình TH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-17",
+              "thu": "T3",
+              "label": "Ngày 17",
+              "sang": "Hình TH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-18",
+              "thu": "T4",
+              "label": "Ngày 18",
+              "sang": "Hình TH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-19",
+              "thu": "T5",
+              "label": "Ngày 19",
+              "sang": "Hình TH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-20",
+              "thu": "T6",
+              "label": "Ngày 20",
+              "sang": "Hình TH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-23",
+              "thu": "T2",
+              "label": "Ngày 23",
+              "sang": "Hình TH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-24",
+              "thu": "T3",
+              "label": "Ngày 24",
+              "sang": "Nghỉ lễ",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-25",
+              "thu": "T4",
+              "label": "Ngày 25",
+              "sang": "Hình TH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-26",
+              "thu": "T5",
+              "label": "Ngày 26",
+              "sang": "Hình TH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-27",
+              "thu": "T6",
+              "label": "Ngày 27",
+              "sang": "Ôn luyện SH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-30",
+              "thu": "T2",
+              "label": "Ngày 30",
+              "sang": "Kiểm tra",
+              "chieu": "",
+              "toi": ""
+            }
+          ]
+        }
+      ]
     },
     "GV010": {
       "ten": "Tạ Minh Thuận",
-      "so_hoc_vien": 5
+      "khoa_dang_day": [
+        {
+          "ma_khoa": "48002K262033",
+          "lop": "B.01K0826",
+          "tu_ngay": "11/9/2026",
+          "den_ngay": "30/11/2026",
+          "xe": "43A-816.27",
+          "sdt": "0919 430511",
+          "so_hoc_vien": 5,
+          "hoc_vien": [
+            "NGÔ VĂN VIẾT NHÂN",
+            "LÊ HOÀNG THÙY TRÂM",
+            "NGUYỄN THANH THẢO",
+            "HUỲNH NGUYỄN HƯƠNG TÚ",
+            "PHÙNG BẢO NGỌC"
+          ],
+          "lich_hoc": [
+            {
+              "date": "2026-09-29",
+              "thu": "T3",
+              "label": "Ngày 29",
+              "sang": "Số nguội",
+              "chieu": "Số nóng",
+              "toi": ""
+            },
+            {
+              "date": "2026-09-30",
+              "thu": "T4",
+              "label": "Ngày 30",
+              "sang": "Bãi phẳng",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-01",
+              "thu": "T5",
+              "label": "Ngày 01",
+              "sang": "Bãi phẳng",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-02",
+              "thu": "T6",
+              "label": "Ngày 02",
+              "sang": "Bãi phẳng",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-05",
+              "thu": "T2",
+              "label": "Ngày 05",
+              "sang": "Bãi phẳng",
+              "chieu": "Chữ chi",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-06",
+              "thu": "T3",
+              "label": "Ngày 06",
+              "sang": "Chữ chi",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-07",
+              "thu": "T4",
+              "label": "Ngày 07",
+              "sang": "Chữ chi",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-08",
+              "thu": "T5",
+              "label": "Ngày 08",
+              "sang": "Đ. Bằng",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-09",
+              "thu": "T6",
+              "label": "Ngày 09",
+              "sang": "Đ. Bằng",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-12",
+              "thu": "T2",
+              "label": "Ngày 12",
+              "sang": "Đ. Bằng",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-13",
+              "thu": "T3",
+              "label": "Ngày 13",
+              "sang": "Đ. Bằng",
+              "chieu": "DP (Cabin)",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-14",
+              "thu": "T4",
+              "label": "Ngày 14",
+              "sang": "DP (Cabin)",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-15",
+              "thu": "T5",
+              "label": "Ngày 15",
+              "sang": "Đ. Dốc\nĐ. Vòng",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-16",
+              "thu": "T6",
+              "label": "Ngày 16",
+              "sang": "Đ. Dốc\nĐ. Vòng",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-19",
+              "thu": "T2",
+              "label": "Ngày 19",
+              "sang": "Đ. Dốc\nĐ. Vòng",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-20",
+              "thu": "T3",
+              "label": "Ngày 20",
+              "sang": "Đ. Dốc\nĐ. Vòng",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-21",
+              "thu": "T4",
+              "label": "Ngày 21",
+              "sang": "Đ. Dốc\nĐ. Vòng",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-22",
+              "thu": "T5",
+              "label": "Ngày 22",
+              "sang": "Đ. Dốc\nĐ. Vòng",
+              "chieu": "Phức tạp",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-23",
+              "thu": "T6",
+              "label": "Ngày 23",
+              "sang": "Phức tạp",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-26",
+              "thu": "T2",
+              "label": "Ngày 26",
+              "sang": "Phức tạp",
+              "chieu": "",
+              "toi": "Ban đêm"
+            },
+            {
+              "date": "2026-10-27",
+              "thu": "T3",
+              "label": "Ngày 27",
+              "sang": "Phức tạp",
+              "chieu": "",
+              "toi": "Ban đêm"
+            },
+            {
+              "date": "2026-10-28",
+              "thu": "T4",
+              "label": "Ngày 28",
+              "sang": "Phức tạp",
+              "chieu": "",
+              "toi": "Ban đêm"
+            },
+            {
+              "date": "2026-10-29",
+              "thu": "T5",
+              "label": "Ngày 29",
+              "sang": "Có tải",
+              "chieu": "",
+              "toi": "Ban đêm"
+            },
+            {
+              "date": "2026-10-30",
+              "thu": "T6",
+              "label": "Ngày 30",
+              "sang": "Có tải",
+              "chieu": "",
+              "toi": "Ban đêm"
+            },
+            {
+              "date": "2026-11-02",
+              "thu": "T2",
+              "label": "Ngày 02",
+              "sang": "Có tải",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-03",
+              "thu": "T3",
+              "label": "Ngày 03",
+              "sang": "Có tải",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-04",
+              "thu": "T4",
+              "label": "Ngày 04",
+              "sang": "Có tải",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-05",
+              "thu": "T5",
+              "label": "Ngày 05",
+              "sang": "Cao tốc",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-06",
+              "thu": "T6",
+              "label": "Ngày 06",
+              "sang": "Cao tốc",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-09",
+              "thu": "T2",
+              "label": "Ngày 09",
+              "sang": "Hình TH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-10",
+              "thu": "T3",
+              "label": "Ngày 10",
+              "sang": "Hình TH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-11",
+              "thu": "T4",
+              "label": "Ngày 11",
+              "sang": "Hình TH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-12",
+              "thu": "T5",
+              "label": "Ngày 12",
+              "sang": "Hình TH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-13",
+              "thu": "T6",
+              "label": "Ngày 13",
+              "sang": "Hình TH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-16",
+              "thu": "T2",
+              "label": "Ngày 16",
+              "sang": "Hình TH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-17",
+              "thu": "T3",
+              "label": "Ngày 17",
+              "sang": "Hình TH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-18",
+              "thu": "T4",
+              "label": "Ngày 18",
+              "sang": "Hình TH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-19",
+              "thu": "T5",
+              "label": "Ngày 19",
+              "sang": "Hình TH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-20",
+              "thu": "T6",
+              "label": "Ngày 20",
+              "sang": "Hình TH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-23",
+              "thu": "T2",
+              "label": "Ngày 23",
+              "sang": "Hình TH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-24",
+              "thu": "T3",
+              "label": "Ngày 24",
+              "sang": "Nghỉ lễ",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-25",
+              "thu": "T4",
+              "label": "Ngày 25",
+              "sang": "Hình TH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-26",
+              "thu": "T5",
+              "label": "Ngày 26",
+              "sang": "Hình TH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-27",
+              "thu": "T6",
+              "label": "Ngày 27",
+              "sang": "Ôn luyện SH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-30",
+              "thu": "T2",
+              "label": "Ngày 30",
+              "sang": "Kiểm tra",
+              "chieu": "",
+              "toi": ""
+            }
+          ]
+        }
+      ]
     },
     "GV009": {
       "ten": "Trần Quốc Khánh",
-      "so_hoc_vien": 5
+      "khoa_dang_day": [
+        {
+          "ma_khoa": "48002K262033",
+          "lop": "B.01K0826",
+          "tu_ngay": "11/9/2026",
+          "den_ngay": "30/11/2026",
+          "xe": "43A-286.27",
+          "sdt": "0935595998",
+          "so_hoc_vien": 5,
+          "hoc_vien": [
+            "TRƯƠNG BẢO KHUÊ",
+            "TRƯƠNG UYÊN PHƯƠNG",
+            "TRẦN THỊ THÚY HẰNG",
+            "NGUYỄN THỊ THU SEN",
+            "LƯƠNG THỊ THANH XUÂN"
+          ],
+          "lich_hoc": [
+            {
+              "date": "2026-09-29",
+              "thu": "T3",
+              "label": "Ngày 29",
+              "sang": "Số nguội",
+              "chieu": "Số nóng",
+              "toi": ""
+            },
+            {
+              "date": "2026-09-30",
+              "thu": "T4",
+              "label": "Ngày 30",
+              "sang": "Bãi phẳng",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-01",
+              "thu": "T5",
+              "label": "Ngày 01",
+              "sang": "Bãi phẳng",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-02",
+              "thu": "T6",
+              "label": "Ngày 02",
+              "sang": "Bãi phẳng",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-05",
+              "thu": "T2",
+              "label": "Ngày 05",
+              "sang": "Bãi phẳng",
+              "chieu": "Chữ chi",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-06",
+              "thu": "T3",
+              "label": "Ngày 06",
+              "sang": "Chữ chi",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-07",
+              "thu": "T4",
+              "label": "Ngày 07",
+              "sang": "Chữ chi",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-08",
+              "thu": "T5",
+              "label": "Ngày 08",
+              "sang": "Đ. Bằng",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-09",
+              "thu": "T6",
+              "label": "Ngày 09",
+              "sang": "Đ. Bằng",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-12",
+              "thu": "T2",
+              "label": "Ngày 12",
+              "sang": "Đ. Bằng",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-13",
+              "thu": "T3",
+              "label": "Ngày 13",
+              "sang": "Đ. Bằng",
+              "chieu": "DP (Cabin)",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-14",
+              "thu": "T4",
+              "label": "Ngày 14",
+              "sang": "DP (Cabin)",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-15",
+              "thu": "T5",
+              "label": "Ngày 15",
+              "sang": "Đ. Dốc\nĐ. Vòng",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-16",
+              "thu": "T6",
+              "label": "Ngày 16",
+              "sang": "Đ. Dốc\nĐ. Vòng",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-19",
+              "thu": "T2",
+              "label": "Ngày 19",
+              "sang": "Đ. Dốc\nĐ. Vòng",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-20",
+              "thu": "T3",
+              "label": "Ngày 20",
+              "sang": "Đ. Dốc\nĐ. Vòng",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-21",
+              "thu": "T4",
+              "label": "Ngày 21",
+              "sang": "Đ. Dốc\nĐ. Vòng",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-22",
+              "thu": "T5",
+              "label": "Ngày 22",
+              "sang": "Đ. Dốc\nĐ. Vòng",
+              "chieu": "Phức tạp",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-23",
+              "thu": "T6",
+              "label": "Ngày 23",
+              "sang": "Phức tạp",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-26",
+              "thu": "T2",
+              "label": "Ngày 26",
+              "sang": "Phức tạp",
+              "chieu": "",
+              "toi": "Ban đêm"
+            },
+            {
+              "date": "2026-10-27",
+              "thu": "T3",
+              "label": "Ngày 27",
+              "sang": "Phức tạp",
+              "chieu": "",
+              "toi": "Ban đêm"
+            },
+            {
+              "date": "2026-10-28",
+              "thu": "T4",
+              "label": "Ngày 28",
+              "sang": "Phức tạp",
+              "chieu": "",
+              "toi": "Ban đêm"
+            },
+            {
+              "date": "2026-10-29",
+              "thu": "T5",
+              "label": "Ngày 29",
+              "sang": "Có tải",
+              "chieu": "",
+              "toi": "Ban đêm"
+            },
+            {
+              "date": "2026-10-30",
+              "thu": "T6",
+              "label": "Ngày 30",
+              "sang": "Có tải",
+              "chieu": "",
+              "toi": "Ban đêm"
+            },
+            {
+              "date": "2026-11-02",
+              "thu": "T2",
+              "label": "Ngày 02",
+              "sang": "Có tải",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-03",
+              "thu": "T3",
+              "label": "Ngày 03",
+              "sang": "Có tải",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-04",
+              "thu": "T4",
+              "label": "Ngày 04",
+              "sang": "Có tải",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-05",
+              "thu": "T5",
+              "label": "Ngày 05",
+              "sang": "Cao tốc",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-06",
+              "thu": "T6",
+              "label": "Ngày 06",
+              "sang": "Cao tốc",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-09",
+              "thu": "T2",
+              "label": "Ngày 09",
+              "sang": "Hình TH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-10",
+              "thu": "T3",
+              "label": "Ngày 10",
+              "sang": "Hình TH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-11",
+              "thu": "T4",
+              "label": "Ngày 11",
+              "sang": "Hình TH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-12",
+              "thu": "T5",
+              "label": "Ngày 12",
+              "sang": "Hình TH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-13",
+              "thu": "T6",
+              "label": "Ngày 13",
+              "sang": "Hình TH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-16",
+              "thu": "T2",
+              "label": "Ngày 16",
+              "sang": "Hình TH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-17",
+              "thu": "T3",
+              "label": "Ngày 17",
+              "sang": "Hình TH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-18",
+              "thu": "T4",
+              "label": "Ngày 18",
+              "sang": "Hình TH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-19",
+              "thu": "T5",
+              "label": "Ngày 19",
+              "sang": "Hình TH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-20",
+              "thu": "T6",
+              "label": "Ngày 20",
+              "sang": "Hình TH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-23",
+              "thu": "T2",
+              "label": "Ngày 23",
+              "sang": "Hình TH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-24",
+              "thu": "T3",
+              "label": "Ngày 24",
+              "sang": "Nghỉ lễ",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-25",
+              "thu": "T4",
+              "label": "Ngày 25",
+              "sang": "Hình TH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-26",
+              "thu": "T5",
+              "label": "Ngày 26",
+              "sang": "Hình TH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-27",
+              "thu": "T6",
+              "label": "Ngày 27",
+              "sang": "Ôn luyện SH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-30",
+              "thu": "T2",
+              "label": "Ngày 30",
+              "sang": "Kiểm tra",
+              "chieu": "",
+              "toi": ""
+            }
+          ]
+        }
+      ]
     },
     "GV006": {
       "ten": "Nguyễn Việt Lâm",
-      "so_hoc_vien": 4
+      "khoa_dang_day": [
+        {
+          "ma_khoa": "48002K262033",
+          "lop": "B.01K0826",
+          "tu_ngay": "11/9/2026",
+          "den_ngay": "30/11/2026",
+          "xe": "43A-363.95",
+          "sdt": "0942369469",
+          "so_hoc_vien": 4,
+          "hoc_vien": [
+            "HUỲNH THỊ THU HÀ",
+            "HUỲNH THỊ MINH HẢI",
+            "ĐỖ QUANG DUY",
+            "PHẠM NG. HOÀNG NGUYÊN"
+          ],
+          "lich_hoc": [
+            {
+              "date": "2026-09-29",
+              "thu": "T3",
+              "label": "Ngày 29",
+              "sang": "Số nguội",
+              "chieu": "Số nóng",
+              "toi": ""
+            },
+            {
+              "date": "2026-09-30",
+              "thu": "T4",
+              "label": "Ngày 30",
+              "sang": "Bãi phẳng",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-01",
+              "thu": "T5",
+              "label": "Ngày 01",
+              "sang": "Bãi phẳng",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-02",
+              "thu": "T6",
+              "label": "Ngày 02",
+              "sang": "Bãi phẳng",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-05",
+              "thu": "T2",
+              "label": "Ngày 05",
+              "sang": "Bãi phẳng",
+              "chieu": "Chữ chi",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-06",
+              "thu": "T3",
+              "label": "Ngày 06",
+              "sang": "Chữ chi",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-07",
+              "thu": "T4",
+              "label": "Ngày 07",
+              "sang": "Chữ chi",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-08",
+              "thu": "T5",
+              "label": "Ngày 08",
+              "sang": "Đ. Bằng",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-09",
+              "thu": "T6",
+              "label": "Ngày 09",
+              "sang": "Đ. Bằng",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-12",
+              "thu": "T2",
+              "label": "Ngày 12",
+              "sang": "Đ. Bằng",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-13",
+              "thu": "T3",
+              "label": "Ngày 13",
+              "sang": "Đ. Bằng",
+              "chieu": "DP (Cabin)",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-14",
+              "thu": "T4",
+              "label": "Ngày 14",
+              "sang": "DP (Cabin)",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-15",
+              "thu": "T5",
+              "label": "Ngày 15",
+              "sang": "Đ. Dốc\nĐ. Vòng",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-16",
+              "thu": "T6",
+              "label": "Ngày 16",
+              "sang": "Đ. Dốc\nĐ. Vòng",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-19",
+              "thu": "T2",
+              "label": "Ngày 19",
+              "sang": "Đ. Dốc\nĐ. Vòng",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-20",
+              "thu": "T3",
+              "label": "Ngày 20",
+              "sang": "Đ. Dốc\nĐ. Vòng",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-21",
+              "thu": "T4",
+              "label": "Ngày 21",
+              "sang": "Đ. Dốc\nĐ. Vòng",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-22",
+              "thu": "T5",
+              "label": "Ngày 22",
+              "sang": "Đ. Dốc\nĐ. Vòng",
+              "chieu": "Phức tạp",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-23",
+              "thu": "T6",
+              "label": "Ngày 23",
+              "sang": "Phức tạp",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-26",
+              "thu": "T2",
+              "label": "Ngày 26",
+              "sang": "Phức tạp",
+              "chieu": "",
+              "toi": "Ban đêm"
+            },
+            {
+              "date": "2026-10-27",
+              "thu": "T3",
+              "label": "Ngày 27",
+              "sang": "Phức tạp",
+              "chieu": "",
+              "toi": "Ban đêm"
+            },
+            {
+              "date": "2026-10-28",
+              "thu": "T4",
+              "label": "Ngày 28",
+              "sang": "Phức tạp",
+              "chieu": "",
+              "toi": "Ban đêm"
+            },
+            {
+              "date": "2026-10-29",
+              "thu": "T5",
+              "label": "Ngày 29",
+              "sang": "Có tải",
+              "chieu": "",
+              "toi": "Ban đêm"
+            },
+            {
+              "date": "2026-10-30",
+              "thu": "T6",
+              "label": "Ngày 30",
+              "sang": "Có tải",
+              "chieu": "",
+              "toi": "Ban đêm"
+            },
+            {
+              "date": "2026-11-02",
+              "thu": "T2",
+              "label": "Ngày 02",
+              "sang": "Có tải",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-03",
+              "thu": "T3",
+              "label": "Ngày 03",
+              "sang": "Có tải",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-04",
+              "thu": "T4",
+              "label": "Ngày 04",
+              "sang": "Có tải",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-05",
+              "thu": "T5",
+              "label": "Ngày 05",
+              "sang": "Cao tốc",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-06",
+              "thu": "T6",
+              "label": "Ngày 06",
+              "sang": "Cao tốc",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-09",
+              "thu": "T2",
+              "label": "Ngày 09",
+              "sang": "Hình TH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-10",
+              "thu": "T3",
+              "label": "Ngày 10",
+              "sang": "Hình TH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-11",
+              "thu": "T4",
+              "label": "Ngày 11",
+              "sang": "Hình TH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-12",
+              "thu": "T5",
+              "label": "Ngày 12",
+              "sang": "Hình TH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-13",
+              "thu": "T6",
+              "label": "Ngày 13",
+              "sang": "Hình TH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-16",
+              "thu": "T2",
+              "label": "Ngày 16",
+              "sang": "Hình TH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-17",
+              "thu": "T3",
+              "label": "Ngày 17",
+              "sang": "Hình TH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-18",
+              "thu": "T4",
+              "label": "Ngày 18",
+              "sang": "Hình TH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-19",
+              "thu": "T5",
+              "label": "Ngày 19",
+              "sang": "Hình TH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-20",
+              "thu": "T6",
+              "label": "Ngày 20",
+              "sang": "Hình TH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-23",
+              "thu": "T2",
+              "label": "Ngày 23",
+              "sang": "Hình TH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-24",
+              "thu": "T3",
+              "label": "Ngày 24",
+              "sang": "Nghỉ lễ",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-25",
+              "thu": "T4",
+              "label": "Ngày 25",
+              "sang": "Hình TH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-26",
+              "thu": "T5",
+              "label": "Ngày 26",
+              "sang": "Hình TH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-27",
+              "thu": "T6",
+              "label": "Ngày 27",
+              "sang": "Ôn luyện SH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-30",
+              "thu": "T2",
+              "label": "Ngày 30",
+              "sang": "Kiểm tra",
+              "chieu": "",
+              "toi": ""
+            }
+          ]
+        }
+      ]
     },
     "GV003": {
       "ten": "Lê Quốc Việt",
-      "so_hoc_vien": 3
+      "khoa_dang_day": [
+        {
+          "ma_khoa": "48002K262033",
+          "lop": "B.01K0826",
+          "tu_ngay": "11/9/2026",
+          "den_ngay": "30/11/2026",
+          "xe": "43A-041.52",
+          "sdt": "0346090070",
+          "so_hoc_vien": 3,
+          "hoc_vien": [
+            "NGUYỄN THỊ CẨM NHUNG",
+            "NGUYỄN THANH MẪN QUÂN",
+            "TRẦN NGỌC TÍCH"
+          ],
+          "lich_hoc": [
+            {
+              "date": "2026-09-29",
+              "thu": "T3",
+              "label": "Ngày 29",
+              "sang": "Số nguội",
+              "chieu": "Số nóng",
+              "toi": ""
+            },
+            {
+              "date": "2026-09-30",
+              "thu": "T4",
+              "label": "Ngày 30",
+              "sang": "Bãi phẳng",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-01",
+              "thu": "T5",
+              "label": "Ngày 01",
+              "sang": "Bãi phẳng",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-02",
+              "thu": "T6",
+              "label": "Ngày 02",
+              "sang": "Bãi phẳng",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-05",
+              "thu": "T2",
+              "label": "Ngày 05",
+              "sang": "Bãi phẳng",
+              "chieu": "Chữ chi",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-06",
+              "thu": "T3",
+              "label": "Ngày 06",
+              "sang": "Chữ chi",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-07",
+              "thu": "T4",
+              "label": "Ngày 07",
+              "sang": "Chữ chi",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-08",
+              "thu": "T5",
+              "label": "Ngày 08",
+              "sang": "Đ. Bằng",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-09",
+              "thu": "T6",
+              "label": "Ngày 09",
+              "sang": "Đ. Bằng",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-12",
+              "thu": "T2",
+              "label": "Ngày 12",
+              "sang": "Đ. Bằng",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-13",
+              "thu": "T3",
+              "label": "Ngày 13",
+              "sang": "Đ. Bằng",
+              "chieu": "DP (Cabin)",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-14",
+              "thu": "T4",
+              "label": "Ngày 14",
+              "sang": "DP (Cabin)",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-15",
+              "thu": "T5",
+              "label": "Ngày 15",
+              "sang": "Đ. Dốc\nĐ. Vòng",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-16",
+              "thu": "T6",
+              "label": "Ngày 16",
+              "sang": "Đ. Dốc\nĐ. Vòng",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-19",
+              "thu": "T2",
+              "label": "Ngày 19",
+              "sang": "Đ. Dốc\nĐ. Vòng",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-20",
+              "thu": "T3",
+              "label": "Ngày 20",
+              "sang": "Đ. Dốc\nĐ. Vòng",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-21",
+              "thu": "T4",
+              "label": "Ngày 21",
+              "sang": "Đ. Dốc\nĐ. Vòng",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-22",
+              "thu": "T5",
+              "label": "Ngày 22",
+              "sang": "Đ. Dốc\nĐ. Vòng",
+              "chieu": "Phức tạp",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-23",
+              "thu": "T6",
+              "label": "Ngày 23",
+              "sang": "Phức tạp",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-10-26",
+              "thu": "T2",
+              "label": "Ngày 26",
+              "sang": "Phức tạp",
+              "chieu": "",
+              "toi": "Ban đêm"
+            },
+            {
+              "date": "2026-10-27",
+              "thu": "T3",
+              "label": "Ngày 27",
+              "sang": "Phức tạp",
+              "chieu": "",
+              "toi": "Ban đêm"
+            },
+            {
+              "date": "2026-10-28",
+              "thu": "T4",
+              "label": "Ngày 28",
+              "sang": "Phức tạp",
+              "chieu": "",
+              "toi": "Ban đêm"
+            },
+            {
+              "date": "2026-10-29",
+              "thu": "T5",
+              "label": "Ngày 29",
+              "sang": "Có tải",
+              "chieu": "",
+              "toi": "Ban đêm"
+            },
+            {
+              "date": "2026-10-30",
+              "thu": "T6",
+              "label": "Ngày 30",
+              "sang": "Có tải",
+              "chieu": "",
+              "toi": "Ban đêm"
+            },
+            {
+              "date": "2026-11-02",
+              "thu": "T2",
+              "label": "Ngày 02",
+              "sang": "Có tải",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-03",
+              "thu": "T3",
+              "label": "Ngày 03",
+              "sang": "Có tải",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-04",
+              "thu": "T4",
+              "label": "Ngày 04",
+              "sang": "Có tải",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-05",
+              "thu": "T5",
+              "label": "Ngày 05",
+              "sang": "Cao tốc",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-06",
+              "thu": "T6",
+              "label": "Ngày 06",
+              "sang": "Cao tốc",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-09",
+              "thu": "T2",
+              "label": "Ngày 09",
+              "sang": "Hình TH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-10",
+              "thu": "T3",
+              "label": "Ngày 10",
+              "sang": "Hình TH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-11",
+              "thu": "T4",
+              "label": "Ngày 11",
+              "sang": "Hình TH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-12",
+              "thu": "T5",
+              "label": "Ngày 12",
+              "sang": "Hình TH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-13",
+              "thu": "T6",
+              "label": "Ngày 13",
+              "sang": "Hình TH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-16",
+              "thu": "T2",
+              "label": "Ngày 16",
+              "sang": "Hình TH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-17",
+              "thu": "T3",
+              "label": "Ngày 17",
+              "sang": "Hình TH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-18",
+              "thu": "T4",
+              "label": "Ngày 18",
+              "sang": "Hình TH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-19",
+              "thu": "T5",
+              "label": "Ngày 19",
+              "sang": "Hình TH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-20",
+              "thu": "T6",
+              "label": "Ngày 20",
+              "sang": "Hình TH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-23",
+              "thu": "T2",
+              "label": "Ngày 23",
+              "sang": "Hình TH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-24",
+              "thu": "T3",
+              "label": "Ngày 24",
+              "sang": "Nghỉ lễ",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-25",
+              "thu": "T4",
+              "label": "Ngày 25",
+              "sang": "Hình TH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-26",
+              "thu": "T5",
+              "label": "Ngày 26",
+              "sang": "Hình TH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-27",
+              "thu": "T6",
+              "label": "Ngày 27",
+              "sang": "Ôn luyện SH",
+              "chieu": "",
+              "toi": ""
+            },
+            {
+              "date": "2026-11-30",
+              "thu": "T2",
+              "label": "Ngày 30",
+              "sang": "Kiểm tra",
+              "chieu": "",
+              "toi": ""
+            }
+          ]
+        }
+      ]
     }
   }
 }

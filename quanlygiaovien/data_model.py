@@ -19,7 +19,7 @@ class DataModel:
         self.json_path = Path(json_path)
         raw = json.loads(self.json_path.read_text(encoding="utf-8"))
         self.generated_at = raw.get("generated_at", "")
-        self.source_file = raw.get("source_file", "")
+        self.source_files = raw.get("source_files", [])
         self.courses = raw.get("courses", [])
 
     # ---- truy cập cơ bản ----

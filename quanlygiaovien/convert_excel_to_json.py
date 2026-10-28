@@ -177,23 +177,44 @@ def merge(phan_xe_courses, lich_hoc_courses):
     return result
 
 
+def load_workbook_courses(excel_path):
+    """Đọc 1 file Excel, trả về list courses (đã merge PHÂN XE + LỊCH HỌC)."""
+    wb = openpyxl.load_workbook(excel_path, data_only=True)
+    phan_xe_courses = parse_phan_xe(wb["PHÂN XE"])
+    lich_hoc_courses = parse_lich_hoc(wb["LỊCH HỌC"])
+    return merge(phan_xe_courses, lich_hoc_courses)
+
+
+def build_data(excel_paths):
+    """Đọc & gộp nhiều file Excel theo mã khóa. Nếu 2 file có cùng mã khóa,
+    file đọc sau sẽ ghi đè file đọc trước (trả thêm danh sách mã bị ghi đè)."""
+    courses_by_code = {}
+    overwritten = []
+    for path in excel_paths:
+        for c in load_workbook_courses(path):
+            if c["ma_khoa"] in courses_by_code:
+                overwritten.append(c["ma_khoa"])
+            courses_by_code[c["ma_khoa"]] = c
+
+    courses = [courses_by_code[k] for k in sorted(courses_by_code)]
+    data = {
+        "generated_at": datetime.now().isoformat(timespec="seconds"),
+        "source_files": [Path(p).name for p in excel_paths],
+        "courses": courses,
+    }
+    return data, overwritten
+
+
 def main():
     excel_path = Path(sys.argv[1]) if len(sys.argv) > 1 else Path(EXCEL_FILE)
     output_path = Path(sys.argv[2]) if len(sys.argv) > 2 else Path(OUTPUT_FILE)
 
-    wb = openpyxl.load_workbook(excel_path, data_only=True)
-    phan_xe_courses = parse_phan_xe(wb["PHÂN XE"])
-    lich_hoc_courses = parse_lich_hoc(wb["LỊCH HỌC"])
-    courses = merge(phan_xe_courses, lich_hoc_courses)
-
-    data = {
-        "generated_at": datetime.now().isoformat(timespec="seconds"),
-        "source_file": excel_path.name,
-        "courses": courses,
-    }
+    data, overwritten = build_data([excel_path])
 
     output_path.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
-    print(f"OK: exported {len(courses)} khoa -> {output_path}")
+    print(f"OK: exported {len(data['courses'])} khoa -> {output_path}")
+    if overwritten:
+        print(f"CANH BAO: trung ma khoa: {overwritten}")
 
 
 if __name__ == "__main__":
