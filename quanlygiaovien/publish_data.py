@@ -10,7 +10,10 @@
 3. Build docs/public_data.json: tên giáo viên + chi tiết từng khóa đang đào tạo
    (khóa/lớp, thời gian, xe, SĐT, danh sách tên học viên) + file PDF/Word gắn kèm
 4. Sinh mã QR cho MỌI giáo viên trong DSGV (mã QR = MaGV - mã chính thức, cố
-   định, không bao giờ trùng lặp) vào qr_codes/<MaGV>.png, có ghi tên bên dưới
+   định, không bao giờ trùng lặp) vào qr_codes/<MaGV>.png, có ghi tên bên dưới.
+   Link/mã QR không bao giờ đổi; nếu DSGV sửa lại tên 1 giáo viên đã có QR,
+   app tự nhận ra (so với qr_codes/_captions.json) và vẽ lại ảnh với tên mới,
+   không cần xóa tay.
 
 Lưu ý: public_data.json có TÊN học viên (theo yêu cầu) nhưng KHÔNG có
 ngày sinh / địa chỉ / CMT / ảnh - những trường đó không bao giờ được đọc ra
@@ -35,6 +38,7 @@ DOCS_DIR = REPO_ROOT / "docs"
 PUBLIC_DATA_FILE = DOCS_DIR / "public_data.json"
 FILES_OUT_DIR = DOCS_DIR / "files"
 QR_DIR = APP_DIR / "qr_codes"
+QR_CAPTIONS_FILE = QR_DIR / "_captions.json"
 APP_SETTINGS_FILE = APP_DIR / "app_settings.json"
 DATA_SOURCES_FILE = APP_DIR / "data_sources.json"
 
@@ -58,19 +62,26 @@ def save_app_settings(settings):
 
 
 # ---------------- nguồn dữ liệu (data_sources.json) ----------------
+def _latest_by_mtime(paths):
+    """Chọn file được sửa đổi gần đây nhất (đáng tin hơn sort theo tên khi
+    định dạng tên file xuất ra có thể thay đổi)."""
+    paths = list(paths)
+    return max(paths, key=lambda p: p.stat().st_mtime) if paths else None
+
+
 def _scan_default_sources():
     """Tự động quét thư mục data/ để gợi ý sẵn danh sách nguồn lần đầu mở app."""
     bien_che = sorted(str(p) for p in DATA_DIR.glob("*.xlsx") if "BIÊN CHẾ XE KHÓA" in p.name.upper())
     lich_hoc = sorted(str(p) for p in DATA_DIR.glob("*.pdf") if "LICH HOC" in p.name.upper())
-    dsgv = sorted(DATA_DIR.glob("DSGV_*.xml"))
-    dsxtl = sorted(DATA_DIR.glob("DSXTL_*.xml"))
+    dsgv = _latest_by_mtime(DATA_DIR.glob("DSGV_*.xml"))
+    dsxtl = _latest_by_mtime(DATA_DIR.glob("DSXTL_*.xml"))
     xe_folder = DATA_DIR / DEFAULT_XE_FOLDER_NAME
     ho_so_folder = DATA_DIR / DEFAULT_HO_SO_FOLDER_NAME
     return {
         "bien_che_files": bien_che,
         "lich_hoc_files": lich_hoc,
-        "dsgv_file": str(dsgv[-1]) if dsgv else "",
-        "dsxtl_file": str(dsxtl[-1]) if dsxtl else "",
+        "dsgv_file": str(dsgv) if dsgv else "",
+        "dsxtl_file": str(dsxtl) if dsxtl else "",
         "xe_folder": str(xe_folder) if xe_folder.is_dir() else "",
         "ho_so_folder": str(ho_so_folder) if ho_so_folder.is_dir() else "",
     }
@@ -131,6 +142,18 @@ def _generate_qr(ma_gv, ten):
     y = qr_img.height + max((caption_h - text_h) // 2, 0)
     draw.text((x, y), ten, fill="black", font=font)
     canvas.save(QR_DIR / f"{ma_gv}.png")
+
+
+def _load_qr_captions():
+    if QR_CAPTIONS_FILE.exists():
+        return json.loads(QR_CAPTIONS_FILE.read_text(encoding="utf-8"))
+    return {}
+
+
+def _save_qr_captions(captions):
+    QR_CAPTIONS_FILE.write_text(
+        json.dumps(captions, ensure_ascii=False, indent=2), encoding="utf-8"
+    )
 
 
 def _copy_public_file(src_path, rel_subdir, dest_stem):
@@ -245,7 +268,9 @@ def run_pipeline(sources=None):
     DOCS_DIR.mkdir(exist_ok=True)
     QR_DIR.mkdir(exist_ok=True)
     existing_qr = {f.stem for f in QR_DIR.glob("*.png")}
+    qr_captions = _load_qr_captions()
     giao_vien_moi = []
+    giao_vien_doi_ten = []
 
     teachers_out = {}
     for ma_gv, rec in dsgv.items():
@@ -258,7 +283,20 @@ def run_pipeline(sources=None):
         }
         if ma_gv not in existing_qr:
             _generate_qr(ma_gv, rec["ten"])
+            qr_captions[ma_gv] = rec["ten"]
             giao_vien_moi.append((rec["ten"], ma_gv))
+        else:
+            ten_cu = qr_captions.get(ma_gv)
+            if ten_cu is None:
+                # QR có từ trước khi có cơ chế theo dõi tên - coi như đang khớp,
+                # không cần tạo lại.
+                qr_captions[ma_gv] = rec["ten"]
+            elif ten_cu != rec["ten"]:
+                _generate_qr(ma_gv, rec["ten"])
+                giao_vien_doi_ten.append((ten_cu, rec["ten"], ma_gv))
+                qr_captions[ma_gv] = rec["ten"]
+
+    _save_qr_captions(qr_captions)
 
     app_settings = load_app_settings()
     ho_so_password = (app_settings.get("ho_so_password") or "").strip()
@@ -280,6 +318,7 @@ def run_pipeline(sources=None):
     return {
         "so_giao_vien": len(teachers_out),
         "giao_vien_moi": giao_vien_moi,
+        "giao_vien_doi_ten": giao_vien_doi_ten,
         "generated_at": model.generated_at,
         "ma_khoa_trung": overwritten,
         "so_file_excel": len(bien_che_files),

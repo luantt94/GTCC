@@ -135,17 +135,23 @@
 const id = new URLSearchParams(window.location.search).get("id");
 const container = document.getElementById("khoa-container");
 
+function esc(value) {
+  return String(value ?? "").replace(/[&<>"']/g, (c) => ({
+    "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;",
+  }[c]));
+}
+
 function row(label, value, hint) {
   const d = document.createElement("div");
   d.className = "row";
-  d.innerHTML = `<div class="k">${label}</div><div class="v">${value}${hint ? `<div class="hint">${hint}</div>` : ""}</div>`;
+  d.innerHTML = `<div class="k">${esc(label)}</div><div class="v">${esc(value)}${hint ? `<div class="hint">${esc(hint)}</div>` : ""}</div>`;
   return d;
 }
 
 function clickableRow(label, value, hint, onToggle) {
   const d = document.createElement("div");
   d.className = "row clickable";
-  d.innerHTML = `<div class="k">${label}</div><div class="v">${value}<div class="hint">${hint}</div></div>`;
+  d.innerHTML = `<div class="k">${esc(label)}</div><div class="v">${esc(value)}<div class="hint">${esc(hint)}</div></div>`;
   const detail = document.createElement("div");
   detail.className = "detail";
   d.addEventListener("click", () => {
@@ -161,14 +167,18 @@ function clickableRow(label, value, hint, onToggle) {
 function fileEmbedHtml(relPath) {
   const absUrl = new URL(relPath, window.location.href).href;
   const ext = relPath.split(".").pop().toLowerCase();
+  // Không nhúng PDF trực tiếp bằng iframe: nhiều trình duyệt ẩn trong app
+  // (Zalo/Messenger/Facebook... khi mở link từ quét QR) không có sẵn trình
+  // xem PDF nên khung sẽ trống. Dùng PDF.js (Mozilla) để xem được ở mọi nơi,
+  // giống cách đang dùng Office Viewer cho file Word.
   const src =
     ext === "pdf"
-      ? relPath
+      ? "https://mozilla.github.io/pdf.js/web/viewer.html?file=" + encodeURIComponent(absUrl)
       : "https://view.officeapps.live.com/op/embed.aspx?src=" + encodeURIComponent(absUrl);
   return `
     <div class="file-embed">
-      <iframe src="${src}" loading="lazy"></iframe>
-      <div class="open-link"><a href="${relPath}" target="_blank" rel="noopener">Mở / tải file gốc ↗</a></div>
+      <iframe src="${esc(src)}" loading="lazy"></iframe>
+      <div class="open-link"><a href="${esc(relPath)}" target="_blank" rel="noopener">Mở / tải file gốc ↗</a></div>
     </div>`;
 }
 
@@ -272,7 +282,7 @@ fetch("public_data.json", { cache: "no-store" })
       const [xeRow, xeDetail] = clickableRow(
         "Xe tập lái", k.xe, "(bấm để xem SĐT && giấy tờ xe)",
         (detail) => {
-          detail.innerHTML = `<p>SĐT: <b>${k.sdt || "chưa có"}</b></p>`;
+          detail.innerHTML = `<p>SĐT: <b>${esc(k.sdt) || "chưa có"}</b></p>`;
           if (k.giay_to_xe_file) {
             detail.innerHTML += `<p style="margin-top:8px;font-weight:600;">Giấy tờ xe:</p>` + fileEmbedHtml(k.giay_to_xe_file);
           }

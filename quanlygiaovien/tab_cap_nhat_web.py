@@ -294,6 +294,10 @@ class CapNhatWebTab(QWidget):
             lines.append("Giáo viên MỚI (đã tạo mã QR trong thư mục qr_codes/):")
             for name, tid in result["giao_vien_moi"]:
                 lines.append(f"  - {name} ({tid}.png)")
+        if result.get("giao_vien_doi_ten"):
+            lines.append("Đã cập nhật lại tên in trên mã QR (link/mã QR không đổi):")
+            for ten_cu, ten_moi, tid in result["giao_vien_doi_ten"]:
+                lines.append(f"  - {tid}: '{ten_cu}' -> '{ten_moi}'")
         lines.append(result["git_message"])
         self.log.append("\n".join(lines))
 
