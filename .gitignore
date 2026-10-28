@@ -218,3 +218,6 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Hồ sơ / tài liệu cá nhân nhạy cảm - không đưa lên GitHub (repo public)
+/data/

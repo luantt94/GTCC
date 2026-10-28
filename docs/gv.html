@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Thông tin giáo viên</title>
+<style>
+  body {
+    font-family: -apple-system, Segoe UI, Roboto, sans-serif;
+    text-align: center;
+    padding: 48px 16px;
+    background: #f7f7f8;
+    color: #222;
+  }
+  .card {
+    max-width: 360px;
+    margin: 0 auto;
+    background: #fff;
+    border-radius: 16px;
+    padding: 32px 24px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  }
+  h1 { font-size: 1.3rem; margin: 0 0 24px; }
+  .count { font-size: 3.2rem; font-weight: 700; color: #0a7a3d; line-height: 1; }
+  .label { color: #666; margin-top: 4px; }
+  .updated { color: #999; font-size: 0.8rem; margin-top: 24px; }
+  .error { color: #c0392b; }
+</style>
+</head>
+<body>
+  <div class="card">
+    <h1 id="ten">Đang tải...</h1>
+    <div class="count" id="soluong">-</div>
+    <div class="label">học viên đang dạy</div>
+    <div class="updated" id="capnhat"></div>
+  </div>
+
+<script>
+const id = new URLSearchParams(window.location.search).get("id");
+
+fetch("public_data.json", { cache: "no-store" })
+  .then(r => r.json())
+  .then(data => {
+    const gv = id ? data.teachers[id] : null;
+    if (!gv) {
+      document.getElementById("ten").textContent = "Không tìm thấy mã giáo viên";
+      document.getElementById("ten").classList.add("error");
+      return;
+    }
+    document.getElementById("ten").textContent = gv.ten;
+    document.getElementById("soluong").textContent = gv.so_hoc_vien;
+    document.getElementById("capnhat").textContent = "Cập nhật: " + data.generated_at;
+  })
+  .catch(() => {
+    document.getElementById("ten").textContent = "Không tải được dữ liệu";
+    document.getElementById("ten").classList.add("error");
+  });
+</script>
+</body>
+</html>

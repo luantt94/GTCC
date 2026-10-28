@@ -1,0 +1,10 @@
+# Dữ liệu nhạy cảm / sinh ra từ Excel - KHÔNG đưa lên GitHub (public)
+data.json
+*.xlsx
+*.xls
+
+# Mã QR in cho giáo viên - chỉ cần lưu local để in lại khi cần
+qr_codes/
+
+__pycache__/
+*.pyc

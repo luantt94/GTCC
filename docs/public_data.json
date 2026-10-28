@@ -1,0 +1,45 @@
+{
+  "generated_at": "2026-10-28T07:43:22",
+  "teachers": {
+    "GV008": {
+      "ten": "Trần Minh Hải",
+      "so_hoc_vien": 5
+    },
+    "GV001": {
+      "ten": "Huỳnh Ngọc Tân",
+      "so_hoc_vien": 5
+    },
+    "GV007": {
+      "ten": "Nguyễn Văn Mỹ",
+      "so_hoc_vien": 5
+    },
+    "GV005": {
+      "ten": "Nguyễn Thành Trung",
+      "so_hoc_vien": 5
+    },
+    "GV002": {
+      "ten": "Lê Quang Nghĩa",
+      "so_hoc_vien": 3
+    },
+    "GV004": {
+      "ten": "Nguyễn Bá Quýnh",
+      "so_hoc_vien": 5
+    },
+    "GV010": {
+      "ten": "Tạ Minh Thuận",
+      "so_hoc_vien": 5
+    },
+    "GV009": {
+      "ten": "Trần Quốc Khánh",
+      "so_hoc_vien": 5
+    },
+    "GV006": {
+      "ten": "Nguyễn Việt Lâm",
+      "so_hoc_vien": 4
+    },
+    "GV003": {
+      "ten": "Lê Quốc Việt",
+      "so_hoc_vien": 3
+    }
+  }
+}
