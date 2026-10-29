@@ -1,20 +1,23 @@
 {
-  "generated_at": "2026-10-28T21:24:36",
+  "generated_at": "2026-10-29T07:41:37",
   "teachers": {
     "48002001": {
       "ten": "Nguyễn Anh Dương",
       "khoa_dang_day": [],
-      "ho_so_file": "files/ho_so_gv/48002001.pdf"
+      "ho_so_file": "files/ho_so_gv/48002001.pdf",
+      "anh_file": null
     },
     "48002002": {
       "ten": "Nguyễn Thành Công",
       "khoa_dang_day": [],
-      "ho_so_file": "files/ho_so_gv/48002002.pdf"
+      "ho_so_file": "files/ho_so_gv/48002002.pdf",
+      "anh_file": null
     },
     "48002003": {
       "ten": "Nguyễn Văn Cường",
       "khoa_dang_day": [],
-      "ho_so_file": "files/ho_so_gv/48002003.pdf"
+      "ho_so_file": "files/ho_so_gv/48002003.pdf",
+      "anh_file": null
     },
     "48002004": {
       "ten": "Nguyễn Đình Ánh",
@@ -55,7 +58,8 @@
           "giay_to_xe_file": "files/xe/43A34074.docx"
         }
       ],
-      "ho_so_file": "files/ho_so_gv/48002004.pdf"
+      "ho_so_file": "files/ho_so_gv/48002004.pdf",
+      "anh_file": null
     },
     "48002005": {
       "ten": "Huỳnh Quốc Bảo",
@@ -96,7 +100,8 @@
           "giay_to_xe_file": "files/xe/43A29261.docx"
         }
       ],
-      "ho_so_file": "files/ho_so_gv/48002005.pdf"
+      "ho_so_file": "files/ho_so_gv/48002005.pdf",
+      "anh_file": null
     },
     "48002006": {
       "ten": "Nguyễn Hữu Bin",
@@ -137,7 +142,8 @@
           "giay_to_xe_file": "files/xe/43A29325.docx"
         }
       ],
-      "ho_so_file": "files/ho_so_gv/48002006.pdf"
+      "ho_so_file": "files/ho_so_gv/48002006.pdf",
+      "anh_file": null
     },
     "48002007": {
       "ten": "Võ Phan Chung",
@@ -178,12 +184,14 @@
           "giay_to_xe_file": "files/xe/43A03136.docx"
         }
       ],
-      "ho_so_file": "files/ho_so_gv/48002007.pdf"
+      "ho_so_file": "files/ho_so_gv/48002007.pdf",
+      "anh_file": null
     },
     "48002008": {
       "ten": "Trần Viết Duy",
       "khoa_dang_day": [],
-      "ho_so_file": "files/ho_so_gv/48002008.pdf"
+      "ho_so_file": "files/ho_so_gv/48002008.pdf",
+      "anh_file": null
     },
     "48002009": {
       "ten": "Lê Văn Đông",
@@ -224,12 +232,14 @@
           "giay_to_xe_file": "files/xe/43A67165.docx"
         }
       ],
-      "ho_so_file": "files/ho_so_gv/48002009.pdf"
+      "ho_so_file": "files/ho_so_gv/48002009.pdf",
+      "anh_file": null
     },
     "48002010": {
       "ten": "Lê Văn Duân",
       "khoa_dang_day": [],
-      "ho_so_file": "files/ho_so_gv/48002010.pdf"
+      "ho_so_file": "files/ho_so_gv/48002010.pdf",
+      "anh_file": null
     },
     "48002011": {
       "ten": "Hoàng Minh Đức",
@@ -252,7 +262,8 @@
           "giay_to_xe_file": "files/xe/43A29337.docx"
         }
       ],
-      "ho_so_file": "files/ho_so_gv/48002011.pdf"
+      "ho_so_file": "files/ho_so_gv/48002011.pdf",
+      "anh_file": null
     },
     "48002012": {
       "ten": "Lê Huỳnh Đức",
@@ -293,32 +304,38 @@
           "giay_to_xe_file": "files/xe/92A09884.docx"
         }
       ],
-      "ho_so_file": "files/ho_so_gv/48002012.pdf"
+      "ho_so_file": "files/ho_so_gv/48002012.pdf",
+      "anh_file": null
     },
     "48002013": {
       "ten": "Hồ Duy Dũng",
       "khoa_dang_day": [],
-      "ho_so_file": "files/ho_so_gv/48002013.pdf"
+      "ho_so_file": "files/ho_so_gv/48002013.pdf",
+      "anh_file": null
     },
     "48002014": {
       "ten": "Huỳnh Trường Giang",
       "khoa_dang_day": [],
-      "ho_so_file": "files/ho_so_gv/48002014.pdf"
+      "ho_so_file": "files/ho_so_gv/48002014.pdf",
+      "anh_file": null
     },
     "48002015": {
       "ten": "Hồ Kỳ Hải",
       "khoa_dang_day": [],
-      "ho_so_file": "files/ho_so_gv/48002015.pdf"
+      "ho_so_file": "files/ho_so_gv/48002015.pdf",
+      "anh_file": null
     },
     "48002016": {
       "ten": "Nguyễn Thanh Hải",
       "khoa_dang_day": [],
-      "ho_so_file": "files/ho_so_gv/48002016.pdf"
+      "ho_so_file": "files/ho_so_gv/48002016.pdf",
+      "anh_file": null
     },
     "48002017": {
       "ten": "Trần Minh Hải",
       "khoa_dang_day": [],
-      "ho_so_file": "files/ho_so_gv/48002017.pdf"
+      "ho_so_file": "files/ho_so_gv/48002017.pdf",
+      "anh_file": null
     },
     "48002018": {
       "ten": "Nguyễn Như Hiếu",
@@ -359,32 +376,38 @@
           "giay_to_xe_file": "files/xe/43A32035.docx"
         }
       ],
-      "ho_so_file": "files/ho_so_gv/48002018.pdf"
+      "ho_so_file": "files/ho_so_gv/48002018.pdf",
+      "anh_file": null
     },
     "48002019": {
       "ten": "Lê Ngọc Hòa",
       "khoa_dang_day": [],
-      "ho_so_file": "files/ho_so_gv/48002019.pdf"
+      "ho_so_file": "files/ho_so_gv/48002019.pdf",
+      "anh_file": null
     },
     "48002020": {
       "ten": "Nguyễn Đình Kha",
       "khoa_dang_day": [],
-      "ho_so_file": "files/ho_so_gv/48002020.pdf"
+      "ho_so_file": "files/ho_so_gv/48002020.pdf",
+      "anh_file": null
     },
     "48002021": {
       "ten": "Trần Quốc Khánh",
       "khoa_dang_day": [],
-      "ho_so_file": "files/ho_so_gv/48002021.pdf"
+      "ho_so_file": "files/ho_so_gv/48002021.pdf",
+      "anh_file": null
     },
     "48002022": {
       "ten": "Huỳnh Bá Đăng Khoa",
       "khoa_dang_day": [],
-      "ho_so_file": "files/ho_so_gv/48002022.pdf"
+      "ho_so_file": "files/ho_so_gv/48002022.pdf",
+      "anh_file": null
     },
     "48002023": {
       "ten": "Lê Bá Kiệt",
       "khoa_dang_day": [],
-      "ho_so_file": "files/ho_so_gv/48002023.pdf"
+      "ho_so_file": "files/ho_so_gv/48002023.pdf",
+      "anh_file": null
     },
     "48002024": {
       "ten": "Lê Trương Lai",
@@ -406,52 +429,62 @@
           "giay_to_xe_file": "files/xe/92A39094.docx"
         }
       ],
-      "ho_so_file": "files/ho_so_gv/48002024.pdf"
+      "ho_so_file": "files/ho_so_gv/48002024.pdf",
+      "anh_file": null
     },
     "48002025": {
       "ten": "Nguyễn Việt Lâm",
       "khoa_dang_day": [],
-      "ho_so_file": "files/ho_so_gv/48002025.pdf"
+      "ho_so_file": "files/ho_so_gv/48002025.pdf",
+      "anh_file": null
     },
     "48002026": {
       "ten": "Lê Văn Long",
       "khoa_dang_day": [],
-      "ho_so_file": "files/ho_so_gv/48002026.pdf"
+      "ho_so_file": "files/ho_so_gv/48002026.pdf",
+      "anh_file": null
     },
     "48002027": {
       "ten": "Nguyễn Mẫn",
       "khoa_dang_day": [],
-      "ho_so_file": "files/ho_so_gv/48002027.pdf"
+      "ho_so_file": "files/ho_so_gv/48002027.pdf",
+      "anh_file": null
     },
     "48002028": {
       "ten": "Đoàn Công Minh",
       "khoa_dang_day": [],
-      "ho_so_file": "files/ho_so_gv/48002028.pdf"
+      "ho_so_file": "files/ho_so_gv/48002028.pdf",
+      "anh_file": null
     },
     "48002029": {
       "ten": "Nguyễn Minh",
       "khoa_dang_day": [],
-      "ho_so_file": "files/ho_so_gv/48002029.pdf"
+      "ho_so_file": "files/ho_so_gv/48002029.pdf",
+      "anh_file": null
     },
     "48002030": {
       "ten": "Nguyễn Văn Mỹ",
       "khoa_dang_day": [],
-      "ho_so_file": "files/ho_so_gv/48002030.pdf"
+      "ho_so_file": "files/ho_so_gv/48002030.pdf",
+      "anh_file": null
     },
     "48002031": {
       "ten": "Lê Quang Nghĩa",
       "khoa_dang_day": [],
-      "ho_so_file": "files/ho_so_gv/48002031.pdf"
+      "ho_so_file": "files/ho_so_gv/48002031.pdf",
+      "anh_file": null
     },
     "48002032": {
       "ten": "Nguyễn Chính Nghĩa",
       "khoa_dang_day": [],
-      "ho_so_file": "files/ho_so_gv/48002032.pdf"
+      "ho_so_file": "files/ho_so_gv/48002032.pdf",
+      "anh_file": null
     },
     "48002033": {
       "ten": "Phùng Trần Ngọc",
       "khoa_dang_day": [],
-      "ho_so_file": "files/ho_so_gv/48002033.pdf"
+      "ho_so_file": "files/ho_so_gv/48002033.pdf",
+      "anh_file": null
     },
     "48002034": {
       "ten": "Nguyễn Đức Ngự",
@@ -475,12 +508,14 @@
           "giay_to_xe_file": "files/xe/43A29259.docx"
         }
       ],
-      "ho_so_file": "files/ho_so_gv/48002034.pdf"
+      "ho_so_file": "files/ho_so_gv/48002034.pdf",
+      "anh_file": null
     },
     "48002035": {
       "ten": "Nguyễn Nguyên",
       "khoa_dang_day": [],
-      "ho_so_file": "files/ho_so_gv/48002035.pdf"
+      "ho_so_file": "files/ho_so_gv/48002035.pdf",
+      "anh_file": null
     },
     "48002036": {
       "ten": "Lê Thành Nhân",
@@ -503,32 +538,38 @@
           "giay_to_xe_file": "files/xe/43A29259.docx"
         }
       ],
-      "ho_so_file": "files/ho_so_gv/48002036.pdf"
+      "ho_so_file": "files/ho_so_gv/48002036.pdf",
+      "anh_file": null
     },
     "48002037": {
       "ten": "Đặng Hoàng Phương",
       "khoa_dang_day": [],
-      "ho_so_file": "files/ho_so_gv/48002037.pdf"
+      "ho_so_file": "files/ho_so_gv/48002037.pdf",
+      "anh_file": null
     },
     "48002038": {
       "ten": "Nguyễn Nam Phương",
       "khoa_dang_day": [],
-      "ho_so_file": "files/ho_so_gv/48002038.pdf"
+      "ho_so_file": "files/ho_so_gv/48002038.pdf",
+      "anh_file": null
     },
     "48002039": {
       "ten": "Trần Ngô Đông Phương",
       "khoa_dang_day": [],
-      "ho_so_file": "files/ho_so_gv/48002039.pdf"
+      "ho_so_file": "files/ho_so_gv/48002039.pdf",
+      "anh_file": null
     },
     "48002040": {
       "ten": "Bùi Kiến Quốc",
       "khoa_dang_day": [],
-      "ho_so_file": "files/ho_so_gv/48002040.pdf"
+      "ho_so_file": "files/ho_so_gv/48002040.pdf",
+      "anh_file": null
     },
     "48002041": {
       "ten": "Nguyễn Bá Quýnh",
       "khoa_dang_day": [],
-      "ho_so_file": null
+      "ho_so_file": null,
+      "anh_file": null
     },
     "48002042": {
       "ten": "Trương Công Sỹ",
@@ -569,32 +610,38 @@
           "giay_to_xe_file": "files/xe/43A27493.docx"
         }
       ],
-      "ho_so_file": "files/ho_so_gv/48002042.pdf"
+      "ho_so_file": "files/ho_so_gv/48002042.pdf",
+      "anh_file": null
     },
     "48002043": {
       "ten": "Huỳnh Ngọc Tân",
       "khoa_dang_day": [],
-      "ho_so_file": "files/ho_so_gv/48002043.pdf"
+      "ho_so_file": "files/ho_so_gv/48002043.pdf",
+      "anh_file": null
     },
     "48002044": {
       "ten": "Phạm Tấn Thịnh",
       "khoa_dang_day": [],
-      "ho_so_file": "files/ho_so_gv/48002044.pdf"
+      "ho_so_file": "files/ho_so_gv/48002044.pdf",
+      "anh_file": null
     },
     "48002045": {
       "ten": "Tạ Minh Thuận",
       "khoa_dang_day": [],
-      "ho_so_file": "files/ho_so_gv/48002045.pdf"
+      "ho_so_file": "files/ho_so_gv/48002045.pdf",
+      "anh_file": null
     },
     "48002046": {
       "ten": "Nguyễn Tiến",
       "khoa_dang_day": [],
-      "ho_so_file": "files/ho_so_gv/48002046.pdf"
+      "ho_so_file": "files/ho_so_gv/48002046.pdf",
+      "anh_file": null
     },
     "48002047": {
       "ten": "Vương Văn Tiến",
       "khoa_dang_day": [],
-      "ho_so_file": "files/ho_so_gv/48002047.pdf"
+      "ho_so_file": "files/ho_so_gv/48002047.pdf",
+      "anh_file": null
     },
     "48002048": {
       "ten": "Hồ Minh Tin",
@@ -635,7 +682,8 @@
           "giay_to_xe_file": "files/xe/43A29288.docx"
         }
       ],
-      "ho_so_file": "files/ho_so_gv/48002048.pdf"
+      "ho_so_file": "files/ho_so_gv/48002048.pdf",
+      "anh_file": null
     },
     "48002049": {
       "ten": "Võ Thành Trung",
@@ -658,17 +706,20 @@
           "giay_to_xe_file": "files/xe/43A29301.docx"
         }
       ],
-      "ho_so_file": "files/ho_so_gv/48002049.pdf"
+      "ho_so_file": "files/ho_so_gv/48002049.pdf",
+      "anh_file": null
     },
     "48002050": {
       "ten": "Nguyễn Đăng Trường",
       "khoa_dang_day": [],
-      "ho_so_file": "files/ho_so_gv/48002050.pdf"
+      "ho_so_file": "files/ho_so_gv/48002050.pdf",
+      "anh_file": null
     },
     "48002051": {
       "ten": "Nguyễn Đình Tuấn",
       "khoa_dang_day": [],
-      "ho_so_file": "files/ho_so_gv/48002051.pdf"
+      "ho_so_file": "files/ho_so_gv/48002051.pdf",
+      "anh_file": null
     },
     "48002052": {
       "ten": "Trần Ngọc Tuấn",
@@ -709,7 +760,8 @@
           "giay_to_xe_file": "files/xe/43A01510.docx"
         }
       ],
-      "ho_so_file": "files/ho_so_gv/48002052.pdf"
+      "ho_so_file": "files/ho_so_gv/48002052.pdf",
+      "anh_file": null
     },
     "48002053": {
       "ten": "Giao Thanh Tùng",
@@ -731,52 +783,62 @@
           "giay_to_xe_file": "files/xe/43A29282.docx"
         }
       ],
-      "ho_so_file": "files/ho_so_gv/48002053.pdf"
+      "ho_so_file": "files/ho_so_gv/48002053.pdf",
+      "anh_file": null
     },
     "48002054": {
       "ten": "Lê Quốc Việt",
       "khoa_dang_day": [],
-      "ho_so_file": "files/ho_so_gv/48002054.pdf"
+      "ho_so_file": "files/ho_so_gv/48002054.pdf",
+      "anh_file": null
     },
     "48002055": {
       "ten": "Trần Thế Hải",
       "khoa_dang_day": [],
-      "ho_so_file": "files/ho_so_gv/48002055.pdf"
+      "ho_so_file": "files/ho_so_gv/48002055.pdf",
+      "anh_file": null
     },
     "48002056": {
       "ten": "Lương Văn Quang",
       "khoa_dang_day": [],
-      "ho_so_file": "files/ho_so_gv/48002056.pdf"
+      "ho_so_file": "files/ho_so_gv/48002056.pdf",
+      "anh_file": null
     },
     "48002057": {
       "ten": "Nguyễn Thành Trung",
       "khoa_dang_day": [],
-      "ho_so_file": "files/ho_so_gv/48002057.pdf"
+      "ho_so_file": "files/ho_so_gv/48002057.pdf",
+      "anh_file": null
     },
     "48002058": {
       "ten": "Trần Thị Ái Vân",
       "khoa_dang_day": [],
-      "ho_so_file": "files/ho_so_gv/48002058.pdf"
+      "ho_so_file": "files/ho_so_gv/48002058.pdf",
+      "anh_file": null
     },
     "48002059": {
       "ten": "Nguyễn Đức Thành Duy",
       "khoa_dang_day": [],
-      "ho_so_file": "files/ho_so_gv/48002059.pdf"
+      "ho_so_file": "files/ho_so_gv/48002059.pdf",
+      "anh_file": null
     },
     "48002060": {
       "ten": "Trần Thanh Hùng",
       "khoa_dang_day": [],
-      "ho_so_file": null
+      "ho_so_file": null,
+      "anh_file": null
     },
     "48002061": {
       "ten": "Bùi Ngọc Triều",
       "khoa_dang_day": [],
-      "ho_so_file": "files/ho_so_gv/48002061.pdf"
+      "ho_so_file": "files/ho_so_gv/48002061.pdf",
+      "anh_file": null
     },
     "48002062": {
       "ten": "Đinh Văn Thảo",
       "khoa_dang_day": [],
-      "ho_so_file": "files/ho_so_gv/48002062.pdf"
+      "ho_so_file": "files/ho_so_gv/48002062.pdf",
+      "anh_file": null
     },
     "48002063": {
       "ten": "Huỳnh Tấn Lai",
@@ -817,7 +879,8 @@
           "giay_to_xe_file": "files/xe/43A29358.docx"
         }
       ],
-      "ho_so_file": "files/ho_so_gv/48002063.pdf"
+      "ho_so_file": "files/ho_so_gv/48002063.pdf",
+      "anh_file": null
     },
     "48002064": {
       "ten": "Đinh Sỹ Liêm",
@@ -840,8 +903,9 @@
           "giay_to_xe_file": "files/xe/43A27590.docx"
         }
       ],
-      "ho_so_file": "files/ho_so_gv/48002064.pdf"
+      "ho_so_file": "files/ho_so_gv/48002064.pdf",
+      "anh_file": null
     }
   },
-  "ho_so_password_hash": null
+  "ho_so_password_hash": "9f9ff7dcfae316f727ecfff74d62f388d8cd5a53ca10ecc304b77944bfbc7502"
 }
