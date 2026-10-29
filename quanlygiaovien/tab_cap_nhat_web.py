@@ -221,7 +221,26 @@ class CapNhatWebTab(QWidget):
         pass_layout.addWidget(btn_save_password)
         outer.addWidget(pass_box)
 
-        photo_box = QGroupBox("Ảnh đại diện giáo viên (công khai, hiển thị ngay trên trang web)")
+        org_box = QGroupBox("Thông tin in trên thẻ giáo viên (áp dụng chung cho mọi thẻ)")
+        org_layout = QHBoxLayout(org_box)
+        self.txt_org1 = QLineEdit()
+        self.txt_org1.setPlaceholderText("Tên cơ quan chủ quản (vd Sở Xây dựng TP Đà Nẵng)")
+        org_layout.addWidget(self.txt_org1, 1)
+        self.txt_org2 = QLineEdit()
+        self.txt_org2.setPlaceholderText("Tên cơ sở đào tạo (vd Trung tâm đào tạo lái xe ô tô, mô tô Đà Nẵng)")
+        org_layout.addWidget(self.txt_org2, 1)
+        the_settings = publish_data.load_app_settings()
+        self.txt_org1.setText(the_settings.get("the_org_line1", ""))
+        self.txt_org2.setText(the_settings.get("the_org_line2", ""))
+        btn_save_org = QPushButton("Lưu")
+        btn_save_org.clicked.connect(self._on_save_org)
+        org_layout.addWidget(btn_save_org)
+        outer.addWidget(org_box)
+
+        photo_box = QGroupBox(
+            "Ảnh đại diện & thẻ giáo viên dạy lái xe "
+            "(ảnh công khai hiển thị ngay trên trang web; hạng/thẻ chỉ in cục bộ)"
+        )
         photo_layout = QHBoxLayout(photo_box)
 
         photo_left = QVBoxLayout()
@@ -244,6 +263,26 @@ class CapNhatWebTab(QWidget):
         btn_row2.addWidget(self.btn_remove_photo)
         btn_row2.addStretch(1)
         photo_left.addLayout(btn_row2)
+
+        hang_row = QHBoxLayout()
+        hang_row.addWidget(QLabel("Dạy lái xe hạng:"))
+        self.txt_hang = QLineEdit()
+        self.txt_hang.setPlaceholderText("vd B, hoặc B2, C, D")
+        hang_row.addWidget(self.txt_hang, 1)
+        btn_save_hang = QPushButton("Lưu hạng")
+        btn_save_hang.clicked.connect(self._on_save_hang)
+        hang_row.addWidget(btn_save_hang)
+        photo_left.addLayout(hang_row)
+
+        card_row = QHBoxLayout()
+        btn_export_card_one = QPushButton("Xuất thẻ GV này (PDF)")
+        btn_export_card_one.clicked.connect(self._on_export_card_one)
+        card_row.addWidget(btn_export_card_one)
+        btn_export_card_all = QPushButton("Xuất thẻ TẤT CẢ giáo viên (PDF)")
+        btn_export_card_all.clicked.connect(self._on_export_card_all)
+        card_row.addWidget(btn_export_card_all)
+        photo_left.addLayout(card_row)
+
         photo_layout.addLayout(photo_left, 1)
 
         self.lbl_photo_preview = QLabel("(chưa có ảnh)")
@@ -383,6 +422,7 @@ class CapNhatWebTab(QWidget):
                 self.cbo_photo_teacher.addItem(f"{rec['ten']} ({ma_gv})", ma_gv)
         self.cbo_photo_teacher.blockSignals(False)
         self._update_photo_preview()
+        self._update_hang_field()
 
     def _update_photo_preview(self):
         ma_gv = self.cbo_photo_teacher.currentData()
@@ -400,6 +440,7 @@ class CapNhatWebTab(QWidget):
 
     def _on_photo_teacher_changed(self, _index):
         self._update_photo_preview()
+        self._update_hang_field()
 
     def _on_add_photo(self):
         ma_gv = self.cbo_photo_teacher.currentData()
@@ -445,3 +486,60 @@ class CapNhatWebTab(QWidget):
             QMessageBox.information(self, "Hoàn tất", message)
         else:
             QMessageBox.warning(self, "Chưa đăng lên web được", message)
+
+    # ---- thông tin in trên thẻ giáo viên ----
+    def _on_save_org(self):
+        settings = publish_data.load_app_settings()
+        settings["the_org_line1"] = self.txt_org1.text().strip()
+        settings["the_org_line2"] = self.txt_org2.text().strip()
+        publish_data.save_app_settings(settings)
+        QMessageBox.information(self, "Đã lưu", "Đã lưu thông tin in trên thẻ giáo viên.")
+
+    def _update_hang_field(self):
+        ma_gv = self.cbo_photo_teacher.currentData()
+        self.txt_hang.setText(publish_data.get_hang_lai_xe(ma_gv) if ma_gv else "")
+
+    def _on_save_hang(self):
+        ma_gv = self.cbo_photo_teacher.currentData()
+        if not ma_gv:
+            QMessageBox.warning(
+                self, "Chưa chọn giáo viên",
+                "Hãy chọn file DSGV_*.xml ở trên rồi bấm 'Tải lại DS giáo viên'.",
+            )
+            return
+        publish_data.set_hang_lai_xe(ma_gv, self.txt_hang.text())
+        QMessageBox.information(self, "Đã lưu", "Đã lưu hạng lái xe dạy cho giáo viên này.")
+
+    def _on_export_card_one(self):
+        ma_gv = self.cbo_photo_teacher.currentData()
+        if not ma_gv:
+            QMessageBox.warning(self, "Chưa chọn giáo viên", "Hãy chọn giáo viên trước.")
+            return
+        ten = self._photo_teachers.get(ma_gv, "")
+        self._export_cards([(ma_gv, ten)], f"the_{ma_gv}.pdf")
+
+    def _on_export_card_all(self):
+        if not self._photo_teachers:
+            QMessageBox.warning(
+                self, "Chưa có DS giáo viên",
+                "Hãy chọn file DSGV_*.xml ở trên rồi bấm 'Tải lại DS giáo viên'.",
+            )
+            return
+        teachers = sorted(self._photo_teachers.items(), key=lambda kv: kv[1])
+        self._export_cards(teachers, "the_giao_vien.pdf")
+
+    def _export_cards(self, teachers, default_name):
+        path, _ = QFileDialog.getSaveFileName(
+            self, "Lưu file PDF thẻ giáo viên", default_name, "PDF Files (*.pdf)"
+        )
+        if not path:
+            return
+        try:
+            so_trang = publish_data.export_teacher_cards(teachers, path)
+        except Exception as exc:  # báo lỗi rõ ràng, không để app crash
+            QMessageBox.critical(self, "Lỗi", str(exc))
+            return
+        QMessageBox.information(
+            self, "Hoàn tất",
+            f"Đã xuất {len(teachers)} thẻ giáo viên ({so_trang} trang) vào:\n{path}",
+        )

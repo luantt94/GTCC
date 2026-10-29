@@ -67,13 +67,34 @@ tự điền sẵn mật khẩu này — đổi/xóa được bất cứ lúc n�
 
 ### Ảnh đại diện giáo viên
 
-Ở khung "Ảnh đại diện giáo viên" (tab CẬP NHẬT WEB): chọn giáo viên trong
-ô danh sách (bấm **Tải lại DS giáo viên** nếu vừa đổi file DSGV), rồi bấm
-**Thêm/Đổi ảnh...** để chọn 1 file ảnh (.png/.jpg) hoặc **Xóa ảnh** để gỡ.
-Ảnh được tự resize nhỏ lại rồi **đăng lên web ngay lập tức** (không cần
-bấm "Cập nhật && Đăng lên web"), hiện ngay trên đầu trang `gv.html` của
-giáo viên đó. Ảnh này **công khai, không cần mật khẩu** (khác với "Hồ sơ
-cá nhân" ở mục trên). Cần Internet để bấm được 2 nút này.
+Ở khung "Ảnh đại diện & thẻ giáo viên dạy lái xe" (tab CẬP NHẬT WEB): chọn
+giáo viên trong ô danh sách (bấm **Tải lại DS giáo viên** nếu vừa đổi file
+DSGV), rồi bấm **Thêm/Đổi ảnh...** để chọn 1 file ảnh (.png/.jpg) hoặc
+**Xóa ảnh** để gỡ. Ảnh được tự resize nhỏ lại rồi **đăng lên web ngay lập
+tức** (không cần bấm "Cập nhật && Đăng lên web"), hiện ngay trên đầu trang
+`gv.html` của giáo viên đó. Ảnh này **công khai, không cần mật khẩu** (khác
+với "Hồ sơ cá nhân" ở mục trên). Cần Internet để bấm được 2 nút này.
+
+### Thẻ (phù hiệu) giáo viên dạy lái xe
+
+Cùng khung trên, mỗi giáo viên có thêm ô **"Dạy lái xe hạng"** (vd `B`,
+`B2, C`) — nhập xong bấm **Lưu hạng**. Ảnh đại diện và hạng lái xe dạy được
+lưu trong 2 file **riêng** (`anh_gv/` và `giao_vien_extra.json`, theo mã
+GV) — **tách biệt khỏi DSGV_*.xml/DSXTL_*.xml**, nên khi sau này đổi sang
+file DSGV/DSXTL mới (bản xuất lại từ Sở), 2 thông tin này **không bị mất**,
+miễn mã GV của giáo viên đó giữ nguyên.
+
+Khung **"Thông tin in trên thẻ giáo viên"** ở trên cùng dùng để nhập tên cơ
+quan chủ quản + tên cơ sở đào tạo in ở đầu mỗi thẻ (bấm **Lưu**, dùng chung
+cho mọi thẻ).
+
+Bấm **"Xuất thẻ GV này (PDF)"** để xuất thẻ của 1 giáo viên đang chọn, hoặc
+**"Xuất thẻ TẤT CẢ giáo viên (PDF)"** để xuất toàn bộ (tối đa 8 thẻ/trang
+A4, tự ngắt trang). File PDF theo đúng khổ Mẫu số 01 (85mm x 50mm), có ảnh
+thẻ 3x4cm, tên + hạng lái xe dạy, và mã QR tra cứu (cùng link với mã QR
+phát cho giáo viên). Đây là tính năng **in cục bộ, không đăng lên web** -
+không cần Internet. Phần mềm không tự đóng dấu giáp lai lên ảnh thẻ, cần
+đóng dấu tay sau khi in như quy định.
 
 ## 3. Quy trình cập nhật web hàng ngày/hàng tuần
 

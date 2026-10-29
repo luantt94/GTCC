@@ -43,6 +43,7 @@ QR_CAPTIONS_FILE = QR_DIR / "_captions.json"
 APP_SETTINGS_FILE = APP_DIR / "app_settings.json"
 DATA_SOURCES_FILE = APP_DIR / "data_sources.json"
 PHOTOS_DIR = APP_DIR / "anh_gv"  # ảnh đại diện giáo viên - lưu local, bản resize sẽ copy sang docs/files
+GV_EXTRA_FILE = APP_DIR / "giao_vien_extra.json"  # hạng lái xe dạy - tách khỏi DSGV, lưu local theo MaGV
 
 BASE_URL = "https://luantt94.github.io/GTCC/gv.html"
 
@@ -68,6 +69,33 @@ def save_app_settings(settings):
     APP_SETTINGS_FILE.write_text(
         json.dumps(settings, ensure_ascii=False, indent=2), encoding="utf-8"
     )
+
+
+# ---------------- thông tin riêng từng giáo viên (hạng lái xe dạy) ----------------
+# Lưu local theo MaGV, tách khỏi DSGV/DSXTL (những file này lấy từ nguồn của
+# Sở và có thể bị thay thế bất cứ lúc nào) nên không bị mất khi đổi file XML,
+# miễn MaGV của giáo viên đó không đổi.
+def load_giao_vien_extra():
+    if GV_EXTRA_FILE.exists():
+        return json.loads(GV_EXTRA_FILE.read_text(encoding="utf-8"))
+    return {}
+
+
+def save_giao_vien_extra(data):
+    GV_EXTRA_FILE.write_text(
+        json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8"
+    )
+
+
+def get_hang_lai_xe(ma_gv):
+    return load_giao_vien_extra().get(ma_gv, {}).get("hang", "")
+
+
+def set_hang_lai_xe(ma_gv, hang):
+    data = load_giao_vien_extra()
+    rec = data.setdefault(ma_gv, {})
+    rec["hang"] = (hang or "").strip()
+    save_giao_vien_extra(data)
 
 
 # ---------------- nguồn dữ liệu (data_sources.json) ----------------
@@ -435,3 +463,31 @@ def remove_teacher_photo(ma_gv, ten):
         _save_public_data(data)
 
     return git_publish.push_public_data(f"Xóa ảnh giáo viên {ten} ({ma_gv})")
+
+
+# ---------------- thẻ (phù hiệu) giáo viên dạy lái xe ----------------
+# Chỉ in ấn cục bộ (không đăng lên web) - ảnh + hạng lái xe dạy lấy từ
+# anh_gv/ và giao_vien_extra.json, KHÔNG đọc trực tiếp từ DSGV/DSXTL.
+def export_teacher_cards(teachers, output_path):
+    """teachers: list (ma_gv, ten). Xuất file PDF "Phù hiệu giáo viên dạy
+    lái xe" (Mẫu số 01), tối đa 8 thẻ/trang. Trả về số trang đã xuất."""
+    import teacher_card
+
+    settings = load_app_settings()
+    org_line1 = settings.get("the_org_line1", "")
+    org_line2 = settings.get("the_org_line2", "")
+    extra = load_giao_vien_extra()
+
+    items = [
+        teacher_card.CardData(
+            ma_gv=ma_gv,
+            ten=ten,
+            hang=extra.get(ma_gv, {}).get("hang", ""),
+            photo_path=teacher_photo_path(ma_gv),
+            org_line1=org_line1,
+            org_line2=org_line2,
+            url=f"{BASE_URL}?id={ma_gv}",
+        )
+        for ma_gv, ten in teachers
+    ]
+    return teacher_card.generate_cards_pdf(items, output_path)
