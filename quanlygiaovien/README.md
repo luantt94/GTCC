@@ -203,6 +203,10 @@ Nếu đây là máy mới hoàn toàn chưa từng đăng nhập GitHub, lần 
 "Cập nhật && Đăng lên web" có thể hiện cửa sổ đăng nhập GitHub — đăng nhập
 1 lần, các lần sau không cần nhập lại.
 
+> **Cài app cho một máy khác (đồng nghiệp, máy văn phòng...) từ đầu?** Xem
+> hướng dẫn chi tiết hơn — clone repo, chép dữ liệu nội bộ, cấp quyền đăng
+> web cho tài khoản GitHub khác — ở [git.md](git.md).
+
 ### Bật GitHub Pages (chỉ làm 1 lần cho repo)
 
 1. Vào `https://github.com/luantt94/GTCC/settings/pages`
