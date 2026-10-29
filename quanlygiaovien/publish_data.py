@@ -28,6 +28,7 @@ from pathlib import Path
 
 import attach_files
 import convert_excel_to_json
+import git_publish
 import roster_xml
 from data_model import DataModel
 
@@ -41,18 +42,26 @@ QR_DIR = APP_DIR / "qr_codes"
 QR_CAPTIONS_FILE = QR_DIR / "_captions.json"
 APP_SETTINGS_FILE = APP_DIR / "app_settings.json"
 DATA_SOURCES_FILE = APP_DIR / "data_sources.json"
+PHOTOS_DIR = APP_DIR / "anh_gv"  # ảnh đại diện giáo viên - lưu local, bản resize sẽ copy sang docs/files
 
 BASE_URL = "https://luantt94.github.io/GTCC/gv.html"
 
 DEFAULT_XE_FOLDER_NAME = "Xe tập lái"
 DEFAULT_HO_SO_FOLDER_NAME = "HO SO GV (2026_GTCC)"
 
+# Mật khẩu xem hồ sơ cá nhân mặc định (máy mới chưa từng lưu cài đặt riêng).
+DEFAULT_HO_SO_PASSWORD = "gtcc2026"
+
+ANH_GV_SUBDIR = "anh_gv"
+
 
 # ---------------- cài đặt chung (mật khẩu hồ sơ cá nhân) ----------------
 def load_app_settings():
     if APP_SETTINGS_FILE.exists():
         return json.loads(APP_SETTINGS_FILE.read_text(encoding="utf-8"))
-    return {}
+    # Máy mới chưa từng lưu cài đặt - mặc định đặt sẵn mật khẩu hồ sơ cá
+    # nhân (người dùng vẫn đổi/xóa được ở tab CẬP NHẬT WEB như bình thường).
+    return {"ho_so_password": DEFAULT_HO_SO_PASSWORD}
 
 
 def save_app_settings(settings):
@@ -276,10 +285,13 @@ def run_pipeline(sources=None):
     for ma_gv, rec in dsgv.items():
         ho_so_src = attach_files.find_ho_so_gv(rec["ten"], ho_so_folder)
         ho_so_file = _copy_public_file(ho_so_src, "ho_so_gv", ma_gv)
+        anh_src = PHOTOS_DIR / f"{ma_gv}.jpg"
+        anh_file = _copy_public_file(anh_src, ANH_GV_SUBDIR, ma_gv) if anh_src.exists() else None
         teachers_out[ma_gv] = {
             "ten": rec["ten"],
             "khoa_dang_day": teaching_now.get(ma_gv, []),
             "ho_so_file": ho_so_file,
+            "anh_file": anh_file,
         }
         if ma_gv not in existing_qr:
             _generate_qr(ma_gv, rec["ten"])
@@ -324,3 +336,75 @@ def run_pipeline(sources=None):
         "so_file_excel": len(bien_che_files),
         "canh_bao": warnings,
     }
+
+
+# ---------------- ảnh đại diện giáo viên ----------------
+# Thêm/xóa ảnh không cần chạy lại toàn bộ pipeline - sửa trực tiếp
+# docs/public_data.json + docs/files/anh_gv rồi đăng (git push) ngay. Ảnh
+# gốc (đã resize) còn giữ ở PHOTOS_DIR để lần "Cập nhật && Đăng lên web"
+# sau vẫn tự copy lại đúng ảnh này (run_pipeline xóa sạch docs/files/ mỗi
+# lần chạy, xem shutil.rmtree ở trên).
+def _load_public_data():
+    if PUBLIC_DATA_FILE.exists():
+        return json.loads(PUBLIC_DATA_FILE.read_text(encoding="utf-8"))
+    return {"generated_at": "", "teachers": {}, "ho_so_password_hash": None}
+
+
+def _save_public_data(data):
+    DOCS_DIR.mkdir(exist_ok=True)
+    PUBLIC_DATA_FILE.write_text(
+        json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8"
+    )
+
+
+def _save_resized_photo(src_path, dest_path, max_dim=1000):
+    from PIL import Image
+
+    dest_path.parent.mkdir(parents=True, exist_ok=True)
+    img = Image.open(src_path).convert("RGB")
+    if max(img.size) > max_dim:
+        img.thumbnail((max_dim, max_dim), Image.LANCZOS)
+    img.save(dest_path, "JPEG", quality=85)
+
+
+def teacher_photo_path(ma_gv):
+    """Đường dẫn ảnh local hiện tại của 1 giáo viên (None nếu chưa có ảnh)."""
+    path = PHOTOS_DIR / f"{ma_gv}.jpg"
+    return path if path.exists() else None
+
+
+def add_teacher_photo(ma_gv, ten, src_path):
+    """Thêm/đổi ảnh đại diện 1 giáo viên và đăng ngay lên web.
+    Trả về (ok: bool, message: str)."""
+    PHOTOS_DIR.mkdir(exist_ok=True)
+    local_path = PHOTOS_DIR / f"{ma_gv}.jpg"
+    _save_resized_photo(src_path, local_path)
+
+    rel_path = _copy_public_file(local_path, ANH_GV_SUBDIR, ma_gv)
+
+    data = _load_public_data()
+    teachers = data.setdefault("teachers", {})
+    rec = teachers.setdefault(ma_gv, {"ten": ten, "khoa_dang_day": [], "ho_so_file": None})
+    rec["anh_file"] = rel_path
+    _save_public_data(data)
+
+    return git_publish.push_public_data(f"Thêm ảnh giáo viên {ten} ({ma_gv})")
+
+
+def remove_teacher_photo(ma_gv, ten):
+    """Xóa ảnh đại diện 1 giáo viên (local + public) và đăng ngay lên web.
+    Trả về (ok: bool, message: str)."""
+    local_path = PHOTOS_DIR / f"{ma_gv}.jpg"
+    if local_path.exists():
+        local_path.unlink()
+    public_path = FILES_OUT_DIR / ANH_GV_SUBDIR / f"{ma_gv}.jpg"
+    if public_path.exists():
+        public_path.unlink()
+
+    data = _load_public_data()
+    teachers = data.get("teachers", {})
+    if ma_gv in teachers:
+        teachers[ma_gv]["anh_file"] = None
+        _save_public_data(data)
+
+    return git_publish.push_public_data(f"Xóa ảnh giáo viên {ten} ({ma_gv})")

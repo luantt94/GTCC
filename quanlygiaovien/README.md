@@ -12,18 +12,19 @@ Bấm đúp vào file chạy app, hoặc mở terminal tại thư mục này và
 python main.py
 ```
 
-App có 4 tab:
+App có 5 tab:
 
 | Tab | Dùng để |
 |---|---|
-| **CẬP NHẬT WEB** | Khai báo nguồn dữ liệu & đăng số liệu giáo viên lên trang web (mã QR) |
+| **CẬP NHẬT WEB** | Khai báo nguồn dữ liệu, quản lý ảnh đại diện giáo viên & đăng số liệu lên trang web (mã QR) |
 | TRA CỨU | Tìm giáo viên / mã khóa, xem học viên, lịch học |
 | PHÂN XE | Xem danh sách xe và giáo viên phụ trách |
-| LỊCH HỌC | Xem lịch học theo khóa |
+| TRA CỨU XE | Xem chi tiết 1 xe (nhãn hiệu/loại xe, lịch sử giáo viên đã dùng, giấy tờ xe) |
+| LỊCH HỌC | Xem trực tiếp nội dung file PDF lịch học thực hành theo khóa |
 
-> **Lưu ý:** 3 tab TRA CỨU / PHÂN XE / LỊCH HỌC chỉ đọc dữ liệu nội bộ lúc
-> **mở app**. Sau khi bấm "Cập nhật && Đăng lên web" ở tab đầu tiên, hãy
-> **khởi động lại app** để 3 tab này thấy dữ liệu mới nhất.
+> **Lưu ý:** 4 tab TRA CỨU / PHÂN XE / TRA CỨU XE / LỊCH HỌC chỉ đọc dữ liệu
+> nội bộ lúc **mở app**. Sau khi bấm "Cập nhật && Đăng lên web" ở tab đầu
+> tiên, hãy **khởi động lại app** để các tab này thấy dữ liệu mới nhất.
 
 ## 2. Nguồn dữ liệu
 
@@ -45,7 +46,9 @@ file (biển số xe, mã khóa, tên giáo viên) — **không cần khai báo 
 
 ### Mật khẩu xem hồ sơ cá nhân
 
-Ô "Mật khẩu xem hồ sơ cá nhân giáo viên" dùng chung cho tất cả giáo viên:
+Ô "Mật khẩu xem hồ sơ cá nhân giáo viên" dùng chung cho tất cả giáo viên.
+**Mật khẩu mặc định: `gtcc2026`** (máy mới chưa từng lưu cài đặt riêng sẽ
+tự điền sẵn mật khẩu này — đổi/xóa được bất cứ lúc nào ở ô này):
 - Có đặt mật khẩu → trang web hiện mục "Hồ sơ cá nhân", người xem phải
   nhập đúng mật khẩu mới xem được (hồ sơ có CCCD/bằng lái nên cần hạn chế).
 - Để **trống** → ẩn hoàn toàn mục hồ sơ cá nhân trên trang web.
@@ -61,6 +64,16 @@ file (biển số xe, mã khóa, tên giáo viên) — **không cần khai báo 
 > Đây là lựa chọn đã cân nhắc (ưu tiên đơn giản, không cần thêm hạ tầng
 > server) — nếu cần chặn thật, phải chuyển hồ sơ sang một dịch vụ có
 > backend kiểm tra quyền truy cập, không thể làm được với GitHub Pages.
+
+### Ảnh đại diện giáo viên
+
+Ở khung "Ảnh đại diện giáo viên" (tab CẬP NHẬT WEB): chọn giáo viên trong
+ô danh sách (bấm **Tải lại DS giáo viên** nếu vừa đổi file DSGV), rồi bấm
+**Thêm/Đổi ảnh...** để chọn 1 file ảnh (.png/.jpg) hoặc **Xóa ảnh** để gỡ.
+Ảnh được tự resize nhỏ lại rồi **đăng lên web ngay lập tức** (không cần
+bấm "Cập nhật && Đăng lên web"), hiện ngay trên đầu trang `gv.html` của
+giáo viên đó. Ảnh này **công khai, không cần mật khẩu** (khác với "Hồ sơ
+cá nhân" ở mục trên). Cần Internet để bấm được 2 nút này.
 
 ## 3. Quy trình cập nhật web hàng ngày/hàng tuần
 

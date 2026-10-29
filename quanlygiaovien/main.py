@@ -9,6 +9,7 @@ from tab_cap_nhat_web import CapNhatWebTab
 from tab_lich_hoc import LichHocTab
 from tab_phan_xe import PhanXeTab
 from tab_tra_cuu import TraCuuTab
+from tab_tra_cuu_xe import TraCuuXeTab
 
 APP_DIR = Path(__file__).resolve().parent
 DATA_JSON = APP_DIR / "data.json"
@@ -24,6 +25,7 @@ class MainWindow(QMainWindow):
         tabs.addTab(CapNhatWebTab(), "CẬP NHẬT WEB")
         tabs.addTab(TraCuuTab(model), "TRA CỨU")
         tabs.addTab(PhanXeTab(model), "PHÂN XE")
+        tabs.addTab(TraCuuXeTab(model), "TRA CỨU XE")
         tabs.addTab(LichHocTab(model), "LỊCH HỌC")
         self.setCentralWidget(tabs)
 

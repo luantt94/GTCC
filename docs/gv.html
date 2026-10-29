@@ -29,6 +29,15 @@
     margin-top: 4px;
   }
   .header .label { font-size: 0.8rem; opacity: 0.85; }
+  .header .anh {
+    display: none;
+    width: 84px;
+    height: 84px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #fff;
+    margin: 6px auto 2px;
+  }
 
   .summary {
     background: #fff;
@@ -114,6 +123,7 @@
 <body>
   <div class="wrap">
     <div class="header">
+      <img class="anh" id="anh-gv" alt="Ảnh giáo viên">
       <div class="label">GIÁO VIÊN</div>
       <div class="ten" id="ten">Đang tải...</div>
     </div>
@@ -226,6 +236,12 @@ fetch("public_data.json", { cache: "no-store" })
 
     document.getElementById("ten").textContent = gv.ten;
     document.getElementById("capnhat").textContent = "Cập nhật: " + data.generated_at;
+
+    if (gv.anh_file) {
+      const anhEl = document.getElementById("anh-gv");
+      anhEl.src = gv.anh_file;
+      anhEl.style.display = "block";
+    }
 
     if (gv.ho_so_file && data.ho_so_password_hash) {
       const hosoCard = document.createElement("div");

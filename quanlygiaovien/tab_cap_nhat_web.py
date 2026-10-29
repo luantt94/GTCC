@@ -14,8 +14,10 @@ git commit/push chạy ngầm khi bấm nút "Cập nhật && Đăng lên web".
 """
 from pathlib import Path
 
-from PySide6.QtCore import QThread, Signal
+from PySide6.QtCore import Qt, QThread, Signal
+from PySide6.QtGui import QPixmap
 from PySide6.QtWidgets import (
+    QComboBox,
     QFileDialog,
     QGroupBox,
     QHBoxLayout,
@@ -31,6 +33,7 @@ from PySide6.QtWidgets import (
 
 import publish_data
 import git_publish
+import roster_xml
 
 
 class _FileListPicker(QGroupBox):
@@ -139,10 +142,30 @@ class _PublishWorker(QThread):
             self.finished_err.emit(str(exc))
 
 
+class _ActionWorker(QThread):
+    """Chạy 1 hành động ngắn (vd thêm/xóa ảnh - có git push) ở thread riêng
+    để không treo UI. fn không nhận tham số, trả về (ok: bool, message: str)."""
+
+    finished_result = Signal(bool, str)
+
+    def __init__(self, fn, parent=None):
+        super().__init__(parent)
+        self.fn = fn
+
+    def run(self):
+        try:
+            ok, message = self.fn()
+        except Exception as exc:  # báo lỗi rõ ràng, không để app crash
+            ok, message = False, str(exc)
+        self.finished_result.emit(ok, message)
+
+
 class CapNhatWebTab(QWidget):
     def __init__(self, parent=None):
         super().__init__(parent)
         self.worker = None
+        self.photo_worker = None
+        self._photo_teachers = {}
         self._build_ui()
         self._load_sources()
 
@@ -198,6 +221,40 @@ class CapNhatWebTab(QWidget):
         pass_layout.addWidget(btn_save_password)
         outer.addWidget(pass_box)
 
+        photo_box = QGroupBox("Ảnh đại diện giáo viên (công khai, hiển thị ngay trên trang web)")
+        photo_layout = QHBoxLayout(photo_box)
+
+        photo_left = QVBoxLayout()
+        photo_row = QHBoxLayout()
+        self.cbo_photo_teacher = QComboBox()
+        self.cbo_photo_teacher.currentIndexChanged.connect(self._on_photo_teacher_changed)
+        photo_row.addWidget(self.cbo_photo_teacher, 1)
+        btn_refresh_teachers = QPushButton("Tải lại DS giáo viên")
+        btn_refresh_teachers.clicked.connect(self._load_photo_teachers)
+        photo_row.addWidget(btn_refresh_teachers)
+        photo_left.addLayout(photo_row)
+
+        btn_row2 = QHBoxLayout()
+        self.btn_add_photo = QPushButton("Thêm/Đổi ảnh...")
+        self.btn_add_photo.clicked.connect(self._on_add_photo)
+        btn_row2.addWidget(self.btn_add_photo)
+        self.btn_remove_photo = QPushButton("Xóa ảnh")
+        self.btn_remove_photo.setEnabled(False)
+        self.btn_remove_photo.clicked.connect(self._on_remove_photo)
+        btn_row2.addWidget(self.btn_remove_photo)
+        btn_row2.addStretch(1)
+        photo_left.addLayout(btn_row2)
+        photo_layout.addLayout(photo_left, 1)
+
+        self.lbl_photo_preview = QLabel("(chưa có ảnh)")
+        self.lbl_photo_preview.setFixedSize(110, 110)
+        self.lbl_photo_preview.setAlignment(Qt.AlignCenter)
+        self.lbl_photo_preview.setStyleSheet("border: 1px solid #ccc;")
+        self.lbl_photo_preview.setScaledContents(False)
+        photo_layout.addWidget(self.lbl_photo_preview)
+
+        outer.addWidget(photo_box)
+
         box = QGroupBox("Đăng số liệu giáo viên lên trang web")
         box_layout = QVBoxLayout(box)
         box_layout.addWidget(
@@ -227,6 +284,7 @@ class CapNhatWebTab(QWidget):
         self.pick_dsxtl.set_path(sources.get("dsxtl_file", ""))
         self.pick_xe_folder.set_path(sources.get("xe_folder", ""))
         self.pick_ho_so_folder.set_path(sources.get("ho_so_folder", ""))
+        self._load_photo_teachers()
 
     def _current_sources(self):
         return {
@@ -311,3 +369,79 @@ class CapNhatWebTab(QWidget):
         self.btn_publish.setText("Cập nhật && Đăng lên web")
         self.log.append(f"LỖI: {message}")
         QMessageBox.critical(self, "Lỗi", message)
+
+    # ---- ảnh đại diện giáo viên ----
+    def _load_photo_teachers(self):
+        self.cbo_photo_teacher.blockSignals(True)
+        self.cbo_photo_teacher.clear()
+        self._photo_teachers = {}
+        dsgv_path = self.pick_dsgv.path()
+        if dsgv_path and Path(dsgv_path).exists():
+            dsgv = roster_xml.parse_dsgv(dsgv_path)
+            for ma_gv, rec in sorted(dsgv.items(), key=lambda kv: kv[1]["ten"]):
+                self._photo_teachers[ma_gv] = rec["ten"]
+                self.cbo_photo_teacher.addItem(f"{rec['ten']} ({ma_gv})", ma_gv)
+        self.cbo_photo_teacher.blockSignals(False)
+        self._update_photo_preview()
+
+    def _update_photo_preview(self):
+        ma_gv = self.cbo_photo_teacher.currentData()
+        path = publish_data.teacher_photo_path(ma_gv) if ma_gv else None
+        if path:
+            pix = QPixmap(str(path)).scaled(
+                110, 110, Qt.AspectRatioMode.KeepAspectRatio, Qt.TransformationMode.SmoothTransformation
+            )
+            self.lbl_photo_preview.setPixmap(pix)
+            self.lbl_photo_preview.setText("")
+        else:
+            self.lbl_photo_preview.setPixmap(QPixmap())
+            self.lbl_photo_preview.setText("(chưa có ảnh)")
+        self.btn_remove_photo.setEnabled(path is not None)
+
+    def _on_photo_teacher_changed(self, _index):
+        self._update_photo_preview()
+
+    def _on_add_photo(self):
+        ma_gv = self.cbo_photo_teacher.currentData()
+        if not ma_gv:
+            QMessageBox.warning(
+                self, "Chưa chọn giáo viên",
+                "Hãy chọn file DSGV_*.xml ở trên rồi bấm 'Tải lại DS giáo viên'.",
+            )
+            return
+        path, _ = QFileDialog.getOpenFileName(
+            self, "Chọn ảnh giáo viên", "", "Ảnh (*.png *.jpg *.jpeg)"
+        )
+        if not path:
+            return
+        ten = self._photo_teachers.get(ma_gv, "")
+        self._run_photo_action(lambda: publish_data.add_teacher_photo(ma_gv, ten, path))
+
+    def _on_remove_photo(self):
+        ma_gv = self.cbo_photo_teacher.currentData()
+        if not ma_gv:
+            return
+        ten = self._photo_teachers.get(ma_gv, "")
+        confirm = QMessageBox.question(
+            self, "Xác nhận", f"Xóa ảnh của '{ten}' khỏi trang web?"
+        )
+        if confirm != QMessageBox.StandardButton.Yes:
+            return
+        self._run_photo_action(lambda: publish_data.remove_teacher_photo(ma_gv, ten))
+
+    def _run_photo_action(self, fn):
+        self.btn_add_photo.setEnabled(False)
+        self.btn_remove_photo.setEnabled(False)
+        self.log.append("Đang xử lý ảnh giáo viên, vui lòng chờ...")
+        self.photo_worker = _ActionWorker(fn)
+        self.photo_worker.finished_result.connect(self._on_photo_action_done)
+        self.photo_worker.start()
+
+    def _on_photo_action_done(self, ok, message):
+        self.btn_add_photo.setEnabled(True)
+        self._update_photo_preview()
+        self.log.append(message)
+        if ok:
+            QMessageBox.information(self, "Hoàn tất", message)
+        else:
+            QMessageBox.warning(self, "Chưa đăng lên web được", message)
