@@ -32,6 +32,36 @@ def normalize_name(text):
     return text.upper()
 
 
+def _name_words(text):
+    """Tách tên thành list từ, bỏ dấu chấm/phẩy cuối mỗi từ - dấu hiệu viết
+    tắt (vd "Tr." "Đ," -> "Tr" "Đ")."""
+    return [w.rstrip(".,") for w in normalize_name(text).split(" ") if w.rstrip(".,")]
+
+
+def is_abbreviated_match(short_name, full_name):
+    """True nếu `short_name` có thể là bản viết tắt của `full_name`: cùng
+    số từ, và mỗi từ của short_name bằng hệt hoặc là phần đầu (viết tắt)
+    của từ tương ứng trong full_name - áp dụng cho cả họ lẫn tên đệm (vd
+    "Trần N. Đ. Phương" khớp "Trần Ngô Đông Phương", "H. Bá Đ, Khoa" khớp
+    "Huỳnh Bá Đăng Khoa")."""
+    short_words = _name_words(short_name)
+    full_words = _name_words(full_name)
+    if not short_words or len(short_words) != len(full_words):
+        return False
+    return all(full_w.startswith(short_w) for short_w, full_w in zip(short_words, full_words))
+
+
+def find_teacher_candidates(name, dsgv):
+    """Tìm giáo viên trong `dsgv` (dict ma_gv -> {"ten": ...}) có tên viết
+    tắt khớp với `name` (xem is_abbreviated_match). Trả về list
+    [(ma_gv, ten_day_du), ...] - rỗng nếu không ai khớp, nhiều hơn 1 phần
+    tử nếu tên viết tắt khớp mơ hồ với nhiều giáo viên (không tự quyết
+    định được, cần người dùng tự sửa lại cho rõ)."""
+    return [
+        (ma_gv, rec["ten"]) for ma_gv, rec in dsgv.items() if is_abbreviated_match(name, rec["ten"])
+    ]
+
+
 def find_lich_hoc_pdf(lop, candidate_files):
     """Tìm file lịch học PDF theo mã lớp (vd "BK0726") trong 1 danh sách
     file PDF đã chọn sẵn (không tự quét thư mục)."""

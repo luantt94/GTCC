@@ -247,12 +247,33 @@ def run_pipeline(sources=None):
                 continue
             ma_gv = name_to_magv.get(attach_files.normalize_name(name))
             if not ma_gv:
-                warnings.append(
-                    f"Không khớp được giáo viên '{name}' trong file Excel "
-                    f"'{c.get('source_file', '')}' (khóa {ma_khoa}) với danh sách "
-                    f"giáo viên trong file '{dsgv_file_name}' - kiểm tra lại chính tả tên."
-                )
-                continue
+                # Không khớp hệt - thử nhận diện tên viết tắt (vd "Trần N. Đ.
+                # Phương" -> "Trần Ngô Đông Phương") trước khi báo không khớp.
+                candidates = attach_files.find_teacher_candidates(name, dsgv)
+                if len(candidates) == 1:
+                    ma_gv, ten_day_du = candidates[0]
+                    warnings.append(
+                        f"Tên viết tắt: đã tự nhận '{name}' trong file Excel "
+                        f"'{c.get('source_file', '')}' (khóa {ma_khoa}) là '{ten_day_du}' "
+                        f"trong file '{dsgv_file_name}' - nên sửa lại Excel cho đúng chính "
+                        "tả để khỏi phải đoán."
+                    )
+                elif candidates:
+                    goi_y = "; ".join(f"'{ten}'" for _, ten in candidates)
+                    warnings.append(
+                        f"Không khớp được giáo viên '{name}' trong file Excel "
+                        f"'{c.get('source_file', '')}' (khóa {ma_khoa}) với file "
+                        f"'{dsgv_file_name}' - tên viết tắt này khớp MƠ HỒ với nhiều giáo "
+                        f"viên ({goi_y}), hãy sửa lại Excel cho rõ."
+                    )
+                    continue
+                else:
+                    warnings.append(
+                        f"Không khớp được giáo viên '{name}' trong file Excel "
+                        f"'{c.get('source_file', '')}' (khóa {ma_khoa}) với danh sách "
+                        f"giáo viên trong file '{dsgv_file_name}' - kiểm tra lại chính tả tên."
+                    )
+                    continue
 
             hoc_vien = g.get("hoc_vien", [])
             xe = g.get("xe", "")
