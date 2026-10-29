@@ -320,13 +320,12 @@ fetch("public_data.json", { cache: "no-store" })
       card.appendChild(row("Thời gian đào tạo", `${k.tu_ngay} → ${k.den_ngay}`));
 
       const [xeRow, xeDetail] = clickableRow(
-        "Xe tập lái", k.xe, "(bấm để xem SĐT && giấy tờ xe)",
+        "Xe tập lái", k.xe, "(bấm để xem giấy tờ xe)",
         (detail) => {
-          detail.innerHTML = `<p>SĐT: <b>${esc(k.sdt) || "chưa có"}</b></p>`;
           if (k.giay_to_xe_link && /^https?:\/\//i.test(k.giay_to_xe_link)) {
-            detail.innerHTML += `<div class="ext-link"><a href="${esc(k.giay_to_xe_link)}" target="_blank" rel="noopener noreferrer">Xem giấy tờ xe (trang của Sở) ↗</a></div>`;
+            detail.innerHTML = `<div class="ext-link"><a href="${esc(k.giay_to_xe_link)}" target="_blank" rel="noopener noreferrer">Xem giấy tờ xe (trang của Sở) ↗</a></div>`;
           } else {
-            detail.innerHTML += `<p style="color:#999;">Chưa có thông tin giấy tờ xe.</p>`;
+            detail.innerHTML = `<p style="color:#999;">Chưa có thông tin giấy tờ xe.</p>`;
           }
         }
       );

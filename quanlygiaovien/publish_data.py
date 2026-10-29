@@ -303,6 +303,9 @@ def run_pipeline(sources=None):
 
     lich_hoc_pdf_cache = {}  # ma_khoa -> rel path (hoặc None), tránh copy trùng
     teaching_now = {}  # ma_gv -> [khoa...]
+    teacher_phone = {}  # ma_gv -> SĐT (lấy từ cột SĐT trong Excel biên chế xe,
+    # khóa nào có nhập trước thì lấy khóa đó) - hiện ở mục "Thông tin giáo
+    # viên", không còn hiện riêng trong từng khóa (mục "Xe tập lái") nữa.
 
     for c in model.all_courses():
         if model.status_of(c) != "Đang đào tạo":
@@ -357,6 +360,10 @@ def run_pipeline(sources=None):
                 )
             giay_to_xe_link = xe_extra.get(attach_files.normalize_plate(xe), {}).get("link") or None
 
+            sdt = g.get("sdt", "")
+            if sdt and ma_gv not in teacher_phone:
+                teacher_phone[ma_gv] = sdt
+
             hoc_vien_display = []
             so_hoc_vien_dem = 0
             for hv in hoc_vien:
@@ -373,7 +380,6 @@ def run_pipeline(sources=None):
                     "tu_ngay": c.get("tu_ngay", ""),
                     "den_ngay": c.get("den_ngay", ""),
                     "xe": xe,
-                    "sdt": g.get("sdt", ""),
                     "so_hoc_vien": so_hoc_vien_dem,
                     "hoc_vien": hoc_vien_display,
                     "lich_hoc_pdf": lich_hoc_pdf,
@@ -396,7 +402,7 @@ def run_pipeline(sources=None):
         anh_file = _copy_public_file(anh_src, ANH_GV_SUBDIR, ma_gv) if anh_src.exists() else None
         teachers_out[ma_gv] = {
             "ten": rec["ten"],
-            "dien_thoai": rec.get("dien_thoai", ""),
+            "dien_thoai": teacher_phone.get(ma_gv) or rec.get("dien_thoai", ""),
             "ngay_sinh": rec.get("ngay_sinh", ""),
             "dia_chi": rec.get("dia_chi", ""),
             "khoa_dang_day": teaching_now.get(ma_gv, []),
