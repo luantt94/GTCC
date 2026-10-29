@@ -55,10 +55,8 @@ _BG_QR_BOX = (1068, 506, 1222, 638)  # khung mã QR
 _BG_HANG_VALUE_X = 850  # bắt đầu vẽ giá trị hạng, ngay sau chữ "Dạy lái xe hạng:"
 _BG_HANG_VALUE_Y = (598, 658)
 _BG_HANG_RIGHT = 1250
-# Khoảng trống dưới tiêu đề "GIÁO VIÊN DẠY LÁI XE" để ghi Họ và tên / Ngày
-# sinh / Địa chỉ (x1 chừa chỗ cho khung QR bên phải, không lấy hết x=1236
-# như trước để tránh đè lên khung QR).
-_BG_FIELDS_AREA = (418, 352, 1048, 596)
+# Khoảng trống dưới tiêu đề "GIÁO VIÊN DẠY LÁI XE" để ghi họ tên, căn giữa.
+_BG_FIELDS_AREA = (418, 352, 1236, 596)
 _BG_FIELDS_COLOR = "black"
 _BG_HANG_COLOR = "#0a1450"
 # Băng chữ trắng trên nền xanh ở đầu thẻ (tên cơ quan/cơ sở đào tạo) - đã có
@@ -272,17 +270,14 @@ def _generate_card_image_from_background(data: CardData) -> Image.Image:
             draw, hang_rendered, hang_y, x=_BG_HANG_VALUE_X, fill=_BG_HANG_COLOR
         )
 
-    # Họ và tên / Ngày tháng năm sinh / Địa chỉ thường trú - tự thu nhỏ
-    # chung (xem _fit_blocks) nếu địa chỉ dài, để không đè lên khung QR hay
-    # dòng "Dạy lái xe hạng:" đã in sẵn bên dưới.
+    # Chỉ ghi họ tên (không ghi ngày sinh/địa chỉ, không ghi nhãn "Họ và
+    # tên:" - theo yêu cầu rút gọn lại), căn giữa dưới tiêu đề.
     fx0, fy0, fx1, fy1 = _BG_FIELDS_AREA
-    field_blocks = [
-        (f"Họ và tên: {data.ten}".upper(), 40, True),
-        (f"Ngày, tháng, năm sinh: {data.ngay_sinh}".upper() if data.ngay_sinh else "", 36, True),
-        (f"Địa chỉ thường trú: {data.dia_chi}".upper() if data.dia_chi else "", 36, True),
-    ]
-    fields_rendered = _fit_blocks(draw, field_blocks, fx1 - fx0, fy1 - fy0, font_for=_px_font_for)
-    _draw_rendered_blocks(draw, fields_rendered, fy0, x=fx0, fill=_BG_FIELDS_COLOR)
+    name_rendered = _fit_blocks(
+        draw, [(data.ten.upper(), 70, True)], fx1 - fx0, fy1 - fy0, font_for=_px_font_for
+    )
+    name_y = fy0 + max((fy1 - fy0 - _total_height(name_rendered)) / 2, 0)
+    _draw_rendered_blocks(draw, name_rendered, name_y, cx=(fx0 + fx1) / 2, fill=_BG_FIELDS_COLOR)
 
     card_w, card_h = _mm(CARD_W_MM), _mm(CARD_H_MM)
     return img.resize((card_w, card_h), Image.LANCZOS)
