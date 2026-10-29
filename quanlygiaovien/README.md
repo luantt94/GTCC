@@ -165,7 +165,10 @@ và phát cho giáo viên — quét bằng camera điện thoại sẽ mở tran
 
 - Các khóa giáo viên đang dạy (mã khóa, lớp, thời gian đào tạo).
 - Xe tập lái phụ trách (bấm vào để xem SĐT + giấy tờ xe).
-- Số lượng học viên (bấm vào để xem danh sách tên).
+- Số lượng học viên (bấm vào để xem danh sách tên - tên nào có ghi chú ở
+  cột "Ghi chú" trong Excel thì hiện kèm trong ngoặc, vd "Tên (Bảo lưu)").
+  Học viên ghi chú đúng **"Bảo lưu"** (không phân biệt hoa/thường, có/không
+  dấu) vẫn hiện trong danh sách nhưng **không tính vào** số lượng học viên.
 - Lịch học (bấm vào để xem bảng lịch chi tiết + file PDF gốc).
 - Hồ sơ cá nhân (nếu đã đặt mật khẩu) — cần nhập đúng mật khẩu mới xem.
 
@@ -183,7 +186,8 @@ gì **lên web**: họ tên, **ngày sinh, địa chỉ** (lấy từ trường 
 NoiCT trong DSGV_*.xml - mục "Thông tin giáo viên" trên `gv.html`, **công
 khai, không cần mật khẩu**, theo yêu cầu), SĐT, mã khóa/lớp, thời gian học,
 biển số xe + link giấy tờ xe (nếu đã nhập - xem mục 2, **không** còn nhúng
-file PDF/Word giấy tờ xe), **tên** học viên, lịch học (kèm file PDF gốc),
+file PDF/Word giấy tờ xe), **tên + ghi chú** học viên (vd "Bảo lưu" - xem
+mục 4), lịch học (kèm file PDF gốc),
 và hồ sơ cá nhân giáo viên **nếu** có đặt mật khẩu xem (xem mục 2).
 
 > ⚠️ Ngày sinh/địa chỉ là thông tin khá nhạy cảm - đây là lựa chọn đã cân

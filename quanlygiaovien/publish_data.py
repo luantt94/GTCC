@@ -29,6 +29,7 @@ Không đụng tới git ở đây - phần git do git_publish.py xử lý.
 import hashlib
 import json
 import shutil
+import unicodedata
 from pathlib import Path
 
 import attach_files
@@ -239,6 +240,16 @@ def _copy_public_file(src_path, rel_subdir, dest_stem):
     return f"files/{rel_subdir}/{dest_path.name}"
 
 
+def _is_bao_luu(ghi_chu):
+    """So khớp ghi chú học viên với "Bảo lưu", không phân biệt hoa/thường
+    hay có dấu/không dấu (vd "bao luu", "BẢO LƯU", "Bảo Lưu" đều khớp)."""
+    text = unicodedata.normalize("NFD", ghi_chu or "")
+    text = "".join(c for c in text if unicodedata.category(c) != "Mn")
+    text = text.replace("đ", "d").replace("Đ", "D")
+    text = " ".join(text.split()).strip().upper()
+    return text == "BAO LUU"
+
+
 def run_pipeline(sources=None):
     """Chạy toàn bộ pipeline theo data_sources.json (hoặc sources truyền vào).
     Trả về dict kết quả để hiển thị cho người dùng."""
@@ -344,6 +355,16 @@ def run_pipeline(sources=None):
                     f"(GV {name}, khóa {ma_khoa}) không có trong file '{dsxtl_file_name}'."
                 )
             giay_to_xe_link = xe_extra.get(attach_files.normalize_plate(xe), {}).get("link") or None
+
+            hoc_vien_display = []
+            so_hoc_vien_dem = 0
+            for hv in hoc_vien:
+                ghi_chu = (hv.get("ghi_chu") or "").strip()
+                ten_hv = f"{hv['ho_ten']} ({ghi_chu})" if ghi_chu else hv["ho_ten"]
+                hoc_vien_display.append(ten_hv)
+                if not _is_bao_luu(ghi_chu):
+                    so_hoc_vien_dem += 1
+
             teaching_now.setdefault(ma_gv, []).append(
                 {
                     "ma_khoa": ma_khoa,
@@ -352,8 +373,8 @@ def run_pipeline(sources=None):
                     "den_ngay": c.get("den_ngay", ""),
                     "xe": xe,
                     "sdt": g.get("sdt", ""),
-                    "so_hoc_vien": len(hoc_vien),
-                    "hoc_vien": [hv["ho_ten"] for hv in hoc_vien],
+                    "so_hoc_vien": so_hoc_vien_dem,
+                    "hoc_vien": hoc_vien_display,
                     "lich_hoc_pdf": lich_hoc_pdf,
                     "giay_to_xe_link": giay_to_xe_link,
                 }
