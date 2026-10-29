@@ -325,6 +325,8 @@ fetch("public_data.json", { cache: "no-store" })
           detail.innerHTML = `<p>SĐT: <b>${esc(k.sdt) || "chưa có"}</b></p>`;
           if (k.giay_to_xe_link && /^https?:\/\//i.test(k.giay_to_xe_link)) {
             detail.innerHTML += `<div class="ext-link"><a href="${esc(k.giay_to_xe_link)}" target="_blank" rel="noopener noreferrer">Xem giấy tờ xe (trang của Sở) ↗</a></div>`;
+          } else {
+            detail.innerHTML += `<p style="color:#999;">Chưa có thông tin giấy tờ xe.</p>`;
           }
         }
       );
