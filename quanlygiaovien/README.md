@@ -90,11 +90,17 @@ cho mọi thẻ).
 
 Bấm **"Xuất thẻ GV này (PDF)"** để xuất thẻ của 1 giáo viên đang chọn, hoặc
 **"Xuất thẻ TẤT CẢ giáo viên (PDF)"** để xuất toàn bộ (tối đa 8 thẻ/trang
-A4, tự ngắt trang). File PDF theo đúng khổ Mẫu số 01 (85mm x 50mm), có ảnh
-thẻ 3x4cm, tên + hạng lái xe dạy, và mã QR tra cứu (cùng link với mã QR
-phát cho giáo viên). Đây là tính năng **in cục bộ, không đăng lên web** -
+A4, tự ngắt trang). Đây là tính năng **in cục bộ, không đăng lên web** -
 không cần Internet. Phần mềm không tự đóng dấu giáp lai lên ảnh thẻ, cần
 đóng dấu tay sau khi in như quy định.
+
+Nếu có file **`data/khunganhnen.jpg`** (ảnh nền thẻ đã thiết kế sẵn, đúng
+logo/màu/bố cục của đơn vị), phần mềm sẽ dùng ảnh này làm nền và chỉ tự
+động dán đè ảnh giáo viên + mã QR + ghi tên/hạng vào đúng các ô trống có
+sẵn trên ảnh. Không có file này thì phần mềm tự vẽ thẻ theo đúng khổ/cỡ
+chữ quy định ở Mẫu số 01 (85mm x 50mm). File `khunganhnen.jpg` nằm trong
+`data/` nên **không đưa lên git** (giống Excel/XML) - máy nào cần ảnh nền
+riêng thì tự đặt file vào đúng đường dẫn này.
 
 ## 3. Quy trình cập nhật web hàng ngày/hàng tuần
 

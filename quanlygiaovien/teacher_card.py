@@ -28,6 +28,9 @@ from pathlib import Path
 
 from PIL import Image, ImageDraw, ImageFont
 
+APP_DIR = Path(__file__).resolve().parent
+BG_PATH = APP_DIR / "data" / "khunganhnen.jpg"  # ảnh nền thẻ đã thiết kế sẵn (nếu có)
+
 DPI = 300
 _MM_TO_PX = DPI / 25.4
 _PT_TO_PX = DPI / 72
@@ -38,11 +41,23 @@ PAGE_W_MM, PAGE_H_MM = 210, 297  # A4 dọc
 GRID_COLS, GRID_ROWS = 2, 4
 CARDS_PER_PAGE = GRID_COLS * GRID_ROWS
 
-# Cỡ chữ (pt) đúng theo quy cách Mẫu số 01
+# Cỡ chữ (pt) đúng theo quy cách Mẫu số 01 - dùng khi KHÔNG có ảnh nền
+# (xem _generate_card_image_procedural).
 FONT_PT_HEADER = 10  # tên cơ quan/cơ sở đào tạo
 FONT_PT_ROLE = 13  # "GIÁO VIÊN DẠY LÁI XE"
 FONT_PT_NAME = 14  # họ tên giáo viên
 FONT_PT_HANG = 14  # hạng lái xe dạy
+
+# Toạ độ (px) các vùng trống trên ảnh nền data/khunganhnen.jpg (1280x768),
+# đo trực tiếp trên ảnh - chỉ đúng với ảnh nền này, phải đo lại nếu đổi ảnh.
+_BG_PHOTO_BOX = (48, 223, 378, 718)  # x0,y0,x1,y1 - khung ảnh giáo viên
+_BG_QR_BOX = (1068, 506, 1222, 638)  # khung mã QR
+_BG_HANG_VALUE_X = 850  # bắt đầu vẽ giá trị hạng, ngay sau chữ "Dạy lái xe hạng:"
+_BG_HANG_VALUE_Y = (598, 658)
+_BG_HANG_RIGHT = 1250
+_BG_NAME_AREA = (418, 352, 1236, 596)  # x0,y0,x1,y1 - khoảng trống dưới tiêu đề để ghi họ tên
+_BG_NAME_COLOR = "black"
+_BG_HANG_COLOR = "#0a1450"
 
 
 def _mm(value):
@@ -60,10 +75,10 @@ class CardData:
     url: str
 
 
-def _font_times(size_pt, bold=False):
+def _font_times_px(size_px, bold=False):
     windir = os.environ.get("WINDIR", "C:\\Windows")
     names = ["timesbd.ttf", "times.ttf"] if bold else ["times.ttf"]
-    size_px = max(round(size_pt * _PT_TO_PX), 8)
+    size_px = max(round(size_px), 8)
     for name in names:
         path = os.path.join(windir, "Fonts", name)
         if os.path.exists(path):
@@ -72,6 +87,10 @@ def _font_times(size_pt, bold=False):
             except OSError:
                 continue
     return ImageFont.load_default()
+
+
+def _font_times(size_pt, bold=False):
+    return _font_times_px(size_pt * _PT_TO_PX, bold=bold)
 
 
 def _line_advance(font):
@@ -104,16 +123,8 @@ _LINE_GAP = _mm(0.6)
 _BLOCK_GAP = _mm(1)
 
 
-def _measure_blocks(draw, blocks, max_w, scale):
-    """blocks: list (text, cỡ_chữ_pt_gốc, bold). Trả về (tổng chiều cao,
-    [(lines, font, line_advance), ...]) ở mức thu nhỏ `scale` (1.0 = đúng
-    cỡ chữ quy cách)."""
-    rendered = []
-    for text, base_pt, bold in blocks:
-        font = _font_times(base_pt * scale, bold=bold)
-        lines = _wrap_lines(draw, text, max_w, font) if text else []
-        rendered.append((lines, font, _line_advance(font)))
-
+def _total_height(rendered):
+    """Tổng chiều cao thật sự của kết quả _measure_blocks/_fit_blocks."""
     total_h = 0
     started = False
     for lines, font, lh in rendered:
@@ -123,17 +134,34 @@ def _measure_blocks(draw, blocks, max_w, scale):
             total_h += _BLOCK_GAP
         started = True
         total_h += len(lines) * lh + max(len(lines) - 1, 0) * _LINE_GAP
-    return total_h, rendered
+    return total_h
 
 
-def _fit_blocks(draw, blocks, max_w, max_h, min_scale=0.45, step=0.05):
-    """Thử cỡ chữ đúng quy cách trước; nếu không vừa khung thẻ (tên cơ
-    quan/họ tên quá dài) thì thu nhỏ dần (đều cho mọi khối) tới khi vừa,
-    để không bao giờ tràn ra ngoài thẻ."""
+def _measure_blocks(draw, blocks, max_w, scale, font_for=None):
+    """blocks: list (text, cỡ_chữ_gốc, bold). `font_for(base_size, scale,
+    bold)` quyết định font thật sự dùng (mặc định: cỡ chữ pt theo quy cách
+    Mẫu số 01). Trả về (tổng chiều cao, [(lines, font, line_advance), ...])
+    ở mức thu nhỏ `scale` (1.0 = đúng cỡ chữ gốc)."""
+    if font_for is None:
+        font_for = lambda base_size, scale, bold: _font_times(base_size * scale, bold=bold)
+
+    rendered = []
+    for text, base_size, bold in blocks:
+        font = font_for(base_size, scale, bold)
+        lines = _wrap_lines(draw, text, max_w, font) if text else []
+        rendered.append((lines, font, _line_advance(font)))
+
+    return _total_height(rendered), rendered
+
+
+def _fit_blocks(draw, blocks, max_w, max_h, font_for=None, min_scale=0.45, step=0.05):
+    """Thử cỡ chữ gốc trước; nếu không vừa khung (tên cơ quan/họ tên quá
+    dài) thì thu nhỏ dần (đều cho mọi khối) tới khi vừa, để không bao giờ
+    tràn ra ngoài thẻ."""
     scale = 1.0
     rendered = None
     while True:
-        total_h, rendered = _measure_blocks(draw, blocks, max_w, scale)
+        total_h, rendered = _measure_blocks(draw, blocks, max_w, scale, font_for=font_for)
         if total_h <= max_h or scale <= min_scale:
             return rendered
         scale = max(scale - step, min_scale)
@@ -184,10 +212,52 @@ def _fit_photo(photo_path, box_w, box_h):
     return photo.resize((box_w, box_h), Image.LANCZOS)
 
 
-def generate_card_image(data: CardData) -> Image.Image:
-    """Cỡ chữ dùng ĐÚNG quy cách Mẫu số 01 (10/13/14pt) khi vừa thẻ; tên cơ
-    quan/họ tên quá dài thì tự thu nhỏ đều (xem _fit_blocks) để không tràn
-    ra ngoài thẻ - không có cách nào khác khi nội dung dài hơn chỗ chứa."""
+def _generate_card_image_from_background(data: CardData) -> Image.Image:
+    """Dùng ảnh nền đã thiết kế sẵn (data/khunganhnen.jpg) làm thẻ, chỉ dán
+    đè ảnh giáo viên + mã QR + ghi họ tên/hạng vào đúng các vùng trống có
+    sẵn trên ảnh (xem _BG_* ở đầu file). Trả về ảnh đã resize về đúng khổ
+    thẻ chuẩn (CARD_W_MM x CARD_H_MM) để ghép trang PDF như bình thường."""
+    img = Image.open(BG_PATH).convert("RGB").copy()
+    draw = ImageDraw.Draw(img)
+
+    px0, py0, px1, py1 = _BG_PHOTO_BOX
+    if data.photo_path and Path(data.photo_path).exists():
+        img.paste(_fit_photo(data.photo_path, px1 - px0, py1 - py0), (px0, py0))
+
+    qx0, qy0, qx1, qy1 = _BG_QR_BOX
+    qr_size = min(qx1 - qx0, qy1 - qy0) - _mm(0.8)
+    qr_x = qx0 + (qx1 - qx0 - qr_size) // 2
+    qr_y = qy0 + (qy1 - qy0 - qr_size) // 2
+    img.paste(_make_qr(data.url, qr_size), (qr_x, qr_y))
+
+    _px_font_for = lambda base_size, scale, bold: _font_times_px(base_size * scale, bold=bold)
+
+    if data.hang:
+        hang_w = _BG_HANG_RIGHT - _BG_HANG_VALUE_X
+        hang_h = _BG_HANG_VALUE_Y[1] - _BG_HANG_VALUE_Y[0]
+        hang_rendered = _fit_blocks(
+            draw, [(data.hang.upper(), 50, True)], hang_w, hang_h, font_for=_px_font_for
+        )
+        hang_y = _BG_HANG_VALUE_Y[0] + max((hang_h - _total_height(hang_rendered)) / 2, 0)
+        _draw_rendered_blocks(
+            draw, hang_rendered, hang_y, x=_BG_HANG_VALUE_X, fill=_BG_HANG_COLOR
+        )
+
+    nx0, ny0, nx1, ny1 = _BG_NAME_AREA
+    name_rendered = _fit_blocks(
+        draw, [(data.ten.upper(), 70, True)], nx1 - nx0, ny1 - ny0, font_for=_px_font_for
+    )
+    name_y = ny0 + max((ny1 - ny0 - _total_height(name_rendered)) / 2, 0)
+    _draw_rendered_blocks(draw, name_rendered, name_y, cx=(nx0 + nx1) / 2, fill=_BG_NAME_COLOR)
+
+    card_w, card_h = _mm(CARD_W_MM), _mm(CARD_H_MM)
+    return img.resize((card_w, card_h), Image.LANCZOS)
+
+
+def _generate_card_image_procedural(data: CardData) -> Image.Image:
+    """Dùng khi KHÔNG có ảnh nền thiết kế sẵn (data/khunganhnen.jpg) - tự vẽ
+    thẻ theo đúng quy cách Mẫu số 01 (10/13/14pt); tên cơ quan/họ tên quá
+    dài thì tự thu nhỏ đều (xem _fit_blocks) để không tràn ra ngoài thẻ."""
     w, h = _mm(CARD_W_MM), _mm(CARD_H_MM)
     img = Image.new("RGB", (w, h), "white")
     draw = ImageDraw.Draw(img)
@@ -259,6 +329,15 @@ def generate_card_image(data: CardData) -> Image.Image:
     _draw_rendered_blocks(draw, text_rendered, content_top, x=text_x)
 
     return img
+
+
+def generate_card_image(data: CardData) -> Image.Image:
+    """Dùng ảnh nền data/khunganhnen.jpg nếu có (xem
+    _generate_card_image_from_background), nếu không thì tự vẽ thẻ theo quy
+    cách Mẫu số 01 (xem _generate_card_image_procedural)."""
+    if BG_PATH.exists():
+        return _generate_card_image_from_background(data)
+    return _generate_card_image_procedural(data)
 
 
 def generate_cards_pdf(items, output_path):
