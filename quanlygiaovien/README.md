@@ -38,8 +38,17 @@ khi mở app lần đầu — bạn chỉ cần sửa khi có thay đổi:
 | File PDF "LICH HOC THUC HANH ..." | Mỗi khóa 1 file lịch học `.pdf` | Tương tự, thêm/xóa theo khóa |
 | DSGV_*.xml | Danh sách **toàn bộ giáo viên** (nguồn chính thức, dùng để tạo mã QR) | Khi có bản DSGV mới xuất ra từ hệ thống |
 | DSXTL_*.xml | Danh sách xe tập lái (đối chiếu biển số) | Khi có bản DSXTL mới |
-| Thư mục giấy tờ xe tập lái | Chứa file `.docx`/`.pdf` giấy tờ từng xe (ghép theo biển số trong tên file) | Khi đổi chỗ lưu thư mục |
+| Thư mục giấy tờ xe tập lái | Chứa file `.docx`/`.pdf` giấy tờ từng xe - chỉ dùng trong app (tab TRA CỨU XE), **không đưa lên trang web** | Khi đổi chỗ lưu thư mục |
 | Thư mục hồ sơ cá nhân giáo viên | Chứa file `.pdf` hồ sơ từng giáo viên (ghép theo tên trong tên file) | Khi đổi chỗ lưu thư mục |
+
+### Link giấy tờ xe trên trang web
+
+Trang web **không còn nhúng file PDF/Word giấy tờ xe** nữa. Thay vào đó,
+khung "Link giấy tờ xe" (tab CẬP NHẬT WEB): chọn biển số trong ô danh sách
+(bấm **Tải lại DS xe** nếu vừa đổi file DSXTL), dán link (vd trang tra cứu
+xe tập lái của Sở GTVT) vào ô rồi bấm **Lưu link**. Bấm "Cập nhật && Đăng
+lên web" để áp dụng — trang `gv.html` sẽ hiện nút "Xem giấy tờ xe (trang
+của Sở)" mở link này ở tab mới, thay cho việc nhúng file như trước.
 
 App tự ghép file PDF/Word vào đúng khóa/xe/giáo viên bằng cách so khớp tên
 file (biển số xe, mã khóa, tên giáo viên) — **không cần khai báo tay**.
@@ -159,9 +168,10 @@ in lại, không cần xóa file tay.
 ## 5. Thông tin bảo mật
 
 Trang web là **công khai trên Internet** (ai có link đều xem được). Những
-gì **lên web**: tên giáo viên, SĐT, mã khóa/lớp, thời gian học, xe + giấy
-tờ xe, **tên** học viên, lịch học (kèm file PDF gốc), và hồ sơ cá nhân giáo
-viên **nếu** có đặt mật khẩu xem (xem mục 2).
+gì **lên web**: tên giáo viên, SĐT, mã khóa/lớp, thời gian học, biển số xe
++ link giấy tờ xe (nếu đã nhập - xem mục 2, **không** còn nhúng file PDF/
+Word giấy tờ xe), **tên** học viên, lịch học (kèm file PDF gốc), và hồ sơ
+cá nhân giáo viên **nếu** có đặt mật khẩu xem (xem mục 2).
 
 Những gì **KHÔNG BAO GIỜ** lên web, kể cả khi đã đặt mật khẩu hồ sơ cá
 nhân — app chủ động không đọc các trường này từ DSGV/DSXTL:

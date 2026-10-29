@@ -6,7 +6,9 @@ Nguồn dữ liệu gồm:
 - File PDF "LICH HOC THUC HANH xxxx.pdf" (mỗi khóa 1 file, thêm/xóa được)
 - File DSGV_*.xml: danh sách TOÀN BỘ giáo viên (nguồn mã QR chính thức)
 - File DSXTL_*.xml: danh sách xe tập lái (đối chiếu biển số)
-- Thư mục giấy tờ xe tập lái (.docx/.pdf theo biển số)
+- Thư mục giấy tờ xe tập lái (.docx/.pdf theo biển số) - chỉ dùng trong app
+  (tab TRA CỨU XE), KHÔNG đưa lên trang web nữa - trang web dùng link giấy
+  tờ xe nhập tay (khung "Link giấy tờ xe" ở dưới)
 - Thư mục hồ sơ cá nhân giáo viên (.pdf theo tên)
 
 Người dùng không cần biết git: toàn bộ convert -> JSON công khai ->
@@ -31,6 +33,7 @@ from PySide6.QtWidgets import (
     QWidget,
 )
 
+import attach_files
 import publish_data
 import git_publish
 import roster_xml
@@ -166,6 +169,7 @@ class CapNhatWebTab(QWidget):
         self.worker = None
         self.photo_worker = None
         self._photo_teachers = {}
+        self._xe_list = {}
         self._build_ui()
         self._load_sources()
 
@@ -294,6 +298,24 @@ class CapNhatWebTab(QWidget):
 
         outer.addWidget(photo_box)
 
+        xe_link_box = QGroupBox(
+            "Link giấy tờ xe (hiện trên trang web - KHÔNG còn nhúng file PDF/Word nữa)"
+        )
+        xe_link_layout = QHBoxLayout(xe_link_box)
+        self.cbo_xe_link = QComboBox()
+        self.cbo_xe_link.currentIndexChanged.connect(self._on_xe_link_changed)
+        xe_link_layout.addWidget(self.cbo_xe_link, 1)
+        btn_refresh_xe = QPushButton("Tải lại DS xe")
+        btn_refresh_xe.clicked.connect(self._load_xe_list)
+        xe_link_layout.addWidget(btn_refresh_xe)
+        self.txt_xe_link = QLineEdit()
+        self.txt_xe_link.setPlaceholderText("Link giấy tờ xe (vd trang tra cứu của Sở) - https://...")
+        xe_link_layout.addWidget(self.txt_xe_link, 2)
+        btn_save_xe_link = QPushButton("Lưu link")
+        btn_save_xe_link.clicked.connect(self._on_save_xe_link)
+        xe_link_layout.addWidget(btn_save_xe_link)
+        outer.addWidget(xe_link_box)
+
         box = QGroupBox("Đăng số liệu giáo viên lên trang web")
         box_layout = QVBoxLayout(box)
         box_layout.addWidget(
@@ -324,6 +346,7 @@ class CapNhatWebTab(QWidget):
         self.pick_xe_folder.set_path(sources.get("xe_folder", ""))
         self.pick_ho_so_folder.set_path(sources.get("ho_so_folder", ""))
         self._load_photo_teachers()
+        self._load_xe_list()
 
     def _current_sources(self):
         return {
@@ -509,6 +532,43 @@ class CapNhatWebTab(QWidget):
             return
         publish_data.set_hang_lai_xe(ma_gv, self.txt_hang.text())
         QMessageBox.information(self, "Đã lưu", "Đã lưu hạng lái xe dạy cho giáo viên này.")
+
+    # ---- link giấy tờ xe (hiện trên trang web) ----
+    def _load_xe_list(self):
+        self.cbo_xe_link.blockSignals(True)
+        self.cbo_xe_link.clear()
+        self._xe_list = {}
+        dsxtl_path = self.pick_dsxtl.path()
+        if dsxtl_path and Path(dsxtl_path).exists():
+            dsxtl = roster_xml.parse_dsxtl(dsxtl_path)
+            for bien_so, info in sorted(dsxtl.items()):
+                plate_norm = attach_files.normalize_plate(bien_so)
+                self._xe_list[plate_norm] = bien_so
+                label = bien_so + (f" ({info['nhan_hieu']})" if info.get("nhan_hieu") else "")
+                self.cbo_xe_link.addItem(label, plate_norm)
+        self.cbo_xe_link.blockSignals(False)
+        self._update_xe_link_field()
+
+    def _update_xe_link_field(self):
+        plate_norm = self.cbo_xe_link.currentData()
+        self.txt_xe_link.setText(publish_data.get_xe_link(plate_norm) if plate_norm else "")
+
+    def _on_xe_link_changed(self, _index):
+        self._update_xe_link_field()
+
+    def _on_save_xe_link(self):
+        plate_norm = self.cbo_xe_link.currentData()
+        if not plate_norm:
+            QMessageBox.warning(
+                self, "Chưa chọn xe",
+                "Hãy chọn file DSXTL_*.xml ở trên rồi bấm 'Tải lại DS xe'.",
+            )
+            return
+        publish_data.set_xe_link(plate_norm, self.txt_xe_link.text())
+        QMessageBox.information(
+            self, "Đã lưu",
+            "Đã lưu link giấy tờ xe. Bấm 'Cập nhật && Đăng lên web' để áp dụng lên trang web.",
+        )
 
     def _on_export_card_one(self):
         ma_gv = self.cbo_photo_teacher.currentData()

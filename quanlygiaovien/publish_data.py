@@ -5,10 +5,12 @@
    - File PDF "LICH HOC THUC HANH xxxx.pdf" (mỗi khóa 1 file)
    - File DSGV_*.xml (danh sách toàn bộ giáo viên, nguồn ID chính thức)
    - File DSXTL_*.xml (danh sách xe tập lái, dùng để đối chiếu biển số)
-   - Thư mục giấy tờ xe (.docx/.pdf) và thư mục hồ sơ cá nhân giáo viên (.pdf)
+   - Thư mục hồ sơ cá nhân giáo viên (.pdf)
 2. Convert Excel -> data.json (dữ liệu đầy đủ, chỉ dùng nội bộ, KHÔNG commit lên git)
 3. Build docs/public_data.json: tên giáo viên + chi tiết từng khóa đang đào tạo
-   (khóa/lớp, thời gian, xe, SĐT, danh sách tên học viên) + file PDF/Word gắn kèm
+   (khóa/lớp, thời gian, xe, SĐT, danh sách tên học viên) + file lịch học PDF +
+   link giấy tờ xe (nhập tay, xem xe_extra.json - KHÔNG còn nhúng file PDF/Word
+   giấy tờ xe lên trang web nữa)
 4. Sinh mã QR cho MỌI giáo viên trong DSGV (mã QR = MaGV - mã chính thức, cố
    định, không bao giờ trùng lặp) vào qr_codes/<MaGV>.png, có ghi tên bên dưới.
    Link/mã QR không bao giờ đổi; nếu DSGV sửa lại tên 1 giáo viên đã có QR,
@@ -44,6 +46,7 @@ APP_SETTINGS_FILE = APP_DIR / "app_settings.json"
 DATA_SOURCES_FILE = APP_DIR / "data_sources.json"
 PHOTOS_DIR = APP_DIR / "anh_gv"  # ảnh đại diện giáo viên - lưu local, bản resize sẽ copy sang docs/files
 GV_EXTRA_FILE = APP_DIR / "giao_vien_extra.json"  # hạng lái xe dạy - tách khỏi DSGV, lưu local theo MaGV
+XE_EXTRA_FILE = APP_DIR / "xe_extra.json"  # link giấy tờ xe (nhập tay) - lưu local theo biển số chuẩn hoá
 
 BASE_URL = "https://luantt94.github.io/GTCC/gv.html"
 
@@ -96,6 +99,33 @@ def set_hang_lai_xe(ma_gv, hang):
     rec = data.setdefault(ma_gv, {})
     rec["hang"] = (hang or "").strip()
     save_giao_vien_extra(data)
+
+
+# ---------------- thông tin riêng từng xe (link giấy tờ xe) ----------------
+# Trang web KHÔNG còn nhúng file PDF/Word giấy tờ xe nữa - thay bằng 1 link
+# do người dùng tự nhập (vd trang tra cứu của Sở), lưu local theo biển số đã
+# chuẩn hoá (attach_files.normalize_plate) - tách khỏi DSXTL.
+def load_xe_extra():
+    if XE_EXTRA_FILE.exists():
+        return json.loads(XE_EXTRA_FILE.read_text(encoding="utf-8"))
+    return {}
+
+
+def save_xe_extra(data):
+    XE_EXTRA_FILE.write_text(
+        json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8"
+    )
+
+
+def get_xe_link(plate_norm):
+    return load_xe_extra().get(plate_norm, {}).get("link", "")
+
+
+def set_xe_link(plate_norm, link):
+    data = load_xe_extra()
+    rec = data.setdefault(plate_norm, {})
+    rec["link"] = (link or "").strip()
+    save_xe_extra(data)
 
 
 # ---------------- nguồn dữ liệu (data_sources.json) ----------------
@@ -244,8 +274,8 @@ def run_pipeline(sources=None):
     dsxtl_file_name = Path(dsxtl_file).name if dsxtl_file else ""
 
     lich_hoc_files = sources.get("lich_hoc_files") or []
-    xe_folder = sources.get("xe_folder") or ""
     ho_so_folder = sources.get("ho_so_folder") or ""
+    xe_extra = load_xe_extra()
 
     name_to_magv = {attach_files.normalize_name(rec["ten"]): magv for magv, rec in dsgv.items()}
 
@@ -310,10 +340,7 @@ def run_pipeline(sources=None):
                     f"Biển số '{xe}' trong file Excel '{c.get('source_file', '')}' "
                     f"(GV {name}, khóa {ma_khoa}) không có trong file '{dsxtl_file_name}'."
                 )
-            xe_doc_src = attach_files.find_xe_doc(xe, xe_folder)
-            giay_to_xe_file = _copy_public_file(
-                xe_doc_src, "xe", attach_files.normalize_plate(xe) or "xe"
-            )
+            giay_to_xe_link = xe_extra.get(attach_files.normalize_plate(xe), {}).get("link") or None
             teaching_now.setdefault(ma_gv, []).append(
                 {
                     "ma_khoa": ma_khoa,
@@ -325,7 +352,7 @@ def run_pipeline(sources=None):
                     "so_hoc_vien": len(hoc_vien),
                     "hoc_vien": [hv["ho_ten"] for hv in hoc_vien],
                     "lich_hoc_pdf": lich_hoc_pdf,
-                    "giay_to_xe_file": giay_to_xe_file,
+                    "giay_to_xe_link": giay_to_xe_link,
                 }
             )
 

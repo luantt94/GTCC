@@ -18,5 +18,8 @@ app_settings.json
 # Hạng lái xe dạy từng giáo viên (dùng để in thẻ) - chỉ lưu local
 giao_vien_extra.json
 
+# Link giấy tờ xe (nhập tay, hiện trên trang web) - chỉ lưu local
+xe_extra.json
+
 __pycache__/
 *.pyc

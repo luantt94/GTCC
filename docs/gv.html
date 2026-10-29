@@ -117,6 +117,10 @@
   }
   .file-embed .open-link a:hover { text-decoration: underline; }
 
+  .ext-link { margin-top: 8px; }
+  .ext-link a { color: #0a5fa8; font-size: 0.9rem; text-decoration: none; }
+  .ext-link a:hover { text-decoration: underline; }
+
   .hoso-card .khoa-title { background: #e3e0ff; color: #3b2f7a; }
 </style>
 </head>
@@ -299,8 +303,8 @@ fetch("public_data.json", { cache: "no-store" })
         "Xe tập lái", k.xe, "(bấm để xem SĐT && giấy tờ xe)",
         (detail) => {
           detail.innerHTML = `<p>SĐT: <b>${esc(k.sdt) || "chưa có"}</b></p>`;
-          if (k.giay_to_xe_file) {
-            detail.innerHTML += `<p style="margin-top:8px;font-weight:600;">Giấy tờ xe:</p>` + fileEmbedHtml(k.giay_to_xe_file);
+          if (k.giay_to_xe_link && /^https?:\/\//i.test(k.giay_to_xe_link)) {
+            detail.innerHTML += `<div class="ext-link"><a href="${esc(k.giay_to_xe_link)}" target="_blank" rel="noopener noreferrer">Xem giấy tờ xe (trang của Sở) ↗</a></div>`;
           }
         }
       );
