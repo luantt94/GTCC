@@ -5,6 +5,7 @@ from pathlib import Path
 from PySide6.QtWidgets import QApplication, QMainWindow, QTabWidget
 
 from data_model import DataModel
+from style import apply_style
 from tab_cap_nhat_web import CapNhatWebTab
 from tab_lich_hoc import LichHocTab
 from tab_phan_xe import PhanXeTab
@@ -32,6 +33,7 @@ class MainWindow(QMainWindow):
 
 def main():
     app = QApplication(sys.argv)
+    apply_style(app)
 
     if not DATA_JSON.exists():
         # Chưa đăng dữ liệu lần nào - tạo file rỗng để mở app được, người

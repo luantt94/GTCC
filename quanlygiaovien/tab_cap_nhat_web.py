@@ -28,6 +28,7 @@ from PySide6.QtWidgets import (
     QListWidget,
     QMessageBox,
     QPushButton,
+    QStyle,
     QTextEdit,
     QVBoxLayout,
     QWidget,
@@ -37,6 +38,10 @@ import attach_files
 import publish_data
 import git_publish
 import roster_xml
+
+
+def _icon(widget, standard_pixmap):
+    return widget.style().standardIcon(standard_pixmap)
 
 
 class _FileListPicker(QGroupBox):
@@ -53,10 +58,10 @@ class _FileListPicker(QGroupBox):
         layout.addWidget(self.lst)
 
         btn_row = QHBoxLayout()
-        btn_add = QPushButton("Thêm...")
+        btn_add = QPushButton(_icon(self, QStyle.StandardPixmap.SP_FileIcon), "Thêm...")
         btn_add.clicked.connect(self._on_add)
         btn_row.addWidget(btn_add)
-        btn_remove = QPushButton("Xóa mục chọn")
+        btn_remove = QPushButton(_icon(self, QStyle.StandardPixmap.SP_TrashIcon), "Xóa")
         btn_remove.clicked.connect(self._on_remove)
         btn_row.addWidget(btn_remove)
         btn_row.addStretch(1)
@@ -99,7 +104,7 @@ class _SinglePathPicker(QGroupBox):
         self.txt = QLineEdit()
         self.txt.setReadOnly(True)
         layout.addWidget(self.txt, 1)
-        btn = QPushButton("Chọn...")
+        btn = QPushButton(_icon(self, QStyle.StandardPixmap.SP_DirOpenIcon), "Chọn...")
         btn.clicked.connect(self._on_choose)
         layout.addWidget(btn)
 
@@ -220,7 +225,7 @@ class CapNhatWebTab(QWidget):
         settings = publish_data.load_app_settings()
         self.txt_password.setText(settings.get("ho_so_password", ""))
         pass_layout.addWidget(self.txt_password)
-        btn_save_password = QPushButton("Lưu mật khẩu")
+        btn_save_password = QPushButton(_icon(self, QStyle.StandardPixmap.SP_DialogSaveButton), "Lưu")
         btn_save_password.clicked.connect(self._on_save_password)
         pass_layout.addWidget(btn_save_password)
         outer.addWidget(pass_box)
@@ -236,32 +241,36 @@ class CapNhatWebTab(QWidget):
         the_settings = publish_data.load_app_settings()
         self.txt_org1.setText(the_settings.get("the_org_line1", ""))
         self.txt_org2.setText(the_settings.get("the_org_line2", ""))
-        btn_save_org = QPushButton("Lưu")
+        btn_save_org = QPushButton(_icon(self, QStyle.StandardPixmap.SP_DialogSaveButton), "Lưu")
         btn_save_org.clicked.connect(self._on_save_org)
         org_layout.addWidget(btn_save_org)
         outer.addWidget(org_box)
 
-        photo_box = QGroupBox(
-            "Ảnh đại diện & thẻ giáo viên dạy lái xe "
-            "(ảnh công khai hiển thị ngay trên trang web; hạng/thẻ chỉ in cục bộ)"
+        photo_box = QGroupBox("Ảnh đại diện && thẻ giáo viên")
+        photo_outer = QVBoxLayout(photo_box)
+        photo_hint = QLabel(
+            "Ảnh đại diện: công khai, hiện ngay trên trang web. Hạng/thẻ: chỉ in cục bộ."
         )
-        photo_layout = QHBoxLayout(photo_box)
+        photo_hint.setStyleSheet("color: #6b7280; font-weight: 400;")
+        photo_outer.addWidget(photo_hint)
+        photo_layout = QHBoxLayout()
+        photo_outer.addLayout(photo_layout)
 
         photo_left = QVBoxLayout()
         photo_row = QHBoxLayout()
         self.cbo_photo_teacher = QComboBox()
         self.cbo_photo_teacher.currentIndexChanged.connect(self._on_photo_teacher_changed)
         photo_row.addWidget(self.cbo_photo_teacher, 1)
-        btn_refresh_teachers = QPushButton("Tải lại DS giáo viên")
+        btn_refresh_teachers = QPushButton(_icon(self, QStyle.StandardPixmap.SP_BrowserReload), "Tải lại")
         btn_refresh_teachers.clicked.connect(self._load_photo_teachers)
         photo_row.addWidget(btn_refresh_teachers)
         photo_left.addLayout(photo_row)
 
         btn_row2 = QHBoxLayout()
-        self.btn_add_photo = QPushButton("Thêm/Đổi ảnh...")
+        self.btn_add_photo = QPushButton(_icon(self, QStyle.StandardPixmap.SP_FileIcon), "Đổi ảnh...")
         self.btn_add_photo.clicked.connect(self._on_add_photo)
         btn_row2.addWidget(self.btn_add_photo)
-        self.btn_remove_photo = QPushButton("Xóa ảnh")
+        self.btn_remove_photo = QPushButton(_icon(self, QStyle.StandardPixmap.SP_TrashIcon), "Xóa ảnh")
         self.btn_remove_photo.setEnabled(False)
         self.btn_remove_photo.clicked.connect(self._on_remove_photo)
         btn_row2.addWidget(self.btn_remove_photo)
@@ -273,18 +282,19 @@ class CapNhatWebTab(QWidget):
         self.txt_hang = QLineEdit()
         self.txt_hang.setPlaceholderText("vd B, hoặc B2, C, D")
         hang_row.addWidget(self.txt_hang, 1)
-        btn_save_hang = QPushButton("Lưu hạng")
+        btn_save_hang = QPushButton(_icon(self, QStyle.StandardPixmap.SP_DialogSaveButton), "Lưu")
         btn_save_hang.clicked.connect(self._on_save_hang)
         hang_row.addWidget(btn_save_hang)
         photo_left.addLayout(hang_row)
 
         card_row = QHBoxLayout()
-        btn_export_card_one = QPushButton("Xuất thẻ GV này (PDF)")
+        btn_export_card_one = QPushButton("Xuất thẻ GV này")
         btn_export_card_one.clicked.connect(self._on_export_card_one)
         card_row.addWidget(btn_export_card_one)
-        btn_export_card_all = QPushButton("Xuất thẻ TẤT CẢ giáo viên (PDF)")
+        btn_export_card_all = QPushButton("Xuất tất cả thẻ")
         btn_export_card_all.clicked.connect(self._on_export_card_all)
         card_row.addWidget(btn_export_card_all)
+        card_row.addStretch(1)
         photo_left.addLayout(card_row)
 
         photo_layout.addLayout(photo_left, 1)
@@ -298,20 +308,23 @@ class CapNhatWebTab(QWidget):
 
         outer.addWidget(photo_box)
 
-        xe_link_box = QGroupBox(
-            "Link giấy tờ xe (hiện trên trang web - KHÔNG còn nhúng file PDF/Word nữa)"
-        )
-        xe_link_layout = QHBoxLayout(xe_link_box)
+        xe_link_box = QGroupBox("Link giấy tờ xe (hiện trên trang web)")
+        xe_link_outer = QVBoxLayout(xe_link_box)
+        xe_link_hint = QLabel("Trang web không nhúng file PDF/Word giấy tờ xe nữa - chỉ hiện link.")
+        xe_link_hint.setStyleSheet("color: #6b7280; font-weight: 400;")
+        xe_link_outer.addWidget(xe_link_hint)
+        xe_link_layout = QHBoxLayout()
+        xe_link_outer.addLayout(xe_link_layout)
         self.cbo_xe_link = QComboBox()
         self.cbo_xe_link.currentIndexChanged.connect(self._on_xe_link_changed)
         xe_link_layout.addWidget(self.cbo_xe_link, 1)
-        btn_refresh_xe = QPushButton("Tải lại DS xe")
+        btn_refresh_xe = QPushButton(_icon(self, QStyle.StandardPixmap.SP_BrowserReload), "Tải lại")
         btn_refresh_xe.clicked.connect(self._load_xe_list)
         xe_link_layout.addWidget(btn_refresh_xe)
         self.txt_xe_link = QLineEdit()
-        self.txt_xe_link.setPlaceholderText("Link giấy tờ xe (vd trang tra cứu của Sở) - https://...")
+        self.txt_xe_link.setPlaceholderText("https://... (vd trang tra cứu xe của Sở)")
         xe_link_layout.addWidget(self.txt_xe_link, 2)
-        btn_save_xe_link = QPushButton("Lưu link")
+        btn_save_xe_link = QPushButton(_icon(self, QStyle.StandardPixmap.SP_DialogSaveButton), "Lưu")
         btn_save_xe_link.clicked.connect(self._on_save_xe_link)
         xe_link_layout.addWidget(btn_save_xe_link)
         outer.addWidget(xe_link_box)
@@ -325,7 +338,10 @@ class CapNhatWebTab(QWidget):
                 "theo mã GV chính thức (DSGV), không đổi giữa các lần cập nhật."
             )
         )
-        self.btn_publish = QPushButton("Cập nhật && Đăng lên web")
+        self.btn_publish = QPushButton(
+            _icon(self, QStyle.StandardPixmap.SP_ArrowUp), "Cập nhật && Đăng lên web"
+        )
+        self.btn_publish.setObjectName("primary")
         self.btn_publish.clicked.connect(self._on_publish_clicked)
         box_layout.addWidget(self.btn_publish)
 
