@@ -1,5 +1,10 @@
 """Giao diện chung cho toàn app - 1 stylesheet (QSS) áp dụng 1 lần lúc khởi
 động (xem main.py: apply_style(app)), không cần sửa từng tab."""
+from pathlib import Path
+
+APP_DIR = Path(__file__).resolve().parent
+# Qt yêu cầu dấu "/" (kể cả trên Windows) trong url() của QSS.
+_DROPDOWN_ARROW = (APP_DIR / "icons" / "dropdown_arrow.svg").as_posix()
 
 APP_QSS = """
 * {
@@ -62,7 +67,7 @@ QLabel {
     background: transparent;
 }
 
-QLineEdit, QComboBox, QTextEdit, QListWidget, QTableWidget {
+QLineEdit, QTextEdit, QListWidget, QTableWidget {
     background: #ffffff;
     border: 1px solid #d0d4db;
     border-radius: 5px;
@@ -71,7 +76,7 @@ QLineEdit, QComboBox, QTextEdit, QListWidget, QTableWidget {
     selection-color: #ffffff;
 }
 
-QLineEdit:focus, QComboBox:focus, QTextEdit:focus {
+QLineEdit:focus, QTextEdit:focus {
     border: 1px solid #3457d5;
 }
 
@@ -80,9 +85,55 @@ QLineEdit:read-only {
     color: #5b6372;
 }
 
+/* Dropdown (combo box) - khung + nút mũi tên rõ ràng, tách biệt hẳn khỏi
+   QLineEdit để không bị nhầm là ô nhập chữ thường. */
+QComboBox {
+    background: #ffffff;
+    border: 1px solid #b7bdc8;
+    border-radius: 5px;
+    padding: 5px 8px;
+    padding-right: 30px;
+    selection-background-color: #3457d5;
+    selection-color: #ffffff;
+}
+
+QComboBox:hover {
+    border-color: #3457d5;
+}
+
+QComboBox:focus {
+    border: 1px solid #3457d5;
+}
+
+QComboBox:on {
+    border: 1px solid #3457d5;
+}
+
 QComboBox::drop-down {
-    border: none;
-    width: 22px;
+    subcontrol-origin: padding;
+    subcontrol-position: top right;
+    width: 28px;
+    border-left: 1px solid #b7bdc8;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    background: #eef1f8;
+}
+
+QComboBox::down-arrow {
+    image: url(__DROPDOWN_ARROW__);
+    width: 11px;
+    height: 11px;
+}
+
+
+QComboBox QAbstractItemView {
+    background: #ffffff;
+    border: 1px solid #b7bdc8;
+    border-radius: 4px;
+    padding: 2px;
+    outline: none;
+    selection-background-color: #3457d5;
+    selection-color: #ffffff;
 }
 
 QPushButton {
@@ -165,4 +216,4 @@ QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical {
 
 
 def apply_style(app):
-    app.setStyleSheet(APP_QSS)
+    app.setStyleSheet(APP_QSS.replace("__DROPDOWN_ARROW__", _DROPDOWN_ARROW))
