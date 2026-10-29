@@ -20,7 +20,7 @@ class MainWindow(QMainWindow):
     def __init__(self, model):
         super().__init__()
         self.setWindowTitle("Quản lý đào tạo lái xe - Tra cứu giáo viên / xe / lịch học")
-        self.resize(1200, 750)
+        self.resize(1200, 850)
 
         tabs = QTabWidget()
         tabs.addTab(CapNhatWebTab(), "CẬP NHẬT WEB")

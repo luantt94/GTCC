@@ -21,6 +21,7 @@ from PySide6.QtGui import QPixmap
 from PySide6.QtWidgets import (
     QComboBox,
     QFileDialog,
+    QFrame,
     QGroupBox,
     QHBoxLayout,
     QLabel,
@@ -28,6 +29,7 @@ from PySide6.QtWidgets import (
     QListWidget,
     QMessageBox,
     QPushButton,
+    QScrollArea,
     QStyle,
     QTextEdit,
     QVBoxLayout,
@@ -179,7 +181,20 @@ class CapNhatWebTab(QWidget):
         self._load_sources()
 
     def _build_ui(self):
-        outer = QVBoxLayout(self)
+        # Nội dung tab ngày càng dài (nhiều khung cài đặt) nên bọc trong
+        # QScrollArea - tránh bị tràn/đè lên nhau khi cửa sổ không đủ cao.
+        root = QVBoxLayout(self)
+        root.setContentsMargins(0, 0, 0, 0)
+        scroll = QScrollArea()
+        scroll.setWidgetResizable(True)
+        scroll.setFrameShape(QFrame.Shape.NoFrame)
+        root.addWidget(scroll)
+
+        content = QWidget()
+        scroll.setWidget(content)
+        outer = QVBoxLayout(content)
+        outer.setContentsMargins(12, 12, 12, 12)
+        outer.setSpacing(10)
 
         self.pick_bien_che = _FileListPicker(
             'File Excel "BIÊN CHẾ XE KHÓA ..." (mỗi khóa 1 file)',
