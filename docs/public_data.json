@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-29T07:53:39",
+  "generated_at": "2026-10-29T07:54:15",
   "teachers": {
     "48002001": {
       "ten": "Nguyễn Anh Dương",
@@ -9,7 +9,43 @@
     },
     "48002002": {
       "ten": "Nguyễn Thành Công",
-      "khoa_dang_day": [],
+      "khoa_dang_day": [
+        {
+          "ma_khoa": "48002K262024",
+          "lop": "BK0726",
+          "tu_ngay": "11/8/2026",
+          "den_ngay": "07/11/2026",
+          "xe": "43B-304.83",
+          "sdt": "0778 666643",
+          "so_hoc_vien": 5,
+          "hoc_vien": [
+            "LÊ QUANG THÀNH",
+            "LÊ ĐÌNH QUỐC HUY",
+            "TRẦN MINH NHÂN KIỆT",
+            "TRƯƠNG QUANG",
+            "MAI THU THẢO"
+          ],
+          "lich_hoc_pdf": "files/lich_hoc/48002K262024.pdf",
+          "giay_to_xe_file": "files/xe/43B30483.docx"
+        },
+        {
+          "ma_khoa": "48002K262032",
+          "lop": "BK0826",
+          "tu_ngay": "18/09/2026",
+          "den_ngay": "15/12/2026",
+          "xe": "43B-304.83",
+          "sdt": "0778 666643",
+          "so_hoc_vien": 4,
+          "hoc_vien": [
+            "PHAN HOÀI LĂNG",
+            "HUỲNH NGỌC TẤN PHÁT",
+            "NGUYỄN THỊ VÂN",
+            "HOÀNG KIM TÙNG"
+          ],
+          "lich_hoc_pdf": "files/lich_hoc/48002K262032.pdf",
+          "giay_to_xe_file": "files/xe/43B30483.docx"
+        }
+      ],
       "ho_so_file": "files/ho_so_gv/48002002.pdf",
       "anh_file": null
     },
@@ -315,7 +351,43 @@
     },
     "48002014": {
       "ten": "Huỳnh Trường Giang",
-      "khoa_dang_day": [],
+      "khoa_dang_day": [
+        {
+          "ma_khoa": "48002K262024",
+          "lop": "BK0726",
+          "tu_ngay": "11/8/2026",
+          "den_ngay": "07/11/2026",
+          "xe": "43A-292.72",
+          "sdt": "0935237239",
+          "so_hoc_vien": 5,
+          "hoc_vien": [
+            "NGUYỄN NAM KHÁNH HƯNG",
+            "TRẦN VIẾT HOÀNG",
+            "TRẦN MẠNH DŨNG",
+            "NGUYỄN THỊ BÌNH",
+            "HUỲNH BÁ XUÂN HỒNG"
+          ],
+          "lich_hoc_pdf": "files/lich_hoc/48002K262024.pdf",
+          "giay_to_xe_file": "files/xe/43A29272.docx"
+        },
+        {
+          "ma_khoa": "48002K262032",
+          "lop": "BK0826",
+          "tu_ngay": "18/09/2026",
+          "den_ngay": "15/12/2026",
+          "xe": "43A-292.72",
+          "sdt": "0935.237.239",
+          "so_hoc_vien": 4,
+          "hoc_vien": [
+            "TRẦN NGỌC THÙY TRINH",
+            "LÊ MINH KIM THÀNH LONG",
+            "LÊ QUỐC THẮNG",
+            "NGUYỄN HỮU THANH HOÀNG"
+          ],
+          "lich_hoc_pdf": "files/lich_hoc/48002K262032.pdf",
+          "giay_to_xe_file": "files/xe/43A29272.docx"
+        }
+      ],
       "ho_so_file": "files/ho_so_gv/48002014.pdf",
       "anh_file": null
     },
@@ -399,7 +471,24 @@
     },
     "48002022": {
       "ten": "Huỳnh Bá Đăng Khoa",
-      "khoa_dang_day": [],
+      "khoa_dang_day": [
+        {
+          "ma_khoa": "48002K262024",
+          "lop": "BK0726",
+          "tu_ngay": "11/8/2026",
+          "den_ngay": "07/11/2026",
+          "xe": "92A-390.94",
+          "sdt": "0772575700",
+          "so_hoc_vien": 3,
+          "hoc_vien": [
+            "CAO THỊ NHẬT LINH",
+            "NGUYỄN DUY KHÁNH",
+            "TRẦN PHƯỚC MẪN"
+          ],
+          "lich_hoc_pdf": "files/lich_hoc/48002K262024.pdf",
+          "giay_to_xe_file": "files/xe/92A39094.docx"
+        }
+      ],
       "ho_so_file": "files/ho_so_gv/48002022.pdf",
       "anh_file": null
     },
@@ -555,7 +644,43 @@
     },
     "48002039": {
       "ten": "Trần Ngô Đông Phương",
-      "khoa_dang_day": [],
+      "khoa_dang_day": [
+        {
+          "ma_khoa": "48002K262024",
+          "lop": "BK0726",
+          "tu_ngay": "11/8/2026",
+          "den_ngay": "07/11/2026",
+          "xe": "43A-292.74",
+          "sdt": "0906 465686",
+          "so_hoc_vien": 5,
+          "hoc_vien": [
+            "NGUYỄN TẤN ĐẠT",
+            "NGUYỄN THỊ TÂM ĐOAN",
+            "NGUYỄN ĐỨC ĐẠT",
+            "TRẦN THỊ THANH NGÂN",
+            "TRẦN PHƯỚC NGHĨA"
+          ],
+          "lich_hoc_pdf": "files/lich_hoc/48002K262024.pdf",
+          "giay_to_xe_file": "files/xe/43A29274.docx"
+        },
+        {
+          "ma_khoa": "48002K262032",
+          "lop": "BK0826",
+          "tu_ngay": "18/09/2026",
+          "den_ngay": "15/12/2026",
+          "xe": "43A-292.74",
+          "sdt": "0906 465686",
+          "so_hoc_vien": 4,
+          "hoc_vien": [
+            "NGÔ VĂN THẮNG",
+            "TRẦN THANH THIÊN",
+            "NGUYỄN VĂN AN",
+            "TRẦN HỮU THUẬN"
+          ],
+          "lich_hoc_pdf": "files/lich_hoc/48002K262032.pdf",
+          "giay_to_xe_file": "files/xe/43A29274.docx"
+        }
+      ],
       "ho_so_file": "files/ho_so_gv/48002039.pdf",
       "anh_file": null
     },
@@ -824,7 +949,43 @@
     },
     "48002060": {
       "ten": "Trần Thanh Hùng",
-      "khoa_dang_day": [],
+      "khoa_dang_day": [
+        {
+          "ma_khoa": "48002K262024",
+          "lop": "BK0726",
+          "tu_ngay": "11/8/2026",
+          "den_ngay": "07/11/2026",
+          "xe": "43A-292.11",
+          "sdt": "0901139535",
+          "so_hoc_vien": 5,
+          "hoc_vien": [
+            "NGUYỄN VĂN HIỆU",
+            "PHAN CHU HÀN UYỂN",
+            "HOÀNG VÕ ĐỨC TÂM",
+            "TRẦN ANH HOÀNG",
+            "TRƯƠNG QUỐC VIỆT"
+          ],
+          "lich_hoc_pdf": "files/lich_hoc/48002K262024.pdf",
+          "giay_to_xe_file": "files/xe/43A29211.docx"
+        },
+        {
+          "ma_khoa": "48002K262032",
+          "lop": "BK0826",
+          "tu_ngay": "18/09/2026",
+          "den_ngay": "15/12/2026",
+          "xe": "43A-292.11",
+          "sdt": "0901139535",
+          "so_hoc_vien": 4,
+          "hoc_vien": [
+            "ĐINH NGỌC PHONG NHÃ",
+            "ĐẶNG NHẬT LONG",
+            "LƯƠNG THẾ DƯƠNG",
+            "TRẦN MINH ĐẠT"
+          ],
+          "lich_hoc_pdf": "files/lich_hoc/48002K262032.pdf",
+          "giay_to_xe_file": "files/xe/43A29211.docx"
+        }
+      ],
       "ho_so_file": null,
       "anh_file": null
     },
