@@ -247,14 +247,15 @@ fetch("public_data.json", { cache: "no-store" })
       anhEl.style.display = "block";
     }
 
-    if (gv.ten || gv.ngay_sinh || gv.dia_chi) {
+    if (gv.ten || gv.dien_thoai || gv.ngay_sinh || gv.dia_chi) {
       const infoCard = document.createElement("div");
       infoCard.className = "khoa-card";
       infoCard.innerHTML = `<div class="khoa-title">Thông tin giáo viên</div>`;
       const infoRows = [
         ["Họ và tên", gv.ten],
+        ["Số điện thoại", gv.dien_thoai],
         ["Ngày tháng năm sinh", gv.ngay_sinh],
-        ["Địa chỉ", gv.dia_chi],
+        ["Địa chỉ thường trú", gv.dia_chi],
       ];
       infoRows.forEach(([label, value]) => {
         if (!value) return;

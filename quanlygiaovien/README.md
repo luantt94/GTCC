@@ -182,23 +182,25 @@ in lại, không cần xóa file tay.
 ## 5. Thông tin bảo mật
 
 Trang web là **công khai trên Internet** (ai có link đều xem được). Những
-gì **lên web**: họ tên, **ngày sinh, địa chỉ** (lấy từ trường NgaySinh/
-NoiCT trong DSGV_*.xml - mục "Thông tin giáo viên" trên `gv.html`, **công
-khai, không cần mật khẩu**, theo yêu cầu), SĐT, mã khóa/lớp, thời gian học,
-biển số xe + link giấy tờ xe (nếu đã nhập - xem mục 2, **không** còn nhúng
-file PDF/Word giấy tờ xe), **tên + ghi chú** học viên (vd "Bảo lưu" - xem
-mục 4), lịch học (kèm file PDF gốc),
-và hồ sơ cá nhân giáo viên **nếu** có đặt mật khẩu xem (xem mục 2).
+gì **lên web**: họ tên, **số điện thoại, ngày sinh, địa chỉ thường trú**
+của giáo viên (lấy từ trường DienThoai/NgaySinh/NoiCT trong DSGV_*.xml -
+mục "Thông tin giáo viên" trên `gv.html`, **công khai, không cần mật
+khẩu**, theo yêu cầu), mã khóa/lớp, thời gian học, biển số xe + link giấy
+tờ xe (nếu đã nhập - xem mục 2, **không** còn nhúng file PDF/Word giấy tờ
+xe), **tên + ghi chú** học viên (vd "Bảo lưu" - xem mục 4), lịch học (kèm
+file PDF gốc), và hồ sơ cá nhân giáo viên **nếu** có đặt mật khẩu xem (xem
+mục 2).
 
-> ⚠️ Ngày sinh/địa chỉ là thông tin khá nhạy cảm - đây là lựa chọn đã cân
-> nhắc và xác nhận với người quản lý app (mặc định trước đây KHÔNG public
-> 2 trường này). Muốn ẩn lại, cần sửa code (`publish_data.run_pipeline`,
-> bỏ 2 dòng `ngay_sinh`/`dia_chi` khi dựng `teachers_out`) rồi đăng lại.
+> ⚠️ Số điện thoại/ngày sinh/địa chỉ là thông tin khá nhạy cảm - đây là
+> lựa chọn đã cân nhắc và xác nhận với người quản lý app (mặc định trước
+> đây KHÔNG public các trường này). Muốn ẩn lại, cần sửa code
+> (`publish_data.run_pipeline`, bỏ 3 dòng `dien_thoai`/`ngay_sinh`/
+> `dia_chi` khi dựng `teachers_out`) rồi đăng lại.
 
 Những gì **KHÔNG BAO GIỜ** lên web, kể cả khi đã đặt mật khẩu hồ sơ cá
 nhân — app chủ động không đọc các trường này từ DSGV/DSXTL:
 - Ảnh chân dung (AnhCD) và số CMT/CCCD (SoCMT) trong file DSGV — **kể cả
-  của giáo viên**, dù ngày sinh/địa chỉ của giáo viên đã public như trên.
+  của giáo viên**, dù SĐT/ngày sinh/địa chỉ của giáo viên đã public như trên.
 - File Excel/XML gốc, và toàn bộ thư mục `data/` (chỉ những file được app
   copy sang `docs/files/` theo đúng giáo viên/xe/khóa mới public).
 - Mật khẩu hồ sơ cá nhân ở dạng gốc (chỉ lưu bản băm SHA-256 trên web).
