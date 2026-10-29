@@ -7,19 +7,22 @@
    - File DSXTL_*.xml (danh sách xe tập lái, dùng để đối chiếu biển số)
    - Thư mục hồ sơ cá nhân giáo viên (.pdf)
 2. Convert Excel -> data.json (dữ liệu đầy đủ, chỉ dùng nội bộ, KHÔNG commit lên git)
-3. Build docs/public_data.json: tên giáo viên + chi tiết từng khóa đang đào tạo
-   (khóa/lớp, thời gian, xe, SĐT, danh sách tên học viên) + file lịch học PDF +
-   link giấy tờ xe (nhập tay, xem xe_extra.json - KHÔNG còn nhúng file PDF/Word
-   giấy tờ xe lên trang web nữa)
+3. Build docs/public_data.json: tên/ngày sinh/địa chỉ giáo viên (theo yêu cầu
+   - lấy từ DSGV_*.xml) + chi tiết từng khóa đang đào tạo (khóa/lớp, thời
+   gian, xe, SĐT, danh sách tên học viên) + file lịch học PDF + link giấy tờ
+   xe (nhập tay, xem xe_extra.json - KHÔNG còn nhúng file PDF/Word giấy tờ xe
+   lên trang web nữa)
 4. Sinh mã QR cho MỌI giáo viên trong DSGV (mã QR = MaGV - mã chính thức, cố
    định, không bao giờ trùng lặp) vào qr_codes/<MaGV>.png, có ghi tên bên dưới.
    Link/mã QR không bao giờ đổi; nếu DSGV sửa lại tên 1 giáo viên đã có QR,
    app tự nhận ra (so với qr_codes/_captions.json) và vẽ lại ảnh với tên mới,
    không cần xóa tay.
 
-Lưu ý: public_data.json có TÊN học viên (theo yêu cầu) nhưng KHÔNG có
-ngày sinh / địa chỉ / CMT / ảnh - những trường đó không bao giờ được đọc ra
-khỏi data.json nội bộ hay file DSGV (chỉ lấy tên + điện thoại).
+Lưu ý: public_data.json có TÊN học viên (theo yêu cầu) nhưng KHÔNG có ngày
+sinh / địa chỉ / CMT / ảnh của HỌC VIÊN - những trường đó không bao giờ được
+đọc ra khỏi data.json nội bộ (chỉ lấy tên + điện thoại). Ngày sinh/địa chỉ
+CỦA GIÁO VIÊN thì CÓ public (theo yêu cầu) - riêng ảnh chân dung (AnhCD) và
+số CMT/CCCD (SoCMT) trong DSGV thì không bao giờ đọc, kể cả của giáo viên.
 
 Không đụng tới git ở đây - phần git do git_publish.py xử lý.
 """
@@ -371,6 +374,8 @@ def run_pipeline(sources=None):
         anh_file = _copy_public_file(anh_src, ANH_GV_SUBDIR, ma_gv) if anh_src.exists() else None
         teachers_out[ma_gv] = {
             "ten": rec["ten"],
+            "ngay_sinh": rec.get("ngay_sinh", ""),
+            "dia_chi": rec.get("dia_chi", ""),
             "khoa_dang_day": teaching_now.get(ma_gv, []),
             "ho_so_file": ho_so_file,
             "anh_file": anh_file,

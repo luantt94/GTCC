@@ -247,6 +247,25 @@ fetch("public_data.json", { cache: "no-store" })
       anhEl.style.display = "block";
     }
 
+    if (gv.ten || gv.ngay_sinh || gv.dia_chi) {
+      const infoCard = document.createElement("div");
+      infoCard.className = "khoa-card";
+      infoCard.innerHTML = `<div class="khoa-title">Thông tin giáo viên</div>`;
+      const infoRows = [
+        ["Họ và tên", gv.ten],
+        ["Ngày tháng năm sinh", gv.ngay_sinh],
+        ["Địa chỉ", gv.dia_chi],
+      ];
+      infoRows.forEach(([label, value]) => {
+        if (!value) return;
+        const row = document.createElement("div");
+        row.className = "row";
+        row.innerHTML = `<div class="k">${esc(label)}</div><div class="v">${esc(value)}</div>`;
+        infoCard.appendChild(row);
+      });
+      container.appendChild(infoCard);
+    }
+
     if (gv.ho_so_file && data.ho_so_password_hash) {
       const hosoCard = document.createElement("div");
       hosoCard.className = "khoa-card hoso-card";

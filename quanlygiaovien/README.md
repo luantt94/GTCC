@@ -117,14 +117,15 @@ Nếu có file **`data/khunganhnen.jpg`** (ảnh nền thẻ đã thiết kế s
 logo/màu/bố cục của đơn vị), phần mềm sẽ dùng ảnh này làm nền và tự động
 dán đè: ảnh giáo viên, mã QR, tên cơ quan/cơ sở đào tạo (ghi đè lên băng
 xanh có sẵn, lấy đúng nội dung đã lưu ở khung "Thông tin in trên thẻ giáo
-viên"), và **Họ và tên / Ngày, tháng, năm sinh / Địa chỉ thường trú / Dạy
-lái xe hạng** - 3 trường ngày sinh/địa chỉ lấy thẳng từ file DSGV_*.xml
-(trường NgaySinh/NoiCT - chỉ dùng để in thẻ cục bộ, không đưa lên web).
-Không có file nền thì phần mềm tự vẽ thẻ theo đúng khổ/cỡ chữ quy định ở
-Mẫu số 01 (85mm x 50mm, không có 3 trường ngày sinh/địa chỉ). File
-`khunganhnen.jpg` nằm trong `data/` nên **không đưa lên git** (giống
-Excel/XML) - máy nào cần ảnh nền riêng thì tự đặt file vào đúng đường dẫn
-này.
+viên"), họ tên (luôn 1 dòng, ngay dưới tiêu đề) và hạng lái xe dạy. Không
+có file nền thì phần mềm tự vẽ thẻ theo đúng khổ/cỡ chữ quy định ở Mẫu số
+01 (85mm x 50mm). File `khunganhnen.jpg` nằm trong `data/` nên **không đưa
+lên git** (giống Excel/XML) - máy nào cần ảnh nền riêng thì tự đặt file
+vào đúng đường dẫn này.
+
+> Thẻ in cục bộ **không** có ngày sinh/địa chỉ - 2 trường này (đọc từ
+> NgaySinh/NoiCT trong DSGV_*.xml) hiện **công khai trên trang web**
+> `gv.html` (mục "Thông tin giáo viên"), xem mục 5.
 
 ## 3. Quy trình cập nhật web hàng ngày/hàng tuần
 
@@ -178,20 +179,27 @@ in lại, không cần xóa file tay.
 ## 5. Thông tin bảo mật
 
 Trang web là **công khai trên Internet** (ai có link đều xem được). Những
-gì **lên web**: tên giáo viên, SĐT, mã khóa/lớp, thời gian học, biển số xe
-+ link giấy tờ xe (nếu đã nhập - xem mục 2, **không** còn nhúng file PDF/
-Word giấy tờ xe), **tên** học viên, lịch học (kèm file PDF gốc), và hồ sơ
-cá nhân giáo viên **nếu** có đặt mật khẩu xem (xem mục 2).
+gì **lên web**: họ tên, **ngày sinh, địa chỉ** (lấy từ trường NgaySinh/
+NoiCT trong DSGV_*.xml - mục "Thông tin giáo viên" trên `gv.html`, **công
+khai, không cần mật khẩu**, theo yêu cầu), SĐT, mã khóa/lớp, thời gian học,
+biển số xe + link giấy tờ xe (nếu đã nhập - xem mục 2, **không** còn nhúng
+file PDF/Word giấy tờ xe), **tên** học viên, lịch học (kèm file PDF gốc),
+và hồ sơ cá nhân giáo viên **nếu** có đặt mật khẩu xem (xem mục 2).
+
+> ⚠️ Ngày sinh/địa chỉ là thông tin khá nhạy cảm - đây là lựa chọn đã cân
+> nhắc và xác nhận với người quản lý app (mặc định trước đây KHÔNG public
+> 2 trường này). Muốn ẩn lại, cần sửa code (`publish_data.run_pipeline`,
+> bỏ 2 dòng `ngay_sinh`/`dia_chi` khi dựng `teachers_out`) rồi đăng lại.
 
 Những gì **KHÔNG BAO GIỜ** lên web, kể cả khi đã đặt mật khẩu hồ sơ cá
 nhân — app chủ động không đọc các trường này từ DSGV/DSXTL:
-- Ảnh chân dung (AnhCD) và số CMT/CCCD (SoCMT) trong file DSGV.
+- Ảnh chân dung (AnhCD) và số CMT/CCCD (SoCMT) trong file DSGV — **kể cả
+  của giáo viên**, dù ngày sinh/địa chỉ của giáo viên đã public như trên.
 - File Excel/XML gốc, và toàn bộ thư mục `data/` (chỉ những file được app
   copy sang `docs/files/` theo đúng giáo viên/xe/khóa mới public).
 - Mật khẩu hồ sơ cá nhân ở dạng gốc (chỉ lưu bản băm SHA-256 trên web).
-- Ngày sinh (NgaySinh) và địa chỉ (NoiCT) trong file DSGV - chỉ đọc để in
-  lên thẻ giáo viên cục bộ (mục "Thẻ (phù hiệu) giáo viên dạy lái xe" ở
-  trên), không có trong `docs/public_data.json`.
+- Ngày sinh/địa chỉ của **học viên** trong Excel - chỉ giáo viên mới có 2
+  trường này public, học viên thì không.
 
 ## 6. Cài đặt lần đầu (dành cho máy mới)
 
