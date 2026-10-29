@@ -10,8 +10,17 @@
 import xml.etree.ElementTree as ET
 
 
+def _format_ddmmyyyy(s):
+    s = (s or "").strip()
+    if len(s) == 8 and s.isdigit():
+        return f"{s[0:2]}/{s[2:4]}/{s[4:8]}"
+    return s
+
+
 def parse_dsgv(path, active_only=True):
-    """Trả về dict: ma_gv (str) -> {"ten": str, "dien_thoai": str}."""
+    """Trả về dict: ma_gv (str) -> {"ten", "dien_thoai", "ngay_sinh",
+    "dia_chi"}. ngay_sinh/dia_chi chỉ dùng để in thẻ giáo viên cục bộ
+    (teacher_card.py) - KHÔNG bao giờ đưa lên trang web public."""
     root = ET.parse(path).getroot()
     body = root.find("GIAOVIENS")
     if body is None:
@@ -33,7 +42,12 @@ def parse_dsgv(path, active_only=True):
         full_name = f"{ho_ten_dem} {ten}".strip()
         if not full_name:
             continue
-        out[ma_gv] = {"ten": full_name, "dien_thoai": g("DienThoai")}
+        out[ma_gv] = {
+            "ten": full_name,
+            "dien_thoai": g("DienThoai"),
+            "ngay_sinh": _format_ddmmyyyy(g("NgaySinh")),
+            "dia_chi": g("NoiCT"),
+        }
     return out
 
 

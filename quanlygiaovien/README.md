@@ -95,12 +95,17 @@ không cần Internet. Phần mềm không tự đóng dấu giáp lai lên ản
 đóng dấu tay sau khi in như quy định.
 
 Nếu có file **`data/khunganhnen.jpg`** (ảnh nền thẻ đã thiết kế sẵn, đúng
-logo/màu/bố cục của đơn vị), phần mềm sẽ dùng ảnh này làm nền và chỉ tự
-động dán đè ảnh giáo viên + mã QR + ghi tên/hạng vào đúng các ô trống có
-sẵn trên ảnh. Không có file này thì phần mềm tự vẽ thẻ theo đúng khổ/cỡ
-chữ quy định ở Mẫu số 01 (85mm x 50mm). File `khunganhnen.jpg` nằm trong
-`data/` nên **không đưa lên git** (giống Excel/XML) - máy nào cần ảnh nền
-riêng thì tự đặt file vào đúng đường dẫn này.
+logo/màu/bố cục của đơn vị), phần mềm sẽ dùng ảnh này làm nền và tự động
+dán đè: ảnh giáo viên, mã QR, tên cơ quan/cơ sở đào tạo (ghi đè lên băng
+xanh có sẵn, lấy đúng nội dung đã lưu ở khung "Thông tin in trên thẻ giáo
+viên"), và **Họ và tên / Ngày, tháng, năm sinh / Địa chỉ thường trú / Dạy
+lái xe hạng** - 3 trường ngày sinh/địa chỉ lấy thẳng từ file DSGV_*.xml
+(trường NgaySinh/NoiCT - chỉ dùng để in thẻ cục bộ, không đưa lên web).
+Không có file nền thì phần mềm tự vẽ thẻ theo đúng khổ/cỡ chữ quy định ở
+Mẫu số 01 (85mm x 50mm, không có 3 trường ngày sinh/địa chỉ). File
+`khunganhnen.jpg` nằm trong `data/` nên **không đưa lên git** (giống
+Excel/XML) - máy nào cần ảnh nền riêng thì tự đặt file vào đúng đường dẫn
+này.
 
 ## 3. Quy trình cập nhật web hàng ngày/hàng tuần
 
@@ -164,6 +169,9 @@ nhân — app chủ động không đọc các trường này từ DSGV/DSXTL:
 - File Excel/XML gốc, và toàn bộ thư mục `data/` (chỉ những file được app
   copy sang `docs/files/` theo đúng giáo viên/xe/khóa mới public).
 - Mật khẩu hồ sơ cá nhân ở dạng gốc (chỉ lưu bản băm SHA-256 trên web).
+- Ngày sinh (NgaySinh) và địa chỉ (NoiCT) trong file DSGV - chỉ đọc để in
+  lên thẻ giáo viên cục bộ (mục "Thẻ (phù hiệu) giáo viên dạy lái xe" ở
+  trên), không có trong `docs/public_data.json`.
 
 ## 6. Cài đặt lần đầu (dành cho máy mới)
 

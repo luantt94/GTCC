@@ -469,8 +469,10 @@ def remove_teacher_photo(ma_gv, ten):
 # Chỉ in ấn cục bộ (không đăng lên web) - ảnh + hạng lái xe dạy lấy từ
 # anh_gv/ và giao_vien_extra.json, KHÔNG đọc trực tiếp từ DSGV/DSXTL.
 def export_teacher_cards(teachers, output_path):
-    """teachers: list (ma_gv, ten). Xuất file PDF "Phù hiệu giáo viên dạy
-    lái xe" (Mẫu số 01), tối đa 8 thẻ/trang. Trả về số trang đã xuất."""
+    """teachers: list (ma_gv, rec) với rec là dict như roster_xml.parse_dsgv
+    trả về (ít nhất có "ten", có thể kèm "ngay_sinh"/"dia_chi"). Xuất file
+    PDF "Phù hiệu giáo viên dạy lái xe" (Mẫu số 01), tối đa 8 thẻ/trang.
+    Trả về số trang đã xuất."""
     import teacher_card
 
     settings = load_app_settings()
@@ -481,13 +483,15 @@ def export_teacher_cards(teachers, output_path):
     items = [
         teacher_card.CardData(
             ma_gv=ma_gv,
-            ten=ten,
+            ten=rec.get("ten", ""),
             hang=extra.get(ma_gv, {}).get("hang", ""),
             photo_path=teacher_photo_path(ma_gv),
             org_line1=org_line1,
             org_line2=org_line2,
             url=f"{BASE_URL}?id={ma_gv}",
+            ngay_sinh=rec.get("ngay_sinh", ""),
+            dia_chi=rec.get("dia_chi", ""),
         )
-        for ma_gv, ten in teachers
+        for ma_gv, rec in teachers
     ]
     return teacher_card.generate_cards_pdf(items, output_path)

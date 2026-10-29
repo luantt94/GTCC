@@ -418,7 +418,7 @@ class CapNhatWebTab(QWidget):
         if dsgv_path and Path(dsgv_path).exists():
             dsgv = roster_xml.parse_dsgv(dsgv_path)
             for ma_gv, rec in sorted(dsgv.items(), key=lambda kv: kv[1]["ten"]):
-                self._photo_teachers[ma_gv] = rec["ten"]
+                self._photo_teachers[ma_gv] = rec
                 self.cbo_photo_teacher.addItem(f"{rec['ten']} ({ma_gv})", ma_gv)
         self.cbo_photo_teacher.blockSignals(False)
         self._update_photo_preview()
@@ -455,14 +455,14 @@ class CapNhatWebTab(QWidget):
         )
         if not path:
             return
-        ten = self._photo_teachers.get(ma_gv, "")
+        ten = self._photo_teachers.get(ma_gv, {}).get("ten", "")
         self._run_photo_action(lambda: publish_data.add_teacher_photo(ma_gv, ten, path))
 
     def _on_remove_photo(self):
         ma_gv = self.cbo_photo_teacher.currentData()
         if not ma_gv:
             return
-        ten = self._photo_teachers.get(ma_gv, "")
+        ten = self._photo_teachers.get(ma_gv, {}).get("ten", "")
         confirm = QMessageBox.question(
             self, "Xác nhận", f"Xóa ảnh của '{ten}' khỏi trang web?"
         )
@@ -515,8 +515,8 @@ class CapNhatWebTab(QWidget):
         if not ma_gv:
             QMessageBox.warning(self, "Chưa chọn giáo viên", "Hãy chọn giáo viên trước.")
             return
-        ten = self._photo_teachers.get(ma_gv, "")
-        self._export_cards([(ma_gv, ten)], f"the_{ma_gv}.pdf")
+        rec = self._photo_teachers.get(ma_gv, {})
+        self._export_cards([(ma_gv, rec)], f"the_{ma_gv}.pdf")
 
     def _on_export_card_all(self):
         if not self._photo_teachers:
@@ -525,7 +525,7 @@ class CapNhatWebTab(QWidget):
                 "Hãy chọn file DSGV_*.xml ở trên rồi bấm 'Tải lại DS giáo viên'.",
             )
             return
-        teachers = sorted(self._photo_teachers.items(), key=lambda kv: kv[1])
+        teachers = sorted(self._photo_teachers.items(), key=lambda kv: kv[1]["ten"])
         self._export_cards(teachers, "the_giao_vien.pdf")
 
     def _export_cards(self, teachers, default_name):

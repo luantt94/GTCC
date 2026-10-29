@@ -55,9 +55,20 @@ _BG_QR_BOX = (1068, 506, 1222, 638)  # khung mã QR
 _BG_HANG_VALUE_X = 850  # bắt đầu vẽ giá trị hạng, ngay sau chữ "Dạy lái xe hạng:"
 _BG_HANG_VALUE_Y = (598, 658)
 _BG_HANG_RIGHT = 1250
-_BG_NAME_AREA = (418, 352, 1236, 596)  # x0,y0,x1,y1 - khoảng trống dưới tiêu đề để ghi họ tên
-_BG_NAME_COLOR = "black"
+# Khoảng trống dưới tiêu đề "GIÁO VIÊN DẠY LÁI XE" để ghi Họ và tên / Ngày
+# sinh / Địa chỉ (x1 chừa chỗ cho khung QR bên phải, không lấy hết x=1236
+# như trước để tránh đè lên khung QR).
+_BG_FIELDS_AREA = (418, 352, 1048, 596)
+_BG_FIELDS_COLOR = "black"
 _BG_HANG_COLOR = "#0a1450"
+# Băng chữ trắng trên nền xanh ở đầu thẻ (tên cơ quan/cơ sở đào tạo) - đã có
+# sẵn trong ảnh nền, vẽ đè thêm bằng org_line1/org_line2 để luôn khớp với
+# cài đặt trong app (phòng khi sau này đổi ảnh nền/đổi tên cơ quan).
+_BG_HEADER_X = (40, 1240)
+_BG_HEADER_LINE_BANDS = [(44, 98), (100, 164)]
+_BG_HEADER_COLOR = "white"
+_BG_HEADER_FILL_RECT = (30, 26, 1250, 182)  # vùng tô lại nền xanh trước khi ghi đè chữ
+_BG_HEADER_FILL_COLOR = "#0556b0"
 
 
 def _mm(value):
@@ -73,6 +84,8 @@ class CardData:
     org_line1: str
     org_line2: str
     url: str
+    ngay_sinh: str = ""
+    dia_chi: str = ""
 
 
 def _font_times_px(size_px, bold=False):
@@ -214,11 +227,27 @@ def _fit_photo(photo_path, box_w, box_h):
 
 def _generate_card_image_from_background(data: CardData) -> Image.Image:
     """Dùng ảnh nền đã thiết kế sẵn (data/khunganhnen.jpg) làm thẻ, chỉ dán
-    đè ảnh giáo viên + mã QR + ghi họ tên/hạng vào đúng các vùng trống có
-    sẵn trên ảnh (xem _BG_* ở đầu file). Trả về ảnh đã resize về đúng khổ
-    thẻ chuẩn (CARD_W_MM x CARD_H_MM) để ghép trang PDF như bình thường."""
+    đè ảnh giáo viên + mã QR + ghi họ tên/ngày sinh/địa chỉ/hạng vào đúng
+    các vùng trống có sẵn trên ảnh (xem _BG_* ở đầu file). Trả về ảnh đã
+    resize về đúng khổ thẻ chuẩn (CARD_W_MM x CARD_H_MM) để ghép trang PDF
+    như bình thường."""
     img = Image.open(BG_PATH).convert("RGB").copy()
     draw = ImageDraw.Draw(img)
+    _px_font_for = lambda base_size, scale, bold: _font_times_px(base_size * scale, bold=bold)
+
+    # Băng tên cơ quan/cơ sở đào tạo - tô lại nền xanh (tránh chồng/bóng mờ
+    # lên chữ có sẵn trong ảnh) rồi ghi đè đúng nội dung từ cài đặt trong
+    # app (ô "Thông tin in trên thẻ giáo viên").
+    draw.rectangle(_BG_HEADER_FILL_RECT, fill=_BG_HEADER_FILL_COLOR)
+    hx0, hx1 = _BG_HEADER_X
+    for line, (by0, by1) in zip((data.org_line1, data.org_line2), _BG_HEADER_LINE_BANDS):
+        if not line:
+            continue
+        rendered = _fit_blocks(
+            draw, [(line.upper(), 46, True)], hx1 - hx0, by1 - by0, font_for=_px_font_for
+        )
+        ly = by0 + max((by1 - by0 - _total_height(rendered)) / 2, 0)
+        _draw_rendered_blocks(draw, rendered, ly, cx=(hx0 + hx1) / 2, fill=_BG_HEADER_COLOR)
 
     px0, py0, px1, py1 = _BG_PHOTO_BOX
     if data.photo_path and Path(data.photo_path).exists():
@@ -229,8 +258,6 @@ def _generate_card_image_from_background(data: CardData) -> Image.Image:
     qr_x = qx0 + (qx1 - qx0 - qr_size) // 2
     qr_y = qy0 + (qy1 - qy0 - qr_size) // 2
     img.paste(_make_qr(data.url, qr_size), (qr_x, qr_y))
-
-    _px_font_for = lambda base_size, scale, bold: _font_times_px(base_size * scale, bold=bold)
 
     if data.hang:
         hang_w = _BG_HANG_RIGHT - _BG_HANG_VALUE_X
@@ -243,12 +270,17 @@ def _generate_card_image_from_background(data: CardData) -> Image.Image:
             draw, hang_rendered, hang_y, x=_BG_HANG_VALUE_X, fill=_BG_HANG_COLOR
         )
 
-    nx0, ny0, nx1, ny1 = _BG_NAME_AREA
-    name_rendered = _fit_blocks(
-        draw, [(data.ten.upper(), 70, True)], nx1 - nx0, ny1 - ny0, font_for=_px_font_for
-    )
-    name_y = ny0 + max((ny1 - ny0 - _total_height(name_rendered)) / 2, 0)
-    _draw_rendered_blocks(draw, name_rendered, name_y, cx=(nx0 + nx1) / 2, fill=_BG_NAME_COLOR)
+    # Họ và tên / Ngày tháng năm sinh / Địa chỉ thường trú - tự thu nhỏ
+    # chung (xem _fit_blocks) nếu địa chỉ dài, để không đè lên khung QR hay
+    # dòng "Dạy lái xe hạng:" đã in sẵn bên dưới.
+    fx0, fy0, fx1, fy1 = _BG_FIELDS_AREA
+    field_blocks = [
+        (f"Họ và tên: {data.ten}".upper(), 40, True),
+        (f"Ngày, tháng, năm sinh: {data.ngay_sinh}".upper() if data.ngay_sinh else "", 36, True),
+        (f"Địa chỉ thường trú: {data.dia_chi}".upper() if data.dia_chi else "", 36, True),
+    ]
+    fields_rendered = _fit_blocks(draw, field_blocks, fx1 - fx0, fy1 - fy0, font_for=_px_font_for)
+    _draw_rendered_blocks(draw, fields_rendered, fy0, x=fx0, fill=_BG_FIELDS_COLOR)
 
     card_w, card_h = _mm(CARD_W_MM), _mm(CARD_H_MM)
     return img.resize((card_w, card_h), Image.LANCZOS)
