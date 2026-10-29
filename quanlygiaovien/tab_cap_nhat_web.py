@@ -80,7 +80,18 @@ class _FileListPicker(QGroupBox):
                 self.lst.addItem(f)
 
     def _on_remove(self):
-        for item in self.lst.selectedItems():
+        items = self.lst.selectedItems()
+        if not items:
+            return
+        ten_file = "\n".join(f"- {Path(i.text()).name}" for i in items)
+        confirm = QMessageBox.question(
+            self, "Xác nhận",
+            f"Bỏ {len(items)} file khỏi danh sách này?\n{ten_file}\n\n"
+            "(Chỉ bỏ khỏi danh sách đang chọn trong app, không xóa file gốc trên máy.)",
+        )
+        if confirm != QMessageBox.StandardButton.Yes:
+            return
+        for item in items:
             self.lst.takeItem(self.lst.row(item))
 
     def paths(self):
