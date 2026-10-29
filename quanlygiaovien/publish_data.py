@@ -208,10 +208,12 @@ def run_pipeline(sources=None):
 
     model = DataModel(data_json_path)
     dsgv = roster_xml.parse_dsgv(dsgv_file)
+    dsgv_file_name = Path(dsgv_file).name
 
     dsxtl_file = sources.get("dsxtl_file") or ""
     dsxtl = roster_xml.parse_dsxtl(dsxtl_file) if dsxtl_file and Path(dsxtl_file).exists() else {}
     dsxtl_plates = {attach_files.normalize_plate(p) for p in dsxtl}
+    dsxtl_file_name = Path(dsxtl_file).name if dsxtl_file else ""
 
     lich_hoc_files = sources.get("lich_hoc_files") or []
     xe_folder = sources.get("xe_folder") or ""
@@ -246,15 +248,19 @@ def run_pipeline(sources=None):
             ma_gv = name_to_magv.get(attach_files.normalize_name(name))
             if not ma_gv:
                 warnings.append(
-                    f"Không khớp được giáo viên '{name}' (khóa {ma_khoa}) với "
-                    "danh sách DSGV - kiểm tra lại chính tả tên."
+                    f"Không khớp được giáo viên '{name}' trong file Excel "
+                    f"'{c.get('source_file', '')}' (khóa {ma_khoa}) với danh sách "
+                    f"giáo viên trong file '{dsgv_file_name}' - kiểm tra lại chính tả tên."
                 )
                 continue
 
             hoc_vien = g.get("hoc_vien", [])
             xe = g.get("xe", "")
             if dsxtl_plates and xe and attach_files.normalize_plate(xe) not in dsxtl_plates:
-                warnings.append(f"Biển số '{xe}' (GV {name}, khóa {ma_khoa}) không có trong DSXTL.")
+                warnings.append(
+                    f"Biển số '{xe}' trong file Excel '{c.get('source_file', '')}' "
+                    f"(GV {name}, khóa {ma_khoa}) không có trong file '{dsxtl_file_name}'."
+                )
             xe_doc_src = attach_files.find_xe_doc(xe, xe_folder)
             giay_to_xe_file = _copy_public_file(
                 xe_doc_src, "xe", attach_files.normalize_plate(xe) or "xe"

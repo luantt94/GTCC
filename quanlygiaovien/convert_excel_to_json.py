@@ -146,6 +146,7 @@ def load_course_from_file(path):
         "so_hoc_vien": so_hoc_vien,
         "groups": groups,
         "lich_hoc": [],  # lịch học giờ chỉ còn ở file PDF, xem attach_files.py
+        "source_file": Path(path).name,  # để báo cảnh báo rõ nguồn khi dữ liệu không khớp
     }
 
 
