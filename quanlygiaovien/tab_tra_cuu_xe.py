@@ -5,10 +5,11 @@ from PySide6.QtGui import QDesktopServices
 from PySide6.QtPdf import QPdfDocument
 from PySide6.QtPdfWidgets import QPdfView
 from PySide6.QtWidgets import (
-    QComboBox,
     QHBoxLayout,
     QLabel,
     QLineEdit,
+    QListWidget,
+    QListWidgetItem,
     QMessageBox,
     QPushButton,
     QSplitter,
@@ -29,9 +30,10 @@ HISTORY_COLUMNS = ["Mã khóa", "Lớp", "Giáo viên", "SĐT", "Thời gian h�
 
 
 class TraCuuXeTab(QWidget):
-    """Tab DANH SÁCH XE: chọn 1 xe tập lái (từ DSXTL), xem nhãn hiệu/loại xe,
-    toàn bộ lịch sử giáo viên/khóa đã dùng xe này, nội dung giấy tờ xe cục
-    bộ (nếu có), và nhập/sửa link giấy tờ xe hiện công khai trên trang web."""
+    """Tab DANH SÁCH XE: danh sách toàn bộ xe tập lái (từ DSXTL) hiện sẵn
+    bên trái để chọn nhanh; bấm vào 1 xe là xem nhãn hiệu/loại xe, toàn bộ
+    lịch sử giáo viên/khóa đã dùng xe này, nội dung giấy tờ xe cục bộ (nếu
+    có), và nhập/sửa link giấy tờ xe hiện công khai trên trang web."""
 
     def __init__(self, model, parent=None):
         super().__init__(parent)
@@ -47,7 +49,7 @@ class TraCuuXeTab(QWidget):
         self.vehicles = self._build_vehicle_list()
         self.current_doc_path = None
         self._build_ui()
-        self._load_combo()
+        self._load_list()
 
     def _build_vehicle_list(self):
         """Gộp danh sách xe từ DSXTL (nguồn chính thức) với mọi biển số xuất
@@ -78,22 +80,28 @@ class TraCuuXeTab(QWidget):
 
     def _build_ui(self):
         layout = QVBoxLayout(self)
+        main_splitter = QSplitter(Qt.Orientation.Horizontal)
+        layout.addWidget(main_splitter, 1)
+
+        # Danh sách xe hiện sẵn toàn bộ bên trái (thay vì giấu trong dropdown)
+        # để chọn nhanh - giống cách làm ở tab DANH SÁCH GIÁO VIÊN.
+        self.list_widget = QListWidget()
+        self.list_widget.setMinimumWidth(220)
+        self.list_widget.setMaximumWidth(320)
+        self.list_widget.currentItemChanged.connect(self._on_xe_changed)
+        main_splitter.addWidget(self.list_widget)
+
+        right = QWidget()
+        right_layout = QVBoxLayout(right)
 
         top = QHBoxLayout()
-        top.addWidget(QLabel("Chọn xe (biển số):"))
-        self.cbo_xe = QComboBox()
-        self.cbo_xe.setEditable(True)
-        self.cbo_xe.setInsertPolicy(QComboBox.NoInsert)
-        self.cbo_xe.currentIndexChanged.connect(self._on_xe_changed)
-        top.addWidget(self.cbo_xe, 1)
+        self.lbl_info = QLabel("")
+        top.addWidget(self.lbl_info, 1)
         self.btn_open_doc = QPushButton("Mở giấy tờ xe...")
         self.btn_open_doc.setEnabled(False)
         self.btn_open_doc.clicked.connect(self._open_doc_external)
         top.addWidget(self.btn_open_doc)
-        layout.addLayout(top)
-
-        self.lbl_info = QLabel("")
-        layout.addWidget(self.lbl_info)
+        right_layout.addLayout(top)
 
         link_row = QHBoxLayout()
         link_row.addWidget(QLabel("Link giấy tờ xe (hiện trên trang web):"))
@@ -105,7 +113,7 @@ class TraCuuXeTab(QWidget):
         )
         self.btn_save_xe_link.clicked.connect(self._on_save_xe_link)
         link_row.addWidget(self.btn_save_xe_link)
-        layout.addLayout(link_row)
+        right_layout.addLayout(link_row)
 
         splitter = QSplitter(Qt.Vertical)
 
@@ -137,16 +145,27 @@ class TraCuuXeTab(QWidget):
         splitter.addWidget(self.doc_stack)
         splitter.setStretchFactor(0, 1)
         splitter.setStretchFactor(1, 2)
-        layout.addWidget(splitter, 1)
+        right_layout.addWidget(splitter, 1)
 
-    def _load_combo(self):
-        self.cbo_xe.clear()
+        main_splitter.addWidget(right)
+        main_splitter.setStretchFactor(0, 1)
+        main_splitter.setStretchFactor(1, 3)
+
+    def _load_list(self):
+        self.list_widget.clear()
         for plate, v in self.vehicles.items():
             label = v["bien_so"] if v["in_dsxtl"] else f"{v['bien_so']} (chưa có trong DSXTL)"
-            self.cbo_xe.addItem(label, plate)
+            item = QListWidgetItem(label)
+            item.setData(Qt.ItemDataRole.UserRole, plate)
+            self.list_widget.addItem(item)
+        if not self.vehicles:
+            self.lbl_info.setText(
+                "Chưa có danh sách xe - chọn file DSXTL_*.xml ở tab CẬP NHẬT WEB "
+                "rồi khởi động lại app."
+            )
 
-    def _on_xe_changed(self, _index):
-        plate = self.cbo_xe.currentData()
+    def _on_xe_changed(self, current, _previous=None):
+        plate = current.data(Qt.ItemDataRole.UserRole) if current else None
         v = self.vehicles.get(plate)
         if not v:
             self.lbl_info.setText("")
@@ -173,7 +192,8 @@ class TraCuuXeTab(QWidget):
         self._show_doc(doc_path)
 
     def _on_save_xe_link(self):
-        plate = self.cbo_xe.currentData()
+        current = self.list_widget.currentItem()
+        plate = current.data(Qt.ItemDataRole.UserRole) if current else None
         if not plate:
             return
         publish_data.set_xe_link(plate, self.txt_xe_link.text())
