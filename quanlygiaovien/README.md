@@ -12,19 +12,23 @@ Bấm đúp vào file chạy app, hoặc mở terminal tại thư mục này và
 python main.py
 ```
 
-App có 5 tab:
+App có 6 tab:
 
 | Tab | Dùng để |
 |---|---|
-| **CẬP NHẬT WEB** | Khai báo nguồn dữ liệu, quản lý ảnh đại diện giáo viên & đăng số liệu lên trang web (mã QR) |
+| **CẬP NHẬT WEB** | Khai báo nguồn dữ liệu, mật khẩu hồ sơ cá nhân, thông tin in trên thẻ GV & đăng số liệu lên trang web (mã QR) |
+| **DANH SÁCH GIÁO VIÊN** | Duyệt danh sách GV, xem ngay thẻ (ảnh có mã QR) từng người, đổi ảnh/hạng lái xe dạy, xuất PDF để in |
 | TRA CỨU | Tìm giáo viên / mã khóa, xem học viên, lịch học |
 | PHÂN XE | Xem danh sách xe và giáo viên phụ trách |
-| TRA CỨU XE | Xem chi tiết 1 xe (nhãn hiệu/loại xe, lịch sử giáo viên đã dùng, giấy tờ xe) |
+| **DANH SÁCH XE** | Duyệt danh sách xe, xem lịch sử giáo viên/khóa đã dùng, giấy tờ xe cục bộ, nhập link giấy tờ xe cho trang web |
 | LỊCH HỌC | Xem trực tiếp nội dung file PDF lịch học thực hành theo khóa |
 
-> **Lưu ý:** 4 tab TRA CỨU / PHÂN XE / TRA CỨU XE / LỊCH HỌC chỉ đọc dữ liệu
-> nội bộ lúc **mở app**. Sau khi bấm "Cập nhật && Đăng lên web" ở tab đầu
-> tiên, hãy **khởi động lại app** để các tab này thấy dữ liệu mới nhất.
+> **Lưu ý:** 5 tab DANH SÁCH GIÁO VIÊN / TRA CỨU / PHÂN XE / DANH SÁCH XE /
+> LỊCH HỌC chỉ đọc dữ liệu nội bộ lúc **mở app** (riêng DANH SÁCH GIÁO VIÊN
+> vẫn sửa ảnh/hạng/xuất PDF và đăng lên web được ngay, chỉ danh sách TÊN
+> giáo viên là cần mở lại app nếu đổi file DSGV). Sau khi bấm "Cập nhật &&
+> Đăng lên web" ở tab đầu tiên, hãy **khởi động lại app** để các tab này
+> thấy dữ liệu mới nhất.
 
 ## 2. Nguồn dữ liệu
 
@@ -38,17 +42,17 @@ khi mở app lần đầu — bạn chỉ cần sửa khi có thay đổi:
 | File PDF "LICH HOC THUC HANH ..." | Mỗi khóa 1 file lịch học `.pdf` | Tương tự, thêm/xóa theo khóa |
 | DSGV_*.xml | Danh sách **toàn bộ giáo viên** (nguồn chính thức, dùng để tạo mã QR) | Khi có bản DSGV mới xuất ra từ hệ thống |
 | DSXTL_*.xml | Danh sách xe tập lái (đối chiếu biển số) | Khi có bản DSXTL mới |
-| Thư mục giấy tờ xe tập lái | Chứa file `.docx`/`.pdf` giấy tờ từng xe - chỉ dùng trong app (tab TRA CỨU XE), **không đưa lên trang web** | Khi đổi chỗ lưu thư mục |
+| Thư mục giấy tờ xe tập lái | Chứa file `.docx`/`.pdf` giấy tờ từng xe - chỉ dùng trong app (tab DANH SÁCH XE), **không đưa lên trang web** | Khi đổi chỗ lưu thư mục |
 | Thư mục hồ sơ cá nhân giáo viên | Chứa file `.pdf` hồ sơ từng giáo viên (ghép theo tên trong tên file) | Khi đổi chỗ lưu thư mục |
 
 ### Link giấy tờ xe trên trang web
 
-Trang web **không còn nhúng file PDF/Word giấy tờ xe** nữa. Thay vào đó,
-khung "Link giấy tờ xe" (tab CẬP NHẬT WEB): chọn biển số trong ô danh sách
-(bấm **Tải lại DS xe** nếu vừa đổi file DSXTL), dán link (vd trang tra cứu
-xe tập lái của Sở GTVT) vào ô rồi bấm **Lưu link**. Bấm "Cập nhật && Đăng
-lên web" để áp dụng — trang `gv.html` sẽ hiện nút "Xem giấy tờ xe (trang
-của Sở)" mở link này ở tab mới, thay cho việc nhúng file như trước.
+Trang web **không còn nhúng file PDF/Word giấy tờ xe** nữa. Thay vào đó, ở
+tab **DANH SÁCH XE**: chọn biển số trong ô danh sách, dán link (vd trang
+tra cứu xe tập lái của Sở GTVT) vào ô "Link giấy tờ xe" rồi bấm **Lưu
+link**. Bấm "Cập nhật && Đăng lên web" (tab CẬP NHẬT WEB) để áp dụng —
+trang `gv.html` sẽ hiện nút "Xem giấy tờ xe (trang của Sở)" mở link này ở
+tab mới, thay cho việc nhúng file như trước.
 
 App tự ghép file PDF/Word vào đúng khóa/xe/giáo viên bằng cách so khớp tên
 file (biển số xe, mã khóa, tên giáo viên) — **không cần khai báo tay**.
@@ -74,34 +78,40 @@ tự điền sẵn mật khẩu này — đổi/xóa được bất cứ lúc n�
 > server) — nếu cần chặn thật, phải chuyển hồ sơ sang một dịch vụ có
 > backend kiểm tra quyền truy cập, không thể làm được với GitHub Pages.
 
-### Ảnh đại diện giáo viên
+### Ảnh đại diện, hạng lái xe dạy & thẻ giáo viên — tab DANH SÁCH GIÁO VIÊN
 
-Ở khung "Ảnh đại diện & thẻ giáo viên dạy lái xe" (tab CẬP NHẬT WEB): chọn
-giáo viên trong ô danh sách (bấm **Tải lại DS giáo viên** nếu vừa đổi file
-DSGV), rồi bấm **Thêm/Đổi ảnh...** để chọn 1 file ảnh (.png/.jpg) hoặc
-**Xóa ảnh** để gỡ. Ảnh được tự resize nhỏ lại rồi **đăng lên web ngay lập
-tức** (không cần bấm "Cập nhật && Đăng lên web"), hiện ngay trên đầu trang
-`gv.html` của giáo viên đó. Ảnh này **công khai, không cần mật khẩu** (khác
-với "Hồ sơ cá nhân" ở mục trên). Cần Internet để bấm được 2 nút này.
+Tab này gồm danh sách toàn bộ giáo viên bên trái; bấm vào 1 người là thấy
+ngay **bản xem trước đúng thẻ thật** (có ảnh + mã QR) của người đó bên
+phải, cập nhật **ngay lập tức** mỗi khi đổi ảnh hoặc gõ hạng — không cần
+xuất file ra mới xem được.
 
-### Thẻ (phù hiệu) giáo viên dạy lái xe
+- **Chọn ảnh...**: chọn 1 file ảnh (.png/.jpg) từ máy.
+- **Dán ảnh (Ctrl+V)**: dán ảnh đang copy trong clipboard (vd chụp màn
+  hình, hoặc copy từ phần mềm quét/máy scan) — không cần lưu file ra trước.
+- **Xóa ảnh**: gỡ ảnh khỏi trang web.
 
-Cùng khung trên, mỗi giáo viên có thêm ô **"Dạy lái xe hạng"** (vd `B`,
-`B2, C`) — nhập xong bấm **Lưu hạng**. Ảnh đại diện và hạng lái xe dạy được
+Dù chọn file hay dán, ảnh đều được tự resize nhỏ lại rồi **đăng lên web
+ngay lập tức** (không cần bấm "Cập nhật && Đăng lên web"), hiện ngay trên
+đầu trang `gv.html` của giáo viên đó. Ảnh này **công khai, không cần mật
+khẩu** (khác với "Hồ sơ cá nhân" ở mục trên). Cần Internet để dùng 3 nút
+ảnh này.
+
+Ô **"Dạy lái xe hạng"** (vd `B`, `B2, C`) hiện ngay trên bản xem trước khi
+gõ; bấm **Lưu hạng** để lưu lại thật sự. Ảnh đại diện và hạng lái xe dạy
 lưu trong 2 file **riêng** (`anh_gv/` và `giao_vien_extra.json`, theo mã
 GV) — **tách biệt khỏi DSGV_*.xml/DSXTL_*.xml**, nên khi sau này đổi sang
 file DSGV/DSXTL mới (bản xuất lại từ Sở), 2 thông tin này **không bị mất**,
 miễn mã GV của giáo viên đó giữ nguyên.
 
-Khung **"Thông tin in trên thẻ giáo viên"** ở trên cùng dùng để nhập tên cơ
-quan chủ quản + tên cơ sở đào tạo in ở đầu mỗi thẻ (bấm **Lưu**, dùng chung
-cho mọi thẻ).
+Khung **"Thông tin in trên thẻ giáo viên"** (tab CẬP NHẬT WEB) dùng để
+nhập tên cơ quan chủ quản + tên cơ sở đào tạo in ở đầu mỗi thẻ (bấm **Lưu**,
+dùng chung cho mọi thẻ).
 
 Bấm **"Xuất thẻ GV này (PDF)"** để xuất thẻ của 1 giáo viên đang chọn, hoặc
-**"Xuất thẻ TẤT CẢ giáo viên (PDF)"** để xuất toàn bộ (tối đa 8 thẻ/trang
-A4, tự ngắt trang). Đây là tính năng **in cục bộ, không đăng lên web** -
-không cần Internet. Phần mềm không tự đóng dấu giáp lai lên ảnh thẻ, cần
-đóng dấu tay sau khi in như quy định.
+**"Xuất tất cả giáo viên (PDF)"** để xuất toàn bộ (tối đa 8 thẻ/trang A4,
+tự ngắt trang). Đây là tính năng **in cục bộ, không đăng lên web** - không
+cần Internet. Phần mềm không tự đóng dấu giáp lai lên ảnh thẻ, cần đóng
+dấu tay sau khi in như quy định.
 
 Nếu có file **`data/khunganhnen.jpg`** (ảnh nền thẻ đã thiết kế sẵn, đúng
 logo/màu/bố cục của đơn vị), phần mềm sẽ dùng ảnh này làm nền và tự động
@@ -209,4 +219,5 @@ Nếu đây là máy mới hoàn toàn chưa từng đăng nhập GitHub, lần 
 | Cảnh báo "trùng mã khóa" | Hai file Excel đang chọn có cùng 1 mã khóa — kiểm tra lại có chọn nhầm file không |
 | Cảnh báo "không khớp được giáo viên" / "biển số không có trong DSXTL" | Tên/biển số viết tắt hoặc sai chính tả trong Excel so với DSGV/DSXTL — sửa lại cho khớp rồi đăng lại |
 | Quét QR báo "Không tìm thấy mã giáo viên" | Chưa bật GitHub Pages, hoặc mới đăng xong cần đợi vài phút |
-| Tab TRA CỨU/PHÂN XE/LỊCH HỌC chưa thấy dữ liệu mới | Khởi động lại app sau khi đăng web xong |
+| Tab TRA CỨU/PHÂN XE/LỊCH HỌC/DANH SÁCH XE chưa thấy dữ liệu mới | Khởi động lại app sau khi đăng web xong |
+| Tab DANH SÁCH GIÁO VIÊN chưa thấy giáo viên mới | Khởi động lại app sau khi đổi file DSGV_*.xml (ảnh/hạng/xuất thẻ của giáo viên đã có trong danh sách thì không cần khởi động lại) |

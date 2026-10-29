@@ -7,6 +7,7 @@ from PySide6.QtWidgets import QApplication, QMainWindow, QTabWidget
 from data_model import DataModel
 from style import apply_style
 from tab_cap_nhat_web import CapNhatWebTab
+from tab_danh_sach_gv import DanhSachGiaoVienTab
 from tab_lich_hoc import LichHocTab
 from tab_phan_xe import PhanXeTab
 from tab_tra_cuu import TraCuuTab
@@ -24,9 +25,10 @@ class MainWindow(QMainWindow):
 
         tabs = QTabWidget()
         tabs.addTab(CapNhatWebTab(), "CẬP NHẬT WEB")
+        tabs.addTab(DanhSachGiaoVienTab(), "DANH SÁCH GIÁO VIÊN")
         tabs.addTab(TraCuuTab(model), "TRA CỨU")
         tabs.addTab(PhanXeTab(model), "PHÂN XE")
-        tabs.addTab(TraCuuXeTab(model), "TRA CỨU XE")
+        tabs.addTab(TraCuuXeTab(model), "DANH SÁCH XE")
         tabs.addTab(LichHocTab(model), "LỊCH HỌC")
         self.setCentralWidget(tabs)
 

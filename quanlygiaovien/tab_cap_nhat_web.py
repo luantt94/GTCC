@@ -7,19 +7,21 @@ Nguồn dữ liệu gồm:
 - File DSGV_*.xml: danh sách TOÀN BỘ giáo viên (nguồn mã QR chính thức)
 - File DSXTL_*.xml: danh sách xe tập lái (đối chiếu biển số)
 - Thư mục giấy tờ xe tập lái (.docx/.pdf theo biển số) - chỉ dùng trong app
-  (tab TRA CỨU XE), KHÔNG đưa lên trang web nữa - trang web dùng link giấy
-  tờ xe nhập tay (khung "Link giấy tờ xe" ở dưới)
+  (tab DANH SÁCH XE), KHÔNG đưa lên trang web nữa - trang web dùng link giấy
+  tờ xe nhập tay (xem tab DANH SÁCH XE)
 - Thư mục hồ sơ cá nhân giáo viên (.pdf theo tên)
+
+Ảnh đại diện, hạng lái xe dạy, xuất thẻ giáo viên: xem tab DANH SÁCH GIÁO
+VIÊN (tab_danh_sach_gv.py). Link giấy tờ xe: xem tab DANH SÁCH XE
+(tab_tra_cuu_xe.py).
 
 Người dùng không cần biết git: toàn bộ convert -> JSON công khai ->
 git commit/push chạy ngầm khi bấm nút "Cập nhật && Đăng lên web".
 """
 from pathlib import Path
 
-from PySide6.QtCore import Qt, QThread, Signal
-from PySide6.QtGui import QPixmap
+from PySide6.QtCore import QThread, Signal
 from PySide6.QtWidgets import (
-    QComboBox,
     QFileDialog,
     QFrame,
     QGroupBox,
@@ -36,14 +38,9 @@ from PySide6.QtWidgets import (
     QWidget,
 )
 
-import attach_files
 import publish_data
 import git_publish
-import roster_xml
-
-
-def _icon(widget, standard_pixmap):
-    return widget.style().standardIcon(standard_pixmap)
+from style import icon as _icon
 
 
 class _FileListPicker(QGroupBox):
@@ -152,31 +149,10 @@ class _PublishWorker(QThread):
             self.finished_err.emit(str(exc))
 
 
-class _ActionWorker(QThread):
-    """Chạy 1 hành động ngắn (vd thêm/xóa ảnh - có git push) ở thread riêng
-    để không treo UI. fn không nhận tham số, trả về (ok: bool, message: str)."""
-
-    finished_result = Signal(bool, str)
-
-    def __init__(self, fn, parent=None):
-        super().__init__(parent)
-        self.fn = fn
-
-    def run(self):
-        try:
-            ok, message = self.fn()
-        except Exception as exc:  # báo lỗi rõ ràng, không để app crash
-            ok, message = False, str(exc)
-        self.finished_result.emit(ok, message)
-
-
 class CapNhatWebTab(QWidget):
     def __init__(self, parent=None):
         super().__init__(parent)
         self.worker = None
-        self.photo_worker = None
-        self._photo_teachers = {}
-        self._xe_list = {}
         self._build_ui()
         self._load_sources()
 
@@ -261,89 +237,6 @@ class CapNhatWebTab(QWidget):
         org_layout.addWidget(btn_save_org)
         outer.addWidget(org_box)
 
-        photo_box = QGroupBox("Ảnh đại diện && thẻ giáo viên")
-        photo_outer = QVBoxLayout(photo_box)
-        photo_hint = QLabel(
-            "Ảnh đại diện: công khai, hiện ngay trên trang web. Hạng/thẻ: chỉ in cục bộ."
-        )
-        photo_hint.setStyleSheet("color: #6b7280; font-weight: 400;")
-        photo_outer.addWidget(photo_hint)
-        photo_layout = QHBoxLayout()
-        photo_outer.addLayout(photo_layout)
-
-        photo_left = QVBoxLayout()
-        photo_row = QHBoxLayout()
-        self.cbo_photo_teacher = QComboBox()
-        self.cbo_photo_teacher.currentIndexChanged.connect(self._on_photo_teacher_changed)
-        photo_row.addWidget(self.cbo_photo_teacher, 1)
-        btn_refresh_teachers = QPushButton(_icon(self, QStyle.StandardPixmap.SP_BrowserReload), "Tải lại")
-        btn_refresh_teachers.clicked.connect(self._load_photo_teachers)
-        photo_row.addWidget(btn_refresh_teachers)
-        photo_left.addLayout(photo_row)
-
-        btn_row2 = QHBoxLayout()
-        self.btn_add_photo = QPushButton(_icon(self, QStyle.StandardPixmap.SP_FileIcon), "Đổi ảnh...")
-        self.btn_add_photo.clicked.connect(self._on_add_photo)
-        btn_row2.addWidget(self.btn_add_photo)
-        self.btn_remove_photo = QPushButton(_icon(self, QStyle.StandardPixmap.SP_TrashIcon), "Xóa ảnh")
-        self.btn_remove_photo.setEnabled(False)
-        self.btn_remove_photo.clicked.connect(self._on_remove_photo)
-        btn_row2.addWidget(self.btn_remove_photo)
-        btn_row2.addStretch(1)
-        photo_left.addLayout(btn_row2)
-
-        hang_row = QHBoxLayout()
-        hang_row.addWidget(QLabel("Dạy lái xe hạng:"))
-        self.txt_hang = QLineEdit()
-        self.txt_hang.setPlaceholderText("vd B, hoặc B2, C, D")
-        hang_row.addWidget(self.txt_hang, 1)
-        btn_save_hang = QPushButton(_icon(self, QStyle.StandardPixmap.SP_DialogSaveButton), "Lưu")
-        btn_save_hang.clicked.connect(self._on_save_hang)
-        hang_row.addWidget(btn_save_hang)
-        photo_left.addLayout(hang_row)
-
-        card_row = QHBoxLayout()
-        btn_export_card_one = QPushButton("Xuất thẻ GV này")
-        btn_export_card_one.clicked.connect(self._on_export_card_one)
-        card_row.addWidget(btn_export_card_one)
-        btn_export_card_all = QPushButton("Xuất tất cả thẻ")
-        btn_export_card_all.clicked.connect(self._on_export_card_all)
-        card_row.addWidget(btn_export_card_all)
-        card_row.addStretch(1)
-        photo_left.addLayout(card_row)
-
-        photo_layout.addLayout(photo_left, 1)
-
-        self.lbl_photo_preview = QLabel("(chưa có ảnh)")
-        self.lbl_photo_preview.setFixedSize(110, 110)
-        self.lbl_photo_preview.setAlignment(Qt.AlignCenter)
-        self.lbl_photo_preview.setStyleSheet("border: 1px solid #ccc;")
-        self.lbl_photo_preview.setScaledContents(False)
-        photo_layout.addWidget(self.lbl_photo_preview)
-
-        outer.addWidget(photo_box)
-
-        xe_link_box = QGroupBox("Link giấy tờ xe (hiện trên trang web)")
-        xe_link_outer = QVBoxLayout(xe_link_box)
-        xe_link_hint = QLabel("Trang web không nhúng file PDF/Word giấy tờ xe nữa - chỉ hiện link.")
-        xe_link_hint.setStyleSheet("color: #6b7280; font-weight: 400;")
-        xe_link_outer.addWidget(xe_link_hint)
-        xe_link_layout = QHBoxLayout()
-        xe_link_outer.addLayout(xe_link_layout)
-        self.cbo_xe_link = QComboBox()
-        self.cbo_xe_link.currentIndexChanged.connect(self._on_xe_link_changed)
-        xe_link_layout.addWidget(self.cbo_xe_link, 1)
-        btn_refresh_xe = QPushButton(_icon(self, QStyle.StandardPixmap.SP_BrowserReload), "Tải lại")
-        btn_refresh_xe.clicked.connect(self._load_xe_list)
-        xe_link_layout.addWidget(btn_refresh_xe)
-        self.txt_xe_link = QLineEdit()
-        self.txt_xe_link.setPlaceholderText("https://... (vd trang tra cứu xe của Sở)")
-        xe_link_layout.addWidget(self.txt_xe_link, 2)
-        btn_save_xe_link = QPushButton(_icon(self, QStyle.StandardPixmap.SP_DialogSaveButton), "Lưu")
-        btn_save_xe_link.clicked.connect(self._on_save_xe_link)
-        xe_link_layout.addWidget(btn_save_xe_link)
-        outer.addWidget(xe_link_box)
-
         box = QGroupBox("Đăng số liệu giáo viên lên trang web")
         box_layout = QVBoxLayout(box)
         box_layout.addWidget(
@@ -376,8 +269,6 @@ class CapNhatWebTab(QWidget):
         self.pick_dsxtl.set_path(sources.get("dsxtl_file", ""))
         self.pick_xe_folder.set_path(sources.get("xe_folder", ""))
         self.pick_ho_so_folder.set_path(sources.get("ho_so_folder", ""))
-        self._load_photo_teachers()
-        self._load_xe_list()
 
     def _current_sources(self):
         return {
@@ -398,6 +289,13 @@ class CapNhatWebTab(QWidget):
             "Đã lưu",
             "Đã lưu mật khẩu. Bấm 'Cập nhật && Đăng lên web' để áp dụng lên trang web.",
         )
+
+    def _on_save_org(self):
+        settings = publish_data.load_app_settings()
+        settings["the_org_line1"] = self.txt_org1.text().strip()
+        settings["the_org_line2"] = self.txt_org2.text().strip()
+        publish_data.save_app_settings(settings)
+        QMessageBox.information(self, "Đã lưu", "Đã lưu thông tin in trên thẻ giáo viên.")
 
     def _on_publish_clicked(self):
         sources = self._current_sources()
@@ -462,175 +360,3 @@ class CapNhatWebTab(QWidget):
         self.btn_publish.setText("Cập nhật && Đăng lên web")
         self.log.append(f"LỖI: {message}")
         QMessageBox.critical(self, "Lỗi", message)
-
-    # ---- ảnh đại diện giáo viên ----
-    def _load_photo_teachers(self):
-        self.cbo_photo_teacher.blockSignals(True)
-        self.cbo_photo_teacher.clear()
-        self._photo_teachers = {}
-        dsgv_path = self.pick_dsgv.path()
-        if dsgv_path and Path(dsgv_path).exists():
-            dsgv = roster_xml.parse_dsgv(dsgv_path)
-            for ma_gv, rec in sorted(dsgv.items(), key=lambda kv: kv[1]["ten"]):
-                self._photo_teachers[ma_gv] = rec
-                self.cbo_photo_teacher.addItem(f"{rec['ten']} ({ma_gv})", ma_gv)
-        self.cbo_photo_teacher.blockSignals(False)
-        self._update_photo_preview()
-        self._update_hang_field()
-
-    def _update_photo_preview(self):
-        ma_gv = self.cbo_photo_teacher.currentData()
-        path = publish_data.teacher_photo_path(ma_gv) if ma_gv else None
-        if path:
-            pix = QPixmap(str(path)).scaled(
-                110, 110, Qt.AspectRatioMode.KeepAspectRatio, Qt.TransformationMode.SmoothTransformation
-            )
-            self.lbl_photo_preview.setPixmap(pix)
-            self.lbl_photo_preview.setText("")
-        else:
-            self.lbl_photo_preview.setPixmap(QPixmap())
-            self.lbl_photo_preview.setText("(chưa có ảnh)")
-        self.btn_remove_photo.setEnabled(path is not None)
-
-    def _on_photo_teacher_changed(self, _index):
-        self._update_photo_preview()
-        self._update_hang_field()
-
-    def _on_add_photo(self):
-        ma_gv = self.cbo_photo_teacher.currentData()
-        if not ma_gv:
-            QMessageBox.warning(
-                self, "Chưa chọn giáo viên",
-                "Hãy chọn file DSGV_*.xml ở trên rồi bấm 'Tải lại DS giáo viên'.",
-            )
-            return
-        path, _ = QFileDialog.getOpenFileName(
-            self, "Chọn ảnh giáo viên", "", "Ảnh (*.png *.jpg *.jpeg)"
-        )
-        if not path:
-            return
-        ten = self._photo_teachers.get(ma_gv, {}).get("ten", "")
-        self._run_photo_action(lambda: publish_data.add_teacher_photo(ma_gv, ten, path))
-
-    def _on_remove_photo(self):
-        ma_gv = self.cbo_photo_teacher.currentData()
-        if not ma_gv:
-            return
-        ten = self._photo_teachers.get(ma_gv, {}).get("ten", "")
-        confirm = QMessageBox.question(
-            self, "Xác nhận", f"Xóa ảnh của '{ten}' khỏi trang web?"
-        )
-        if confirm != QMessageBox.StandardButton.Yes:
-            return
-        self._run_photo_action(lambda: publish_data.remove_teacher_photo(ma_gv, ten))
-
-    def _run_photo_action(self, fn):
-        self.btn_add_photo.setEnabled(False)
-        self.btn_remove_photo.setEnabled(False)
-        self.log.append("Đang xử lý ảnh giáo viên, vui lòng chờ...")
-        self.photo_worker = _ActionWorker(fn)
-        self.photo_worker.finished_result.connect(self._on_photo_action_done)
-        self.photo_worker.start()
-
-    def _on_photo_action_done(self, ok, message):
-        self.btn_add_photo.setEnabled(True)
-        self._update_photo_preview()
-        self.log.append(message)
-        if ok:
-            QMessageBox.information(self, "Hoàn tất", message)
-        else:
-            QMessageBox.warning(self, "Chưa đăng lên web được", message)
-
-    # ---- thông tin in trên thẻ giáo viên ----
-    def _on_save_org(self):
-        settings = publish_data.load_app_settings()
-        settings["the_org_line1"] = self.txt_org1.text().strip()
-        settings["the_org_line2"] = self.txt_org2.text().strip()
-        publish_data.save_app_settings(settings)
-        QMessageBox.information(self, "Đã lưu", "Đã lưu thông tin in trên thẻ giáo viên.")
-
-    def _update_hang_field(self):
-        ma_gv = self.cbo_photo_teacher.currentData()
-        self.txt_hang.setText(publish_data.get_hang_lai_xe(ma_gv) if ma_gv else "")
-
-    def _on_save_hang(self):
-        ma_gv = self.cbo_photo_teacher.currentData()
-        if not ma_gv:
-            QMessageBox.warning(
-                self, "Chưa chọn giáo viên",
-                "Hãy chọn file DSGV_*.xml ở trên rồi bấm 'Tải lại DS giáo viên'.",
-            )
-            return
-        publish_data.set_hang_lai_xe(ma_gv, self.txt_hang.text())
-        QMessageBox.information(self, "Đã lưu", "Đã lưu hạng lái xe dạy cho giáo viên này.")
-
-    # ---- link giấy tờ xe (hiện trên trang web) ----
-    def _load_xe_list(self):
-        self.cbo_xe_link.blockSignals(True)
-        self.cbo_xe_link.clear()
-        self._xe_list = {}
-        dsxtl_path = self.pick_dsxtl.path()
-        if dsxtl_path and Path(dsxtl_path).exists():
-            dsxtl = roster_xml.parse_dsxtl(dsxtl_path)
-            for bien_so, info in sorted(dsxtl.items()):
-                plate_norm = attach_files.normalize_plate(bien_so)
-                self._xe_list[plate_norm] = bien_so
-                label = bien_so + (f" ({info['nhan_hieu']})" if info.get("nhan_hieu") else "")
-                self.cbo_xe_link.addItem(label, plate_norm)
-        self.cbo_xe_link.blockSignals(False)
-        self._update_xe_link_field()
-
-    def _update_xe_link_field(self):
-        plate_norm = self.cbo_xe_link.currentData()
-        self.txt_xe_link.setText(publish_data.get_xe_link(plate_norm) if plate_norm else "")
-
-    def _on_xe_link_changed(self, _index):
-        self._update_xe_link_field()
-
-    def _on_save_xe_link(self):
-        plate_norm = self.cbo_xe_link.currentData()
-        if not plate_norm:
-            QMessageBox.warning(
-                self, "Chưa chọn xe",
-                "Hãy chọn file DSXTL_*.xml ở trên rồi bấm 'Tải lại DS xe'.",
-            )
-            return
-        publish_data.set_xe_link(plate_norm, self.txt_xe_link.text())
-        QMessageBox.information(
-            self, "Đã lưu",
-            "Đã lưu link giấy tờ xe. Bấm 'Cập nhật && Đăng lên web' để áp dụng lên trang web.",
-        )
-
-    def _on_export_card_one(self):
-        ma_gv = self.cbo_photo_teacher.currentData()
-        if not ma_gv:
-            QMessageBox.warning(self, "Chưa chọn giáo viên", "Hãy chọn giáo viên trước.")
-            return
-        rec = self._photo_teachers.get(ma_gv, {})
-        self._export_cards([(ma_gv, rec)], f"the_{ma_gv}.pdf")
-
-    def _on_export_card_all(self):
-        if not self._photo_teachers:
-            QMessageBox.warning(
-                self, "Chưa có DS giáo viên",
-                "Hãy chọn file DSGV_*.xml ở trên rồi bấm 'Tải lại DS giáo viên'.",
-            )
-            return
-        teachers = sorted(self._photo_teachers.items(), key=lambda kv: kv[1]["ten"])
-        self._export_cards(teachers, "the_giao_vien.pdf")
-
-    def _export_cards(self, teachers, default_name):
-        path, _ = QFileDialog.getSaveFileName(
-            self, "Lưu file PDF thẻ giáo viên", default_name, "PDF Files (*.pdf)"
-        )
-        if not path:
-            return
-        try:
-            so_trang = publish_data.export_teacher_cards(teachers, path)
-        except Exception as exc:  # báo lỗi rõ ràng, không để app crash
-            QMessageBox.critical(self, "Lỗi", str(exc))
-            return
-        QMessageBox.information(
-            self, "Hoàn tất",
-            f"Đã xuất {len(teachers)} thẻ giáo viên ({so_trang} trang) vào:\n{path}",
-        )

@@ -217,3 +217,9 @@ QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical {
 
 def apply_style(app):
     app.setStyleSheet(APP_QSS.replace("__DROPDOWN_ARROW__", _DROPDOWN_ARROW))
+
+
+def icon(widget, standard_pixmap):
+    """Icon chuẩn của Qt theo style hiện tại - dùng chung cho mọi tab thay vì
+    định nghĩa lại hàm này ở từng file."""
+    return widget.style().standardIcon(standard_pixmap)

@@ -8,9 +8,12 @@ from PySide6.QtWidgets import (
     QComboBox,
     QHBoxLayout,
     QLabel,
+    QLineEdit,
+    QMessageBox,
     QPushButton,
     QSplitter,
     QStackedWidget,
+    QStyle,
     QTableWidget,
     QTableWidgetItem,
     QVBoxLayout,
@@ -20,13 +23,15 @@ from PySide6.QtWidgets import (
 import attach_files
 import publish_data
 import roster_xml
+from style import icon as _icon
 
 HISTORY_COLUMNS = ["Mã khóa", "Lớp", "Giáo viên", "SĐT", "Thời gian học", "Số HV", "Tình trạng"]
 
 
 class TraCuuXeTab(QWidget):
-    """Tab TRA CỨU XE: chọn 1 xe tập lái, xem nhãn hiệu/loại xe (theo DSXTL),
-    toàn bộ lịch sử giáo viên/khóa đã dùng xe này, và nội dung giấy tờ xe."""
+    """Tab DANH SÁCH XE: chọn 1 xe tập lái (từ DSXTL), xem nhãn hiệu/loại xe,
+    toàn bộ lịch sử giáo viên/khóa đã dùng xe này, nội dung giấy tờ xe cục
+    bộ (nếu có), và nhập/sửa link giấy tờ xe hiện công khai trên trang web."""
 
     def __init__(self, model, parent=None):
         super().__init__(parent)
@@ -90,6 +95,18 @@ class TraCuuXeTab(QWidget):
         self.lbl_info = QLabel("")
         layout.addWidget(self.lbl_info)
 
+        link_row = QHBoxLayout()
+        link_row.addWidget(QLabel("Link giấy tờ xe (hiện trên trang web):"))
+        self.txt_xe_link = QLineEdit()
+        self.txt_xe_link.setPlaceholderText("https://... (vd trang tra cứu xe của Sở)")
+        link_row.addWidget(self.txt_xe_link, 1)
+        self.btn_save_xe_link = QPushButton(
+            _icon(self, QStyle.StandardPixmap.SP_DialogSaveButton), "Lưu link"
+        )
+        self.btn_save_xe_link.clicked.connect(self._on_save_xe_link)
+        link_row.addWidget(self.btn_save_xe_link)
+        layout.addLayout(link_row)
+
         splitter = QSplitter(Qt.Vertical)
 
         self.table = QTableWidget()
@@ -133,6 +150,8 @@ class TraCuuXeTab(QWidget):
         v = self.vehicles.get(plate)
         if not v:
             self.lbl_info.setText("")
+            self.txt_xe_link.setText("")
+            self.btn_save_xe_link.setEnabled(False)
             self._render_history(None)
             self._show_doc(None)
             return
@@ -145,10 +164,24 @@ class TraCuuXeTab(QWidget):
                 "(kiểm tra lại chính tả biển số trong Excel)."
             )
 
+        self.btn_save_xe_link.setEnabled(True)
+        self.txt_xe_link.setText(publish_data.get_xe_link(plate))
+
         self._render_history(plate)
 
         doc_path = attach_files.find_xe_doc(v["bien_so"], self.xe_folder)
         self._show_doc(doc_path)
+
+    def _on_save_xe_link(self):
+        plate = self.cbo_xe.currentData()
+        if not plate:
+            return
+        publish_data.set_xe_link(plate, self.txt_xe_link.text())
+        QMessageBox.information(
+            self, "Đã lưu",
+            "Đã lưu link giấy tờ xe. Bấm 'Cập nhật && Đăng lên web' ở tab CẬP NHẬT WEB "
+            "để áp dụng lên trang web.",
+        )
 
     def _render_history(self, plate):
         rows = []
