@@ -201,6 +201,21 @@ def _draw_rendered_blocks(draw, rendered, y, x=None, cx=None, fill="black"):
     return ty - y
 
 
+def _fit_single_line_font(draw, text, max_w, base_size, font_for, min_scale=0.3, step=0.05):
+    """Co cỡ chữ dần tới khi `text` vừa trên ĐÚNG 1 dòng trong bề rộng
+    max_w (không bao giờ xuống dòng) - dùng cho họ tên, luôn phải nằm 1
+    dòng theo yêu cầu, kể cả tên dài."""
+    scale = 1.0
+    font = font_for(base_size, scale, True)
+    while scale > min_scale:
+        bbox = draw.textbbox((0, 0), text, font=font)
+        if bbox[2] - bbox[0] <= max_w:
+            break
+        scale = max(scale - step, min_scale)
+        font = font_for(base_size, scale, True)
+    return font
+
+
 def _make_qr(url, size_px):
     import qrcode
 
@@ -271,13 +286,16 @@ def _generate_card_image_from_background(data: CardData) -> Image.Image:
         )
 
     # Chỉ ghi họ tên (không ghi ngày sinh/địa chỉ, không ghi nhãn "Họ và
-    # tên:" - theo yêu cầu rút gọn lại), căn giữa dưới tiêu đề.
+    # tên:" - theo yêu cầu rút gọn lại). Luôn nằm ĐÚNG 1 dòng (co chữ nếu
+    # tên dài, không bao giờ xuống dòng) và đặt ngay dưới tiêu đề (cách đều
+    # khoảng nhỏ) thay vì căn giữa cả khối - tránh nằm sát khung mã QR.
     fx0, fy0, fx1, fy1 = _BG_FIELDS_AREA
-    name_rendered = _fit_blocks(
-        draw, [(data.ten.upper(), 70, True)], fx1 - fx0, fy1 - fy0, font_for=_px_font_for
-    )
-    name_y = fy0 + max((fy1 - fy0 - _total_height(name_rendered)) / 2, 0)
-    _draw_rendered_blocks(draw, name_rendered, name_y, cx=(fx0 + fx1) / 2, fill=_BG_FIELDS_COLOR)
+    name_text = data.ten.upper()
+    name_font = _fit_single_line_font(draw, name_text, fx1 - fx0, 70, _px_font_for)
+    name_bbox = draw.textbbox((0, 0), name_text, font=name_font)
+    name_w = name_bbox[2] - name_bbox[0]
+    name_y = fy0 + _mm(2)
+    draw.text(((fx0 + fx1) / 2 - name_w / 2, name_y), name_text, font=name_font, fill=_BG_FIELDS_COLOR)
 
     card_w, card_h = _mm(CARD_W_MM), _mm(CARD_H_MM)
     return img.resize((card_w, card_h), Image.LANCZOS)
