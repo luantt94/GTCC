@@ -1,9 +1,23 @@
-"""Sinh ảnh/PDF "Phù hiệu giáo viên dạy lái xe" (Mẫu số 01): thẻ 85mm x
-50mm có ảnh thẻ 3x4cm, tên cơ quan/cơ sở đào tạo, họ tên, hạng lái xe dạy,
-và mã QR tra cứu thông tin (cùng link với mã QR phát cho giáo viên).
+"""Sinh ảnh/PDF "Phù hiệu giáo viên dạy lái xe" theo đúng Mẫu số 01 (quy
+cách chính thức do người dùng cung cấp):
 
-Phần mềm KHÔNG tự vẽ dấu giáp lai (con dấu đóng đè lên ảnh thẻ) - đây là
-thao tác đóng dấu thật sau khi in, ngoài phạm vi phần mềm.
+- Kích thước: 50 mm x 85 mm.
+- In trên giấy trắng chất lượng tốt, ép plastic kẹp trong mica, đeo ở phía
+  ngực trái hoặc ở cổ (việc in ấn/ép plastic/đeo thẻ nằm ngoài phạm vi phần
+  mềm - chỉ ghi chú lại đây để người in nhớ làm đúng).
+- Phía trên: tên cơ quan quản lý cấp trên trực tiếp + tên cơ sở đào tạo -
+  Times New Roman in hoa, cỡ chữ 10.
+- Phía dưới bên trái: ảnh màu 3 cm x 4 cm (có đóng dấu giáp lai của cơ sở
+  đào tạo - phần mềm KHÔNG tự vẽ dấu giáp lai, đây là con dấu đóng tay thật
+  sau khi in, ngoài phạm vi phần mềm).
+- Phía dưới bên phải:
+  - "GIÁO VIÊN DẠY LÁI XE" - Times New Roman in hoa, đậm, cỡ chữ 13.
+  - Họ tên giáo viên - Times New Roman in hoa, đậm, cỡ chữ 14.
+  - Hạng giấy phép lái xe dạy lái - Times New Roman in hoa, đậm, cỡ chữ 14.
+- Mã QR tra cứu thông tin (bổ sung theo yêu cầu, không nằm trong Mẫu số 01
+  gốc) đặt trong khung riêng, có chú thích "QUÉT QR TRA CỨU THÔNG TIN",
+  dùng chung link với mã QR đã phát cho giáo viên.
+- Xuất PDF tối đa 8 thẻ/trang giấy (xem CARDS_PER_PAGE).
 
 Dữ liệu ảnh + hạng lái xe dạy lấy từ giao_vien_extra.json / anh_gv/ (xem
 publish_data.py) - tách riêng khỏi DSGV/DSXTL để không mất khi đổi file XML.
@@ -16,12 +30,19 @@ from PIL import Image, ImageDraw, ImageFont
 
 DPI = 300
 _MM_TO_PX = DPI / 25.4
+_PT_TO_PX = DPI / 72
 
 CARD_W_MM, CARD_H_MM = 85, 50
 PHOTO_W_MM, PHOTO_H_MM = 30, 40
 PAGE_W_MM, PAGE_H_MM = 210, 297  # A4 dọc
 GRID_COLS, GRID_ROWS = 2, 4
 CARDS_PER_PAGE = GRID_COLS * GRID_ROWS
+
+# Cỡ chữ (pt) đúng theo quy cách Mẫu số 01
+FONT_PT_HEADER = 10  # tên cơ quan/cơ sở đào tạo
+FONT_PT_ROLE = 13  # "GIÁO VIÊN DẠY LÁI XE"
+FONT_PT_NAME = 14  # họ tên giáo viên
+FONT_PT_HANG = 14  # hạng lái xe dạy
 
 
 def _mm(value):
@@ -39,10 +60,10 @@ class CardData:
     url: str
 
 
-def _font_times(size_mm, bold=False):
+def _font_times(size_pt, bold=False):
     windir = os.environ.get("WINDIR", "C:\\Windows")
     names = ["timesbd.ttf", "times.ttf"] if bold else ["times.ttf"]
-    size_px = max(_mm(size_mm), 8)
+    size_px = max(round(size_pt * _PT_TO_PX), 8)
     for name in names:
         path = os.path.join(windir, "Fonts", name)
         if os.path.exists(path):
@@ -59,13 +80,6 @@ def _line_advance(font):
     Việt cao/thấp khác nhau), cộng dồn sai số nếu dùng để xếp nhiều dòng."""
     ascent, descent = font.getmetrics()
     return ascent + descent
-
-
-def _draw_centered(draw, text, cx, y, font, fill="black"):
-    bbox = draw.textbbox((0, 0), text, font=font)
-    w = bbox[2] - bbox[0]
-    draw.text((cx - w / 2, y), text, font=font, fill=fill)
-    return _line_advance(font)
 
 
 def _wrap_lines(draw, text, max_w, font):
@@ -86,28 +100,66 @@ def _wrap_lines(draw, text, max_w, font):
     return lines
 
 
-def _wrap_and_draw(draw, text, x, y, max_w, font, fill="black"):
-    """Xuống dòng (căn trái) nếu quá rộng. Trả về chiều cao đã vẽ."""
-    line_gap = _mm(0.6)
-    lh = _line_advance(font)
-    total_h = 0
-    for line in _wrap_lines(draw, text, max_w, font):
-        draw.text((x, y + total_h), line, font=font, fill=fill)
-        total_h += lh + line_gap
-    return total_h
+_LINE_GAP = _mm(0.6)
+_BLOCK_GAP = _mm(1)
 
 
-def _wrap_and_draw_centered(draw, text, cx, y, max_w, font, fill="black"):
-    """Xuống dòng (căn giữa) nếu quá rộng. Trả về chiều cao đã vẽ."""
-    line_gap = _mm(0.6)
-    lh = _line_advance(font)
+def _measure_blocks(draw, blocks, max_w, scale):
+    """blocks: list (text, cỡ_chữ_pt_gốc, bold). Trả về (tổng chiều cao,
+    [(lines, font, line_advance), ...]) ở mức thu nhỏ `scale` (1.0 = đúng
+    cỡ chữ quy cách)."""
+    rendered = []
+    for text, base_pt, bold in blocks:
+        font = _font_times(base_pt * scale, bold=bold)
+        lines = _wrap_lines(draw, text, max_w, font) if text else []
+        rendered.append((lines, font, _line_advance(font)))
+
     total_h = 0
-    for line in _wrap_lines(draw, text, max_w, font):
-        bbox = draw.textbbox((0, 0), line, font=font)
-        w = bbox[2] - bbox[0]
-        draw.text((cx - w / 2, y + total_h), line, font=font, fill=fill)
-        total_h += lh + line_gap
-    return total_h
+    started = False
+    for lines, font, lh in rendered:
+        if not lines:
+            continue
+        if started:
+            total_h += _BLOCK_GAP
+        started = True
+        total_h += len(lines) * lh + max(len(lines) - 1, 0) * _LINE_GAP
+    return total_h, rendered
+
+
+def _fit_blocks(draw, blocks, max_w, max_h, min_scale=0.45, step=0.05):
+    """Thử cỡ chữ đúng quy cách trước; nếu không vừa khung thẻ (tên cơ
+    quan/họ tên quá dài) thì thu nhỏ dần (đều cho mọi khối) tới khi vừa,
+    để không bao giờ tràn ra ngoài thẻ."""
+    scale = 1.0
+    rendered = None
+    while True:
+        total_h, rendered = _measure_blocks(draw, blocks, max_w, scale)
+        if total_h <= max_h or scale <= min_scale:
+            return rendered
+        scale = max(scale - step, min_scale)
+
+
+def _draw_rendered_blocks(draw, rendered, y, x=None, cx=None, fill="black"):
+    """Vẽ kết quả _fit_blocks/_measure_blocks, căn trái (x) hoặc căn giữa (cx)."""
+    ty = y
+    started = False
+    for lines, font, lh in rendered:
+        if not lines:
+            continue
+        if started:
+            ty += _BLOCK_GAP
+        started = True
+        for i, line in enumerate(lines):
+            if i > 0:
+                ty += _LINE_GAP
+            if cx is not None:
+                bbox = draw.textbbox((0, 0), line, font=font)
+                lw = bbox[2] - bbox[0]
+                draw.text((cx - lw / 2, ty), line, font=font, fill=fill)
+            else:
+                draw.text((x, ty), line, font=font, fill=fill)
+            ty += lh
+    return ty - y
 
 
 def _make_qr(url, size_px):
@@ -133,35 +185,34 @@ def _fit_photo(photo_path, box_w, box_h):
 
 
 def generate_card_image(data: CardData) -> Image.Image:
+    """Cỡ chữ dùng ĐÚNG quy cách Mẫu số 01 (10/13/14pt) khi vừa thẻ; tên cơ
+    quan/họ tên quá dài thì tự thu nhỏ đều (xem _fit_blocks) để không tràn
+    ra ngoài thẻ - không có cách nào khác khi nội dung dài hơn chỗ chứa."""
     w, h = _mm(CARD_W_MM), _mm(CARD_H_MM)
     img = Image.new("RGB", (w, h), "white")
     draw = ImageDraw.Draw(img)
     draw.rectangle([0, 0, w - 1, h - 1], outline="black", width=2)
 
     pad = _mm(2)
-    y = pad
-    font_header = _font_times(2.6, bold=True)
     header_w = w - 2 * pad
-    for line in (data.org_line1, data.org_line2):
-        if line:
-            y += _wrap_and_draw_centered(draw, line.upper(), w / 2, y, header_w, font_header)
-    y += _mm(0.5)
+    header_blocks = [
+        (data.org_line1.upper() if data.org_line1 else "", FONT_PT_HEADER, True),
+        (data.org_line2.upper() if data.org_line2 else "", FONT_PT_HEADER, True),
+    ]
+    header_rendered = _fit_blocks(draw, header_blocks, header_w, _mm(16))
+    header_h = _draw_rendered_blocks(draw, header_rendered, pad, cx=w / 2)
+
+    y = pad + header_h + _mm(0.5)
     draw.line([pad, y, w - pad, y], fill="black", width=1)
     content_top = y + _mm(1.5)
 
     photo_w, photo_h = _mm(PHOTO_W_MM), _mm(PHOTO_H_MM)
     photo_x = pad
     photo_y = h - pad - photo_h
-    draw.rectangle(
-        [photo_x, photo_y, photo_x + photo_w, photo_y + photo_h], outline="black", width=1
-    )
     if data.photo_path and Path(data.photo_path).exists():
         img.paste(_fit_photo(data.photo_path, photo_w, photo_h), (photo_x, photo_y))
-        draw.rectangle(
-            [photo_x, photo_y, photo_x + photo_w, photo_y + photo_h], outline="black", width=1
-        )
     else:
-        font_ph = _font_times(3)
+        font_ph = _font_times(9)
         msg = "ẢNH 3x4"
         bbox = draw.textbbox((0, 0), msg, font=font_ph)
         tw, th = bbox[2] - bbox[0], bbox[3] - bbox[1]
@@ -169,26 +220,43 @@ def generate_card_image(data: CardData) -> Image.Image:
             (photo_x + (photo_w - tw) / 2, photo_y + (photo_h - th) / 2),
             msg, font=font_ph, fill="#999999",
         )
+    draw.rectangle(
+        [photo_x, photo_y, photo_x + photo_w, photo_y + photo_h], outline="black", width=1
+    )
 
-    qr_size = _mm(16)
-    qr_x = w - pad - qr_size
-    qr_y = content_top
+    # Khung "QR tra cứu" - mã QR nằm TRONG khung, chú thích đầy đủ bên dưới
+    # (bổ sung theo yêu cầu, không thuộc Mẫu số 01 gốc).
+    qr_pad = _mm(1.2)
+    qr_size = _mm(15)
+    qr_cap_max_h = max((h - pad) - (content_top + qr_pad + qr_size + _mm(0.8) + qr_pad), _mm(4))
+    qr_cap_blocks = [("QUÉT QR TRA CỨU THÔNG TIN", 6.5, False)]
+    qr_cap_rendered = _fit_blocks(draw, qr_cap_blocks, qr_size, qr_cap_max_h)
+
+    qr_box_w = qr_size + 2 * qr_pad
+    qr_box_x = w - pad - qr_box_w
+    qr_box_y = content_top
+    qr_x = qr_box_x + qr_pad
+    qr_y = qr_box_y + qr_pad
     img.paste(_make_qr(data.url, qr_size), (qr_x, qr_y))
-    font_qr_cap = _font_times(2)
-    _draw_centered(draw, "QUÉT QR TRA CỨU", qr_x + qr_size / 2, qr_y + qr_size + _mm(0.3), font_qr_cap)
+    cap_y = qr_y + qr_size + _mm(0.8)
+    cap_h = _draw_rendered_blocks(draw, qr_cap_rendered, cap_y, cx=qr_box_x + qr_box_w / 2)
+    qr_box_h = qr_pad + qr_size + _mm(0.8) + cap_h + qr_pad
+    draw.rectangle(
+        [qr_box_x, qr_box_y, qr_box_x + qr_box_w, qr_box_y + qr_box_h], outline="black", width=1
+    )
 
     text_x = photo_x + photo_w + _mm(2)
-    text_right = qr_x - _mm(2)
+    text_right = qr_box_x - _mm(2)
     text_w = max(text_right - text_x, _mm(10))
+    text_max_h = max((h - pad) - content_top, _mm(10))
 
-    ty = content_top
-    f_role = _font_times(3.6, bold=True)
-    ty += _wrap_and_draw(draw, "GIÁO VIÊN DẠY LÁI XE", text_x, ty, text_w, f_role) + _mm(1)
-    f_name = _font_times(3.9, bold=True)
-    ty += _wrap_and_draw(draw, data.ten.upper(), text_x, ty, text_w, f_name) + _mm(1)
-    if data.hang:
-        f_hang = _font_times(3.9, bold=True)
-        _wrap_and_draw(draw, f"Dạy lái xe hạng: {data.hang}".upper(), text_x, ty, text_w, f_hang)
+    text_blocks = [
+        ("GIÁO VIÊN DẠY LÁI XE", FONT_PT_ROLE, True),
+        (data.ten.upper(), FONT_PT_NAME, True),
+        (f"Hạng: {data.hang}".upper() if data.hang else "", FONT_PT_HANG, True),
+    ]
+    text_rendered = _fit_blocks(draw, text_blocks, text_w, text_max_h)
+    _draw_rendered_blocks(draw, text_rendered, content_top, x=text_x)
 
     return img
 
