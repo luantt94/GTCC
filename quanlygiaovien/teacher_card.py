@@ -235,14 +235,16 @@ def _generate_card_image_from_background(data: CardData) -> Image.Image:
     draw = ImageDraw.Draw(img)
     _px_font_for = lambda base_size, scale, bold: _font_times_px(base_size * scale, bold=bold)
 
-    # Băng tên cơ quan/cơ sở đào tạo - tô lại nền xanh (tránh chồng/bóng mờ
-    # lên chữ có sẵn trong ảnh) rồi ghi đè đúng nội dung từ cài đặt trong
-    # app (ô "Thông tin in trên thẻ giáo viên").
-    draw.rectangle(_BG_HEADER_FILL_RECT, fill=_BG_HEADER_FILL_COLOR)
+    # Băng tên cơ quan/cơ sở đào tạo - ảnh nền đã có sẵn chữ đúng; CHỈ tô lại
+    # nền xanh + ghi đè khi cài đặt trong app (ô "Thông tin in trên thẻ giáo
+    # viên") có nội dung khác rỗng, để không xoá mất chữ gốc khi chưa cài
+    # đặt gì (lỗi trước đây: tô trắng/xanh toàn băng dù 2 dòng đều rỗng).
     hx0, hx1 = _BG_HEADER_X
+    fx0, _, fx1, _ = _BG_HEADER_FILL_RECT
     for line, (by0, by1) in zip((data.org_line1, data.org_line2), _BG_HEADER_LINE_BANDS):
         if not line:
             continue
+        draw.rectangle((fx0, by0 - 4, fx1, by1 + 4), fill=_BG_HEADER_FILL_COLOR)
         rendered = _fit_blocks(
             draw, [(line.upper(), 46, True)], hx1 - hx0, by1 - by0, font_for=_px_font_for
         )
