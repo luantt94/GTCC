@@ -28,7 +28,9 @@ from pathlib import Path
 
 from PIL import Image, ImageDraw, ImageFont
 
-APP_DIR = Path(__file__).resolve().parent
+from runtime_paths import app_dir
+
+APP_DIR = app_dir()
 BG_PATH = APP_DIR / "data" / "khunganhnen.jpg"  # ảnh nền thẻ đã thiết kế sẵn (nếu có)
 
 DPI = 300

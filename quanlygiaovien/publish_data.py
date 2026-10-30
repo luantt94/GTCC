@@ -38,8 +38,9 @@ import convert_excel_to_json
 import git_publish
 import roster_xml
 from data_model import DataModel
+from runtime_paths import app_dir
 
-APP_DIR = Path(__file__).resolve().parent
+APP_DIR = app_dir()
 REPO_ROOT = APP_DIR.parent  # docs/ phải nằm ở root repo để GitHub Pages phục vụ được
 DATA_DIR = APP_DIR / "data"
 DOCS_DIR = REPO_ROOT / "docs"

@@ -1,10 +1,10 @@
 import json
 import sys
-from pathlib import Path
 
 from PySide6.QtWidgets import QApplication, QMainWindow, QTabWidget
 
 from data_model import DataModel
+from runtime_paths import app_dir
 from style import apply_style
 from tab_cap_nhat_web import CapNhatWebTab
 from tab_danh_sach_gv import DanhSachGiaoVienTab
@@ -13,7 +13,7 @@ from tab_phan_xe import PhanXeTab
 from tab_tra_cuu import TraCuuTab
 from tab_tra_cuu_xe import TraCuuXeTab
 
-APP_DIR = Path(__file__).resolve().parent
+APP_DIR = app_dir()
 DATA_JSON = APP_DIR / "data.json"
 
 

@@ -4,9 +4,10 @@ Người dùng không cần biết git: hàm push_public_data() tự làm mọi 
 chỉ commit/push đúng những file được phép public (xem .gitignore).
 """
 import subprocess
-from pathlib import Path
 
-APP_DIR = Path(__file__).resolve().parent
+from runtime_paths import app_dir
+
+APP_DIR = app_dir()
 REPO_ROOT = APP_DIR.parent  # git root thực tế là D:\GTCC (docs/ nằm ở đây)
 
 FILES_TO_PUBLISH = [

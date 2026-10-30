@@ -1,8 +1,8 @@
 """Giao diện chung cho toàn app - 1 stylesheet (QSS) áp dụng 1 lần lúc khởi
 động (xem main.py: apply_style(app)), không cần sửa từng tab."""
-from pathlib import Path
+from runtime_paths import app_dir
 
-APP_DIR = Path(__file__).resolve().parent
+APP_DIR = app_dir()
 # Qt yêu cầu dấu "/" (kể cả trên Windows) trong url() của QSS.
 _DROPDOWN_ARROW = (APP_DIR / "icons" / "dropdown_arrow.svg").as_posix()
 
