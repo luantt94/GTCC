@@ -406,6 +406,7 @@ def run_pipeline(sources=None):
             "dien_thoai": teacher_phone.get(ma_gv) or rec.get("dien_thoai", ""),
             "ngay_sinh": rec.get("ngay_sinh", ""),
             "dia_chi": rec.get("dia_chi", ""),
+            "hang_lai_xe": get_hang_lai_xe(ma_gv),
             "khoa_dang_day": teaching_now.get(ma_gv, []),
             "ho_so_file": ho_so_file,
             "anh_file": anh_file,
