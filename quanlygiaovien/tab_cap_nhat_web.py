@@ -6,9 +6,6 @@ Nguồn dữ liệu gồm:
 - File PDF "LICH HOC THUC HANH xxxx.pdf" (mỗi khóa 1 file, thêm/xóa được)
 - File DSGV_*.xml: danh sách TOÀN BỘ giáo viên (nguồn mã QR chính thức)
 - File DSXTL_*.xml: danh sách xe tập lái (đối chiếu biển số)
-- Thư mục giấy tờ xe tập lái (.docx/.pdf theo biển số) - chỉ dùng trong app
-  (tab DANH SÁCH XE), KHÔNG đưa lên trang web nữa - trang web dùng link giấy
-  tờ xe nhập tay (xem tab DANH SÁCH XE)
 - Thư mục hồ sơ cá nhân giáo viên (.pdf theo tên)
 
 Ảnh đại diện, hạng lái xe dạy, xuất thẻ giáo viên: xem tab DANH SÁCH GIÁO
@@ -22,6 +19,7 @@ from pathlib import Path
 
 from PySide6.QtCore import QThread, Signal
 from PySide6.QtWidgets import (
+    QCheckBox,
     QFileDialog,
     QFrame,
     QGroupBox,
@@ -206,14 +204,10 @@ class CapNhatWebTab(QWidget):
         row1.addWidget(self.pick_dsxtl)
         outer.addLayout(row1)
 
-        row2 = QHBoxLayout()
-        self.pick_xe_folder = _SinglePathPicker("Thư mục giấy tờ xe tập lái", mode="folder")
-        row2.addWidget(self.pick_xe_folder)
         self.pick_ho_so_folder = _SinglePathPicker(
             "Thư mục hồ sơ cá nhân giáo viên", mode="folder"
         )
-        row2.addWidget(self.pick_ho_so_folder)
-        outer.addLayout(row2)
+        outer.addWidget(self.pick_ho_so_folder)
 
         pass_box = QGroupBox(
             "Mật khẩu xem hồ sơ cá nhân giáo viên (áp dụng cho mọi giáo viên)"
@@ -227,26 +221,14 @@ class CapNhatWebTab(QWidget):
         settings = publish_data.load_app_settings()
         self.txt_password.setText(settings.get("ho_so_password", ""))
         pass_layout.addWidget(self.txt_password)
+        self.chk_show_password = QCheckBox("Hiện mật khẩu")
+        self.chk_show_password.setChecked(False)
+        self.chk_show_password.toggled.connect(self._on_toggle_show_password)
+        pass_layout.addWidget(self.chk_show_password)
         btn_save_password = QPushButton(_icon(self, QStyle.StandardPixmap.SP_DialogSaveButton), "Lưu")
         btn_save_password.clicked.connect(self._on_save_password)
         pass_layout.addWidget(btn_save_password)
         outer.addWidget(pass_box)
-
-        org_box = QGroupBox("Thông tin in trên thẻ giáo viên (áp dụng chung cho mọi thẻ)")
-        org_layout = QHBoxLayout(org_box)
-        self.txt_org1 = QLineEdit()
-        self.txt_org1.setPlaceholderText("Tên cơ quan chủ quản (vd Sở Xây dựng TP Đà Nẵng)")
-        org_layout.addWidget(self.txt_org1, 1)
-        self.txt_org2 = QLineEdit()
-        self.txt_org2.setPlaceholderText("Tên cơ sở đào tạo (vd Trung tâm đào tạo lái xe ô tô, mô tô Đà Nẵng)")
-        org_layout.addWidget(self.txt_org2, 1)
-        the_settings = publish_data.load_app_settings()
-        self.txt_org1.setText(the_settings.get("the_org_line1", ""))
-        self.txt_org2.setText(the_settings.get("the_org_line2", ""))
-        btn_save_org = QPushButton(_icon(self, QStyle.StandardPixmap.SP_DialogSaveButton), "Lưu")
-        btn_save_org.clicked.connect(self._on_save_org)
-        org_layout.addWidget(btn_save_org)
-        outer.addWidget(org_box)
 
         box = QGroupBox("Đăng số liệu giáo viên lên trang web")
         box_layout = QVBoxLayout(box)
@@ -278,7 +260,6 @@ class CapNhatWebTab(QWidget):
         self.pick_lich_hoc.set_paths(sources.get("lich_hoc_files", []))
         self.pick_dsgv.set_path(sources.get("dsgv_file", ""))
         self.pick_dsxtl.set_path(sources.get("dsxtl_file", ""))
-        self.pick_xe_folder.set_path(sources.get("xe_folder", ""))
         self.pick_ho_so_folder.set_path(sources.get("ho_so_folder", ""))
 
     def _current_sources(self):
@@ -287,9 +268,13 @@ class CapNhatWebTab(QWidget):
             "lich_hoc_files": self.pick_lich_hoc.paths(),
             "dsgv_file": self.pick_dsgv.path(),
             "dsxtl_file": self.pick_dsxtl.path(),
-            "xe_folder": self.pick_xe_folder.path(),
             "ho_so_folder": self.pick_ho_so_folder.path(),
         }
+
+    def _on_toggle_show_password(self, checked):
+        self.txt_password.setEchoMode(
+            QLineEdit.EchoMode.Normal if checked else QLineEdit.EchoMode.Password
+        )
 
     def _on_save_password(self):
         settings = publish_data.load_app_settings()
@@ -300,13 +285,6 @@ class CapNhatWebTab(QWidget):
             "Đã lưu",
             "Đã lưu mật khẩu. Bấm 'Cập nhật && Đăng lên web' để áp dụng lên trang web.",
         )
-
-    def _on_save_org(self):
-        settings = publish_data.load_app_settings()
-        settings["the_org_line1"] = self.txt_org1.text().strip()
-        settings["the_org_line2"] = self.txt_org2.text().strip()
-        publish_data.save_app_settings(settings)
-        QMessageBox.information(self, "Đã lưu", "Đã lưu thông tin in trên thẻ giáo viên.")
 
     def _on_publish_clicked(self):
         sources = self._current_sources()
