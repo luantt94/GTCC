@@ -9,6 +9,10 @@
 """
 import xml.etree.ElementTree as ET
 
+# Không bao giờ đưa 2 trường này vào "extra" (ảnh chân dung base64 rất nặng,
+# CMT/CCCD là thông tin nhạy cảm) - mọi trường khác trong DSGV đều hiện ra.
+_EXCLUDED_EXTRA_TAGS = {"AnhCD", "SoCMT"}
+
 
 def _format_ddmmyyyy(s):
     s = (s or "").strip()
@@ -42,11 +46,17 @@ def parse_dsgv(path, active_only=True):
         full_name = f"{ho_ten_dem} {ten}".strip()
         if not full_name:
             continue
+        extra = {
+            child.tag: (child.text or "").strip()
+            for child in rec
+            if child.tag not in _EXCLUDED_EXTRA_TAGS
+        }
         out[ma_gv] = {
             "ten": full_name,
             "dien_thoai": g("DienThoai"),
             "ngay_sinh": _format_ddmmyyyy(g("NgaySinh")),
             "dia_chi": g("NoiCT"),
+            "extra": extra,
         }
     return out
 

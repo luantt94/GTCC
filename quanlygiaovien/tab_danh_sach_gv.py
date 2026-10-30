@@ -27,6 +27,7 @@ from PySide6.QtWidgets import (
     QPushButton,
     QSplitter,
     QStyle,
+    QTextEdit,
     QVBoxLayout,
     QWidget,
 )
@@ -34,6 +35,13 @@ from PySide6.QtWidgets import (
 import publish_data
 import roster_xml
 from style import icon as _icon
+
+
+def _given_name_key(full_name):
+    """Khóa sắp xếp theo TÊN (từ cuối cùng), không theo HỌ - vd "Nguyễn Văn
+    An" sắp xếp theo "An"."""
+    parts = (full_name or "").split()
+    return (parts[-1], full_name) if parts else (full_name, full_name)
 
 
 def _pil_to_pixmap(img):
@@ -140,6 +148,12 @@ class DanhSachGiaoVienTab(QWidget):
         export_row.addStretch(1)
         right_layout.addLayout(export_row)
 
+        right_layout.addWidget(QLabel("Toàn bộ thông tin từ file DSGV_*.xml:"))
+        self.txt_xml_info = QTextEdit()
+        self.txt_xml_info.setReadOnly(True)
+        self.txt_xml_info.setMaximumHeight(220)
+        right_layout.addWidget(self.txt_xml_info)
+
         splitter.addWidget(right)
         splitter.setStretchFactor(0, 1)
         splitter.setStretchFactor(1, 2)
@@ -156,7 +170,7 @@ class DanhSachGiaoVienTab(QWidget):
     # ---- danh sách ----
     def _load_list(self):
         self.list_widget.clear()
-        for ma_gv, rec in sorted(self._teachers.items(), key=lambda kv: kv[1]["ten"]):
+        for ma_gv, rec in sorted(self._teachers.items(), key=lambda kv: _given_name_key(kv[1]["ten"])):
             item = QListWidgetItem(f"{rec['ten']} ({ma_gv})")
             item.setData(Qt.ItemDataRole.UserRole, ma_gv)
             self.list_widget.addItem(item)
@@ -170,6 +184,7 @@ class DanhSachGiaoVienTab(QWidget):
         if not current:
             self._current_ma_gv = None
             self._set_detail_enabled(False)
+            self.txt_xml_info.clear()
             return
         ma_gv = current.data(Qt.ItemDataRole.UserRole)
         self._current_ma_gv = ma_gv
@@ -178,6 +193,7 @@ class DanhSachGiaoVienTab(QWidget):
         self.txt_hang.setText(publish_data.get_hang_lai_xe(ma_gv))
         self.txt_hang.blockSignals(False)
         self._refresh_preview()
+        self._refresh_xml_info(ma_gv)
 
     # ---- xem trước thẻ ----
     def _refresh_preview(self, hang_override=None):
@@ -201,6 +217,12 @@ class DanhSachGiaoVienTab(QWidget):
         super().resizeEvent(event)
         if self._current_ma_gv:
             self._refresh_preview(hang_override=self.txt_hang.text())
+
+    # ---- toàn bộ thông tin từ XML ----
+    def _refresh_xml_info(self, ma_gv):
+        extra = self._teachers.get(ma_gv, {}).get("extra", {})
+        lines = [f"{tag}: {value}" for tag, value in extra.items()]
+        self.txt_xml_info.setPlainText("\n".join(lines))
 
     # ---- hạng lái xe dạy ----
     def _on_hang_edited_live(self, text):
@@ -292,7 +314,7 @@ class DanhSachGiaoVienTab(QWidget):
                 "Hãy chọn file DSGV_*.xml ở tab CẬP NHẬT WEB rồi khởi động lại app.",
             )
             return
-        teachers = sorted(self._teachers.items(), key=lambda kv: kv[1]["ten"])
+        teachers = sorted(self._teachers.items(), key=lambda kv: _given_name_key(kv[1]["ten"]))
         self._export_cards(teachers, "the_giao_vien.pdf")
 
     def _export_cards(self, teachers, default_name):

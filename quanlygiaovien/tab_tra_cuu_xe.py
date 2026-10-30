@@ -1,9 +1,8 @@
+import re
 from pathlib import Path
 
 from PySide6.QtCore import Qt, QUrl
 from PySide6.QtGui import QDesktopServices
-from PySide6.QtPdf import QPdfDocument
-from PySide6.QtPdfWidgets import QPdfView
 from PySide6.QtWidgets import (
     QHBoxLayout,
     QLabel,
@@ -32,14 +31,13 @@ HISTORY_COLUMNS = ["Mã khóa", "Lớp", "Giáo viên", "SĐT", "Thời gian h�
 class TraCuuXeTab(QWidget):
     """Tab DANH SÁCH XE: danh sách toàn bộ xe tập lái (từ DSXTL) hiện sẵn
     bên trái để chọn nhanh; bấm vào 1 xe là xem nhãn hiệu/loại xe, toàn bộ
-    lịch sử giáo viên/khóa đã dùng xe này, nội dung giấy tờ xe cục bộ (nếu
-    có), và nhập/sửa link giấy tờ xe hiện công khai trên trang web."""
+    lịch sử giáo viên/khóa đã dùng xe này, và nhập/sửa + mở link giấy tờ xe
+    hiện công khai trên trang web."""
 
     def __init__(self, model, parent=None):
         super().__init__(parent)
         self.model = model
         sources = publish_data.load_data_sources()
-        self.xe_folder = sources.get("xe_folder", "")
         dsxtl_file = sources.get("dsxtl_file", "")
         self.dsxtl = (
             roster_xml.parse_dsxtl(dsxtl_file)
@@ -47,7 +45,7 @@ class TraCuuXeTab(QWidget):
             else {}
         )
         self.vehicles = self._build_vehicle_list()
-        self.current_doc_path = None
+        self.current_xe_link = ""
         self._build_ui()
         self._load_list()
 
@@ -114,6 +112,7 @@ class TraCuuXeTab(QWidget):
         self.btn_save_xe_link.clicked.connect(self._on_save_xe_link)
         link_row.addWidget(self.btn_save_xe_link)
         right_layout.addLayout(link_row)
+        self.txt_xe_link.textChanged.connect(self._show_doc)
 
         splitter = QSplitter(Qt.Vertical)
 
@@ -127,16 +126,9 @@ class TraCuuXeTab(QWidget):
 
         self.doc_stack = QStackedWidget()
 
-        self.lbl_no_doc = QLabel("Chưa có file giấy tờ xe khớp với biển số này.")
+        self.lbl_no_doc = QLabel("Chưa có link giấy tờ xe cho biển số này.")
         self.lbl_no_doc.setAlignment(Qt.AlignCenter)
         self.doc_stack.addWidget(self.lbl_no_doc)
-
-        self.pdf_doc = QPdfDocument(self)
-        self.pdf_view = QPdfView()
-        self.pdf_view.setDocument(self.pdf_doc)
-        self.pdf_view.setPageMode(QPdfView.PageMode.MultiPage)
-        self.pdf_view.setZoomMode(QPdfView.ZoomMode.FitToWidth)
-        self.doc_stack.addWidget(self.pdf_view)
 
         self.lbl_doc_external = QLabel("")
         self.lbl_doc_external.setAlignment(Qt.AlignCenter)
@@ -153,9 +145,9 @@ class TraCuuXeTab(QWidget):
 
     def _load_list(self):
         self.list_widget.clear()
-        for plate, v in self.vehicles.items():
+        for stt, (plate, v) in enumerate(self.vehicles.items(), start=1):
             label = v["bien_so"] if v["in_dsxtl"] else f"{v['bien_so']} (chưa có trong DSXTL)"
-            item = QListWidgetItem(label)
+            item = QListWidgetItem(f"{stt}. {label}")
             item.setData(Qt.ItemDataRole.UserRole, plate)
             self.list_widget.addItem(item)
         if not self.vehicles:
@@ -172,7 +164,7 @@ class TraCuuXeTab(QWidget):
             self.txt_xe_link.setText("")
             self.btn_save_xe_link.setEnabled(False)
             self._render_history(None)
-            self._show_doc(None)
+            self._show_doc("")
             return
 
         if v["in_dsxtl"]:
@@ -187,9 +179,7 @@ class TraCuuXeTab(QWidget):
         self.txt_xe_link.setText(publish_data.get_xe_link(plate))
 
         self._render_history(plate)
-
-        doc_path = attach_files.find_xe_doc(v["bien_so"], self.xe_folder)
-        self._show_doc(doc_path)
+        self._show_doc(self.txt_xe_link.text())
 
     def _on_save_xe_link(self):
         current = self.list_widget.currentItem()
@@ -238,21 +228,25 @@ class TraCuuXeTab(QWidget):
         self.table.resizeColumnsToContents()
         self.table.horizontalHeader().setStretchLastSection(True)
 
-    def _show_doc(self, doc_path):
-        self.current_doc_path = doc_path
-        self.btn_open_doc.setEnabled(doc_path is not None)
-        if doc_path is None:
+    def _show_doc(self, link):
+        link = (link or "").strip()
+        self.current_xe_link = link
+        is_valid = bool(re.match(r"^https?://", link, re.IGNORECASE))
+        self.btn_open_doc.setEnabled(is_valid)
+        if not link:
+            self.lbl_no_doc.setText("Chưa có link giấy tờ xe cho biển số này.")
             self.doc_stack.setCurrentWidget(self.lbl_no_doc)
-            return
-        if doc_path.suffix.lower() == ".pdf":
-            self.pdf_doc.load(str(doc_path))
-            self.doc_stack.setCurrentWidget(self.pdf_view)
+        elif not is_valid:
+            self.lbl_no_doc.setText(
+                "Link giấy tờ xe không hợp lệ (phải bắt đầu bằng http:// hoặc https://)."
+            )
+            self.doc_stack.setCurrentWidget(self.lbl_no_doc)
         else:
             self.lbl_doc_external.setText(
-                f"Giấy tờ xe: {doc_path.name}\n(bấm \"Mở giấy tờ xe...\" để mở bằng Word)"
+                'Đã có link giấy tờ xe - bấm "Mở giấy tờ xe..." để xem.'
             )
             self.doc_stack.setCurrentWidget(self.lbl_doc_external)
 
     def _open_doc_external(self):
-        if self.current_doc_path:
-            QDesktopServices.openUrl(QUrl.fromLocalFile(str(self.current_doc_path)))
+        if self.current_xe_link:
+            QDesktopServices.openUrl(QUrl(self.current_xe_link))
