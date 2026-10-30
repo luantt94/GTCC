@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-30T08:27:04",
+  "generated_at": "2026-10-30T10:30:50",
   "teachers": {
     "48002001": {
       "ten": "Nguyễn Anh Dương",
@@ -316,6 +316,22 @@
           ],
           "lich_hoc_pdf": "files/lich_hoc/48002K262032.pdf",
           "giay_to_xe_link": "https://csdlgtvt.danang.gov.vn/p#/p/gp/e659419c-cbe3-4c8e-9074-c0c3482e3458"
+        },
+        {
+          "ma_khoa": "48002K26C1007",
+          "lop": "C1K0726",
+          "tu_ngay": "",
+          "den_ngay": "",
+          "xe": "43C-164.43(Ca 2)",
+          "so_hoc_vien": 4,
+          "hoc_vien": [
+            "NGUYỄN QUỐC AN",
+            "TRẦN QUỐC VỊNH",
+            "LÊ ĐÌNH TÂM",
+            "TRƯƠNG MINH VIỆT"
+          ],
+          "lich_hoc_pdf": null,
+          "giay_to_xe_link": null
         }
       ],
       "ho_so_file": "files/ho_so_gv/48002011.pdf",
@@ -366,10 +382,29 @@
     },
     "48002013": {
       "ten": "Hồ Duy Dũng",
-      "dien_thoai": "",
+      "dien_thoai": "SĐT: 0919311211",
       "ngay_sinh": "26/01/1973",
       "dia_chi": "Phường Sơn Trà, Thành phố Đà Nẵng",
-      "khoa_dang_day": [],
+      "khoa_dang_day": [
+        {
+          "ma_khoa": "48002K26C1007",
+          "lop": "C1K0726",
+          "tu_ngay": "",
+          "den_ngay": "",
+          "xe": "43C-164.43(Ca 1)",
+          "so_hoc_vien": 6,
+          "hoc_vien": [
+            "CAO QUANG LÂM",
+            "BHỜ NƯỚCH VĂN",
+            "NGUYỄN ĐỨC MINH QUY",
+            "NGUYỄN CÔNG QUANG",
+            "NGUYỄN PHAN HOÀI LINH",
+            "LÊ TẤN LỘC"
+          ],
+          "lich_hoc_pdf": null,
+          "giay_to_xe_link": null
+        }
+      ],
       "ho_so_file": "files/ho_so_gv/48002013.pdf",
       "anh_file": "files/anh_gv/48002013.jpg"
     },
@@ -540,10 +575,29 @@
     },
     "48002023": {
       "ten": "Lê Bá Kiệt",
-      "dien_thoai": "",
+      "dien_thoai": "SĐT: 0905555874",
       "ngay_sinh": "24/01/1968",
       "dia_chi": "Phường Cẩm Lệ, Thành phố Đà Nẵng",
-      "khoa_dang_day": [],
+      "khoa_dang_day": [
+        {
+          "ma_khoa": "48002K26C1007",
+          "lop": "C1K0726",
+          "tu_ngay": "",
+          "den_ngay": "",
+          "xe": "43C-158.44(Ca 1)",
+          "so_hoc_vien": 6,
+          "hoc_vien": [
+            "VŨ ANH HƯNG",
+            "TRƯƠNG LÊ NGỌC VŨ",
+            "VĂN VŨ ĐẶNG HÀO",
+            "NGÔ VĂN PHÚ",
+            "NGUYỄN THANH PHÚC",
+            "NGUYỄN THÀNH ĐẠT"
+          ],
+          "lich_hoc_pdf": null,
+          "giay_to_xe_link": null
+        }
+      ],
       "ho_so_file": "files/ho_so_gv/48002023.pdf",
       "anh_file": null
     },
@@ -574,10 +628,27 @@
     },
     "48002025": {
       "ten": "Nguyễn Việt Lâm",
-      "dien_thoai": "",
+      "dien_thoai": "0903577027",
       "ngay_sinh": "04/02/1974",
       "dia_chi": "Phường Thanh Khê, Thành phố Đà Nẵng",
-      "khoa_dang_day": [],
+      "khoa_dang_day": [
+        {
+          "ma_khoa": "48002K26C1007",
+          "lop": "C1K0726",
+          "tu_ngay": "",
+          "den_ngay": "",
+          "xe": "43C-158.86(Ca 2)",
+          "so_hoc_vien": 4,
+          "hoc_vien": [
+            "NGUYỄN TRƯỜNG SA",
+            "ĐẶNG CÔNG PHÚ",
+            "HOÀNG NGỌC DŨNG",
+            "PHẠM VĂN KHÁNH"
+          ],
+          "lich_hoc_pdf": null,
+          "giay_to_xe_link": null
+        }
+      ],
       "ho_so_file": "files/ho_so_gv/48002025.pdf",
       "anh_file": null
     },
@@ -848,10 +919,29 @@
     },
     "48002044": {
       "ten": "Phạm Tấn Thịnh",
-      "dien_thoai": "",
+      "dien_thoai": "SĐT: 0905535757",
       "ngay_sinh": "15/09/1981",
       "dia_chi": "Xã Hòa Vang, Thành phố Đà Nẵng",
-      "khoa_dang_day": [],
+      "khoa_dang_day": [
+        {
+          "ma_khoa": "48002K26C1007",
+          "lop": "C1K0726",
+          "tu_ngay": "",
+          "den_ngay": "",
+          "xe": "43C-158.86(Ca 1)",
+          "so_hoc_vien": 6,
+          "hoc_vien": [
+            "PHẠM PHÚ QUỐC",
+            "TRẦN VĂN VIÊN",
+            "LÊ XUÂN QUÝ",
+            "LƯƠNG ANH TRIỆU",
+            "HUỲNH KIM PHÁT",
+            "LÊ TẤN LỘC"
+          ],
+          "lich_hoc_pdf": null,
+          "giay_to_xe_link": null
+        }
+      ],
       "ho_so_file": "files/ho_so_gv/48002044.pdf",
       "anh_file": null
     },
@@ -946,6 +1036,22 @@
           ],
           "lich_hoc_pdf": "files/lich_hoc/48002K262032.pdf",
           "giay_to_xe_link": null
+        },
+        {
+          "ma_khoa": "48002K26C1007",
+          "lop": "C1K0726",
+          "tu_ngay": "",
+          "den_ngay": "",
+          "xe": "43B-252.95(Ca 2)",
+          "so_hoc_vien": 4,
+          "hoc_vien": [
+            "ĐOÀN NGỌC TÂN",
+            "NGÔ ĐÌNH THÀNH",
+            "HUỲNH HOÀNG GIANG",
+            "ĐINH VĂN VƯƠNG"
+          ],
+          "lich_hoc_pdf": null,
+          "giay_to_xe_link": null
         }
       ],
       "ho_so_file": "files/ho_so_gv/48002049.pdf",
@@ -1032,6 +1138,22 @@
           ],
           "lich_hoc_pdf": "files/lich_hoc/48002K262032.pdf",
           "giay_to_xe_link": "https://csdlgtvt.danang.gov.vn/p#/p/gp/4d2f23d0-4340-4ef3-a6b5-e9eb503bb9d3"
+        },
+        {
+          "ma_khoa": "48002K26C1007",
+          "lop": "C1K0726",
+          "tu_ngay": "",
+          "den_ngay": "",
+          "xe": "43C-158.44(Ca 2)",
+          "so_hoc_vien": 4,
+          "hoc_vien": [
+            "ĐINH NGUYỄN TIẾN ĐẠT",
+            "NGUYỄN VĂN HƯNG",
+            "PHÙNG ĐÌNH THẮNG",
+            "PHẠM VĂN LÂM"
+          ],
+          "lich_hoc_pdf": null,
+          "giay_to_xe_link": null
         }
       ],
       "ho_so_file": "files/ho_so_gv/48002053.pdf",
