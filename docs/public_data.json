@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-30T10:30:50",
+  "generated_at": "2026-10-30T10:35:38",
   "teachers": {
     "48002001": {
       "ten": "Nguyễn Anh Dương",
@@ -585,12 +585,12 @@
           "tu_ngay": "",
           "den_ngay": "",
           "xe": "43C-158.44(Ca 1)",
-          "so_hoc_vien": 6,
+          "so_hoc_vien": 4,
           "hoc_vien": [
-            "VŨ ANH HƯNG",
-            "TRƯƠNG LÊ NGỌC VŨ",
-            "VĂN VŨ ĐẶNG HÀO",
-            "NGÔ VĂN PHÚ",
+            "VŨ ANH HƯNG (Bảo lưu)",
+            "TRƯƠNG LÊ NGỌC VŨ (Bao luu)",
+            "VĂN VŨ ĐẶNG HÀO (Hoc bo sung)",
+            "NGÔ VĂN PHÚ (Hoc bo sung 01- 07)",
             "NGUYỄN THANH PHÚC",
             "NGUYỄN THÀNH ĐẠT"
           ],
