@@ -51,14 +51,27 @@ def is_abbreviated_match(short_name, full_name):
     return all(full_w.startswith(short_w) for short_w, full_w in zip(short_words, full_words))
 
 
+def _is_prefixed_exact_match(name_with_prefix, full_name):
+    """True nếu `name_with_prefix` = 1 vài từ tiền tố (vd "Thầy", "Cô") +
+    đúng hệt `full_name` - xử lý trường hợp Excel lỡ nhập kèm tiền tố xưng
+    danh trước tên (vd "Thầy Lê Ngọc Hòa" khớp "Lê Ngọc Hòa")."""
+    name_words = _name_words(name_with_prefix)
+    full_words = _name_words(full_name)
+    if not full_words or len(name_words) <= len(full_words):
+        return False
+    return name_words[-len(full_words):] == full_words
+
+
 def find_teacher_candidates(name, dsgv):
-    """Tìm giáo viên trong `dsgv` (dict ma_gv -> {"ten": ...}) có tên viết
-    tắt khớp với `name` (xem is_abbreviated_match). Trả về list
-    [(ma_gv, ten_day_du), ...] - rỗng nếu không ai khớp, nhiều hơn 1 phần
-    tử nếu tên viết tắt khớp mơ hồ với nhiều giáo viên (không tự quyết
-    định được, cần người dùng tự sửa lại cho rõ)."""
+    """Tìm giáo viên trong `dsgv` (dict ma_gv -> {"ten": ...}) khớp với
+    `name` - cùng hệt (bỏ tiền tố xưng danh), hoặc tên viết tắt (xem
+    is_abbreviated_match). Trả về list [(ma_gv, ten_day_du), ...] - rỗng
+    nếu không ai khớp, nhiều hơn 1 phần tử nếu khớp mơ hồ với nhiều giáo
+    viên (không tự quyết định được, cần người dùng tự sửa lại cho rõ)."""
     return [
-        (ma_gv, rec["ten"]) for ma_gv, rec in dsgv.items() if is_abbreviated_match(name, rec["ten"])
+        (ma_gv, rec["ten"])
+        for ma_gv, rec in dsgv.items()
+        if is_abbreviated_match(name, rec["ten"]) or _is_prefixed_exact_match(name, rec["ten"])
     ]
 
 

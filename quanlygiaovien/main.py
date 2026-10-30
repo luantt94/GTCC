@@ -1,8 +1,11 @@
 import json
 import sys
+from pathlib import Path
 
 from PySide6.QtWidgets import QApplication, QMainWindow, QTabWidget
 
+import publish_data
+import roster_xml
 from data_model import DataModel
 from runtime_paths import app_dir
 from style import apply_style
@@ -49,7 +52,10 @@ def main():
             encoding="utf-8",
         )
 
-    model = DataModel(DATA_JSON)
+    dsgv_file = publish_data.load_data_sources().get("dsgv_file") or ""
+    dsgv = roster_xml.parse_dsgv(dsgv_file) if dsgv_file and Path(dsgv_file).exists() else {}
+
+    model = DataModel(DATA_JSON, dsgv=dsgv)
     window = MainWindow(model)
     window.show()
     sys.exit(app.exec())

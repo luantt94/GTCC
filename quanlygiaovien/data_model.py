@@ -3,6 +3,8 @@ import json
 from datetime import datetime
 from pathlib import Path
 
+import attach_files
+
 
 def _parse_date(text):
     text = (text or "").strip()
@@ -15,12 +17,41 @@ def _parse_date(text):
 
 
 class DataModel:
-    def __init__(self, json_path):
+    def __init__(self, json_path, dsgv=None):
+        """dsgv (tùy chọn): dict ma_gv -> {"ten": ...} từ roster_xml.parse_dsgv -
+        dùng để thay tên viết tắt nhập trong Excel "biên chế xe" bằng tên đầy đủ
+        chuẩn bên DSGV, và để tra cứu ra toàn bộ giáo viên (không chỉ những
+        người đang có khóa trong Excel)."""
         self.json_path = Path(json_path)
         raw = json.loads(self.json_path.read_text(encoding="utf-8"))
         self.generated_at = raw.get("generated_at", "")
         self.source_files = raw.get("source_files", [])
         self.courses = raw.get("courses", [])
+        self.dsgv_names = set()
+        if dsgv:
+            self.dsgv_names = {rec["ten"] for rec in dsgv.values() if rec.get("ten")}
+            self._resolve_teacher_names(dsgv)
+
+    def _resolve_teacher_names(self, dsgv):
+        """Thay tên giáo viên trong từng khóa (có thể viết tắt trong Excel)
+        bằng tên đầy đủ khớp bên DSGV - khớp hệt trước, không được thì thử
+        khớp tên viết tắt (vd "Tr. N. Đ. Phương" -> "Trần Ngô Đông Phương").
+        Không khớp được (mơ hồ hoặc không tìm thấy) thì giữ nguyên tên gốc."""
+        name_to_magv = {
+            attach_files.normalize_name(rec["ten"]): magv for magv, rec in dsgv.items()
+        }
+        for c in self.courses:
+            for g in c.get("groups", []):
+                name = g.get("giao_vien")
+                if not name:
+                    continue
+                ma_gv = name_to_magv.get(attach_files.normalize_name(name))
+                if not ma_gv:
+                    candidates = attach_files.find_teacher_candidates(name, dsgv)
+                    if len(candidates) == 1:
+                        ma_gv = candidates[0][0]
+                if ma_gv:
+                    g["giao_vien"] = dsgv[ma_gv]["ten"]
 
     # ---- truy cập cơ bản ----
     def all_courses(self):
@@ -36,8 +67,10 @@ class DataModel:
         return None
 
     def all_teachers(self):
-        """Danh sách tên giáo viên duy nhất, đã sắp xếp."""
-        names = set()
+        """Danh sách tên giáo viên duy nhất, đã sắp xếp - gồm toàn bộ giáo
+        viên bên DSGV (nếu có), gộp thêm tên trong các khóa (phòng khi chưa
+        khớp được với DSGV)."""
+        names = set(self.dsgv_names)
         for c in self.courses:
             for g in c.get("groups", []):
                 if g.get("giao_vien"):
