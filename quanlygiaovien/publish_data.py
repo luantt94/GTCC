@@ -1,7 +1,7 @@
 """Pipeline cập nhật dữ liệu công khai cho trang web (GitHub Pages):
 
 1. Đọc các nguồn trong data_sources.json (xem load_data_sources()):
-   - File Excel "BIÊN CHẾ XE KHÓA xxxx.xlsx" (mỗi khóa 1 file)
+   - File Excel "BIÊN CHẾ XE KHÓA xxxx.xlsx/.xls" (mỗi khóa 1 file)
    - File PDF "LICH HOC THUC HANH xxxx.pdf" (mỗi khóa 1 file)
    - File DSGV_*.xml (danh sách toàn bộ giáo viên, nguồn ID chính thức)
    - File DSXTL_*.xml (danh sách xe tập lái, dùng để đối chiếu biển số)
@@ -144,7 +144,11 @@ def _latest_by_mtime(paths):
 
 def _scan_default_sources():
     """Tự động quét thư mục data/ để gợi ý sẵn danh sách nguồn lần đầu mở app."""
-    bien_che = sorted(str(p) for p in DATA_DIR.glob("*.xlsx") if "BIÊN CHẾ XE KHÓA" in p.name.upper())
+    bien_che = sorted(
+        str(p)
+        for p in list(DATA_DIR.glob("*.xlsx")) + list(DATA_DIR.glob("*.xls"))
+        if "BIÊN CHẾ XE KHÓA" in p.name.upper()
+    )
     lich_hoc = sorted(str(p) for p in DATA_DIR.glob("*.pdf") if "LICH HOC" in p.name.upper())
     dsgv = _latest_by_mtime(DATA_DIR.glob("DSGV_*.xml"))
     dsxtl = _latest_by_mtime(DATA_DIR.glob("DSXTL_*.xml"))
@@ -194,15 +198,56 @@ def _load_caption_font(size):
     return ImageFont.load_default()
 
 
+def _paste_photo_center(qr_img, photo_path, ratio=0.26):
+    """Dán ảnh đại diện giáo viên (cắt tròn, viền trắng) vào chính giữa mã QR.
+    Mã QR phải dùng error_correction mức H (30%) để vẫn đọc được khi bị che
+    1 phần ở giữa (xem _generate_qr)."""
+    from PIL import Image, ImageDraw
+
+    photo = Image.open(photo_path).convert("RGB")
+    side = min(photo.size)
+    left = (photo.width - side) // 2
+    top = (photo.height - side) // 2
+    size = int(qr_img.width * ratio)
+    photo = photo.crop((left, top, left + side, top + side)).resize(
+        (size, size), Image.LANCZOS
+    )
+
+    mask = Image.new("L", (size, size), 0)
+    ImageDraw.Draw(mask).ellipse((0, 0, size, size), fill=255)
+
+    border = max(size // 12, 4)
+    badge_size = size + border * 2
+    badge = Image.new("RGBA", (badge_size, badge_size), (0, 0, 0, 0))
+    ImageDraw.Draw(badge).ellipse((0, 0, badge_size, badge_size), fill="white")
+    badge.paste(photo, (border, border), mask)
+
+    canvas = qr_img.convert("RGBA")
+    x = (canvas.width - badge_size) // 2
+    y = (canvas.height - badge_size) // 2
+    canvas.paste(badge, (x, y), badge)
+    return canvas.convert("RGB")
+
+
 def _generate_qr(ma_gv, ten):
-    """Tạo mã QR (link cố định theo MaGV) kèm tên giáo viên in bên dưới,
-    để dễ phân biệt các mã QR đã in."""
+    """Tạo mã QR (link cố định theo MaGV) kèm tên giáo viên in bên dưới, để
+    dễ phân biệt các mã QR đã in. Nếu giáo viên đã có ảnh đại diện, dán ảnh
+    (cắt tròn) vào chính giữa mã QR cho đẹp - dùng error_correction mức H để
+    mã QR vẫn đọc được dù bị che giữa."""
     import qrcode
+    from qrcode.constants import ERROR_CORRECT_H
     from PIL import Image, ImageDraw
 
     QR_DIR.mkdir(exist_ok=True)
     url = f"{BASE_URL}?id={ma_gv}"
-    qr_img = qrcode.make(url).convert("RGB")
+    qr = qrcode.QRCode(error_correction=ERROR_CORRECT_H, border=2)
+    qr.add_data(url)
+    qr.make(fit=True)
+    qr_img = qr.make_image(fill_color="black", back_color="white").convert("RGB")
+
+    photo_path = teacher_photo_path(ma_gv)
+    if photo_path:
+        qr_img = _paste_photo_center(qr_img, photo_path)
 
     font = _load_caption_font(20)
     caption_h = 34
@@ -499,6 +544,7 @@ def add_teacher_photo(ma_gv, ten, src_path):
     _save_resized_photo(src_path, local_path)
 
     rel_path = _copy_public_file(local_path, ANH_GV_SUBDIR, ma_gv)
+    _generate_qr(ma_gv, ten)  # vẽ lại QR, dán ảnh mới vào giữa
 
     data = _load_public_data()
     teachers = data.setdefault("teachers", {})
@@ -518,6 +564,8 @@ def remove_teacher_photo(ma_gv, ten):
     public_path = FILES_OUT_DIR / ANH_GV_SUBDIR / f"{ma_gv}.jpg"
     if public_path.exists():
         public_path.unlink()
+    if (QR_DIR / f"{ma_gv}.png").exists():
+        _generate_qr(ma_gv, ten)  # vẽ lại QR không còn ảnh giữa
 
     data = _load_public_data()
     teachers = data.get("teachers", {})

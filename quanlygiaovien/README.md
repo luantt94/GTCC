@@ -38,7 +38,7 @@ khi mở app lần đầu — bạn chỉ cần sửa khi có thay đổi:
 
 | Vùng | Nội dung | Khi nào cần sửa |
 |---|---|---|
-| File Excel "BIÊN CHẾ XE KHÓA ..." | Mỗi khóa đào tạo 1 file `.xlsx` | Có khóa mới → bấm **Thêm...**; khóa đã xong → chọn dòng rồi **Xóa mục chọn** |
+| File Excel "BIÊN CHẾ XE KHÓA ..." | Mỗi khóa đào tạo 1 file `.xlsx` hoặc `.xls` (97-2003) | Có khóa mới → bấm **Thêm...**; khóa đã xong → chọn dòng rồi **Xóa mục chọn** |
 | File PDF "LICH HOC THUC HANH ..." | Mỗi khóa 1 file lịch học `.pdf` | Tương tự, thêm/xóa theo khóa |
 | DSGV_*.xml | Danh sách **toàn bộ giáo viên** (nguồn chính thức, dùng để tạo mã QR) | Khi có bản DSGV mới xuất ra từ hệ thống |
 | DSXTL_*.xml | Danh sách xe tập lái (đối chiếu biển số) | Khi có bản DSXTL mới |

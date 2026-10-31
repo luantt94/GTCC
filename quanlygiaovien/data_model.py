@@ -1,5 +1,6 @@
 """Nạp data.json (xuất từ Excel) và cung cấp các hàm tra cứu cho app."""
 import json
+import re
 from datetime import datetime
 from pathlib import Path
 
@@ -14,6 +15,26 @@ def _parse_date(text):
         except ValueError:
             continue
     return None
+
+
+_HANG_PREFIX_RE = re.compile(r"^([A-Za-z0-9.]+)K", re.UNICODE)
+
+
+def parse_hang(lop):
+    """Suy ra hạng đào tạo từ mã lớp (cột 'Khóa' trong bảng phân hạng):
+    - Có dấu phẩy (khóa nâng hạng, vd 'NHD2K0726,C-D2') -> lấy phần sau dấu
+      phẩy ('C-D2').
+    - Không có dấu phẩy -> lấy phần trước chữ 'K', bỏ hậu tố sau dấu chấm
+      nếu có (vd 'BK0726' -> 'B', 'B.01K0726' -> 'B', 'C1K0726' -> 'C1')."""
+    lop = (lop or "").strip()
+    if not lop:
+        return ""
+    if "," in lop:
+        return lop.split(",", 1)[1].strip()
+    m = _HANG_PREFIX_RE.match(lop)
+    if not m:
+        return ""
+    return m.group(1).split(".")[0]
 
 
 class DataModel:
@@ -114,6 +135,16 @@ class DataModel:
                     }
                 )
         return rows
+
+    def summarize_by_hang(self, rows):
+        """Gộp các dòng kết quả tra cứu (xem search_by_teacher/search_by_course)
+        theo hạng (suy ra từ mã lớp, xem parse_hang) -> tổng số học viên mỗi
+        hạng. Trả về list [(hang, so_hoc_vien)] sắp theo tên hạng."""
+        totals = {}
+        for r in rows:
+            hang = parse_hang(r.get("lop", "")) or "?"
+            totals[hang] = totals.get(hang, 0) + r.get("so_hoc_vien", 0)
+        return sorted(totals.items())
 
     def search_by_course(self, ma_khoa):
         """Trả về list các dòng (mỗi dòng = 1 giáo viên/xe trong khóa đó)."""

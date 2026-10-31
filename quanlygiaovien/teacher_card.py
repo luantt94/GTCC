@@ -218,11 +218,46 @@ def _fit_single_line_font(draw, text, max_w, base_size, font_for, min_scale=0.3,
     return font
 
 
-def _make_qr(url, size_px):
-    import qrcode
+def _paste_photo_center(qr_img, photo_path, ratio=0.26):
+    """Dán ảnh giáo viên (cắt tròn, viền trắng) vào chính giữa mã QR - cần
+    error_correction mức H (xem _make_qr) để mã QR vẫn đọc được khi bị che
+    1 phần ở giữa."""
+    photo = Image.open(photo_path).convert("RGB")
+    side = min(photo.size)
+    left = (photo.width - side) // 2
+    top = (photo.height - side) // 2
+    size = int(qr_img.width * ratio)
+    photo = photo.crop((left, top, left + side, top + side)).resize(
+        (size, size), Image.LANCZOS
+    )
 
-    img = qrcode.make(url).convert("RGB")
-    return img.resize((size_px, size_px), Image.NEAREST)
+    mask = Image.new("L", (size, size), 0)
+    ImageDraw.Draw(mask).ellipse((0, 0, size, size), fill=255)
+
+    border = max(size // 12, 4)
+    badge_size = size + border * 2
+    badge = Image.new("RGBA", (badge_size, badge_size), (0, 0, 0, 0))
+    ImageDraw.Draw(badge).ellipse((0, 0, badge_size, badge_size), fill="white")
+    badge.paste(photo, (border, border), mask)
+
+    canvas = qr_img.convert("RGBA")
+    x = (canvas.width - badge_size) // 2
+    y = (canvas.height - badge_size) // 2
+    canvas.paste(badge, (x, y), badge)
+    return canvas.convert("RGB")
+
+
+def _make_qr(url, size_px, photo_path=None):
+    import qrcode
+    from qrcode.constants import ERROR_CORRECT_H
+
+    qr = qrcode.QRCode(error_correction=ERROR_CORRECT_H, border=2)
+    qr.add_data(url)
+    qr.make(fit=True)
+    img = qr.make_image(fill_color="black", back_color="white").convert("RGB")
+    if photo_path and Path(photo_path).exists():
+        img = _paste_photo_center(img, photo_path)
+    return img.resize((size_px, size_px), Image.LANCZOS)
 
 
 def _fit_photo(photo_path, box_w, box_h):
@@ -274,7 +309,7 @@ def _generate_card_image_from_background(data: CardData) -> Image.Image:
     qr_size = min(qx1 - qx0, qy1 - qy0) - _mm(0.8)
     qr_x = qx0 + (qx1 - qx0 - qr_size) // 2
     qr_y = qy0 + (qy1 - qy0 - qr_size) // 2
-    img.paste(_make_qr(data.url, qr_size), (qr_x, qr_y))
+    img.paste(_make_qr(data.url, qr_size, data.photo_path), (qr_x, qr_y))
 
     if data.hang:
         hang_w = _BG_HANG_RIGHT - _BG_HANG_VALUE_X
@@ -356,7 +391,7 @@ def _generate_card_image_procedural(data: CardData) -> Image.Image:
     qr_box_y = content_top
     qr_x = qr_box_x + qr_pad
     qr_y = qr_box_y + qr_pad
-    img.paste(_make_qr(data.url, qr_size), (qr_x, qr_y))
+    img.paste(_make_qr(data.url, qr_size, data.photo_path), (qr_x, qr_y))
     cap_y = qr_y + qr_size + _mm(0.8)
     cap_h = _draw_rendered_blocks(draw, qr_cap_rendered, cap_y, cx=qr_box_x + qr_box_w / 2)
     qr_box_h = qr_pad + qr_size + _mm(0.8) + cap_h + qr_pad

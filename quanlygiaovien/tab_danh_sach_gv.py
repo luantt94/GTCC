@@ -17,10 +17,10 @@ from pathlib import Path
 from PySide6.QtCore import Qt, QThread, Signal
 from PySide6.QtGui import QGuiApplication, QPixmap
 from PySide6.QtWidgets import (
+    QComboBox,
     QFileDialog,
     QHBoxLayout,
     QLabel,
-    QLineEdit,
     QListWidget,
     QListWidgetItem,
     QMessageBox,
@@ -31,6 +31,10 @@ from PySide6.QtWidgets import (
     QVBoxLayout,
     QWidget,
 )
+
+# Các hạng lái xe thường gặp - hiện trong danh sách chọn, nhưng vẫn cho gõ
+# tay hạng khác (vd ghép nhiều hạng "B, C1") vì đây là ô combo có thể sửa.
+CAC_HANG_LAI_XE = ["B", "C1", "C", "D1", "D2", "CE"]
 
 import publish_data
 import roster_xml
@@ -127,9 +131,12 @@ class DanhSachGiaoVienTab(QWidget):
 
         hang_row = QHBoxLayout()
         hang_row.addWidget(QLabel("Dạy lái xe hạng:"))
-        self.txt_hang = QLineEdit()
-        self.txt_hang.setPlaceholderText("vd B, hoặc B2, C, D")
-        self.txt_hang.textEdited.connect(self._on_hang_edited_live)
+        self.txt_hang = QComboBox()
+        self.txt_hang.setEditable(True)
+        self.txt_hang.addItems(CAC_HANG_LAI_XE)
+        self.txt_hang.setCurrentIndex(-1)
+        self.txt_hang.setPlaceholderText("Chọn hoặc gõ hạng, vd B, C1...")
+        self.txt_hang.editTextChanged.connect(self._on_hang_edited_live)
         hang_row.addWidget(self.txt_hang, 1)
         self.btn_save_hang = QPushButton(
             _icon(self, QStyle.StandardPixmap.SP_DialogSaveButton), "Lưu hạng"
@@ -190,7 +197,7 @@ class DanhSachGiaoVienTab(QWidget):
         self._current_ma_gv = ma_gv
         self._set_detail_enabled(True)
         self.txt_hang.blockSignals(True)
-        self.txt_hang.setText(publish_data.get_hang_lai_xe(ma_gv))
+        self.txt_hang.setCurrentText(publish_data.get_hang_lai_xe(ma_gv))
         self.txt_hang.blockSignals(False)
         self._refresh_preview()
         self._refresh_xml_info(ma_gv)
@@ -216,7 +223,7 @@ class DanhSachGiaoVienTab(QWidget):
     def resizeEvent(self, event):
         super().resizeEvent(event)
         if self._current_ma_gv:
-            self._refresh_preview(hang_override=self.txt_hang.text())
+            self._refresh_preview(hang_override=self.txt_hang.currentText())
 
     # ---- toàn bộ thông tin từ XML ----
     def _refresh_xml_info(self, ma_gv):
@@ -231,7 +238,7 @@ class DanhSachGiaoVienTab(QWidget):
     def _on_save_hang(self):
         if not self._current_ma_gv:
             return
-        publish_data.set_hang_lai_xe(self._current_ma_gv, self.txt_hang.text())
+        publish_data.set_hang_lai_xe(self._current_ma_gv, self.txt_hang.currentText())
         QMessageBox.information(self, "Đã lưu", "Đã lưu hạng lái xe dạy cho giáo viên này.")
         self._refresh_preview()
 
@@ -293,7 +300,7 @@ class DanhSachGiaoVienTab(QWidget):
 
     def _on_photo_action_done(self, ok, message):
         self._set_detail_enabled(True)
-        self._refresh_preview(hang_override=self.txt_hang.text())
+        self._refresh_preview(hang_override=self.txt_hang.currentText())
         if ok:
             QMessageBox.information(self, "Hoàn tất", message)
         else:

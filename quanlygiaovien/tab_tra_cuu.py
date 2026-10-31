@@ -53,6 +53,17 @@ class TraCuuTab(QWidget):
 
         outer.addWidget(box)
 
+        hang_box = QGroupBox("Tổng hợp số học viên theo hạng")
+        hang_layout = QVBoxLayout(hang_box)
+        self.tbl_hang = QTableWidget()
+        self.tbl_hang.setColumnCount(2)
+        self.tbl_hang.setHorizontalHeaderLabels(["Hạng", "Số học viên"])
+        self.tbl_hang.setEditTriggers(QTableWidget.NoEditTriggers)
+        self.tbl_hang.setMaximumHeight(140)
+        self.tbl_hang.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
+        hang_layout.addWidget(self.tbl_hang)
+        outer.addWidget(hang_box)
+
         splitter = QSplitter(Qt.Vertical)
 
         self.table = QTableWidget()
@@ -145,6 +156,7 @@ class TraCuuTab(QWidget):
             ]
             for col, val in enumerate(values):
                 self.table.setItem(row_idx, col, QTableWidgetItem(val))
+        self._render_hang_summary(rows)
         self.lbl_detail.setText(summary_text)
         if rows:
             self.table.selectRow(0)
@@ -155,6 +167,15 @@ class TraCuuTab(QWidget):
         else:
             self.tbl_hoc_vien.setRowCount(0)
             self.tbl_lich_hoc.setRowCount(0)
+
+    def _render_hang_summary(self, rows):
+        summary = self.model.summarize_by_hang(rows)
+        self.tbl_hang.setRowCount(len(summary))
+        for row_idx, (hang, so_hv) in enumerate(summary):
+            self.tbl_hang.setItem(row_idx, 0, QTableWidgetItem(hang))
+            item_so_hv = QTableWidgetItem(str(so_hv))
+            item_so_hv.setTextAlignment(Qt.AlignCenter)
+            self.tbl_hang.setItem(row_idx, 1, item_so_hv)
 
     def _on_row_selected(self):
         selected = self.table.selectedItems()

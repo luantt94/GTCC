@@ -2,7 +2,7 @@
 nút để đẩy lên trang web (GitHub Pages).
 
 Nguồn dữ liệu gồm:
-- File Excel "BIÊN CHẾ XE KHÓA xxxx.xlsx" (mỗi khóa 1 file, thêm/xóa được)
+- File Excel "BIÊN CHẾ XE KHÓA xxxx.xlsx/.xls" (mỗi khóa 1 file, thêm/xóa được)
 - File PDF "LICH HOC THUC HANH xxxx.pdf" (mỗi khóa 1 file, thêm/xóa được)
 - File DSGV_*.xml: danh sách TOÀN BỘ giáo viên (nguồn mã QR chính thức)
 - File DSXTL_*.xml: danh sách xe tập lái (đối chiếu biển số)
@@ -183,7 +183,7 @@ class CapNhatWebTab(QWidget):
 
         self.pick_bien_che = _FileListPicker(
             'File Excel "BIÊN CHẾ XE KHÓA ..." (mỗi khóa 1 file)',
-            "Excel Files (*.xlsx)",
+            "Excel Files (*.xlsx *.xls)",
         )
         outer.addWidget(self.pick_bien_che)
 

@@ -1,5 +1,6 @@
-"""Đọc các file "BIÊN CHẾ XE KHÓA xxxx.xlsx" (mỗi khóa 1 file, xuất từ hệ
-thống quản lý) sang data.json dùng chung cho toàn bộ app.
+"""Đọc các file "BIÊN CHẾ XE KHÓA xxxx.xlsx/.xls" (mỗi khóa 1 file, xuất từ
+hệ thống quản lý, hỗ trợ cả định dạng Excel 97-2003) sang data.json dùng
+chung cho toàn bộ app.
 
 Mỗi file có 3 sheet:
 - "DS": chỉ có số thứ tự, không dùng.
@@ -20,6 +21,8 @@ from datetime import datetime
 from pathlib import Path
 
 import openpyxl
+
+import xls_compat
 
 TITLE_RE = re.compile(r"BI[ÊE]N CH[ẾE] XE KH[ÓO]A\s+(\S+)\s*\(([^)]+)\)", re.UNICODE | re.IGNORECASE)
 PERIOD_RE = re.compile(r"T[ừu]\s*([0-9/]+).*?đ[ếe]n\s*([0-9/]+)", re.UNICODE | re.IGNORECASE | re.DOTALL)
@@ -118,9 +121,16 @@ def _find_period(wb, ma_khoa):
     return "", ""
 
 
+def _load_workbook(path):
+    """Mở workbook, hỗ trợ cả .xlsx (openpyxl) và .xls 97-2003 (xlrd)."""
+    if Path(path).suffix.lower() == ".xls":
+        return xls_compat.load_workbook(path)
+    return openpyxl.load_workbook(path, data_only=True)
+
+
 def load_course_from_file(path):
-    """Đọc 1 file 'BIÊN CHẾ XE KHÓA xxxx.xlsx', trả về 1 course dict."""
-    wb = openpyxl.load_workbook(path, data_only=True)
+    """Đọc 1 file 'BIÊN CHẾ XE KHÓA xxxx.xlsx/.xls', trả về 1 course dict."""
+    wb = _load_workbook(path)
     ws, title = _find_course_sheet(wb)
     if ws is None:
         raise ValueError(
