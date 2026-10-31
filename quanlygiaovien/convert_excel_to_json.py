@@ -37,6 +37,14 @@ def clean_text(value):
     return text
 
 
+def clean_plate(value):
+    """Chuẩn hoá biển số: bỏ dấu '-' và '.' (Excel hay nhập kiểu
+    '43B-252.95') để đồng bộ với định dạng biển số bên DSXTL_*.xml (không có
+    2 ký tự này, vd '43B25295')."""
+    text = clean_text(value)
+    return text.replace("-", "").replace(".", "")
+
+
 def _find_course_sheet(wb):
     """Tìm sheet có dòng tiêu đề 'BIÊN CHẾ XE KHÓA ...'. Trả về (ws, title_text)."""
     for ws in wb.worksheets:
@@ -74,7 +82,7 @@ def _parse_groups(ws):
             if xe_gv_sdt and str(xe_gv_sdt).strip():
                 lines = [clean_text(x) for x in str(xe_gv_sdt).split("\n")]
                 lines = [x for x in lines if x]
-                xe = lines[0] if len(lines) > 0 else ""
+                xe = clean_plate(lines[0]) if len(lines) > 0 else ""
                 giao_vien = lines[1] if len(lines) > 1 else ""
                 sdt = lines[2] if len(lines) > 2 else ""
                 current_group = {
