@@ -32,6 +32,18 @@ from runtime_paths import app_dir
 
 APP_DIR = app_dir()
 BG_PATH = APP_DIR / "data" / "khunganhnen.jpg"  # ảnh nền thẻ đã thiết kế sẵn (nếu có)
+# Bản sao của BG_PATH nhưng đã xoá khung/viền xanh + icon placeholder ở vùng
+# ảnh giáo viên (xem _ensure_bg_photo_variant) - dùng khi giáo viên ĐÃ có
+# ảnh, để dán ảnh vào vùng trống hoàn toàn thay vì phải canh khớp pixel với
+# viền bo góc có sẵn (dễ lệch, luôn còn sót 1 chút viền). Không có ảnh thì
+# vẫn dùng BG_PATH như cũ (còn nguyên khung/viền placeholder). App tự tạo
+# file này khi cần (không cần chạy tay), xem _ensure_bg_photo_variant().
+BG_PATH_PHOTO = APP_DIR / "data" / "khunganhnen_co_anh.jpg"
+# Vùng bao trọn khung/viền bo góc + icon + chữ placeholder trên BG_PATH, tô
+# lại bằng màu giấy nền (đo trực tiếp trên ảnh nền hiện tại - phải đo lại
+# nếu đổi ảnh nền) để tạo BG_PATH_PHOTO.
+_BG_ERASE_BOX = (30, 192, 388, 728)
+_BG_PAPER_COLOR = (253, 249, 238)
 
 DPI = 300
 _MM_TO_PX = DPI / 25.4
@@ -52,12 +64,10 @@ FONT_PT_HANG = 14  # hạng lái xe dạy
 
 # Toạ độ (px) các vùng trống trên ảnh nền data/khunganhnen.jpg (1280x768),
 # đo trực tiếp trên ảnh - chỉ đúng với ảnh nền này, phải đo lại nếu đổi ảnh.
-# Khung ảnh giáo viên: viền xanh vẽ sẵn trên ảnh nền rộng hơn vài px so với
-# khung đo ban đầu ở 2 cạnh phải/dưới (375-380 và 716-721) - khi CÓ ảnh,
-# dán đè rộng hơn 1 chút (x1/y1 lớn hơn) để che hết viền, không còn thấy
-# viền xanh ló ra; KHÔNG ảnh thì khung trống vẫn hiện nguyên viền như thiết
-# kế gốc (không vẽ/xoá gì thêm).
-_BG_PHOTO_BOX = (48, 223, 382, 723)  # x0,y0,x1,y1 - khung dán ảnh giáo viên
+# Khung ảnh giáo viên: khi CÓ ảnh, dùng BG_PATH_PHOTO (đã xoá sẵn khung/viền
+# placeholder ở vùng này - xem _ensure_bg_photo_variant) nên dán thẳng vào
+# đúng vùng trống, không còn viền xanh để lo che/lệch.
+_BG_PHOTO_BOX = (48, 223, 378, 718)  # x0,y0,x1,y1 - khung dán ảnh giáo viên
 PHOTO_CROP_RATIO = 3 / 4  # ảnh thẻ chuẩn "3x4" (rộng:cao) - luôn crop đúng tỉ lệ này trước khi dán
 _BG_QR_BOX = (1068, 506, 1222, 638)  # khung mã QR
 _BG_HANG_VALUE_X = 850  # bắt đầu vẽ giá trị hạng, ngay sau chữ "Dạy lái xe hạng:"
@@ -79,6 +89,20 @@ _BG_HEADER_FILL_COLOR = "#0556b0"
 
 def _mm(value):
     return round(value * _MM_TO_PX)
+
+
+def _ensure_bg_photo_variant():
+    """Tạo (hoặc làm mới nếu BG_PATH vừa đổi) BG_PATH_PHOTO từ BG_PATH - xem
+    comment ở BG_PATH_PHOTO. Trả về True nếu BG_PATH_PHOTO dùng được sau khi
+    chạy xong (False nếu không có BG_PATH để tạo từ đó)."""
+    if not BG_PATH.exists():
+        return False
+    if BG_PATH_PHOTO.exists() and BG_PATH_PHOTO.stat().st_mtime >= BG_PATH.stat().st_mtime:
+        return True
+    img = Image.open(BG_PATH).convert("RGB")
+    ImageDraw.Draw(img).rectangle(_BG_ERASE_BOX, fill=_BG_PAPER_COLOR)
+    img.save(BG_PATH_PHOTO, quality=95)
+    return True
 
 
 @dataclass
@@ -289,7 +313,9 @@ def _generate_card_image_from_background(data: CardData) -> Image.Image:
     các vùng trống có sẵn trên ảnh (xem _BG_* ở đầu file). Trả về ảnh đã
     resize về đúng khổ thẻ chuẩn (CARD_W_MM x CARD_H_MM) để ghép trang PDF
     như bình thường."""
-    img = Image.open(BG_PATH).convert("RGB").copy()
+    has_photo = data.photo_path and Path(data.photo_path).exists()
+    bg_path = BG_PATH_PHOTO if has_photo and _ensure_bg_photo_variant() else BG_PATH
+    img = Image.open(bg_path).convert("RGB").copy()
     draw = ImageDraw.Draw(img)
     _px_font_for = lambda base_size, scale, bold: _font_times_px(base_size * scale, bold=bold)
 
@@ -309,8 +335,8 @@ def _generate_card_image_from_background(data: CardData) -> Image.Image:
         ly = by0 + max((by1 - by0 - _total_height(rendered)) / 2, 0)
         _draw_rendered_blocks(draw, rendered, ly, cx=(hx0 + hx1) / 2, fill=_BG_HEADER_COLOR)
 
-    px0, py0, px1, py1 = _BG_PHOTO_BOX
-    if data.photo_path and Path(data.photo_path).exists():
+    if has_photo:
+        px0, py0, px1, py1 = _BG_PHOTO_BOX
         photo = _fit_photo(data.photo_path, px1 - px0, py1 - py0, crop_ratio=PHOTO_CROP_RATIO)
         img.paste(photo, (px0, py0))
 
