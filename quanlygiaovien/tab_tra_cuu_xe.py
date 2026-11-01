@@ -83,11 +83,22 @@ class TraCuuXeTab(QWidget):
 
         # Danh sách xe hiện sẵn toàn bộ bên trái (thay vì giấu trong dropdown)
         # để chọn nhanh - giống cách làm ở tab DANH SÁCH GIÁO VIÊN.
+        left = QWidget()
+        left.setMinimumWidth(220)
+        left.setMaximumWidth(320)
+        left_layout = QVBoxLayout(left)
+        left_layout.setContentsMargins(0, 0, 0, 0)
+
+        self.txt_search = QLineEdit()
+        self.txt_search.setPlaceholderText("Tìm kiếm theo biển số...")
+        self.txt_search.textChanged.connect(self._on_search_changed)
+        left_layout.addWidget(self.txt_search)
+
         self.list_widget = QListWidget()
-        self.list_widget.setMinimumWidth(220)
-        self.list_widget.setMaximumWidth(320)
         self.list_widget.currentItemChanged.connect(self._on_xe_changed)
-        main_splitter.addWidget(self.list_widget)
+        left_layout.addWidget(self.list_widget, 1)
+
+        main_splitter.addWidget(left)
 
         right = QWidget()
         right_layout = QVBoxLayout(right)
@@ -143,9 +154,16 @@ class TraCuuXeTab(QWidget):
         main_splitter.setStretchFactor(0, 1)
         main_splitter.setStretchFactor(1, 3)
 
-    def _load_list(self):
+    def _load_list(self, filter_text=""):
         self.list_widget.clear()
-        for stt, (plate, v) in enumerate(self.vehicles.items(), start=1):
+        items = list(self.vehicles.items())
+        filter_text = (filter_text or "").strip().lower()
+        if filter_text:
+            items = [
+                (plate, v) for plate, v in items
+                if filter_text in v["bien_so"].lower() or filter_text in plate.lower()
+            ]
+        for stt, (plate, v) in enumerate(items, start=1):
             label = v["bien_so"] if v["in_dsxtl"] else f"{v['bien_so']} (chưa có trong DSXTL)"
             item = QListWidgetItem(f"{stt}. {label}")
             item.setData(Qt.ItemDataRole.UserRole, plate)
@@ -155,6 +173,13 @@ class TraCuuXeTab(QWidget):
                 "Chưa có danh sách xe - chọn file DSXTL_*.xml ở tab CẬP NHẬT WEB "
                 "rồi khởi động lại app."
             )
+        elif not items:
+            empty_item = QListWidgetItem("Không tìm thấy biển số phù hợp.")
+            empty_item.setFlags(Qt.ItemFlag.NoItemFlags)
+            self.list_widget.addItem(empty_item)
+
+    def _on_search_changed(self, text):
+        self._load_list(text)
 
     def _on_xe_changed(self, current, _previous=None):
         plate = current.data(Qt.ItemDataRole.UserRole) if current else None
