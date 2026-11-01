@@ -204,6 +204,7 @@ class TraCuuXeTab(QWidget):
                         {
                             "ma_khoa": c["ma_khoa"],
                             "lop": c.get("lop", ""),
+                            "ca": g.get("ca", ""),
                             "giao_vien": g.get("giao_vien", ""),
                             "sdt": g.get("sdt", ""),
                             "thoi_gian": f"{c.get('tu_ngay', '')} → {c.get('den_ngay', '')}",
@@ -216,7 +217,7 @@ class TraCuuXeTab(QWidget):
         for row_idx, r in enumerate(rows):
             values = [
                 r["ma_khoa"],
-                r["lop"],
+                f"{r['lop']} ({r['ca']})" if r.get("ca") else r["lop"],
                 r["giao_vien"],
                 r["sdt"],
                 r["thoi_gian"],

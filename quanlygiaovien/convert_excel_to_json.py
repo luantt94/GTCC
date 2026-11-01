@@ -37,19 +37,28 @@ def clean_text(value):
     return text
 
 
-_CA_SUFFIX_RE = re.compile(r"\(\s*ca\s*\d+\s*\)\s*$", re.IGNORECASE)
+_CA_SUFFIX_RE = re.compile(r"\(\s*(ca\s*\d+)\s*\)\s*$", re.IGNORECASE)
+
+
+def split_plate_ca(value):
+    """Tách hậu tố '(Ca 1)'/'(Ca 2)' ra khỏi biển số (1 xe chạy nhiều ca
+    trong cùng khóa, mỗi ca Excel ghi riêng 1 dòng xe/GV/SĐT) - cùng 1 xe
+    thì phải gộp lại 1 biển số, không tách thành nhiều xe khác nhau, nhưng
+    vẫn giữ lại "ca mấy" riêng để hiện ghi chú. Trả về (biển_số, ca) - ca
+    rỗng nếu không có hậu tố."""
+    text = clean_text(value)
+    m = _CA_SUFFIX_RE.search(text)
+    if not m:
+        return text, ""
+    ca = re.sub(r"\s+", " ", m.group(1).strip()).title()
+    return text[: m.start()].strip(), ca
 
 
 def clean_plate(value):
-    """Chuẩn hoá biển số:
-    - Bỏ hậu tố '(Ca 1)'/'(Ca 2)' (1 xe chạy nhiều ca trong cùng khóa, mỗi
-      ca Excel ghi riêng 1 dòng xe/GV/SĐT) - cùng 1 xe thì phải gộp lại 1
-      biển số, không tách thành nhiều xe khác nhau.
-    - Bỏ dấu '-' và '.' (Excel hay nhập kiểu '43B-252.95') để đồng bộ với
-      định dạng biển số bên DSXTL_*.xml (không có 2 ký tự này, vd
-      '43B25295')."""
-    text = clean_text(value)
-    text = _CA_SUFFIX_RE.sub("", text).strip()
+    """Chuẩn hoá biển số: bỏ hậu tố '(Ca N)' (xem split_plate_ca) rồi bỏ dấu
+    '-' và '.' (Excel hay nhập kiểu '43B-252.95') để đồng bộ với định dạng
+    biển số bên DSXTL_*.xml (không có 2 ký tự này, vd '43B25295')."""
+    text, _ca = split_plate_ca(value)
     return text.replace("-", "").replace(".", "")
 
 
@@ -65,7 +74,7 @@ def _find_course_sheet(wb):
 
 def _parse_groups(ws):
     """Đọc bảng học viên bắt đầu từ dòng có 'Stt' tới hết sheet.
-    Trả về list groups: [{giao_vien, xe, sdt, hoc_vien: [...]}]."""
+    Trả về list groups: [{giao_vien, xe, ca, sdt, hoc_vien: [...]}]."""
     groups = []
     current_group = None
     started = False
@@ -90,12 +99,14 @@ def _parse_groups(ws):
             if xe_gv_sdt and str(xe_gv_sdt).strip():
                 lines = [clean_text(x) for x in str(xe_gv_sdt).split("\n")]
                 lines = [x for x in lines if x]
-                xe = clean_plate(lines[0]) if len(lines) > 0 else ""
+                xe_text, ca = split_plate_ca(lines[0]) if len(lines) > 0 else ("", "")
+                xe = xe_text.replace("-", "").replace(".", "")
                 giao_vien = lines[1] if len(lines) > 1 else ""
                 sdt = lines[2] if len(lines) > 2 else ""
                 current_group = {
                     "giao_vien": giao_vien,
                     "xe": xe,
+                    "ca": ca,  # "Ca 1"/"Ca 2" nếu 1 xe chạy nhiều ca trong khóa, rỗng nếu không
                     "sdt": sdt,
                     "hoc_vien": [],
                 }

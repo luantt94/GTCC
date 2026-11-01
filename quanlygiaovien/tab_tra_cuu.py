@@ -148,7 +148,7 @@ class TraCuuTab(QWidget):
                 r["giao_vien"],
                 r["ma_khoa"],
                 r["lop"],
-                r["xe"],
+                f"{r['xe']} ({r['ca']})" if r.get("ca") else r["xe"],
                 r["sdt"],
                 str(r["so_hoc_vien"]),
                 thoi_gian,
