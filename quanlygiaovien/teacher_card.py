@@ -52,7 +52,13 @@ FONT_PT_HANG = 14  # hạng lái xe dạy
 
 # Toạ độ (px) các vùng trống trên ảnh nền data/khunganhnen.jpg (1280x768),
 # đo trực tiếp trên ảnh - chỉ đúng với ảnh nền này, phải đo lại nếu đổi ảnh.
-_BG_PHOTO_BOX = (48, 223, 378, 718)  # x0,y0,x1,y1 - khung ảnh giáo viên
+# Khung ảnh giáo viên: viền xanh vẽ sẵn trên ảnh nền rộng hơn vài px so với
+# khung đo ban đầu ở 2 cạnh phải/dưới (375-380 và 716-721) - khi CÓ ảnh,
+# dán đè rộng hơn 1 chút (x1/y1 lớn hơn) để che hết viền, không còn thấy
+# viền xanh ló ra; KHÔNG ảnh thì khung trống vẫn hiện nguyên viền như thiết
+# kế gốc (không vẽ/xoá gì thêm).
+_BG_PHOTO_BOX = (48, 223, 382, 723)  # x0,y0,x1,y1 - khung dán ảnh giáo viên
+PHOTO_CROP_RATIO = 3 / 4  # ảnh thẻ chuẩn "3x4" (rộng:cao) - luôn crop đúng tỉ lệ này trước khi dán
 _BG_QR_BOX = (1068, 506, 1222, 638)  # khung mã QR
 _BG_HANG_VALUE_X = 850  # bắt đầu vẽ giá trị hạng, ngay sau chữ "Dạy lái xe hạng:"
 _BG_HANG_VALUE_Y = (598, 658)
@@ -260,9 +266,11 @@ def _make_qr(url, size_px, photo_path=None):
     return img.resize((size_px, size_px), Image.LANCZOS)
 
 
-def _fit_photo(photo_path, box_w, box_h):
+def _fit_photo(photo_path, box_w, box_h, crop_ratio=None):
+    """Crop ảnh theo tỉ lệ crop_ratio (rộng:cao) rồi resize vừa khít khung
+    (box_w, box_h) - mặc định (crop_ratio=None) lấy luôn tỉ lệ của khung."""
     photo = Image.open(photo_path).convert("RGB")
-    ratio = box_w / box_h
+    ratio = crop_ratio if crop_ratio else box_w / box_h
     pw, ph = photo.size
     if pw / ph > ratio:
         new_w = int(ph * ratio)
@@ -303,7 +311,8 @@ def _generate_card_image_from_background(data: CardData) -> Image.Image:
 
     px0, py0, px1, py1 = _BG_PHOTO_BOX
     if data.photo_path and Path(data.photo_path).exists():
-        img.paste(_fit_photo(data.photo_path, px1 - px0, py1 - py0), (px0, py0))
+        photo = _fit_photo(data.photo_path, px1 - px0, py1 - py0, crop_ratio=PHOTO_CROP_RATIO)
+        img.paste(photo, (px0, py0))
 
     qx0, qy0, qx1, qy1 = _BG_QR_BOX
     qr_size = min(qx1 - qx0, qy1 - qy0) - _mm(0.8)
