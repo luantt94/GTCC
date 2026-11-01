@@ -21,6 +21,7 @@ from PySide6.QtWidgets import (
     QFileDialog,
     QHBoxLayout,
     QLabel,
+    QLineEdit,
     QListWidget,
     QListWidgetItem,
     QMessageBox,
@@ -94,11 +95,22 @@ class DanhSachGiaoVienTab(QWidget):
         splitter = QSplitter(Qt.Orientation.Horizontal)
         layout.addWidget(splitter, 1)
 
+        left = QWidget()
+        left.setMinimumWidth(240)
+        left.setMaximumWidth(360)
+        left_layout = QVBoxLayout(left)
+        left_layout.setContentsMargins(0, 0, 0, 0)
+
+        self.txt_search = QLineEdit()
+        self.txt_search.setPlaceholderText("Tìm kiếm giáo viên theo tên hoặc mã GV...")
+        self.txt_search.textChanged.connect(self._on_search_changed)
+        left_layout.addWidget(self.txt_search)
+
         self.list_widget = QListWidget()
-        self.list_widget.setMinimumWidth(240)
-        self.list_widget.setMaximumWidth(360)
         self.list_widget.currentItemChanged.connect(self._on_select)
-        splitter.addWidget(self.list_widget)
+        left_layout.addWidget(self.list_widget, 1)
+
+        splitter.addWidget(left)
 
         right = QWidget()
         right_layout = QVBoxLayout(right)
@@ -175,10 +187,17 @@ class DanhSachGiaoVienTab(QWidget):
             w.setEnabled(enabled)
 
     # ---- danh sách ----
-    def _load_list(self):
+    def _load_list(self, filter_text=""):
         self.list_widget.clear()
-        for ma_gv, rec in sorted(self._teachers.items(), key=lambda kv: _given_name_key(kv[1]["ten"])):
-            item = QListWidgetItem(f"{rec['ten']} ({ma_gv})")
+        teachers = sorted(self._teachers.items(), key=lambda kv: _given_name_key(kv[1]["ten"]))
+        filter_text = (filter_text or "").strip().lower()
+        if filter_text:
+            teachers = [
+                (ma_gv, rec) for ma_gv, rec in teachers
+                if filter_text in rec["ten"].lower() or filter_text in ma_gv.lower()
+            ]
+        for stt, (ma_gv, rec) in enumerate(teachers, start=1):
+            item = QListWidgetItem(f"{stt}. {rec['ten']} ({ma_gv})")
             item.setData(Qt.ItemDataRole.UserRole, ma_gv)
             self.list_widget.addItem(item)
         if not self._teachers:
@@ -186,6 +205,13 @@ class DanhSachGiaoVienTab(QWidget):
                 "Chưa có danh sách giáo viên.\n"
                 "Hãy chọn file DSGV_*.xml ở tab CẬP NHẬT WEB rồi khởi động lại app."
             )
+        elif not teachers:
+            empty_item = QListWidgetItem("Không tìm thấy giáo viên phù hợp.")
+            empty_item.setFlags(Qt.ItemFlag.NoItemFlags)
+            self.list_widget.addItem(empty_item)
+
+    def _on_search_changed(self, text):
+        self._load_list(text)
 
     def _on_select(self, current, _previous):
         if not current:
