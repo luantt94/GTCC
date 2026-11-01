@@ -37,11 +37,19 @@ def clean_text(value):
     return text
 
 
+_CA_SUFFIX_RE = re.compile(r"\(\s*ca\s*\d+\s*\)\s*$", re.IGNORECASE)
+
+
 def clean_plate(value):
-    """Chuẩn hoá biển số: bỏ dấu '-' và '.' (Excel hay nhập kiểu
-    '43B-252.95') để đồng bộ với định dạng biển số bên DSXTL_*.xml (không có
-    2 ký tự này, vd '43B25295')."""
+    """Chuẩn hoá biển số:
+    - Bỏ hậu tố '(Ca 1)'/'(Ca 2)' (1 xe chạy nhiều ca trong cùng khóa, mỗi
+      ca Excel ghi riêng 1 dòng xe/GV/SĐT) - cùng 1 xe thì phải gộp lại 1
+      biển số, không tách thành nhiều xe khác nhau.
+    - Bỏ dấu '-' và '.' (Excel hay nhập kiểu '43B-252.95') để đồng bộ với
+      định dạng biển số bên DSXTL_*.xml (không có 2 ký tự này, vd
+      '43B25295')."""
     text = clean_text(value)
+    text = _CA_SUFFIX_RE.sub("", text).strip()
     return text.replace("-", "").replace(".", "")
 
 
