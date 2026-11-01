@@ -23,6 +23,12 @@
     padding: 16px 20px;
     text-align: center;
   }
+  .header.with-photo {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    text-align: left;
+  }
   .header .ten {
     font-size: 1.4rem;
     font-weight: 700;
@@ -37,6 +43,12 @@
     object-fit: cover;
     border: 2px solid #fff;
     margin: 6px auto 2px;
+    flex-shrink: 0;
+  }
+  .header.with-photo .anh {
+    width: 64px;
+    height: 64px;
+    margin: 0;
   }
 
   .summary {
@@ -126,10 +138,12 @@
 </head>
 <body>
   <div class="wrap">
-    <div class="header">
+    <div class="header" id="header">
       <img class="anh" id="anh-gv" alt="Ảnh giáo viên">
-      <div class="label">GIÁO VIÊN</div>
-      <div class="ten" id="ten">Đang tải...</div>
+      <div class="header-text">
+        <div class="label">GIÁO VIÊN</div>
+        <div class="ten" id="ten">Đang tải...</div>
+      </div>
     </div>
     <div class="summary" id="summary" style="display:none;">
       <div>
@@ -245,6 +259,7 @@ fetch("public_data.json", { cache: "no-store" })
       const anhEl = document.getElementById("anh-gv");
       anhEl.src = gv.anh_file;
       anhEl.style.display = "block";
+      document.getElementById("header").classList.add("with-photo");
     }
 
     if (gv.ten || gv.dien_thoai || gv.ngay_sinh || gv.dia_chi || gv.hang_lai_xe) {
