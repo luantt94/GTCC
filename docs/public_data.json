@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-10-30T15:17:59",
+  "generated_at": "2026-11-01T16:23:04",
   "teachers": {
     "48002001": {
       "ten": "Nguyễn Anh Dương",
       "dien_thoai": "0935323555",
       "ngay_sinh": "27/04/1976",
       "dia_chi": "52 Vũ Miên, Phường Hòa Xuân, Thành phố Đà Nẵng",
-      "hang_lai_xe": "",
+      "hang_lai_xe": "C1",
       "khoa_dang_day": [],
       "ho_so_file": "files/ho_so_gv/48002001.pdf",
       "anh_file": null
@@ -16,14 +16,14 @@
       "dien_thoai": "0778 666643",
       "ngay_sinh": "29/10/1999",
       "dia_chi": "Xã Hòa Tiến, Thành phố Đà Nẵng",
-      "hang_lai_xe": "",
+      "hang_lai_xe": "B",
       "khoa_dang_day": [
         {
           "ma_khoa": "48002K262024",
           "lop": "BK0726",
           "tu_ngay": "11/8/2026",
           "den_ngay": "07/11/2026",
-          "xe": "43B-304.83",
+          "xe": "43B30483",
           "so_hoc_vien": 5,
           "hoc_vien": [
             "LÊ QUANG THÀNH",
@@ -40,7 +40,7 @@
           "lop": "BK0826",
           "tu_ngay": "18/09/2026",
           "den_ngay": "15/12/2026",
-          "xe": "43B-304.83",
+          "xe": "43B30483",
           "so_hoc_vien": 4,
           "hoc_vien": [
             "PHAN HOÀI LĂNG",
@@ -60,14 +60,14 @@
       "dien_thoai": "SĐT: 0903511968",
       "ngay_sinh": "08/08/1979",
       "dia_chi": "Phường Cẩm Lệ, Thành phố Đà Nẵng",
-      "hang_lai_xe": "",
+      "hang_lai_xe": "C1",
       "khoa_dang_day": [
         {
           "ma_khoa": "48002K26C1007",
           "lop": "C1K0726",
           "tu_ngay": "",
           "den_ngay": "",
-          "xe": "43B-252.95(Ca 1)",
+          "xe": "43B25295",
           "so_hoc_vien": 6,
           "hoc_vien": [
             "LÊ HỒ HỮU PHƯỚC",
@@ -89,14 +89,14 @@
       "dien_thoai": "0914 243313",
       "ngay_sinh": "01/01/1982",
       "dia_chi": "Phường Điện Bàn Bắc, Thành phố Đà Nẵng",
-      "hang_lai_xe": "",
+      "hang_lai_xe": "C1",
       "khoa_dang_day": [
         {
           "ma_khoa": "48002K262024",
           "lop": "BK0726",
           "tu_ngay": "11/8/2026",
           "den_ngay": "07/11/2026",
-          "xe": "43A-340.74",
+          "xe": "43A34074",
           "so_hoc_vien": 5,
           "hoc_vien": [
             "NGUYỄN THỊ TRÀ MY",
@@ -113,7 +113,7 @@
           "lop": "BK0826",
           "tu_ngay": "18/09/2026",
           "den_ngay": "15/12/2026",
-          "xe": "43A-340.74",
+          "xe": "43A34074",
           "so_hoc_vien": 4,
           "hoc_vien": [
             "NGÔ VĂN NHO",
@@ -133,14 +133,14 @@
       "dien_thoai": "0905 00002",
       "ngay_sinh": "01/01/1972",
       "dia_chi": "Phường Cẩm Lệ, Thành phố Đà Nẵng",
-      "hang_lai_xe": "",
+      "hang_lai_xe": "D2",
       "khoa_dang_day": [
         {
           "ma_khoa": "48002K262024",
           "lop": "BK0726",
           "tu_ngay": "11/8/2026",
           "den_ngay": "07/11/2026",
-          "xe": "43A-292.61",
+          "xe": "43A29261",
           "so_hoc_vien": 5,
           "hoc_vien": [
             "BÙI ĐỨC DUY",
@@ -157,7 +157,7 @@
           "lop": "BK0826",
           "tu_ngay": "18/09/2026",
           "den_ngay": "15/12/2026",
-          "xe": "43A-292.61",
+          "xe": "43A29261",
           "so_hoc_vien": 4,
           "hoc_vien": [
             "PHAN TẤN HÙNG",
@@ -177,14 +177,14 @@
       "dien_thoai": "0902 168337",
       "ngay_sinh": "26/07/1993",
       "dia_chi": "Phường Hòa Khánh, Thành phố Đà Nẵng",
-      "hang_lai_xe": "",
+      "hang_lai_xe": "C1",
       "khoa_dang_day": [
         {
           "ma_khoa": "48002K262024",
           "lop": "BK0726",
           "tu_ngay": "11/8/2026",
           "den_ngay": "07/11/2026",
-          "xe": "43A-293.25",
+          "xe": "43A29325",
           "so_hoc_vien": 5,
           "hoc_vien": [
             "DƯƠNG CÔNG TRÍ",
@@ -201,7 +201,7 @@
           "lop": "BK0826",
           "tu_ngay": "18/09/2026",
           "den_ngay": "15/12/2026",
-          "xe": "43A-293.25",
+          "xe": "43A29325",
           "so_hoc_vien": 4,
           "hoc_vien": [
             "MÃ THỊ ÚT",
@@ -221,14 +221,14 @@
       "dien_thoai": "0905 657697",
       "ngay_sinh": "28/09/1995",
       "dia_chi": "Phường An Khê, Thành phố Đà Nẵng",
-      "hang_lai_xe": "",
+      "hang_lai_xe": "C1",
       "khoa_dang_day": [
         {
           "ma_khoa": "48002K262024",
           "lop": "BK0726",
           "tu_ngay": "11/8/2026",
           "den_ngay": "07/11/2026",
-          "xe": "43A-031.36",
+          "xe": "43A03136",
           "so_hoc_vien": 5,
           "hoc_vien": [
             "NGUYỄN HỮU KIÊN",
@@ -245,7 +245,7 @@
           "lop": "BK0826",
           "tu_ngay": "18/09/2026",
           "den_ngay": "15/12/2026",
-          "xe": "43A-031.36",
+          "xe": "43A03136",
           "so_hoc_vien": 4,
           "hoc_vien": [
             "TRẦN THỊ THANH LONG",
@@ -265,7 +265,7 @@
       "dien_thoai": "",
       "ngay_sinh": "11/08/1972",
       "dia_chi": "Phường Hải Châu, Thành phố Đà Nẵng",
-      "hang_lai_xe": "",
+      "hang_lai_xe": "D",
       "khoa_dang_day": [],
       "ho_so_file": "files/ho_so_gv/48002008.pdf",
       "anh_file": null
@@ -275,14 +275,14 @@
       "dien_thoai": "0903 522250",
       "ngay_sinh": "25/09/1979",
       "dia_chi": "Xã Bà Nà, Thành phố Đà Nẵng",
-      "hang_lai_xe": "",
+      "hang_lai_xe": "C",
       "khoa_dang_day": [
         {
           "ma_khoa": "48002K262024",
           "lop": "BK0726",
           "tu_ngay": "11/8/2026",
           "den_ngay": "07/11/2026",
-          "xe": "43A-671.65",
+          "xe": "43A67165",
           "so_hoc_vien": 5,
           "hoc_vien": [
             "ĐOÀN NGỌC HOÀNG LONG",
@@ -299,7 +299,7 @@
           "lop": "BK0826",
           "tu_ngay": "18/09/2026",
           "den_ngay": "15/12/2026",
-          "xe": "43A-671.65",
+          "xe": "43A67165",
           "so_hoc_vien": 4,
           "hoc_vien": [
             "NGÔ ĐẮC DIỆP",
@@ -319,7 +319,7 @@
       "dien_thoai": "",
       "ngay_sinh": "01/01/1980",
       "dia_chi": "Xã Bà Nà, Thành phố Đà Nẵng",
-      "hang_lai_xe": "",
+      "hang_lai_xe": "C1",
       "khoa_dang_day": [],
       "ho_so_file": "files/ho_so_gv/48002010.pdf",
       "anh_file": null
@@ -329,14 +329,14 @@
       "dien_thoai": "0935048049",
       "ngay_sinh": "31/10/1977",
       "dia_chi": "Phường Thanh Khê, Thành phố Đà Nẵng",
-      "hang_lai_xe": "",
+      "hang_lai_xe": "D2, CE",
       "khoa_dang_day": [
         {
           "ma_khoa": "48002K262032",
           "lop": "BK0826",
           "tu_ngay": "18/09/2026",
           "den_ngay": "15/12/2026",
-          "xe": "43A-293.37",
+          "xe": "43A29337",
           "so_hoc_vien": 4,
           "hoc_vien": [
             "NGUYỄN ĐÌNH HOÀNG",
@@ -352,7 +352,7 @@
           "lop": "C1K0726",
           "tu_ngay": "",
           "den_ngay": "",
-          "xe": "43C-164.43(Ca 2)",
+          "xe": "43C16443",
           "so_hoc_vien": 4,
           "hoc_vien": [
             "NGUYỄN QUỐC AN",
@@ -361,7 +361,7 @@
             "TRƯƠNG MINH VIỆT"
           ],
           "lich_hoc_pdf": null,
-          "giay_to_xe_link": null
+          "giay_to_xe_link": "https://csdlgtvt.danang.gov.vn/p#/p/gp/4d134250-3192-41f1-b96f-251528c0fc28"
         }
       ],
       "ho_so_file": "files/ho_so_gv/48002011.pdf",
@@ -372,14 +372,14 @@
       "dien_thoai": "0763 190870",
       "ngay_sinh": "29/08/1996",
       "dia_chi": "Phường Điện Bàn Đông, Thành phố Đà Nẵng",
-      "hang_lai_xe": "",
+      "hang_lai_xe": "C1",
       "khoa_dang_day": [
         {
           "ma_khoa": "48002K262024",
           "lop": "BK0726",
           "tu_ngay": "11/8/2026",
           "den_ngay": "07/11/2026",
-          "xe": "92A-098.84",
+          "xe": "92A09884",
           "so_hoc_vien": 5,
           "hoc_vien": [
             "NGUYỄN TRẦN MINH TÂM",
@@ -396,7 +396,7 @@
           "lop": "BK0826",
           "tu_ngay": "18/09/2026",
           "den_ngay": "15/12/2026",
-          "xe": "92A-098.84",
+          "xe": "92A09884",
           "so_hoc_vien": 4,
           "hoc_vien": [
             "NGUYỄN TUẤN",
@@ -416,14 +416,14 @@
       "dien_thoai": "SĐT: 0919311211",
       "ngay_sinh": "26/01/1973",
       "dia_chi": "Phường Sơn Trà, Thành phố Đà Nẵng",
-      "hang_lai_xe": "",
+      "hang_lai_xe": "D",
       "khoa_dang_day": [
         {
           "ma_khoa": "48002K26C1007",
           "lop": "C1K0726",
           "tu_ngay": "",
           "den_ngay": "",
-          "xe": "43C-164.43(Ca 1)",
+          "xe": "43C16443",
           "so_hoc_vien": 6,
           "hoc_vien": [
             "CAO QUANG LÂM",
@@ -434,7 +434,7 @@
             "LÊ TẤN LỘC"
           ],
           "lich_hoc_pdf": null,
-          "giay_to_xe_link": null
+          "giay_to_xe_link": "https://csdlgtvt.danang.gov.vn/p#/p/gp/4d134250-3192-41f1-b96f-251528c0fc28"
         }
       ],
       "ho_so_file": "files/ho_so_gv/48002013.pdf",
@@ -445,14 +445,14 @@
       "dien_thoai": "0935237239",
       "ngay_sinh": "17/04/1983",
       "dia_chi": "Phường An Khê, Thành phố Đà Nẵng",
-      "hang_lai_xe": "",
+      "hang_lai_xe": "D2",
       "khoa_dang_day": [
         {
           "ma_khoa": "48002K262024",
           "lop": "BK0726",
           "tu_ngay": "11/8/2026",
           "den_ngay": "07/11/2026",
-          "xe": "43A-292.72",
+          "xe": "43A29272",
           "so_hoc_vien": 5,
           "hoc_vien": [
             "NGUYỄN NAM KHÁNH HƯNG",
@@ -469,7 +469,7 @@
           "lop": "BK0826",
           "tu_ngay": "18/09/2026",
           "den_ngay": "15/12/2026",
-          "xe": "43A-292.72",
+          "xe": "43A29272",
           "so_hoc_vien": 4,
           "hoc_vien": [
             "TRẦN NGỌC THÙY TRINH",
@@ -489,7 +489,7 @@
       "dien_thoai": "",
       "ngay_sinh": "02/04/1965",
       "dia_chi": "Phường Hải Châu, Thành phố Đà Nẵng",
-      "hang_lai_xe": "",
+      "hang_lai_xe": "C1",
       "khoa_dang_day": [],
       "ho_so_file": "files/ho_so_gv/48002015.pdf",
       "anh_file": null
@@ -499,7 +499,7 @@
       "dien_thoai": "",
       "ngay_sinh": "18/11/1988",
       "dia_chi": "Phường Hòa Xuân, Thành phố Đà Nẵng",
-      "hang_lai_xe": "",
+      "hang_lai_xe": "C1",
       "khoa_dang_day": [],
       "ho_so_file": "files/ho_so_gv/48002016.pdf",
       "anh_file": null
@@ -509,7 +509,7 @@
       "dien_thoai": "",
       "ngay_sinh": "18/05/1985",
       "dia_chi": "Xã Hòa Tiến, Thành phố Đà Nẵng",
-      "hang_lai_xe": "",
+      "hang_lai_xe": "D2",
       "khoa_dang_day": [],
       "ho_so_file": "files/ho_so_gv/48002017.pdf",
       "anh_file": null
@@ -519,14 +519,14 @@
       "dien_thoai": "0904815535",
       "ngay_sinh": "19/12/1983",
       "dia_chi": "Phường Hòa Cường, Thành phố Đà Nẵng",
-      "hang_lai_xe": "",
+      "hang_lai_xe": "C1",
       "khoa_dang_day": [
         {
           "ma_khoa": "48002K262024",
           "lop": "BK0726",
           "tu_ngay": "11/8/2026",
           "den_ngay": "07/11/2026",
-          "xe": "43A-320.35",
+          "xe": "43A32035",
           "so_hoc_vien": 5,
           "hoc_vien": [
             "TRẦN MINH HIẾU",
@@ -543,7 +543,7 @@
           "lop": "BK0826",
           "tu_ngay": "18/09/2026",
           "den_ngay": "15/12/2026",
-          "xe": "43A-320.35",
+          "xe": "43A32035",
           "so_hoc_vien": 4,
           "hoc_vien": [
             "TRẦN THANH ÁNH",
@@ -563,14 +563,14 @@
       "dien_thoai": "SĐT: 0905 831378",
       "ngay_sinh": "05/05/1971",
       "dia_chi": "Phường Hòa Cường, Thành phố Đà Nẵng",
-      "hang_lai_xe": "",
+      "hang_lai_xe": "D",
       "khoa_dang_day": [
         {
           "ma_khoa": "48002K26C1007",
           "lop": "C1K0726",
           "tu_ngay": "",
           "den_ngay": "",
-          "xe": "43C-165.58",
+          "xe": "43C16558",
           "so_hoc_vien": 8,
           "hoc_vien": [
             "NGUYỄN HỮU MINH",
@@ -594,7 +594,7 @@
       "dien_thoai": "",
       "ngay_sinh": "02/09/1976",
       "dia_chi": "Phường Cẩm Lệ, Thành phố Đà Nẵng",
-      "hang_lai_xe": "",
+      "hang_lai_xe": "B",
       "khoa_dang_day": [],
       "ho_so_file": "files/ho_so_gv/48002020.pdf",
       "anh_file": "files/anh_gv/48002020.jpg"
@@ -604,7 +604,7 @@
       "dien_thoai": "",
       "ngay_sinh": "02/09/1986",
       "dia_chi": "Phường An Hải, Thành phố Hải Phòng",
-      "hang_lai_xe": "",
+      "hang_lai_xe": "D2",
       "khoa_dang_day": [],
       "ho_so_file": "files/ho_so_gv/48002021.pdf",
       "anh_file": null
@@ -614,14 +614,14 @@
       "dien_thoai": "0772575700",
       "ngay_sinh": "04/03/1992",
       "dia_chi": "Phường Thanh Khê, Thành phố Đà Nẵng",
-      "hang_lai_xe": "",
+      "hang_lai_xe": "C1",
       "khoa_dang_day": [
         {
           "ma_khoa": "48002K262024",
           "lop": "BK0726",
           "tu_ngay": "11/8/2026",
           "den_ngay": "07/11/2026",
-          "xe": "92A-390.94",
+          "xe": "92A39094",
           "so_hoc_vien": 3,
           "hoc_vien": [
             "CAO THỊ NHẬT LINH",
@@ -640,14 +640,14 @@
       "dien_thoai": "SĐT: 0905555874",
       "ngay_sinh": "24/01/1968",
       "dia_chi": "Phường Cẩm Lệ, Thành phố Đà Nẵng",
-      "hang_lai_xe": "",
+      "hang_lai_xe": "D2",
       "khoa_dang_day": [
         {
           "ma_khoa": "48002K26C1007",
           "lop": "C1K0726",
           "tu_ngay": "",
           "den_ngay": "",
-          "xe": "43C-158.44(Ca 1)",
+          "xe": "43C15844",
           "so_hoc_vien": 4,
           "hoc_vien": [
             "VŨ ANH HƯNG (Bảo lưu)",
@@ -658,7 +658,7 @@
             "NGUYỄN THÀNH ĐẠT"
           ],
           "lich_hoc_pdf": null,
-          "giay_to_xe_link": null
+          "giay_to_xe_link": "https://csdlgtvt.danang.gov.vn/p#/p/gp/546adcde-7361-4214-b13b-e31d034aef6e"
         }
       ],
       "ho_so_file": "files/ho_so_gv/48002023.pdf",
@@ -669,14 +669,14 @@
       "dien_thoai": "0935953546",
       "ngay_sinh": "25/08/1998",
       "dia_chi": "Phường Điện Bàn Đông, Thành phố Đà Nẵng",
-      "hang_lai_xe": "",
+      "hang_lai_xe": "B",
       "khoa_dang_day": [
         {
           "ma_khoa": "48002K262032",
           "lop": "BK0826",
           "tu_ngay": "18/09/2026",
           "den_ngay": "15/12/2026",
-          "xe": "92A-390.94",
+          "xe": "92A39094",
           "so_hoc_vien": 3,
           "hoc_vien": [
             "VÕ HƯNG MINH",
@@ -695,14 +695,14 @@
       "dien_thoai": "0903577027",
       "ngay_sinh": "04/02/1974",
       "dia_chi": "Phường Thanh Khê, Thành phố Đà Nẵng",
-      "hang_lai_xe": "",
+      "hang_lai_xe": "D2",
       "khoa_dang_day": [
         {
           "ma_khoa": "48002K26C1007",
           "lop": "C1K0726",
           "tu_ngay": "",
           "den_ngay": "",
-          "xe": "43C-158.86(Ca 2)",
+          "xe": "43C15886",
           "so_hoc_vien": 4,
           "hoc_vien": [
             "NGUYỄN TRƯỜNG SA",
@@ -711,7 +711,7 @@
             "PHẠM VĂN KHÁNH"
           ],
           "lich_hoc_pdf": null,
-          "giay_to_xe_link": null
+          "giay_to_xe_link": "https://csdlgtvt.danang.gov.vn/p#/p/gp/ba26cf9f-9c7c-4dc1-93e3-a8f30b21fed0"
         }
       ],
       "ho_so_file": "files/ho_so_gv/48002025.pdf",
@@ -722,7 +722,7 @@
       "dien_thoai": "",
       "ngay_sinh": "03/04/1975",
       "dia_chi": "Phường Hải Châu, Thành phố Đà Nẵng",
-      "hang_lai_xe": "",
+      "hang_lai_xe": "D",
       "khoa_dang_day": [],
       "ho_so_file": "files/ho_so_gv/48002026.pdf",
       "anh_file": null
@@ -732,7 +732,7 @@
       "dien_thoai": "",
       "ngay_sinh": "01/01/1981",
       "dia_chi": "Phường Cẩm Lệ, Thành phố Đà Nẵng",
-      "hang_lai_xe": "",
+      "hang_lai_xe": "C1",
       "khoa_dang_day": [],
       "ho_so_file": "files/ho_so_gv/48002027.pdf",
       "anh_file": null
@@ -742,7 +742,7 @@
       "dien_thoai": "",
       "ngay_sinh": "04/07/1983",
       "dia_chi": "Phường Hòa Xuân, Thành phố Đà Nẵng",
-      "hang_lai_xe": "",
+      "hang_lai_xe": "D",
       "khoa_dang_day": [],
       "ho_so_file": "files/ho_so_gv/48002028.pdf",
       "anh_file": null
@@ -752,7 +752,7 @@
       "dien_thoai": "",
       "ngay_sinh": "14/12/1975",
       "dia_chi": "Phường Cẩm Lệ, Thành phố Đà Nẵng",
-      "hang_lai_xe": "",
+      "hang_lai_xe": "D, CE",
       "khoa_dang_day": [],
       "ho_so_file": "files/ho_so_gv/48002029.pdf",
       "anh_file": null
@@ -762,7 +762,7 @@
       "dien_thoai": "",
       "ngay_sinh": "04/04/1989",
       "dia_chi": "Xã Hòa Tiến, Thành phố Đà Nẵng",
-      "hang_lai_xe": "",
+      "hang_lai_xe": "B",
       "khoa_dang_day": [],
       "ho_so_file": "files/ho_so_gv/48002030.pdf",
       "anh_file": null
@@ -772,7 +772,7 @@
       "dien_thoai": "",
       "ngay_sinh": "13/01/1991",
       "dia_chi": "Xã Triệu Cơ, Tỉnh Quảng Trị",
-      "hang_lai_xe": "",
+      "hang_lai_xe": "C1",
       "khoa_dang_day": [],
       "ho_so_file": "files/ho_so_gv/48002031.pdf",
       "anh_file": null
@@ -782,7 +782,7 @@
       "dien_thoai": "",
       "ngay_sinh": "24/02/1983",
       "dia_chi": "Phường Hòa Xuân, Thành phố Đà Nẵng",
-      "hang_lai_xe": "",
+      "hang_lai_xe": "D2",
       "khoa_dang_day": [],
       "ho_so_file": "files/ho_so_gv/48002032.pdf",
       "anh_file": "files/anh_gv/48002032.jpg"
@@ -792,7 +792,7 @@
       "dien_thoai": "",
       "ngay_sinh": "10/04/1982",
       "dia_chi": "Phường Cẩm Lệ, Thành phố Đà Nẵng",
-      "hang_lai_xe": "",
+      "hang_lai_xe": "D",
       "khoa_dang_day": [],
       "ho_so_file": "files/ho_so_gv/48002033.pdf",
       "anh_file": null
@@ -802,14 +802,14 @@
       "dien_thoai": "0905 051109",
       "ngay_sinh": "15/12/1988",
       "dia_chi": "Phường Hòa Xuân, Thành phố Đà Nẵng",
-      "hang_lai_xe": "",
+      "hang_lai_xe": "B",
       "khoa_dang_day": [
         {
           "ma_khoa": "48002K262024",
           "lop": "BK0726",
           "tu_ngay": "11/8/2026",
           "den_ngay": "07/11/2026",
-          "xe": "43A-292.59",
+          "xe": "43A29259",
           "so_hoc_vien": 5,
           "hoc_vien": [
             "NGUYỄN THANH PHƯƠNG",
@@ -830,7 +830,7 @@
       "dien_thoai": "",
       "ngay_sinh": "18/09/1966",
       "dia_chi": "Phường Hòa Khánh, Thành phố Đà Nẵng",
-      "hang_lai_xe": "",
+      "hang_lai_xe": "C1",
       "khoa_dang_day": [],
       "ho_so_file": "files/ho_so_gv/48002035.pdf",
       "anh_file": null
@@ -840,14 +840,14 @@
       "dien_thoai": "0931410511",
       "ngay_sinh": "05/11/1990",
       "dia_chi": "Phường Thanh Khê, Thành phố Đà Nẵng",
-      "hang_lai_xe": "",
+      "hang_lai_xe": "C1",
       "khoa_dang_day": [
         {
           "ma_khoa": "48002K262032",
           "lop": "BK0826",
           "tu_ngay": "18/09/2026",
           "den_ngay": "15/12/2026",
-          "xe": "43A-292.59",
+          "xe": "43A29259",
           "so_hoc_vien": 4,
           "hoc_vien": [
             "BÙI THỊ NHƯ MAI",
@@ -867,7 +867,7 @@
       "dien_thoai": "",
       "ngay_sinh": "16/08/1971",
       "dia_chi": "Phường Ngũ Hành Sơn, Thành phố Đà Nẵng",
-      "hang_lai_xe": "",
+      "hang_lai_xe": "D",
       "khoa_dang_day": [],
       "ho_so_file": "files/ho_so_gv/48002037.pdf",
       "anh_file": null
@@ -877,7 +877,7 @@
       "dien_thoai": "",
       "ngay_sinh": "15/06/1968",
       "dia_chi": "Phường Thanh Khê, Thành phố Đà Nẵng",
-      "hang_lai_xe": "",
+      "hang_lai_xe": "D2, CE",
       "khoa_dang_day": [],
       "ho_so_file": "files/ho_so_gv/48002038.pdf",
       "anh_file": null
@@ -887,14 +887,14 @@
       "dien_thoai": "0906 465686",
       "ngay_sinh": "05/07/1981",
       "dia_chi": "Phường Cẩm Lệ, Thành phố Đà Nẵng",
-      "hang_lai_xe": "",
+      "hang_lai_xe": "C1",
       "khoa_dang_day": [
         {
           "ma_khoa": "48002K262024",
           "lop": "BK0726",
           "tu_ngay": "11/8/2026",
           "den_ngay": "07/11/2026",
-          "xe": "43A-292.74",
+          "xe": "43A29274",
           "so_hoc_vien": 5,
           "hoc_vien": [
             "NGUYỄN TẤN ĐẠT",
@@ -911,7 +911,7 @@
           "lop": "BK0826",
           "tu_ngay": "18/09/2026",
           "den_ngay": "15/12/2026",
-          "xe": "43A-292.74",
+          "xe": "43A29274",
           "so_hoc_vien": 4,
           "hoc_vien": [
             "NGÔ VĂN THẮNG",
@@ -931,7 +931,7 @@
       "dien_thoai": "",
       "ngay_sinh": "06/12/1968",
       "dia_chi": "Phường Hòa Cường, Thành phố Đà Nẵng",
-      "hang_lai_xe": "",
+      "hang_lai_xe": "D2",
       "khoa_dang_day": [],
       "ho_so_file": "files/ho_so_gv/48002040.pdf",
       "anh_file": null
@@ -941,7 +941,7 @@
       "dien_thoai": "",
       "ngay_sinh": "04/03/1974",
       "dia_chi": "Phường Hải Châu, Thành phố Đà Nẵng",
-      "hang_lai_xe": "",
+      "hang_lai_xe": "B",
       "khoa_dang_day": [],
       "ho_so_file": null,
       "anh_file": null
@@ -951,14 +951,14 @@
       "dien_thoai": "0849 226111",
       "ngay_sinh": "24/04/1981",
       "dia_chi": "Phường Hòa Xuân, Thành phố Đà Nẵng",
-      "hang_lai_xe": "",
+      "hang_lai_xe": "D2",
       "khoa_dang_day": [
         {
           "ma_khoa": "48002K262024",
           "lop": "BK0726",
           "tu_ngay": "11/8/2026",
           "den_ngay": "07/11/2026",
-          "xe": "43A-274.93",
+          "xe": "43A27493",
           "so_hoc_vien": 5,
           "hoc_vien": [
             "HOÀNG VĂN HIỆP",
@@ -975,7 +975,7 @@
           "lop": "BK0826",
           "tu_ngay": "18/09/2026",
           "den_ngay": "15/12/2026",
-          "xe": "43A-274.93",
+          "xe": "43A27493",
           "so_hoc_vien": 4,
           "hoc_vien": [
             "VÕ VĂN ĐOÀN",
@@ -995,7 +995,7 @@
       "dien_thoai": "",
       "ngay_sinh": "19/10/1984",
       "dia_chi": "Phường An Khê, Thành phố Đà Nẵng",
-      "hang_lai_xe": "",
+      "hang_lai_xe": "D2",
       "khoa_dang_day": [],
       "ho_so_file": "files/ho_so_gv/48002043.pdf",
       "anh_file": null
@@ -1005,14 +1005,14 @@
       "dien_thoai": "SĐT: 0905535757",
       "ngay_sinh": "15/09/1981",
       "dia_chi": "Xã Hòa Vang, Thành phố Đà Nẵng",
-      "hang_lai_xe": "",
+      "hang_lai_xe": "D2",
       "khoa_dang_day": [
         {
           "ma_khoa": "48002K26C1007",
           "lop": "C1K0726",
           "tu_ngay": "",
           "den_ngay": "",
-          "xe": "43C-158.86(Ca 1)",
+          "xe": "43C15886",
           "so_hoc_vien": 6,
           "hoc_vien": [
             "PHẠM PHÚ QUỐC",
@@ -1023,7 +1023,7 @@
             "LÊ TẤN LỘC"
           ],
           "lich_hoc_pdf": null,
-          "giay_to_xe_link": null
+          "giay_to_xe_link": "https://csdlgtvt.danang.gov.vn/p#/p/gp/ba26cf9f-9c7c-4dc1-93e3-a8f30b21fed0"
         }
       ],
       "ho_so_file": "files/ho_so_gv/48002044.pdf",
@@ -1034,7 +1034,7 @@
       "dien_thoai": "",
       "ngay_sinh": "14/09/1985",
       "dia_chi": "Phường Thanh Khê, Thành phố Đà Nẵng",
-      "hang_lai_xe": "",
+      "hang_lai_xe": "D2",
       "khoa_dang_day": [],
       "ho_so_file": "files/ho_so_gv/48002045.pdf",
       "anh_file": null
@@ -1044,7 +1044,7 @@
       "dien_thoai": "",
       "ngay_sinh": "01/08/1965",
       "dia_chi": "Phường Thanh Khê, Thành phố Đà Nẵng",
-      "hang_lai_xe": "",
+      "hang_lai_xe": "D2, CE",
       "khoa_dang_day": [],
       "ho_so_file": "files/ho_so_gv/48002046.pdf",
       "anh_file": null
@@ -1054,7 +1054,7 @@
       "dien_thoai": "",
       "ngay_sinh": "01/11/1966",
       "dia_chi": "Phường Hòa Cường, Thành phố Đà Nẵng",
-      "hang_lai_xe": "",
+      "hang_lai_xe": "D2, CE",
       "khoa_dang_day": [],
       "ho_so_file": "files/ho_so_gv/48002047.pdf",
       "anh_file": null
@@ -1064,14 +1064,14 @@
       "dien_thoai": "0905 636352",
       "ngay_sinh": "01/08/1996",
       "dia_chi": "Phường Thanh Khê, Thành phố Đà Nẵng",
-      "hang_lai_xe": "",
+      "hang_lai_xe": "B",
       "khoa_dang_day": [
         {
           "ma_khoa": "48002K262024",
           "lop": "BK0726",
           "tu_ngay": "11/8/2026",
           "den_ngay": "07/11/2026",
-          "xe": "43A-292.88",
+          "xe": "43A29288",
           "so_hoc_vien": 5,
           "hoc_vien": [
             "NGUYỄN THỊ OANH",
@@ -1088,7 +1088,7 @@
           "lop": "BK0826",
           "tu_ngay": "18/09/2026",
           "den_ngay": "15/12/2026",
-          "xe": "43A-292.88",
+          "xe": "43A29288",
           "so_hoc_vien": 4,
           "hoc_vien": [
             "ĐỖ MINH QUỐC",
@@ -1108,14 +1108,14 @@
       "dien_thoai": "0905737464",
       "ngay_sinh": "23/11/1983",
       "dia_chi": "Phường Thanh Khê, Thành phố Đà Nẵng",
-      "hang_lai_xe": "",
+      "hang_lai_xe": "C1",
       "khoa_dang_day": [
         {
           "ma_khoa": "48002K262032",
           "lop": "BK0826",
           "tu_ngay": "18/09/2026",
           "den_ngay": "15/12/2026",
-          "xe": "43A-293.01",
+          "xe": "43A29301",
           "so_hoc_vien": 4,
           "hoc_vien": [
             "NGUYỄN ĐÌNH DIỄN",
@@ -1131,7 +1131,7 @@
           "lop": "C1K0726",
           "tu_ngay": "",
           "den_ngay": "",
-          "xe": "43B-252.95(Ca 2)",
+          "xe": "43B25295",
           "so_hoc_vien": 4,
           "hoc_vien": [
             "ĐOÀN NGỌC TÂN",
@@ -1151,7 +1151,7 @@
       "dien_thoai": "",
       "ngay_sinh": "01/02/1979",
       "dia_chi": "Phường Hòa Khánh, Thành phố Đà Nẵng",
-      "hang_lai_xe": "",
+      "hang_lai_xe": "D",
       "khoa_dang_day": [],
       "ho_so_file": "files/ho_so_gv/48002050.pdf",
       "anh_file": null
@@ -1161,7 +1161,7 @@
       "dien_thoai": "",
       "ngay_sinh": "01/08/1975",
       "dia_chi": "Phường Hải Châu, Thành phố Đà Nẵng",
-      "hang_lai_xe": "",
+      "hang_lai_xe": "B",
       "khoa_dang_day": [],
       "ho_so_file": "files/ho_so_gv/48002051.pdf",
       "anh_file": null
@@ -1171,14 +1171,14 @@
       "dien_thoai": "0905 955158",
       "ngay_sinh": "28/08/1979",
       "dia_chi": "Phường An Hải, Thành phố Đà Nẵng",
-      "hang_lai_xe": "",
+      "hang_lai_xe": "C1",
       "khoa_dang_day": [
         {
           "ma_khoa": "48002K262024",
           "lop": "BK0726",
           "tu_ngay": "11/8/2026",
           "den_ngay": "07/11/2026",
-          "xe": "43A-015.10",
+          "xe": "43A01510",
           "so_hoc_vien": 5,
           "hoc_vien": [
             "ĐẶNG NGỌC HẢI",
@@ -1195,7 +1195,7 @@
           "lop": "BK0826",
           "tu_ngay": "18/09/2026",
           "den_ngay": "15/12/2026",
-          "xe": "43A-015.10",
+          "xe": "43A01510",
           "so_hoc_vien": 4,
           "hoc_vien": [
             "TRƯƠNG QUANG TRƯỜNG",
@@ -1215,14 +1215,14 @@
       "dien_thoai": "0905690456",
       "ngay_sinh": "31/12/1982",
       "dia_chi": "Phường Thanh Khê, Thành phố Đà Nẵng",
-      "hang_lai_xe": "",
+      "hang_lai_xe": "D",
       "khoa_dang_day": [
         {
           "ma_khoa": "48002K262032",
           "lop": "BK0826",
           "tu_ngay": "18/09/2026",
           "den_ngay": "15/12/2026",
-          "xe": "43A-292.82",
+          "xe": "43A29282",
           "so_hoc_vien": 3,
           "hoc_vien": [
             "TRẦN HOÀNG QUANG VŨ",
@@ -1237,7 +1237,7 @@
           "lop": "C1K0726",
           "tu_ngay": "",
           "den_ngay": "",
-          "xe": "43C-158.44(Ca 2)",
+          "xe": "43C15844",
           "so_hoc_vien": 4,
           "hoc_vien": [
             "ĐINH NGUYỄN TIẾN ĐẠT",
@@ -1246,7 +1246,7 @@
             "PHẠM VĂN LÂM"
           ],
           "lich_hoc_pdf": null,
-          "giay_to_xe_link": null
+          "giay_to_xe_link": "https://csdlgtvt.danang.gov.vn/p#/p/gp/546adcde-7361-4214-b13b-e31d034aef6e"
         }
       ],
       "ho_so_file": "files/ho_so_gv/48002053.pdf",
@@ -1257,7 +1257,7 @@
       "dien_thoai": "",
       "ngay_sinh": "11/12/1983",
       "dia_chi": "Xã Bà Nà, Thành phố Đà Nẵng",
-      "hang_lai_xe": "",
+      "hang_lai_xe": "C1",
       "khoa_dang_day": [],
       "ho_so_file": "files/ho_so_gv/48002054.pdf",
       "anh_file": null
@@ -1267,7 +1267,7 @@
       "dien_thoai": "",
       "ngay_sinh": "01/04/1972",
       "dia_chi": "Phường Thanh Khê, Thành phố Đà Nẵng",
-      "hang_lai_xe": "",
+      "hang_lai_xe": "D2",
       "khoa_dang_day": [],
       "ho_so_file": "files/ho_so_gv/48002055.pdf",
       "anh_file": null
@@ -1277,7 +1277,7 @@
       "dien_thoai": "",
       "ngay_sinh": "20/04/1976",
       "dia_chi": "Phường An Khê, Thành phố Đà Nẵng",
-      "hang_lai_xe": "",
+      "hang_lai_xe": "D",
       "khoa_dang_day": [],
       "ho_so_file": "files/ho_so_gv/48002056.pdf",
       "anh_file": null
@@ -1287,7 +1287,7 @@
       "dien_thoai": "",
       "ngay_sinh": "09/05/1993",
       "dia_chi": "Phường Hải Châu, Thành phố Đà Nẵng",
-      "hang_lai_xe": "",
+      "hang_lai_xe": "C",
       "khoa_dang_day": [],
       "ho_so_file": "files/ho_so_gv/48002057.pdf",
       "anh_file": null
@@ -1297,7 +1297,7 @@
       "dien_thoai": "0917672579",
       "ngay_sinh": "05/10/1977",
       "dia_chi": "Phường Thanh Khê, Thành phố Đà Nẵng",
-      "hang_lai_xe": "",
+      "hang_lai_xe": "A1",
       "khoa_dang_day": [],
       "ho_so_file": "files/ho_so_gv/48002058.pdf",
       "anh_file": null
@@ -1307,7 +1307,7 @@
       "dien_thoai": "",
       "ngay_sinh": "09/02/1994",
       "dia_chi": "Phường Hòa Cường, Thành phố Đà Nẵng",
-      "hang_lai_xe": "",
+      "hang_lai_xe": "C",
       "khoa_dang_day": [],
       "ho_so_file": "files/ho_so_gv/48002059.pdf",
       "anh_file": null
@@ -1317,14 +1317,14 @@
       "dien_thoai": "0901139535",
       "ngay_sinh": "25/10/1992",
       "dia_chi": "Phường Cẩm Lệ, Thành phố Đà Nẵng",
-      "hang_lai_xe": "",
+      "hang_lai_xe": "B",
       "khoa_dang_day": [
         {
           "ma_khoa": "48002K262024",
           "lop": "BK0726",
           "tu_ngay": "11/8/2026",
           "den_ngay": "07/11/2026",
-          "xe": "43A-292.11",
+          "xe": "43A29211",
           "so_hoc_vien": 5,
           "hoc_vien": [
             "NGUYỄN VĂN HIỆU",
@@ -1341,7 +1341,7 @@
           "lop": "BK0826",
           "tu_ngay": "18/09/2026",
           "den_ngay": "15/12/2026",
-          "xe": "43A-292.11",
+          "xe": "43A29211",
           "so_hoc_vien": 4,
           "hoc_vien": [
             "ĐINH NGỌC PHONG NHÃ",
@@ -1361,7 +1361,7 @@
       "dien_thoai": "",
       "ngay_sinh": "14/01/1983",
       "dia_chi": "Phường Thủ Đức, Thành phố Hồ Chí Minh",
-      "hang_lai_xe": "",
+      "hang_lai_xe": "C1",
       "khoa_dang_day": [],
       "ho_so_file": "files/ho_so_gv/48002061.pdf",
       "anh_file": null
@@ -1371,7 +1371,7 @@
       "dien_thoai": "",
       "ngay_sinh": "01/01/1974",
       "dia_chi": "Phường Hòa Cường, Thành phố Đà Nẵng",
-      "hang_lai_xe": "",
+      "hang_lai_xe": "D, CE",
       "khoa_dang_day": [],
       "ho_so_file": "files/ho_so_gv/48002062.pdf",
       "anh_file": null
@@ -1381,14 +1381,14 @@
       "dien_thoai": "0905222506",
       "ngay_sinh": "12/08/1981",
       "dia_chi": "Xã Bà Nà, Thành phố Đà Nẵng",
-      "hang_lai_xe": "",
+      "hang_lai_xe": "C",
       "khoa_dang_day": [
         {
           "ma_khoa": "48002K262024",
           "lop": "BK0726",
           "tu_ngay": "11/8/2026",
           "den_ngay": "07/11/2026",
-          "xe": "43A-293.58",
+          "xe": "43A29358",
           "so_hoc_vien": 5,
           "hoc_vien": [
             "PHẠM VŨ HOÀNG",
@@ -1405,7 +1405,7 @@
           "lop": "BK0826",
           "tu_ngay": "18/09/2026",
           "den_ngay": "15/12/2026",
-          "xe": "43A-293.58",
+          "xe": "43A29358",
           "so_hoc_vien": 4,
           "hoc_vien": [
             "ĐỖ THỊ THANH LAN",
@@ -1425,14 +1425,14 @@
       "dien_thoai": "0868753997",
       "ngay_sinh": "30/04/1980",
       "dia_chi": "Phường Cẩm Lệ, Thành phố Đà Nẵng",
-      "hang_lai_xe": "",
+      "hang_lai_xe": "C1",
       "khoa_dang_day": [
         {
           "ma_khoa": "48002K262032",
           "lop": "BK0826",
           "tu_ngay": "18/09/2026",
           "den_ngay": "15/12/2026",
-          "xe": "43A-275.90",
+          "xe": "43A27590",
           "so_hoc_vien": 4,
           "hoc_vien": [
             "LÊ THỊ THANH THẢO",
