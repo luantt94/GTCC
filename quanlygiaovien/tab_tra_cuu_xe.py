@@ -16,6 +16,7 @@ from PySide6.QtWidgets import (
     QStyle,
     QTableWidget,
     QTableWidgetItem,
+    QTextEdit,
     QVBoxLayout,
     QWidget,
 )
@@ -59,6 +60,7 @@ class TraCuuXeTab(QWidget):
                 "bien_so": bien_so,
                 "nhan_hieu": info.get("nhan_hieu", ""),
                 "loai_xe": info.get("loai_xe", ""),
+                "extra": info.get("extra", {}),
                 "in_dsxtl": True,
             }
         for c in self.model.all_courses():
@@ -72,6 +74,7 @@ class TraCuuXeTab(QWidget):
                         "bien_so": xe,
                         "nhan_hieu": "",
                         "loai_xe": "",
+                        "extra": {},
                         "in_dsxtl": False,
                     }
         return dict(sorted(vehicles.items(), key=lambda kv: kv[1]["bien_so"]))
@@ -135,6 +138,15 @@ class TraCuuXeTab(QWidget):
         self.table.horizontalHeader().setStretchLastSection(True)
         splitter.addWidget(self.table)
 
+        xml_info_box = QWidget()
+        xml_info_layout = QVBoxLayout(xml_info_box)
+        xml_info_layout.setContentsMargins(0, 0, 0, 0)
+        xml_info_layout.addWidget(QLabel("Toàn bộ thông tin từ file DSXTL_*.xml:"))
+        self.txt_xml_info = QTextEdit()
+        self.txt_xml_info.setReadOnly(True)
+        xml_info_layout.addWidget(self.txt_xml_info)
+        splitter.addWidget(xml_info_box)
+
         self.doc_stack = QStackedWidget()
 
         self.lbl_no_doc = QLabel("Chưa có link giấy tờ xe cho biển số này.")
@@ -147,7 +159,8 @@ class TraCuuXeTab(QWidget):
 
         splitter.addWidget(self.doc_stack)
         splitter.setStretchFactor(0, 1)
-        splitter.setStretchFactor(1, 2)
+        splitter.setStretchFactor(1, 1)
+        splitter.setStretchFactor(2, 2)
         right_layout.addWidget(splitter, 1)
 
         main_splitter.addWidget(right)
@@ -190,6 +203,7 @@ class TraCuuXeTab(QWidget):
             self.btn_save_xe_link.setEnabled(False)
             self._render_history(None)
             self._show_doc("")
+            self.txt_xml_info.clear()
             return
 
         if v["in_dsxtl"]:
@@ -205,6 +219,15 @@ class TraCuuXeTab(QWidget):
 
         self._render_history(plate)
         self._show_doc(self.txt_xe_link.text())
+        self._refresh_xml_info(v)
+
+    def _refresh_xml_info(self, v):
+        extra = v.get("extra") or {}
+        if not extra:
+            self.txt_xml_info.setPlainText("(Biển số này chưa có trong DSXTL_*.xml.)")
+            return
+        lines = [f"{tag}: {value}" for tag, value in extra.items()]
+        self.txt_xml_info.setPlainText("\n".join(lines))
 
     def _on_save_xe_link(self):
         current = self.list_widget.currentItem()

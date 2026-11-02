@@ -62,7 +62,10 @@ def parse_dsgv(path, active_only=True):
 
 
 def parse_dsxtl(path, active_only=True):
-    """Trả về dict: biển số (nguyên văn) -> {"nhan_hieu":..., "loai_xe":...}."""
+    """Trả về dict: biển số (nguyên văn) -> {"nhan_hieu":..., "loai_xe":...,
+    "extra": {...}}. "extra" là TOÀN BỘ các trường còn lại của xe (số khung,
+    số động cơ, hạn giấy phép, v.v...) - không có trường nào nhạy cảm trong
+    DSXTL (không phải thông tin cá nhân) nên không cần loại trừ gì."""
     root = ET.parse(path).getroot()
     body = root.find("XETAPS")
     if body is None:
@@ -79,5 +82,10 @@ def parse_dsxtl(path, active_only=True):
         bien_so = g("BIENSOXE")
         if not bien_so:
             continue
-        out[bien_so] = {"nhan_hieu": g("NHANHIEU"), "loai_xe": g("LOAIXE")}
+        extra = {child.tag: (child.text or "").strip() for child in rec}
+        out[bien_so] = {
+            "nhan_hieu": g("NHANHIEU"),
+            "loai_xe": g("LOAIXE"),
+            "extra": extra,
+        }
     return out
