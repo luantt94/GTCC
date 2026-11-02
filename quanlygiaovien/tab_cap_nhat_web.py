@@ -17,7 +17,8 @@ git commit/push chạy ngầm khi bấm nút "Cập nhật && Đăng lên web".
 """
 from pathlib import Path
 
-from PySide6.QtCore import QThread, Signal
+from PySide6.QtCore import QThread, QUrl, Signal
+from PySide6.QtGui import QDesktopServices
 from PySide6.QtWidgets import (
     QCheckBox,
     QFileDialog,
@@ -52,6 +53,8 @@ class _FileListPicker(QGroupBox):
         self.lst = QListWidget()
         self.lst.setFixedHeight(90)
         self.lst.setSelectionMode(QListWidget.SelectionMode.ExtendedSelection)
+        self.lst.setToolTip("Bấm đúp vào 1 file để mở lên kiểm tra.")
+        self.lst.itemDoubleClicked.connect(self._on_open_item)
         layout.addWidget(self.lst)
 
         btn_row = QHBoxLayout()
@@ -76,6 +79,13 @@ class _FileListPicker(QGroupBox):
         for f in files:
             if f not in existing_set:
                 self.lst.addItem(f)
+
+    def _on_open_item(self, item):
+        path = Path(item.text())
+        if not path.exists():
+            QMessageBox.warning(self, "Không tìm thấy file", f"File không còn tồn tại:\n{path}")
+            return
+        QDesktopServices.openUrl(QUrl.fromLocalFile(str(path)))
 
     def _on_remove(self):
         items = self.lst.selectedItems()
@@ -112,6 +122,10 @@ class _SinglePathPicker(QGroupBox):
         self.txt = QLineEdit()
         self.txt.setReadOnly(True)
         layout.addWidget(self.txt, 1)
+        btn_open = QPushButton(_icon(self, QStyle.StandardPixmap.SP_FileIcon), "Mở")
+        btn_open.setToolTip("Mở file/thư mục này lên để kiểm tra.")
+        btn_open.clicked.connect(self._on_open)
+        layout.addWidget(btn_open)
         btn = QPushButton(_icon(self, QStyle.StandardPixmap.SP_DirOpenIcon), "Chọn...")
         btn.clicked.connect(self._on_choose)
         layout.addWidget(btn)
@@ -129,6 +143,17 @@ class _SinglePathPicker(QGroupBox):
             )
         if path:
             self.txt.setText(path)
+
+    def _on_open(self):
+        path_str = self.txt.text().strip()
+        if not path_str:
+            QMessageBox.information(self, "Chưa chọn", "Chưa chọn file/thư mục nào.")
+            return
+        path = Path(path_str)
+        if not path.exists():
+            QMessageBox.warning(self, "Không tìm thấy", f"Không tồn tại:\n{path}")
+            return
+        QDesktopServices.openUrl(QUrl.fromLocalFile(str(path)))
 
     def path(self):
         return self.txt.text().strip()
