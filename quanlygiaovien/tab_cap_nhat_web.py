@@ -32,6 +32,7 @@ from PySide6.QtWidgets import (
     QPushButton,
     QScrollArea,
     QStyle,
+    QTextBrowser,
     QTextEdit,
     QVBoxLayout,
     QWidget,
@@ -40,6 +41,59 @@ from PySide6.QtWidgets import (
 import publish_data
 import git_publish
 from style import icon as _icon
+
+# Mô tả định dạng từng loại file nguồn - hiện ngay trong tab để người dùng
+# khác (hoặc máy mới lấy code về) biết cần chuẩn bị file đúng cấu trúc nào
+# trước khi chọn, khỏi phải đọc code mới hiểu được.
+_FORMAT_GUIDE_HTML = """
+<style>
+  p { margin: 4px 0 10px 0; }
+  b { color: #2b6cb0; }
+  code { background: #eef2f7; padding: 1px 4px; border-radius: 3px; }
+  ul { margin: 2px 0 10px 18px; padding: 0; }
+  li { margin: 2px 0; }
+</style>
+
+<p><b>1. File Excel "BIÊN CHẾ XE KHÓA xxxx.xlsx/.xls"</b> (mỗi khóa 1 file) - gồm 2 sheet app đọc tới:</p>
+<ul>
+<li>1 sheet có dòng tiêu đề <code>BIÊN CHẾ XE KHÓA &lt;mã khóa&gt; (&lt;lớp&gt;)</code> ở cột A
+(trong 10 dòng đầu). Bảng học viên bắt đầu từ dòng có cột A = <code>Stt</code>, các cột:
+A=Stt, B=Họ và tên, C=Ngày sinh (dd/mm/yyyy), D=Địa chỉ thường trú,
+E=Xe/GV/SĐT (1 ô gộp 3 dòng: biển số xe [có thể thêm hậu tố
+<code>(Ca 1)</code>/<code>(Ca 2)</code> nếu 1 xe chạy nhiều ca] / tên giáo viên / số điện thoại),
+F=Ghi chú (vd "Bảo lưu").</li>
+<li>Sheet tên <code>"Sổ phân công GV"</code>: dòng tiêu đề có cột A = <code>Số TT</code>,
+cột C = "Thời gian" dạng <code>Từ dd/mm/yyyy ... đến dd/mm/yyyy</code>, cột D = mã khóa
+(phải khớp mã khóa ở sheet trên) - dùng lấy ngày bắt đầu/kết thúc khóa.</li>
+</ul>
+
+<p><b>2. File PDF "LICH HOC THUC HANH xxxx.pdf"</b> (mỗi khóa 1 file) - không yêu cầu
+nội dung bên trong, chỉ cần <u>tên file</u> có chứa mã lớp (vd "BK0726") để app tự khớp
+với khóa tương ứng.</p>
+
+<p><b>3. File DSGV_*.xml</b> - XML gốc xuất từ hệ thống của Sở GTVT (không tự tạo tay),
+cấu trúc <code>&lt;GIAOVIENS&gt;&lt;GIAOVIEN&gt;&lt;MaGV&gt;&lt;HoTenDem&gt;&lt;TenGV&gt;
+&lt;DienThoai&gt;&lt;NgaySinh&gt;&lt;NoiCT&gt;&lt;TrangThai&gt;...</code> - là nguồn mã QR
+chính thức cho từng giáo viên, <u>bắt buộc phải có</u>.</p>
+
+<p><b>4. File DSXTL_*.xml</b> - XML gốc từ Sở GTVT, cấu trúc
+<code>&lt;XETAPS&gt;&lt;XETAP&gt;&lt;BIENSOXE&gt;&lt;NHANHIEU&gt;&lt;LOAIXE&gt;
+&lt;TRANGTHAI&gt;...</code> - dùng đối chiếu biển số Excel có khớp danh sách chính thức
+không (không bắt buộc, nhưng thiếu thì mất cảnh báo biển số sai).</p>
+
+<p><b>5. Thư mục hồ sơ cá nhân giáo viên</b> - chứa file PDF, chỉ cần <u>tên file</u> chứa
+tên giáo viên (không phân biệt hoa/thường, có thể có số thứ tự ở đầu tên file) để app
+tự khớp, không yêu cầu đặt tên file theo quy tắc cố định.</p>
+
+<p><b>6. File kết quả thi tốt nghiệp</b> (vd "SỐ LƯỢNG THI ĐẠT TỐT NGHIỆP ...xlsx/.xls",
+<u>không bắt buộc</u>) - đọc sheet tên <code>"TỔNGHỢP"</code> (không có thì lấy sheet đầu
+tiên), mỗi dòng 1 học viên ĐÃ ĐẠT: A=Stt, B=Họ và tên, C=Ngày sinh, D=Số CMND
+(KHÔNG đọc/không đưa lên web), E=Địa chỉ (KHÔNG đọc/không đưa lên web), F=Khóa (mã lớp,
+vd "BK0626", có thể kèm <code>, Hạng</code>), G=Hạng, H=Ngày tốt nghiệp (dd/mm/yyyy).
+Đối chiếu với học viên bên file biên chế xe theo (tên đã chuẩn hoá + ngày sinh + mã lớp) -
+khớp được thì ghi "Đạt" + ngày tốt nghiệp; không khớp coi là <i>chưa có kết quả</i>
+(KHÔNG phải trượt).</p>
+"""
 
 
 class _FileListPicker(QGroupBox):
@@ -205,6 +259,19 @@ class CapNhatWebTab(QWidget):
         outer = QVBoxLayout(content)
         outer.setContentsMargins(12, 12, 12, 12)
         outer.setSpacing(10)
+
+        guide_box = QGroupBox("Hướng dẫn định dạng từng file nguồn (bấm để xem/ẩn)")
+        guide_box.setCheckable(True)
+        guide_box.setChecked(False)
+        guide_layout = QVBoxLayout(guide_box)
+        self.txt_guide = QTextBrowser()
+        self.txt_guide.setOpenExternalLinks(False)
+        self.txt_guide.setHtml(_FORMAT_GUIDE_HTML)
+        self.txt_guide.setFixedHeight(320)
+        self.txt_guide.setVisible(False)
+        guide_layout.addWidget(self.txt_guide)
+        guide_box.toggled.connect(self.txt_guide.setVisible)
+        outer.addWidget(guide_box)
 
         self.pick_bien_che = _FileListPicker(
             'File Excel "BIÊN CHẾ XE KHÓA ..." (mỗi khóa 1 file)',
