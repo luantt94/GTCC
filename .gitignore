@@ -221,4 +221,8 @@ __marimo__/
 
 # Hồ sơ / tài liệu cá nhân nhạy cảm - không đưa lên GitHub (repo public)
 /data/
-/quanlygiaovien/data/
+/quanlygiaovien/data/*
+# Ảnh nền khung thẻ giáo viên (không chứa dữ liệu cá nhân) - CẦN có sẵn để
+# app in thẻ chạy được ngay khi gửi cho máy khác, nên vẫn commit lên git.
+!/quanlygiaovien/data/khunganhnen.jpg
+!/quanlygiaovien/data/khunganhnen_co_anh.jpg
