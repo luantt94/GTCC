@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-02T09:53:08",
+  "generated_at": "2026-11-02T11:42:55",
   "teachers": {
     "48002001": {
       "ten": "Nguyễn Anh Dương",
@@ -26,11 +26,31 @@
           "xe": "43B30483",
           "so_hoc_vien": 5,
           "hoc_vien": [
-            "LÊ QUANG THÀNH",
-            "LÊ ĐÌNH QUỐC HUY",
-            "TRẦN MINH NHÂN KIỆT",
-            "TRƯƠNG QUANG",
-            "MAI THU THẢO"
+            {
+              "ten": "LÊ QUANG THÀNH",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "LÊ ĐÌNH QUỐC HUY",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "TRẦN MINH NHÂN KIỆT",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "TRƯƠNG QUANG",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "MAI THU THẢO",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            }
           ],
           "lich_hoc_pdf": "files/lich_hoc/48002K262024.pdf",
           "giay_to_xe_link": "https://csdlgtvt.danang.vn/p/#/gp/2816adef-5acc-464a-8c9c-0d3a844b17c5"
@@ -43,10 +63,26 @@
           "xe": "43B30483",
           "so_hoc_vien": 4,
           "hoc_vien": [
-            "PHAN HOÀI LĂNG",
-            "HUỲNH NGỌC TẤN PHÁT",
-            "NGUYỄN THỊ VÂN",
-            "HOÀNG KIM TÙNG"
+            {
+              "ten": "PHAN HOÀI LĂNG",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "HUỲNH NGỌC TẤN PHÁT",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "NGUYỄN THỊ VÂN",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "HOÀNG KIM TÙNG",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            }
           ],
           "lich_hoc_pdf": "files/lich_hoc/48002K262032.pdf",
           "giay_to_xe_link": "https://csdlgtvt.danang.vn/p/#/gp/2816adef-5acc-464a-8c9c-0d3a844b17c5"
@@ -70,12 +106,36 @@
           "xe": "43B25295",
           "so_hoc_vien": 6,
           "hoc_vien": [
-            "LÊ HỒ HỮU PHƯỚC",
-            "NGUYỄN VĂN THIÊN",
-            "CÙ VĂN TRUNG",
-            "NGUYỄN THỊ THANH CHÂU",
-            "ĐẶNG CÔNG VINH",
-            "NGUYỄN ĐÌNH HUY"
+            {
+              "ten": "LÊ HỒ HỮU PHƯỚC",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "NGUYỄN VĂN THIÊN",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "CÙ VĂN TRUNG",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "NGUYỄN THỊ THANH CHÂU",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "ĐẶNG CÔNG VINH",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "NGUYỄN ĐÌNH HUY",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            }
           ],
           "lich_hoc_pdf": null,
           "giay_to_xe_link": "https://csdlgtvt.danang.vn/p/#/gp/1378ba10-6a6f-4095-8d18-2570f7e9f635"
@@ -99,11 +159,31 @@
           "xe": "43A34074",
           "so_hoc_vien": 5,
           "hoc_vien": [
-            "NGUYỄN THỊ TRÀ MY",
-            "NGUYỄN VĂN TRƯNG",
-            "NGUYỄN HỮU THANH",
-            "HOÀNG HẢI ĐÔNG",
-            "DƯƠNG HIỂN TÀI"
+            {
+              "ten": "NGUYỄN THỊ TRÀ MY",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "NGUYỄN VĂN TRƯNG",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "NGUYỄN HỮU THANH",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "HOÀNG HẢI ĐÔNG",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "DƯƠNG HIỂN TÀI",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            }
           ],
           "lich_hoc_pdf": "files/lich_hoc/48002K262024.pdf",
           "giay_to_xe_link": "https://csdlgtvt.danang.vn/p/#/gp/6d25dbc5-49f8-4689-8011-292aec7439c7"
@@ -116,10 +196,26 @@
           "xe": "43A34074",
           "so_hoc_vien": 4,
           "hoc_vien": [
-            "NGÔ VĂN NHO",
-            "TÀO DIỄM PHÚC",
-            "NGUYỄN DUY ANH",
-            "NGUYỄN VĂN TOÀN"
+            {
+              "ten": "NGÔ VĂN NHO",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "TÀO DIỄM PHÚC",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "NGUYỄN DUY ANH",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "NGUYỄN VĂN TOÀN",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            }
           ],
           "lich_hoc_pdf": "files/lich_hoc/48002K262032.pdf",
           "giay_to_xe_link": "https://csdlgtvt.danang.vn/p/#/gp/6d25dbc5-49f8-4689-8011-292aec7439c7"
@@ -143,11 +239,31 @@
           "xe": "43A29261",
           "so_hoc_vien": 5,
           "hoc_vien": [
-            "BÙI ĐỨC DUY",
-            "NGUYỄN BÁ VỮNG",
-            "LÊ UYÊN THẢO",
-            "LÊ ĐỨC QUANG",
-            "BÙI ĐỨC NHÂN"
+            {
+              "ten": "BÙI ĐỨC DUY",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "NGUYỄN BÁ VỮNG",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "LÊ UYÊN THẢO",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "LÊ ĐỨC QUANG",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "BÙI ĐỨC NHÂN",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            }
           ],
           "lich_hoc_pdf": "files/lich_hoc/48002K262024.pdf",
           "giay_to_xe_link": "https://csdlgtvt.danang.vn/p/#/gp/da98d908-e0ef-4dbd-b11a-fc504297564c"
@@ -160,10 +276,26 @@
           "xe": "43A29261",
           "so_hoc_vien": 4,
           "hoc_vien": [
-            "PHAN TẤN HÙNG",
-            "PHẠM NHỚ",
-            "HUỲNH BẢO QUYÊN",
-            "DƯƠNG VĂN MẠNH"
+            {
+              "ten": "PHAN TẤN HÙNG",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "PHẠM NHỚ",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "HUỲNH BẢO QUYÊN",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "DƯƠNG VĂN MẠNH",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            }
           ],
           "lich_hoc_pdf": "files/lich_hoc/48002K262032.pdf",
           "giay_to_xe_link": "https://csdlgtvt.danang.vn/p/#/gp/da98d908-e0ef-4dbd-b11a-fc504297564c"
@@ -187,11 +319,31 @@
           "xe": "43A29325",
           "so_hoc_vien": 5,
           "hoc_vien": [
-            "DƯƠNG CÔNG TRÍ",
-            "TRẦN VĂN LỢI",
-            "VÕ NHƯ THIÊN",
-            "LÊ THỊ KIM OANH",
-            "PHẠM TẤN THỐNG NHẤT"
+            {
+              "ten": "DƯƠNG CÔNG TRÍ",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "TRẦN VĂN LỢI",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "VÕ NHƯ THIÊN",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "LÊ THỊ KIM OANH",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "PHẠM TẤN THỐNG NHẤT",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            }
           ],
           "lich_hoc_pdf": "files/lich_hoc/48002K262024.pdf",
           "giay_to_xe_link": "https://csdlgtvt.danang.vn/p/#/gp/1dc8cf35-baa9-4207-8a19-61989d39f0e7"
@@ -204,10 +356,26 @@
           "xe": "43A29325",
           "so_hoc_vien": 4,
           "hoc_vien": [
-            "MÃ THỊ ÚT",
-            "NGUYỄN GIA BẢO",
-            "NGUYỄN QUANG HÙNG",
-            "ĐINH NGỌC AN"
+            {
+              "ten": "MÃ THỊ ÚT",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "NGUYỄN GIA BẢO",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "NGUYỄN QUANG HÙNG",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "ĐINH NGỌC AN",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            }
           ],
           "lich_hoc_pdf": "files/lich_hoc/48002K262032.pdf",
           "giay_to_xe_link": "https://csdlgtvt.danang.vn/p/#/gp/1dc8cf35-baa9-4207-8a19-61989d39f0e7"
@@ -231,11 +399,31 @@
           "xe": "43A03136",
           "so_hoc_vien": 5,
           "hoc_vien": [
-            "NGUYỄN HỮU KIÊN",
-            "HOÀNG THỊ QUỲNH NGA",
-            "PHAN THỊ MINH CHÂU",
-            "TRẦN THỊ THÙY TRANG",
-            "HUỲNH NGỌC ĐỊNH"
+            {
+              "ten": "NGUYỄN HỮU KIÊN",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "HOÀNG THỊ QUỲNH NGA",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "PHAN THỊ MINH CHÂU",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "TRẦN THỊ THÙY TRANG",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "HUỲNH NGỌC ĐỊNH",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            }
           ],
           "lich_hoc_pdf": "files/lich_hoc/48002K262024.pdf",
           "giay_to_xe_link": "https://csdlgtvt.danang.vn/p/#/gp/639946a2-e656-4055-a4de-3f33f6faf2d"
@@ -248,10 +436,26 @@
           "xe": "43A03136",
           "so_hoc_vien": 4,
           "hoc_vien": [
-            "TRẦN THỊ THANH LONG",
-            "LÊ ĐÌNH MINH",
-            "VÕ LONG PHÁT",
-            "TRỊNH THỊ XUÂN MAI"
+            {
+              "ten": "TRẦN THỊ THANH LONG",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "LÊ ĐÌNH MINH",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "VÕ LONG PHÁT",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "TRỊNH THỊ XUÂN MAI",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            }
           ],
           "lich_hoc_pdf": "files/lich_hoc/48002K262032.pdf",
           "giay_to_xe_link": "https://csdlgtvt.danang.vn/p/#/gp/639946a2-e656-4055-a4de-3f33f6faf2d"
@@ -285,11 +489,31 @@
           "xe": "43A67165",
           "so_hoc_vien": 5,
           "hoc_vien": [
-            "ĐOÀN NGỌC HOÀNG LONG",
-            "NGUYỄN QUỐC VŨ",
-            "NGUYỄN TẤN THÔNG",
-            "ĐINH SỸ QUỐC VIỆT",
-            "NGUYỄN TĂNG HỒNG NGỌC"
+            {
+              "ten": "ĐOÀN NGỌC HOÀNG LONG",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "NGUYỄN QUỐC VŨ",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "NGUYỄN TẤN THÔNG",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "ĐINH SỸ QUỐC VIỆT",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "NGUYỄN TĂNG HỒNG NGỌC",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            }
           ],
           "lich_hoc_pdf": "files/lich_hoc/48002K262024.pdf",
           "giay_to_xe_link": "https://csdlgtvt.danang.vn/p/#/gp/4d06240a-3710-43dd-b031-c5bb21ffd783"
@@ -302,10 +526,26 @@
           "xe": "43A67165",
           "so_hoc_vien": 4,
           "hoc_vien": [
-            "NGÔ ĐẮC DIỆP",
-            "TRẦN THỊ THÙY TRANG",
-            "NGÔ THỊ NHƯ QUỲNH",
-            "ĐẶNG CÔNG TRINH"
+            {
+              "ten": "NGÔ ĐẮC DIỆP",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "TRẦN THỊ THÙY TRANG",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "NGÔ THỊ NHƯ QUỲNH",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "ĐẶNG CÔNG TRINH",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            }
           ],
           "lich_hoc_pdf": "files/lich_hoc/48002K262032.pdf",
           "giay_to_xe_link": "https://csdlgtvt.danang.vn/p/#/gp/4d06240a-3710-43dd-b031-c5bb21ffd783"
@@ -339,10 +579,26 @@
           "xe": "43A29337",
           "so_hoc_vien": 4,
           "hoc_vien": [
-            "NGUYỄN ĐÌNH HOÀNG",
-            "NGUYỄN VŨ ANH CƯỜNG",
-            "LƯƠNG MINH TÂM",
-            "NGUYỄN VĂN LAI"
+            {
+              "ten": "NGUYỄN ĐÌNH HOÀNG",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "NGUYỄN VŨ ANH CƯỜNG",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "LƯƠNG MINH TÂM",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "NGUYỄN VĂN LAI",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            }
           ],
           "lich_hoc_pdf": "files/lich_hoc/48002K262032.pdf",
           "giay_to_xe_link": "https://csdlgtvt.danang.vn/p/#/gp/e659419c-cbe3-4c8e-9074-c0c3482e3458"
@@ -355,10 +611,26 @@
           "xe": "43C16443",
           "so_hoc_vien": 4,
           "hoc_vien": [
-            "NGUYỄN QUỐC AN",
-            "TRẦN QUỐC VỊNH",
-            "LÊ ĐÌNH TÂM",
-            "TRƯƠNG MINH VIỆT"
+            {
+              "ten": "NGUYỄN QUỐC AN",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "TRẦN QUỐC VỊNH",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "LÊ ĐÌNH TÂM",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "TRƯƠNG MINH VIỆT",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            }
           ],
           "lich_hoc_pdf": null,
           "giay_to_xe_link": "https://csdlgtvt.danang.vn/p/#/gp/4d134250-3192-41f1-b96f-251528c0fc28"
@@ -382,11 +654,31 @@
           "xe": "92A09884",
           "so_hoc_vien": 5,
           "hoc_vien": [
-            "NGUYỄN TRẦN MINH TÂM",
-            "TRẦN TRƯƠNG NGỌC SƠN",
-            "DƯƠNG VĂN DUY",
-            "NGUYỄN ĐÌNH HOÀNG PHÚ",
-            "NGUYỄN VĂN NHẬT TÂN"
+            {
+              "ten": "NGUYỄN TRẦN MINH TÂM",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "TRẦN TRƯƠNG NGỌC SƠN",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "DƯƠNG VĂN DUY",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "NGUYỄN ĐÌNH HOÀNG PHÚ",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "NGUYỄN VĂN NHẬT TÂN",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            }
           ],
           "lich_hoc_pdf": "files/lich_hoc/48002K262024.pdf",
           "giay_to_xe_link": "https://csdlgtvt.danang.vn/p/#/gp/07673dd9-c352-4856-9357-ee0d753bb182"
@@ -399,10 +691,26 @@
           "xe": "92A09884",
           "so_hoc_vien": 4,
           "hoc_vien": [
-            "NGUYỄN TUẤN",
-            "VÕ HOÀNG HẢI",
-            "NGUYỄN THỊ NGÂN",
-            "NGUYỄN VĂN HUY"
+            {
+              "ten": "NGUYỄN TUẤN",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "VÕ HOÀNG HẢI",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "NGUYỄN THỊ NGÂN",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "NGUYỄN VĂN HUY",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            }
           ],
           "lich_hoc_pdf": "files/lich_hoc/48002K262032.pdf",
           "giay_to_xe_link": "https://csdlgtvt.danang.vn/p/#/gp/07673dd9-c352-4856-9357-ee0d753bb182"
@@ -426,12 +734,36 @@
           "xe": "43C16443",
           "so_hoc_vien": 6,
           "hoc_vien": [
-            "CAO QUANG LÂM",
-            "BHỜ NƯỚCH VĂN",
-            "NGUYỄN ĐỨC MINH QUY",
-            "NGUYỄN CÔNG QUANG",
-            "NGUYỄN PHAN HOÀI LINH",
-            "LÊ TẤN LỘC"
+            {
+              "ten": "CAO QUANG LÂM",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "BHỜ NƯỚCH VĂN",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "NGUYỄN ĐỨC MINH QUY",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "NGUYỄN CÔNG QUANG",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "NGUYỄN PHAN HOÀI LINH",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "LÊ TẤN LỘC",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            }
           ],
           "lich_hoc_pdf": null,
           "giay_to_xe_link": "https://csdlgtvt.danang.vn/p/#/gp/4d134250-3192-41f1-b96f-251528c0fc28"
@@ -455,11 +787,31 @@
           "xe": "43A29272",
           "so_hoc_vien": 5,
           "hoc_vien": [
-            "NGUYỄN NAM KHÁNH HƯNG",
-            "TRẦN VIẾT HOÀNG",
-            "TRẦN MẠNH DŨNG",
-            "NGUYỄN THỊ BÌNH",
-            "HUỲNH BÁ XUÂN HỒNG"
+            {
+              "ten": "NGUYỄN NAM KHÁNH HƯNG",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "TRẦN VIẾT HOÀNG",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "TRẦN MẠNH DŨNG",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "NGUYỄN THỊ BÌNH",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "HUỲNH BÁ XUÂN HỒNG",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            }
           ],
           "lich_hoc_pdf": "files/lich_hoc/48002K262024.pdf",
           "giay_to_xe_link": "https://csdlgtvt.danang.vn/p/#/gp/014989be-75a7-41d2-bbfc-ad9bf63547da"
@@ -472,10 +824,26 @@
           "xe": "43A29272",
           "so_hoc_vien": 4,
           "hoc_vien": [
-            "TRẦN NGỌC THÙY TRINH",
-            "LÊ MINH KIM THÀNH LONG",
-            "LÊ QUỐC THẮNG",
-            "NGUYỄN HỮU THANH HOÀNG"
+            {
+              "ten": "TRẦN NGỌC THÙY TRINH",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "LÊ MINH KIM THÀNH LONG",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "LÊ QUỐC THẮNG",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "NGUYỄN HỮU THANH HOÀNG",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            }
           ],
           "lich_hoc_pdf": "files/lich_hoc/48002K262032.pdf",
           "giay_to_xe_link": "https://csdlgtvt.danang.vn/p/#/gp/014989be-75a7-41d2-bbfc-ad9bf63547da"
@@ -529,11 +897,31 @@
           "xe": "43A32035",
           "so_hoc_vien": 5,
           "hoc_vien": [
-            "TRẦN MINH HIẾU",
-            "TRƯƠNG THỊ THÙY TRÂM",
-            "NGUYỄN QUANG HUY",
-            "LÊ MINH SANG",
-            "NGUYỄN HỒ NHẬT DUY"
+            {
+              "ten": "TRẦN MINH HIẾU",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "TRƯƠNG THỊ THÙY TRÂM",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "NGUYỄN QUANG HUY",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "LÊ MINH SANG",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "NGUYỄN HỒ NHẬT DUY",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            }
           ],
           "lich_hoc_pdf": "files/lich_hoc/48002K262024.pdf",
           "giay_to_xe_link": "https://csdlgtvt.danang.vn/p/#/gp/3a8abc5a-8dec-426e-bd70-d95acf3aa3cd"
@@ -546,10 +934,26 @@
           "xe": "43A32035",
           "so_hoc_vien": 4,
           "hoc_vien": [
-            "TRẦN THANH ÁNH",
-            "BÙI THANH HƯNG",
-            "TRƯƠNG PHƯỚC THỊNH",
-            "NGUYỄN THÀNH ĐẠT"
+            {
+              "ten": "TRẦN THANH ÁNH",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "BÙI THANH HƯNG",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "TRƯƠNG PHƯỚC THỊNH",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "NGUYỄN THÀNH ĐẠT",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            }
           ],
           "lich_hoc_pdf": "files/lich_hoc/48002K262032.pdf",
           "giay_to_xe_link": "https://csdlgtvt.danang.vn/p/#/gp/3a8abc5a-8dec-426e-bd70-d95acf3aa3cd"
@@ -573,14 +977,46 @@
           "xe": "43C16558",
           "so_hoc_vien": 8,
           "hoc_vien": [
-            "NGUYỄN HỮU MINH",
-            "TRẦN PHƯỚC TÀI",
-            "VÕ NGỌC MẪN",
-            "NGUYỄN QUANG QUYẾN",
-            "TRẦN ANH BẢO HOÀNG",
-            "NGÔ VĂN QUỐC ĐẠT",
-            "ĐINH VIẾT MẠNH TÚ",
-            "VŨ BÙI GIA KHÁNH"
+            {
+              "ten": "NGUYỄN HỮU MINH",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "TRẦN PHƯỚC TÀI",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "VÕ NGỌC MẪN",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "NGUYỄN QUANG QUYẾN",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "TRẦN ANH BẢO HOÀNG",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "NGÔ VĂN QUỐC ĐẠT",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "ĐINH VIẾT MẠNH TÚ",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "VŨ BÙI GIA KHÁNH",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            }
           ],
           "lich_hoc_pdf": null,
           "giay_to_xe_link": "https://csdlgtvt.danang.vn/p/#/gp/d5d10429-cbab-43c6-abc9-31961a770e95"
@@ -624,9 +1060,21 @@
           "xe": "92A39094",
           "so_hoc_vien": 3,
           "hoc_vien": [
-            "CAO THỊ NHẬT LINH",
-            "NGUYỄN DUY KHÁNH",
-            "TRẦN PHƯỚC MẪN"
+            {
+              "ten": "CAO THỊ NHẬT LINH",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "NGUYỄN DUY KHÁNH",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "TRẦN PHƯỚC MẪN",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            }
           ],
           "lich_hoc_pdf": "files/lich_hoc/48002K262024.pdf",
           "giay_to_xe_link": "https://csdlgtvt.danang.vn/p/#/gp/96e2351b-f020-48fe-ba9c-59ea375e1912"
@@ -650,12 +1098,36 @@
           "xe": "43C15844",
           "so_hoc_vien": 4,
           "hoc_vien": [
-            "VŨ ANH HƯNG (Bảo lưu)",
-            "TRƯƠNG LÊ NGỌC VŨ (Bao luu)",
-            "VĂN VŨ ĐẶNG HÀO (Hoc bo sung)",
-            "NGÔ VĂN PHÚ (Hoc bo sung 01- 07)",
-            "NGUYỄN THANH PHÚC",
-            "NGUYỄN THÀNH ĐẠT"
+            {
+              "ten": "VŨ ANH HƯNG (Bảo lưu)",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "TRƯƠNG LÊ NGỌC VŨ (Bao luu)",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "VĂN VŨ ĐẶNG HÀO (Hoc bo sung)",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "NGÔ VĂN PHÚ (Hoc bo sung 01- 07)",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "NGUYỄN THANH PHÚC",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "NGUYỄN THÀNH ĐẠT",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            }
           ],
           "lich_hoc_pdf": null,
           "giay_to_xe_link": "https://csdlgtvt.danang.vn/p/#/gp/546adcde-7361-4214-b13b-e31d034aef6e"
@@ -679,9 +1151,21 @@
           "xe": "92A39094",
           "so_hoc_vien": 3,
           "hoc_vien": [
-            "VÕ HƯNG MINH",
-            "VÕ HƯNG THỊNH",
-            "TRƯƠNG THANH DUNG"
+            {
+              "ten": "VÕ HƯNG MINH",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "VÕ HƯNG THỊNH",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "TRƯƠNG THANH DUNG",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            }
           ],
           "lich_hoc_pdf": "files/lich_hoc/48002K262032.pdf",
           "giay_to_xe_link": "https://csdlgtvt.danang.vn/p/#/gp/96e2351b-f020-48fe-ba9c-59ea375e1912"
@@ -705,10 +1189,26 @@
           "xe": "43C15886",
           "so_hoc_vien": 4,
           "hoc_vien": [
-            "NGUYỄN TRƯỜNG SA",
-            "ĐẶNG CÔNG PHÚ",
-            "HOÀNG NGỌC DŨNG",
-            "PHẠM VĂN KHÁNH"
+            {
+              "ten": "NGUYỄN TRƯỜNG SA",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "ĐẶNG CÔNG PHÚ",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "HOÀNG NGỌC DŨNG",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "PHẠM VĂN KHÁNH",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            }
           ],
           "lich_hoc_pdf": null,
           "giay_to_xe_link": "https://csdlgtvt.danang.vn/p/#/gp/ba26cf9f-9c7c-4dc1-93a3-a8f30b21fed0"
@@ -812,11 +1312,31 @@
           "xe": "43A29259",
           "so_hoc_vien": 5,
           "hoc_vien": [
-            "NGUYỄN THANH PHƯƠNG",
-            "PHẠM TẤN TÀI",
-            "LÊ ANH KHOA",
-            "NGUYỄN QUỲNH CHÂU",
-            "ĐÀO THỊ THÙY TRINH"
+            {
+              "ten": "NGUYỄN THANH PHƯƠNG",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "PHẠM TẤN TÀI",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "LÊ ANH KHOA",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "NGUYỄN QUỲNH CHÂU",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "ĐÀO THỊ THÙY TRINH",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            }
           ],
           "lich_hoc_pdf": "files/lich_hoc/48002K262024.pdf",
           "giay_to_xe_link": "https://csdlgtvt.danang.vn/p/#/gp/80f5d0e6-9932-42f6-839d-0b21457a85c6"
@@ -850,10 +1370,26 @@
           "xe": "43A29259",
           "so_hoc_vien": 4,
           "hoc_vien": [
-            "BÙI THỊ NHƯ MAI",
-            "TRẦN THỊ TỐ TRINH",
-            "HUỲNH HÀ PHƯƠNG UYÊN",
-            "LÊ PHƯỚC TÂN"
+            {
+              "ten": "BÙI THỊ NHƯ MAI",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "TRẦN THỊ TỐ TRINH",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "HUỲNH HÀ PHƯƠNG UYÊN",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "LÊ PHƯỚC TÂN",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            }
           ],
           "lich_hoc_pdf": "files/lich_hoc/48002K262032.pdf",
           "giay_to_xe_link": "https://csdlgtvt.danang.vn/p/#/gp/80f5d0e6-9932-42f6-839d-0b21457a85c6"
@@ -897,11 +1433,31 @@
           "xe": "43A29274",
           "so_hoc_vien": 5,
           "hoc_vien": [
-            "NGUYỄN TẤN ĐẠT",
-            "NGUYỄN THỊ TÂM ĐOAN",
-            "NGUYỄN ĐỨC ĐẠT",
-            "TRẦN THỊ THANH NGÂN",
-            "TRẦN PHƯỚC NGHĨA"
+            {
+              "ten": "NGUYỄN TẤN ĐẠT",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "NGUYỄN THỊ TÂM ĐOAN",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "NGUYỄN ĐỨC ĐẠT",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "TRẦN THỊ THANH NGÂN",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "TRẦN PHƯỚC NGHĨA",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            }
           ],
           "lich_hoc_pdf": "files/lich_hoc/48002K262024.pdf",
           "giay_to_xe_link": "https://csdlgtvt.danang.vn/p/#/gp/0c575272-563b-4bae-8ca5-f063d5c5fabd"
@@ -914,10 +1470,26 @@
           "xe": "43A29274",
           "so_hoc_vien": 4,
           "hoc_vien": [
-            "NGÔ VĂN THẮNG",
-            "TRẦN THANH THIÊN",
-            "NGUYỄN VĂN AN",
-            "TRẦN HỮU THUẬN"
+            {
+              "ten": "NGÔ VĂN THẮNG",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "TRẦN THANH THIÊN",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "NGUYỄN VĂN AN",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "TRẦN HỮU THUẬN",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            }
           ],
           "lich_hoc_pdf": "files/lich_hoc/48002K262032.pdf",
           "giay_to_xe_link": "https://csdlgtvt.danang.vn/p/#/gp/0c575272-563b-4bae-8ca5-f063d5c5fabd"
@@ -961,11 +1533,31 @@
           "xe": "43A27493",
           "so_hoc_vien": 5,
           "hoc_vien": [
-            "HOÀNG VĂN HIỆP",
-            "NGUYỄN TẤN HUÂN",
-            "PHẠM TRỌNG HOÀNG",
-            "NGUYỄN VĂN KHƯƠNG",
-            "HỒ ĐÌNH HIỆU"
+            {
+              "ten": "HOÀNG VĂN HIỆP",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "NGUYỄN TẤN HUÂN",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "PHẠM TRỌNG HOÀNG",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "NGUYỄN VĂN KHƯƠNG",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "HỒ ĐÌNH HIỆU",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            }
           ],
           "lich_hoc_pdf": "files/lich_hoc/48002K262024.pdf",
           "giay_to_xe_link": "https://csdlgtvt.danang.vn/p/#/gp/01fbd7b1-9e13-4d31-ae15-430574962e1f"
@@ -978,10 +1570,26 @@
           "xe": "43A27493",
           "so_hoc_vien": 4,
           "hoc_vien": [
-            "VÕ VĂN ĐOÀN",
-            "HUỲNH NGỌC BẢO KHÁNH",
-            "TRẦN NGUYÊN HỢI",
-            "TRẦN VIẾT DŨNG"
+            {
+              "ten": "VÕ VĂN ĐOÀN",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "HUỲNH NGỌC BẢO KHÁNH",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "TRẦN NGUYÊN HỢI",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "TRẦN VIẾT DŨNG",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            }
           ],
           "lich_hoc_pdf": "files/lich_hoc/48002K262032.pdf",
           "giay_to_xe_link": "https://csdlgtvt.danang.vn/p/#/gp/01fbd7b1-9e13-4d31-ae15-430574962e1f"
@@ -1015,12 +1623,36 @@
           "xe": "43C15886",
           "so_hoc_vien": 6,
           "hoc_vien": [
-            "PHẠM PHÚ QUỐC",
-            "TRẦN VĂN VIÊN",
-            "LÊ XUÂN QUÝ",
-            "LƯƠNG ANH TRIỆU",
-            "HUỲNH KIM PHÁT",
-            "LÊ TẤN LỘC"
+            {
+              "ten": "PHẠM PHÚ QUỐC",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "TRẦN VĂN VIÊN",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "LÊ XUÂN QUÝ",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "LƯƠNG ANH TRIỆU",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "HUỲNH KIM PHÁT",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "LÊ TẤN LỘC",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            }
           ],
           "lich_hoc_pdf": null,
           "giay_to_xe_link": "https://csdlgtvt.danang.vn/p/#/gp/ba26cf9f-9c7c-4dc1-93a3-a8f30b21fed0"
@@ -1074,11 +1706,31 @@
           "xe": "43A29288",
           "so_hoc_vien": 5,
           "hoc_vien": [
-            "NGUYỄN THỊ OANH",
-            "NGUYỄN THANH ĐẠT",
-            "PHẠM MINH HƯNG",
-            "TRƯƠNG QUỐC DŨNG",
-            "LÊ VĂN THÔNG"
+            {
+              "ten": "NGUYỄN THỊ OANH",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "NGUYỄN THANH ĐẠT",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "PHẠM MINH HƯNG",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "TRƯƠNG QUỐC DŨNG",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "LÊ VĂN THÔNG",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            }
           ],
           "lich_hoc_pdf": "files/lich_hoc/48002K262024.pdf",
           "giay_to_xe_link": "https://csdlgtvt.danang.vn/p/#/gp/a5800c55-3254-43cd-9622-fb811f176cfd"
@@ -1091,10 +1743,26 @@
           "xe": "43A29288",
           "so_hoc_vien": 4,
           "hoc_vien": [
-            "ĐỖ MINH QUỐC",
-            "DƯƠNG HOÀNG DUY BẢO",
-            "TRẦN HOÀNG CÔNG MINH",
-            "ĐÀO HOÀNG MINH"
+            {
+              "ten": "ĐỖ MINH QUỐC",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "DƯƠNG HOÀNG DUY BẢO",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "TRẦN HOÀNG CÔNG MINH",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "ĐÀO HOÀNG MINH",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            }
           ],
           "lich_hoc_pdf": "files/lich_hoc/48002K262032.pdf",
           "giay_to_xe_link": "https://csdlgtvt.danang.vn/p/#/gp/a5800c55-3254-43cd-9622-fb811f176cfd"
@@ -1118,10 +1786,26 @@
           "xe": "43A29301",
           "so_hoc_vien": 4,
           "hoc_vien": [
-            "NGUYỄN ĐÌNH DIỄN",
-            "NGUYỄN CÔNG VIÊN",
-            "PHẠM THANH THIÊN",
-            "NGUYỄN THÀNH TUẤN"
+            {
+              "ten": "NGUYỄN ĐÌNH DIỄN",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "NGUYỄN CÔNG VIÊN",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "PHẠM THANH THIÊN",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "NGUYỄN THÀNH TUẤN",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            }
           ],
           "lich_hoc_pdf": "files/lich_hoc/48002K262032.pdf",
           "giay_to_xe_link": "https://csdlgtvt.danang.vn/p/#/gp/7967c39c-f7e0-4691-b70a-2fd9f2a4b147"
@@ -1134,10 +1818,26 @@
           "xe": "43B25295",
           "so_hoc_vien": 4,
           "hoc_vien": [
-            "ĐOÀN NGỌC TÂN",
-            "NGÔ ĐÌNH THÀNH",
-            "HUỲNH HOÀNG GIANG",
-            "ĐINH VĂN VƯƠNG"
+            {
+              "ten": "ĐOÀN NGỌC TÂN",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "NGÔ ĐÌNH THÀNH",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "HUỲNH HOÀNG GIANG",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "ĐINH VĂN VƯƠNG",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            }
           ],
           "lich_hoc_pdf": null,
           "giay_to_xe_link": "https://csdlgtvt.danang.vn/p/#/gp/1378ba10-6a6f-4095-8d18-2570f7e9f635"
@@ -1181,11 +1881,31 @@
           "xe": "43A01510",
           "so_hoc_vien": 5,
           "hoc_vien": [
-            "ĐẶNG NGỌC HẢI",
-            "ĐẶNG NGỌC HUY",
-            "TRẦN NGỌC ANH KHOA",
-            "NGUYỄN QUANG HOÀNG",
-            "NGUYỄN PHAN TRƯỜNG THÀNH"
+            {
+              "ten": "ĐẶNG NGỌC HẢI",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "ĐẶNG NGỌC HUY",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "TRẦN NGỌC ANH KHOA",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "NGUYỄN QUANG HOÀNG",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "NGUYỄN PHAN TRƯỜNG THÀNH",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            }
           ],
           "lich_hoc_pdf": "files/lich_hoc/48002K262024.pdf",
           "giay_to_xe_link": "https://csdlgtvt.danang.vn/p/#/gp/268b059a-0a98-4cec-bb7c-622c87a79c62"
@@ -1198,10 +1918,26 @@
           "xe": "43A01510",
           "so_hoc_vien": 4,
           "hoc_vien": [
-            "TRƯƠNG QUANG TRƯỜNG",
-            "NGUYỄN HOÀNG PHƯƠNG",
-            "NGUYỄN MINH LỢI",
-            "ĐẶNG XUÂN THUẬN"
+            {
+              "ten": "TRƯƠNG QUANG TRƯỜNG",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "NGUYỄN HOÀNG PHƯƠNG",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "NGUYỄN MINH LỢI",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "ĐẶNG XUÂN THUẬN",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            }
           ],
           "lich_hoc_pdf": "files/lich_hoc/48002K262032.pdf",
           "giay_to_xe_link": "https://csdlgtvt.danang.vn/p/#/gp/268b059a-0a98-4cec-bb7c-622c87a79c62"
@@ -1225,9 +1961,21 @@
           "xe": "43A29282",
           "so_hoc_vien": 3,
           "hoc_vien": [
-            "TRẦN HOÀNG QUANG VŨ",
-            "LƯƠNG SỸ HOÀNG PHÚC",
-            "NGÔ QUỐC TOẢN"
+            {
+              "ten": "TRẦN HOÀNG QUANG VŨ",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "LƯƠNG SỸ HOÀNG PHÚC",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "NGÔ QUỐC TOẢN",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            }
           ],
           "lich_hoc_pdf": "files/lich_hoc/48002K262032.pdf",
           "giay_to_xe_link": "https://csdlgtvt.danang.vn/p/#/gp/4d2f23d0-4340-4ef3-a6b5-e9eb503bb9d3"
@@ -1240,10 +1988,26 @@
           "xe": "43C15844",
           "so_hoc_vien": 4,
           "hoc_vien": [
-            "ĐINH NGUYỄN TIẾN ĐẠT",
-            "NGUYỄN VĂN HƯNG",
-            "PHÙNG ĐÌNH THẮNG",
-            "PHẠM VĂN LÂM"
+            {
+              "ten": "ĐINH NGUYỄN TIẾN ĐẠT",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "NGUYỄN VĂN HƯNG",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "PHÙNG ĐÌNH THẮNG",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "PHẠM VĂN LÂM",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            }
           ],
           "lich_hoc_pdf": null,
           "giay_to_xe_link": "https://csdlgtvt.danang.vn/p/#/gp/546adcde-7361-4214-b13b-e31d034aef6e"
@@ -1327,11 +2091,31 @@
           "xe": "43A29211",
           "so_hoc_vien": 5,
           "hoc_vien": [
-            "NGUYỄN VĂN HIỆU",
-            "PHAN CHU HÀN UYỂN",
-            "HOÀNG VÕ ĐỨC TÂM",
-            "TRẦN ANH HOÀNG",
-            "TRƯƠNG QUỐC VIỆT"
+            {
+              "ten": "NGUYỄN VĂN HIỆU",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "PHAN CHU HÀN UYỂN",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "HOÀNG VÕ ĐỨC TÂM",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "TRẦN ANH HOÀNG",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "TRƯƠNG QUỐC VIỆT",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            }
           ],
           "lich_hoc_pdf": "files/lich_hoc/48002K262024.pdf",
           "giay_to_xe_link": "https://csdlgtvt.danang.vn/p/#/gp/4ed66dc5-5d99-4c40-911e-f4e0dedb9e8d"
@@ -1344,10 +2128,26 @@
           "xe": "43A29211",
           "so_hoc_vien": 4,
           "hoc_vien": [
-            "ĐINH NGỌC PHONG NHÃ",
-            "ĐẶNG NHẬT LONG",
-            "LƯƠNG THẾ DƯƠNG",
-            "TRẦN MINH ĐẠT"
+            {
+              "ten": "ĐINH NGỌC PHONG NHÃ",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "ĐẶNG NHẬT LONG",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "LƯƠNG THẾ DƯƠNG",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "TRẦN MINH ĐẠT",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            }
           ],
           "lich_hoc_pdf": "files/lich_hoc/48002K262032.pdf",
           "giay_to_xe_link": "https://csdlgtvt.danang.vn/p/#/gp/4ed66dc5-5d99-4c40-911e-f4e0dedb9e8d"
@@ -1391,11 +2191,31 @@
           "xe": "43A29358",
           "so_hoc_vien": 5,
           "hoc_vien": [
-            "PHẠM VŨ HOÀNG",
-            "NGUYỄN ĐÌNH HUY",
-            "NGUYỄN MINH THẮNG",
-            "LƯU HỒNG PHÚC",
-            "HỒ CÔNG HUY"
+            {
+              "ten": "PHẠM VŨ HOÀNG",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "NGUYỄN ĐÌNH HUY",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "NGUYỄN MINH THẮNG",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "LƯU HỒNG PHÚC",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "HỒ CÔNG HUY",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            }
           ],
           "lich_hoc_pdf": "files/lich_hoc/48002K262024.pdf",
           "giay_to_xe_link": "https://csdlgtvt.danang.vn/p/#/gp/d65001be-4659-466f-ac24-37028429794d"
@@ -1408,10 +2228,26 @@
           "xe": "43A29358",
           "so_hoc_vien": 4,
           "hoc_vien": [
-            "ĐỖ THỊ THANH LAN",
-            "TRẦN TẤN DŨNG",
-            "HOÀNG NHẬT MINH",
-            "TRẦN THỊ THANH PHƯƠNG"
+            {
+              "ten": "ĐỖ THỊ THANH LAN",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "TRẦN TẤN DŨNG",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "HOÀNG NHẬT MINH",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "TRẦN THỊ THANH PHƯƠNG",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            }
           ],
           "lich_hoc_pdf": "files/lich_hoc/48002K262032.pdf",
           "giay_to_xe_link": "https://csdlgtvt.danang.vn/p/#/gp/d65001be-4659-466f-ac24-37028429794d"
@@ -1435,10 +2271,26 @@
           "xe": "43A27590",
           "so_hoc_vien": 4,
           "hoc_vien": [
-            "LÊ THỊ THANH THẢO",
-            "BÙI ĐÌNH DŨNG",
-            "LE VAN CHUẨN",
-            "NGUYỄN DUY LƯƠNG"
+            {
+              "ten": "LÊ THỊ THANH THẢO",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "BÙI ĐÌNH DŨNG",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "LE VAN CHUẨN",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            },
+            {
+              "ten": "NGUYỄN DUY LƯƠNG",
+              "ket_qua_thi": "",
+              "ngay_tot_nghiep": ""
+            }
           ],
           "lich_hoc_pdf": "files/lich_hoc/48002K262032.pdf",
           "giay_to_xe_link": "https://csdlgtvt.danang.vn/p/#/gp/87025927-a01a-4a8a-9228-d88171014f44"

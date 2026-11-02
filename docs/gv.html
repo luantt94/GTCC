@@ -356,9 +356,11 @@ fetch("public_data.json", { cache: "no-store" })
         (detail) => {
           const ul = document.createElement("ul");
           ul.className = "hv-list";
-          k.hoc_vien.forEach(ten => {
+          k.hoc_vien.forEach(hv => {
             const li = document.createElement("li");
-            li.textContent = ten;
+            li.textContent = hv.ket_qua_thi
+              ? `${hv.ten} - ${hv.ket_qua_thi}${hv.ngay_tot_nghiep ? " (" + hv.ngay_tot_nghiep + ")" : ""}`
+              : hv.ten;
             ul.appendChild(li);
           });
           detail.appendChild(ul);

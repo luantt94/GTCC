@@ -18,9 +18,10 @@
    app tự nhận ra (so với qr_codes/_captions.json) và vẽ lại ảnh với tên mới,
    không cần xóa tay.
 
-Lưu ý: public_data.json có TÊN học viên (theo yêu cầu) nhưng KHÔNG có ngày
-sinh / địa chỉ / CMT / ảnh của HỌC VIÊN - những trường đó không bao giờ được
-đọc ra khỏi data.json nội bộ (chỉ lấy tên + điện thoại + ghi chú). SĐT/ngày
+Lưu ý: public_data.json có TÊN + kết quả thi/ngày tốt nghiệp (nếu có) của
+HỌC VIÊN (theo yêu cầu) nhưng KHÔNG có ngày sinh / địa chỉ / CMT / ảnh của
+HỌC VIÊN - những trường đó không bao giờ được đọc ra khỏi data.json nội bộ
+(chỉ lấy tên + điện thoại + ghi chú + kết quả thi + ngày tốt nghiệp). SĐT/ngày
 sinh/địa chỉ CỦA GIÁO VIÊN thì CÓ public (theo yêu cầu) - riêng ảnh chân
 dung (AnhCD) và số CMT/CCCD (SoCMT) trong DSGV thì không bao giờ đọc, kể
 cả của giáo viên.
@@ -428,7 +429,15 @@ def run_pipeline(sources=None):
             for hv in hoc_vien:
                 ghi_chu = (hv.get("ghi_chu") or "").strip()
                 ten_hv = f"{hv['ho_ten']} ({ghi_chu})" if ghi_chu else hv["ho_ten"]
-                hoc_vien_display.append(ten_hv)
+                hoc_vien_display.append(
+                    {
+                        "ten": ten_hv,
+                        # Chỉ công khai kết quả thi (Đạt/chưa) + ngày tốt nghiệp -
+                        # KHÔNG đưa CMND/ngày sinh/địa chỉ học viên lên web public.
+                        "ket_qua_thi": hv.get("ket_qua_thi", ""),
+                        "ngay_tot_nghiep": hv.get("ngay_tot_nghiep", ""),
+                    }
+                )
                 if not _is_bao_luu(ghi_chu):
                     so_hoc_vien_dem += 1
 
