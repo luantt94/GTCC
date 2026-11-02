@@ -152,6 +152,11 @@ def _scan_default_sources():
     lich_hoc = sorted(str(p) for p in DATA_DIR.glob("*.pdf") if "LICH HOC" in p.name.upper())
     dsgv = _latest_by_mtime(DATA_DIR.glob("DSGV_*.xml"))
     dsxtl = _latest_by_mtime(DATA_DIR.glob("DSXTL_*.xml"))
+    ket_qua_thi = _latest_by_mtime(
+        p
+        for p in list(DATA_DIR.glob("*.xlsx")) + list(DATA_DIR.glob("*.xls"))
+        if "THI ĐẠT TỐT NGHIỆP" in p.name.upper()
+    )
     xe_folder = DATA_DIR / DEFAULT_XE_FOLDER_NAME
     ho_so_folder = DATA_DIR / DEFAULT_HO_SO_FOLDER_NAME
     return {
@@ -159,6 +164,7 @@ def _scan_default_sources():
         "lich_hoc_files": lich_hoc,
         "dsgv_file": str(dsgv) if dsgv else "",
         "dsxtl_file": str(dsxtl) if dsxtl else "",
+        "ket_qua_thi_file": str(ket_qua_thi) if ket_qua_thi else "",
         "xe_folder": str(xe_folder) if xe_folder.is_dir() else "",
         "ho_so_folder": str(ho_so_folder) if ho_so_folder.is_dir() else "",
     }
@@ -319,8 +325,15 @@ def run_pipeline(sources=None):
             "nguồn mã QR chính thức cho giáo viên, bắt buộc phải có."
         )
 
+    ket_qua_thi_file = sources.get("ket_qua_thi_file") or ""
+    ket_qua_thi = (
+        convert_excel_to_json.load_ket_qua_thi(ket_qua_thi_file)
+        if ket_qua_thi_file and Path(ket_qua_thi_file).exists()
+        else {}
+    )
+
     data_json_path = APP_DIR / "data.json"
-    data, overwritten = convert_excel_to_json.build_data(bien_che_files)
+    data, overwritten = convert_excel_to_json.build_data(bien_che_files, ket_qua_thi=ket_qua_thi)
     data_json_path.write_text(
         json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8"
     )

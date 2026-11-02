@@ -33,9 +33,19 @@ class PhanXeTab(QWidget):
         layout.addLayout(top)
 
         self.tree = QTreeWidget()
-        self.tree.setColumnCount(5)
-        self.tree.setHeaderLabels(["Họ và tên / Xe - GV - SĐT", "Ngày sinh", "Địa chỉ", "Ghi chú", "Stt"])
-        self.tree.setColumnHidden(4, True)
+        self.tree.setColumnCount(7)
+        self.tree.setHeaderLabels(
+            [
+                "Họ và tên / Xe - GV - SĐT",
+                "Ngày sinh",
+                "Địa chỉ",
+                "Ghi chú",
+                "Kết quả thi",
+                "Ngày tốt nghiệp",
+                "Stt",
+            ]
+        )
+        self.tree.setColumnHidden(6, True)
         self.tree.setAlternatingRowColors(True)
         layout.addWidget(self.tree)
 
@@ -63,7 +73,7 @@ class PhanXeTab(QWidget):
 
         for g in course.get("groups", []):
             header_text = f"{g['giao_vien']}  |  Xe {g['xe']}  |  SĐT {g.get('sdt','')}  ({len(g['hoc_vien'])} HV)"
-            top_item = QTreeWidgetItem([header_text, "", "", "", ""])
+            top_item = QTreeWidgetItem([header_text, "", "", "", "", "", ""])
             top_item.setFirstColumnSpanned(False)
             font = top_item.font(0)
             font.setBold(True)
@@ -77,6 +87,8 @@ class PhanXeTab(QWidget):
                         hv.get("ngay_sinh", ""),
                         hv.get("dia_chi", ""),
                         hv.get("ghi_chu", ""),
+                        hv.get("ket_qua_thi", ""),
+                        hv.get("ngay_tot_nghiep", ""),
                         str(hv.get("stt", "")),
                     ]
                 )
@@ -84,5 +96,5 @@ class PhanXeTab(QWidget):
 
             top_item.setExpanded(True)
 
-        for col in range(4):
+        for col in range(6):
             self.tree.resizeColumnToContents(col)

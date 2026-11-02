@@ -234,6 +234,14 @@ class CapNhatWebTab(QWidget):
         )
         outer.addWidget(self.pick_ho_so_folder)
 
+        self.pick_ket_qua_thi = _SinglePathPicker(
+            "File kết quả thi tốt nghiệp (vd \"SỐ LƯỢNG THI ĐẠT TỐT NGHIỆP ...xlsx\") "
+            "- không bắt buộc",
+            mode="file",
+            file_filter="Excel Files (*.xlsx *.xls)",
+        )
+        outer.addWidget(self.pick_ket_qua_thi)
+
         pass_box = QGroupBox(
             "Mật khẩu xem hồ sơ cá nhân giáo viên (áp dụng cho mọi giáo viên)"
         )
@@ -286,6 +294,7 @@ class CapNhatWebTab(QWidget):
         self.pick_dsgv.set_path(sources.get("dsgv_file", ""))
         self.pick_dsxtl.set_path(sources.get("dsxtl_file", ""))
         self.pick_ho_so_folder.set_path(sources.get("ho_so_folder", ""))
+        self.pick_ket_qua_thi.set_path(sources.get("ket_qua_thi_file", ""))
 
     def _current_sources(self):
         return {
@@ -294,6 +303,7 @@ class CapNhatWebTab(QWidget):
             "dsgv_file": self.pick_dsgv.path(),
             "dsxtl_file": self.pick_dsxtl.path(),
             "ho_so_folder": self.pick_ho_so_folder.path(),
+            "ket_qua_thi_file": self.pick_ket_qua_thi.path(),
         }
 
     def _on_toggle_show_password(self, checked):

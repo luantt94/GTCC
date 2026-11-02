@@ -22,6 +22,7 @@ from pathlib import Path
 
 import openpyxl
 
+import attach_files
 import xls_compat
 
 TITLE_RE = re.compile(r"BI[ÊE]N CH[ẾE] XE KH[ÓO]A\s+(\S+)\s*\(([^)]+)\)", re.UNICODE | re.IGNORECASE)
@@ -72,9 +73,16 @@ def _find_course_sheet(wb):
     return None, None
 
 
-def _parse_groups(ws):
+def _parse_groups(ws, lop="", ket_qua_thi=None):
     """Đọc bảng học viên bắt đầu từ dòng có 'Stt' tới hết sheet.
-    Trả về list groups: [{giao_vien, xe, ca, sdt, hoc_vien: [...]}]."""
+    Trả về list groups: [{giao_vien, xe, ca, sdt, hoc_vien: [...]}].
+
+    ket_qua_thi (tùy chọn): dict đối chiếu kết quả thi tốt nghiệp - xem
+    load_ket_qua_thi(). Nếu có, mỗi học viên được tra theo (tên, ngày sinh,
+    lớp); khớp được thì coi là đã ĐẠT (file nguồn chỉ liệt kê học viên đạt)
+    và lấy luôn ngày tốt nghiệp, không khớp thì để trống (chưa có kết quả,
+    KHÔNG phải trượt)."""
+    ket_qua_thi = ket_qua_thi or {}
     groups = []
     current_group = None
     started = False
@@ -113,6 +121,8 @@ def _parse_groups(ws):
                 groups.append(current_group)
 
             if current_group is not None:
+                key = (attach_files.normalize_name(ho_ten), ngay_sinh, lop)
+                ngay_tot_nghiep = ket_qua_thi.get(key, "")
                 current_group["hoc_vien"].append(
                     {
                         "stt": stt,
@@ -120,6 +130,8 @@ def _parse_groups(ws):
                         "ngay_sinh": ngay_sinh,
                         "dia_chi": dia_chi,
                         "ghi_chu": ghi_chu,
+                        "ket_qua_thi": "Đạt" if ngay_tot_nghiep else "",
+                        "ngay_tot_nghiep": ngay_tot_nghiep,
                     }
                 )
 
@@ -155,7 +167,7 @@ def _load_workbook(path):
     return openpyxl.load_workbook(path, data_only=True)
 
 
-def load_course_from_file(path):
+def load_course_from_file(path, ket_qua_thi=None):
     """Đọc 1 file 'BIÊN CHẾ XE KHÓA xxxx.xlsx/.xls', trả về 1 course dict."""
     wb = _load_workbook(path)
     ws, title = _find_course_sheet(wb)
@@ -170,7 +182,7 @@ def load_course_from_file(path):
     else:
         ma_khoa, lop = title, ""
 
-    groups = _parse_groups(ws)
+    groups = _parse_groups(ws, lop, ket_qua_thi)
     so_hoc_vien = sum(len(g["hoc_vien"]) for g in groups)
     tu_ngay, den_ngay = _find_period(wb, ma_khoa)
 
@@ -187,14 +199,38 @@ def load_course_from_file(path):
     }
 
 
-def build_data(excel_paths):
+def load_ket_qua_thi(path, sheet_name="TỔNGHỢP"):
+    """Đọc file "SỐ LƯỢNG THI ĐẠT TỐT NGHIỆP ...xlsx/.xls" (sheet tổng hợp -
+    MỖI DÒNG LÀ 1 HỌC VIÊN ĐÃ ĐẠT, có cột Họ tên/Ngày sinh/Khóa/Ngày TN) để
+    đối chiếu kết quả thi cho học viên bên 'BIÊN CHẾ XE KHÓA ...'. Trả về
+    dict (tên đã chuẩn hoá, ngày sinh, lớp) -> ngày tốt nghiệp. Không có
+    trong dict này nghĩa là CHƯA CÓ kết quả (chưa thi/chưa đạt), không suy
+    ra là trượt."""
+    wb = _load_workbook(path)
+    sheet = sheet_name if sheet_name in wb.sheetnames else wb.sheetnames[0]
+    ws = wb[sheet]
+    result = {}
+    for row in ws.iter_rows(min_row=2, max_col=8):
+        ho_ten = clean_text(row[1].value)
+        ngay_sinh = clean_text(row[2].value)
+        khoa = clean_text(row[5].value)
+        ngay_tn = clean_text(row[7].value)
+        if not ho_ten or not khoa:
+            continue
+        lop = khoa.split(",")[0].strip()
+        key = (attach_files.normalize_name(ho_ten), ngay_sinh, lop)
+        result[key] = ngay_tn
+    return result
+
+
+def build_data(excel_paths, ket_qua_thi=None):
     """Đọc & gộp nhiều file 'BIÊN CHẾ XE KHÓA xxxx.xlsx' (mỗi file 1 khóa).
     Nếu 2 file trùng mã khóa, file đọc sau ghi đè file đọc trước (trả thêm
-    danh sách mã bị ghi đè)."""
+    danh sách mã bị ghi đè). ket_qua_thi (tùy chọn): xem load_ket_qua_thi()."""
     courses_by_code = {}
     overwritten = []
     for path in excel_paths:
-        c = load_course_from_file(path)
+        c = load_course_from_file(path, ket_qua_thi)
         if c["ma_khoa"] in courses_by_code:
             overwritten.append(c["ma_khoa"])
         courses_by_code[c["ma_khoa"]] = c
