@@ -336,10 +336,10 @@ fetch("public_data.json", { cache: "no-store" })
       title.textContent = `${idx + 1}. Khóa ${k.ma_khoa} (${k.lop})`;
       card.appendChild(title);
 
-      card.appendChild(row("Thời gian đào tạo", `${k.tu_ngay} → ${k.den_ngay}`));
+      card.appendChild(row("📅 Thời gian đào tạo", `${k.tu_ngay} → ${k.den_ngay}`));
 
       const [xeRow, xeDetail] = clickableRow(
-        "Xe tập lái", k.xe, "(bấm để xem giấy tờ xe)",
+        "🚗 Xe tập lái", k.xe, "(bấm để xem giấy tờ xe)",
         (detail) => {
           if (k.giay_to_xe_link && /^https?:\/\//i.test(k.giay_to_xe_link)) {
             detail.innerHTML = `<div class="ext-link"><a href="${esc(k.giay_to_xe_link)}" target="_blank" rel="noopener noreferrer">Bấm để xem thông tin xe tập lái ↗</a></div>`;
@@ -352,7 +352,7 @@ fetch("public_data.json", { cache: "no-store" })
       card.appendChild(xeDetail);
 
       const [hvRow, hvDetail] = clickableRow(
-        "Số lượng học viên", k.so_hoc_vien, "(bấm để xem danh sách)",
+        "👥 Số lượng học viên", k.so_hoc_vien, "(bấm để xem danh sách)",
         (detail) => {
           const ul = document.createElement("ul");
           ul.className = "hv-list";
@@ -370,7 +370,7 @@ fetch("public_data.json", { cache: "no-store" })
       card.appendChild(hvDetail);
 
       const [lhRow, lhDetail] = clickableRow(
-        "Lịch học", "Xem", "(bấm để xem lịch)",
+        "📖 Lịch học", "Xem", "(bấm để xem lịch)",
         (detail) => {
           detail.innerHTML = renderLichHoc(k.lich_hoc);
           if (k.lich_hoc_pdf) {
