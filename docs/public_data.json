@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-01T16:23:04",
+  "generated_at": "2026-11-02T09:53:08",
   "teachers": {
     "48002001": {
       "ten": "Nguyễn Anh Dương",
@@ -33,7 +33,7 @@
             "MAI THU THẢO"
           ],
           "lich_hoc_pdf": "files/lich_hoc/48002K262024.pdf",
-          "giay_to_xe_link": null
+          "giay_to_xe_link": "https://csdlgtvt.danang.vn/p/#/gp/2816adef-5acc-464a-8c9c-0d3a844b17c5"
         },
         {
           "ma_khoa": "48002K262032",
@@ -49,7 +49,7 @@
             "HOÀNG KIM TÙNG"
           ],
           "lich_hoc_pdf": "files/lich_hoc/48002K262032.pdf",
-          "giay_to_xe_link": null
+          "giay_to_xe_link": "https://csdlgtvt.danang.vn/p/#/gp/2816adef-5acc-464a-8c9c-0d3a844b17c5"
         }
       ],
       "ho_so_file": "files/ho_so_gv/48002002.pdf",
@@ -78,7 +78,7 @@
             "NGUYỄN ĐÌNH HUY"
           ],
           "lich_hoc_pdf": null,
-          "giay_to_xe_link": null
+          "giay_to_xe_link": "https://csdlgtvt.danang.vn/p/#/gp/1378ba10-6a6f-4095-8d18-2570f7e9f635"
         }
       ],
       "ho_so_file": "files/ho_so_gv/48002003.pdf",
@@ -106,7 +106,7 @@
             "DƯƠNG HIỂN TÀI"
           ],
           "lich_hoc_pdf": "files/lich_hoc/48002K262024.pdf",
-          "giay_to_xe_link": null
+          "giay_to_xe_link": "https://csdlgtvt.danang.vn/p/#/gp/6d25dbc5-49f8-4689-8011-292aec7439c7"
         },
         {
           "ma_khoa": "48002K262032",
@@ -122,7 +122,7 @@
             "NGUYỄN VĂN TOÀN"
           ],
           "lich_hoc_pdf": "files/lich_hoc/48002K262032.pdf",
-          "giay_to_xe_link": null
+          "giay_to_xe_link": "https://csdlgtvt.danang.vn/p/#/gp/6d25dbc5-49f8-4689-8011-292aec7439c7"
         }
       ],
       "ho_so_file": "files/ho_so_gv/48002004.pdf",
@@ -150,7 +150,7 @@
             "BÙI ĐỨC NHÂN"
           ],
           "lich_hoc_pdf": "files/lich_hoc/48002K262024.pdf",
-          "giay_to_xe_link": null
+          "giay_to_xe_link": "https://csdlgtvt.danang.vn/p/#/gp/da98d908-e0ef-4dbd-b11a-fc504297564c"
         },
         {
           "ma_khoa": "48002K262032",
@@ -166,7 +166,7 @@
             "DƯƠNG VĂN MẠNH"
           ],
           "lich_hoc_pdf": "files/lich_hoc/48002K262032.pdf",
-          "giay_to_xe_link": null
+          "giay_to_xe_link": "https://csdlgtvt.danang.vn/p/#/gp/da98d908-e0ef-4dbd-b11a-fc504297564c"
         }
       ],
       "ho_so_file": "files/ho_so_gv/48002005.pdf",
@@ -194,7 +194,7 @@
             "PHẠM TẤN THỐNG NHẤT"
           ],
           "lich_hoc_pdf": "files/lich_hoc/48002K262024.pdf",
-          "giay_to_xe_link": null
+          "giay_to_xe_link": "https://csdlgtvt.danang.vn/p/#/gp/1dc8cf35-baa9-4207-8a19-61989d39f0e7"
         },
         {
           "ma_khoa": "48002K262032",
@@ -210,7 +210,7 @@
             "ĐINH NGỌC AN"
           ],
           "lich_hoc_pdf": "files/lich_hoc/48002K262032.pdf",
-          "giay_to_xe_link": null
+          "giay_to_xe_link": "https://csdlgtvt.danang.vn/p/#/gp/1dc8cf35-baa9-4207-8a19-61989d39f0e7"
         }
       ],
       "ho_so_file": "files/ho_so_gv/48002006.pdf",
@@ -238,7 +238,7 @@
             "HUỲNH NGỌC ĐỊNH"
           ],
           "lich_hoc_pdf": "files/lich_hoc/48002K262024.pdf",
-          "giay_to_xe_link": null
+          "giay_to_xe_link": "https://csdlgtvt.danang.vn/p/#/gp/639946a2-e656-4055-a4de-3f33f6faf2d"
         },
         {
           "ma_khoa": "48002K262032",
@@ -254,7 +254,7 @@
             "TRỊNH THỊ XUÂN MAI"
           ],
           "lich_hoc_pdf": "files/lich_hoc/48002K262032.pdf",
-          "giay_to_xe_link": null
+          "giay_to_xe_link": "https://csdlgtvt.danang.vn/p/#/gp/639946a2-e656-4055-a4de-3f33f6faf2d"
         }
       ],
       "ho_so_file": "files/ho_so_gv/48002007.pdf",
@@ -292,7 +292,7 @@
             "NGUYỄN TĂNG HỒNG NGỌC"
           ],
           "lich_hoc_pdf": "files/lich_hoc/48002K262024.pdf",
-          "giay_to_xe_link": "https://csdlgtvt.danang.gov.vn/p#/p/gp/4d06240a-3710-43dd-b031-c5bb21ffd783"
+          "giay_to_xe_link": "https://csdlgtvt.danang.vn/p/#/gp/4d06240a-3710-43dd-b031-c5bb21ffd783"
         },
         {
           "ma_khoa": "48002K262032",
@@ -308,7 +308,7 @@
             "ĐẶNG CÔNG TRINH"
           ],
           "lich_hoc_pdf": "files/lich_hoc/48002K262032.pdf",
-          "giay_to_xe_link": "https://csdlgtvt.danang.gov.vn/p#/p/gp/4d06240a-3710-43dd-b031-c5bb21ffd783"
+          "giay_to_xe_link": "https://csdlgtvt.danang.vn/p/#/gp/4d06240a-3710-43dd-b031-c5bb21ffd783"
         }
       ],
       "ho_so_file": "files/ho_so_gv/48002009.pdf",
@@ -345,7 +345,7 @@
             "NGUYỄN VĂN LAI"
           ],
           "lich_hoc_pdf": "files/lich_hoc/48002K262032.pdf",
-          "giay_to_xe_link": "https://csdlgtvt.danang.gov.vn/p#/p/gp/e659419c-cbe3-4c8e-9074-c0c3482e3458"
+          "giay_to_xe_link": "https://csdlgtvt.danang.vn/p/#/gp/e659419c-cbe3-4c8e-9074-c0c3482e3458"
         },
         {
           "ma_khoa": "48002K26C1007",
@@ -361,7 +361,7 @@
             "TRƯƠNG MINH VIỆT"
           ],
           "lich_hoc_pdf": null,
-          "giay_to_xe_link": "https://csdlgtvt.danang.gov.vn/p#/p/gp/4d134250-3192-41f1-b96f-251528c0fc28"
+          "giay_to_xe_link": "https://csdlgtvt.danang.vn/p/#/gp/4d134250-3192-41f1-b96f-251528c0fc28"
         }
       ],
       "ho_so_file": "files/ho_so_gv/48002011.pdf",
@@ -389,7 +389,7 @@
             "NGUYỄN VĂN NHẬT TÂN"
           ],
           "lich_hoc_pdf": "files/lich_hoc/48002K262024.pdf",
-          "giay_to_xe_link": null
+          "giay_to_xe_link": "https://csdlgtvt.danang.vn/p/#/gp/07673dd9-c352-4856-9357-ee0d753bb182"
         },
         {
           "ma_khoa": "48002K262032",
@@ -405,7 +405,7 @@
             "NGUYỄN VĂN HUY"
           ],
           "lich_hoc_pdf": "files/lich_hoc/48002K262032.pdf",
-          "giay_to_xe_link": null
+          "giay_to_xe_link": "https://csdlgtvt.danang.vn/p/#/gp/07673dd9-c352-4856-9357-ee0d753bb182"
         }
       ],
       "ho_so_file": "files/ho_so_gv/48002012.pdf",
@@ -434,7 +434,7 @@
             "LÊ TẤN LỘC"
           ],
           "lich_hoc_pdf": null,
-          "giay_to_xe_link": "https://csdlgtvt.danang.gov.vn/p#/p/gp/4d134250-3192-41f1-b96f-251528c0fc28"
+          "giay_to_xe_link": "https://csdlgtvt.danang.vn/p/#/gp/4d134250-3192-41f1-b96f-251528c0fc28"
         }
       ],
       "ho_so_file": "files/ho_so_gv/48002013.pdf",
@@ -462,7 +462,7 @@
             "HUỲNH BÁ XUÂN HỒNG"
           ],
           "lich_hoc_pdf": "files/lich_hoc/48002K262024.pdf",
-          "giay_to_xe_link": null
+          "giay_to_xe_link": "https://csdlgtvt.danang.vn/p/#/gp/014989be-75a7-41d2-bbfc-ad9bf63547da"
         },
         {
           "ma_khoa": "48002K262032",
@@ -478,7 +478,7 @@
             "NGUYỄN HỮU THANH HOÀNG"
           ],
           "lich_hoc_pdf": "files/lich_hoc/48002K262032.pdf",
-          "giay_to_xe_link": null
+          "giay_to_xe_link": "https://csdlgtvt.danang.vn/p/#/gp/014989be-75a7-41d2-bbfc-ad9bf63547da"
         }
       ],
       "ho_so_file": "files/ho_so_gv/48002014.pdf",
@@ -536,7 +536,7 @@
             "NGUYỄN HỒ NHẬT DUY"
           ],
           "lich_hoc_pdf": "files/lich_hoc/48002K262024.pdf",
-          "giay_to_xe_link": null
+          "giay_to_xe_link": "https://csdlgtvt.danang.vn/p/#/gp/3a8abc5a-8dec-426e-bd70-d95acf3aa3cd"
         },
         {
           "ma_khoa": "48002K262032",
@@ -552,7 +552,7 @@
             "NGUYỄN THÀNH ĐẠT"
           ],
           "lich_hoc_pdf": "files/lich_hoc/48002K262032.pdf",
-          "giay_to_xe_link": null
+          "giay_to_xe_link": "https://csdlgtvt.danang.vn/p/#/gp/3a8abc5a-8dec-426e-bd70-d95acf3aa3cd"
         }
       ],
       "ho_so_file": "files/ho_so_gv/48002018.pdf",
@@ -583,7 +583,7 @@
             "VŨ BÙI GIA KHÁNH"
           ],
           "lich_hoc_pdf": null,
-          "giay_to_xe_link": "https://csdlgtvt.danang.gov.vn/p#/p/gp/d5d10429-cbab-43c6-abc9-31961a770e95"
+          "giay_to_xe_link": "https://csdlgtvt.danang.vn/p/#/gp/d5d10429-cbab-43c6-abc9-31961a770e95"
         }
       ],
       "ho_so_file": "files/ho_so_gv/48002019.pdf",
@@ -629,7 +629,7 @@
             "TRẦN PHƯỚC MẪN"
           ],
           "lich_hoc_pdf": "files/lich_hoc/48002K262024.pdf",
-          "giay_to_xe_link": null
+          "giay_to_xe_link": "https://csdlgtvt.danang.vn/p/#/gp/96e2351b-f020-48fe-ba9c-59ea375e1912"
         }
       ],
       "ho_so_file": "files/ho_so_gv/48002022.pdf",
@@ -658,7 +658,7 @@
             "NGUYỄN THÀNH ĐẠT"
           ],
           "lich_hoc_pdf": null,
-          "giay_to_xe_link": "https://csdlgtvt.danang.gov.vn/p#/p/gp/546adcde-7361-4214-b13b-e31d034aef6e"
+          "giay_to_xe_link": "https://csdlgtvt.danang.vn/p/#/gp/546adcde-7361-4214-b13b-e31d034aef6e"
         }
       ],
       "ho_so_file": "files/ho_so_gv/48002023.pdf",
@@ -684,7 +684,7 @@
             "TRƯƠNG THANH DUNG"
           ],
           "lich_hoc_pdf": "files/lich_hoc/48002K262032.pdf",
-          "giay_to_xe_link": null
+          "giay_to_xe_link": "https://csdlgtvt.danang.vn/p/#/gp/96e2351b-f020-48fe-ba9c-59ea375e1912"
         }
       ],
       "ho_so_file": "files/ho_so_gv/48002024.pdf",
@@ -711,7 +711,7 @@
             "PHẠM VĂN KHÁNH"
           ],
           "lich_hoc_pdf": null,
-          "giay_to_xe_link": "https://csdlgtvt.danang.gov.vn/p#/p/gp/ba26cf9f-9c7c-4dc1-93e3-a8f30b21fed0"
+          "giay_to_xe_link": "https://csdlgtvt.danang.vn/p/#/gp/ba26cf9f-9c7c-4dc1-93a3-a8f30b21fed0"
         }
       ],
       "ho_so_file": "files/ho_so_gv/48002025.pdf",
@@ -819,7 +819,7 @@
             "ĐÀO THỊ THÙY TRINH"
           ],
           "lich_hoc_pdf": "files/lich_hoc/48002K262024.pdf",
-          "giay_to_xe_link": "https://csdlgtvt.danang.gov.vn/p#/p/gp/80f5d0e6-9932-42f6-839d-0b21457a85c6"
+          "giay_to_xe_link": "https://csdlgtvt.danang.vn/p/#/gp/80f5d0e6-9932-42f6-839d-0b21457a85c6"
         }
       ],
       "ho_so_file": "files/ho_so_gv/48002034.pdf",
@@ -856,7 +856,7 @@
             "LÊ PHƯỚC TÂN"
           ],
           "lich_hoc_pdf": "files/lich_hoc/48002K262032.pdf",
-          "giay_to_xe_link": "https://csdlgtvt.danang.gov.vn/p#/p/gp/80f5d0e6-9932-42f6-839d-0b21457a85c6"
+          "giay_to_xe_link": "https://csdlgtvt.danang.vn/p/#/gp/80f5d0e6-9932-42f6-839d-0b21457a85c6"
         }
       ],
       "ho_so_file": "files/ho_so_gv/48002036.pdf",
@@ -904,7 +904,7 @@
             "TRẦN PHƯỚC NGHĨA"
           ],
           "lich_hoc_pdf": "files/lich_hoc/48002K262024.pdf",
-          "giay_to_xe_link": null
+          "giay_to_xe_link": "https://csdlgtvt.danang.vn/p/#/gp/0c575272-563b-4bae-8ca5-f063d5c5fabd"
         },
         {
           "ma_khoa": "48002K262032",
@@ -920,7 +920,7 @@
             "TRẦN HỮU THUẬN"
           ],
           "lich_hoc_pdf": "files/lich_hoc/48002K262032.pdf",
-          "giay_to_xe_link": null
+          "giay_to_xe_link": "https://csdlgtvt.danang.vn/p/#/gp/0c575272-563b-4bae-8ca5-f063d5c5fabd"
         }
       ],
       "ho_so_file": "files/ho_so_gv/48002039.pdf",
@@ -968,7 +968,7 @@
             "HỒ ĐÌNH HIỆU"
           ],
           "lich_hoc_pdf": "files/lich_hoc/48002K262024.pdf",
-          "giay_to_xe_link": null
+          "giay_to_xe_link": "https://csdlgtvt.danang.vn/p/#/gp/01fbd7b1-9e13-4d31-ae15-430574962e1f"
         },
         {
           "ma_khoa": "48002K262032",
@@ -984,7 +984,7 @@
             "TRẦN VIẾT DŨNG"
           ],
           "lich_hoc_pdf": "files/lich_hoc/48002K262032.pdf",
-          "giay_to_xe_link": null
+          "giay_to_xe_link": "https://csdlgtvt.danang.vn/p/#/gp/01fbd7b1-9e13-4d31-ae15-430574962e1f"
         }
       ],
       "ho_so_file": "files/ho_so_gv/48002042.pdf",
@@ -1023,7 +1023,7 @@
             "LÊ TẤN LỘC"
           ],
           "lich_hoc_pdf": null,
-          "giay_to_xe_link": "https://csdlgtvt.danang.gov.vn/p#/p/gp/ba26cf9f-9c7c-4dc1-93e3-a8f30b21fed0"
+          "giay_to_xe_link": "https://csdlgtvt.danang.vn/p/#/gp/ba26cf9f-9c7c-4dc1-93a3-a8f30b21fed0"
         }
       ],
       "ho_so_file": "files/ho_so_gv/48002044.pdf",
@@ -1081,7 +1081,7 @@
             "LÊ VĂN THÔNG"
           ],
           "lich_hoc_pdf": "files/lich_hoc/48002K262024.pdf",
-          "giay_to_xe_link": null
+          "giay_to_xe_link": "https://csdlgtvt.danang.vn/p/#/gp/a5800c55-3254-43cd-9622-fb811f176cfd"
         },
         {
           "ma_khoa": "48002K262032",
@@ -1097,7 +1097,7 @@
             "ĐÀO HOÀNG MINH"
           ],
           "lich_hoc_pdf": "files/lich_hoc/48002K262032.pdf",
-          "giay_to_xe_link": null
+          "giay_to_xe_link": "https://csdlgtvt.danang.vn/p/#/gp/a5800c55-3254-43cd-9622-fb811f176cfd"
         }
       ],
       "ho_so_file": "files/ho_so_gv/48002048.pdf",
@@ -1124,7 +1124,7 @@
             "NGUYỄN THÀNH TUẤN"
           ],
           "lich_hoc_pdf": "files/lich_hoc/48002K262032.pdf",
-          "giay_to_xe_link": null
+          "giay_to_xe_link": "https://csdlgtvt.danang.vn/p/#/gp/7967c39c-f7e0-4691-b70a-2fd9f2a4b147"
         },
         {
           "ma_khoa": "48002K26C1007",
@@ -1140,7 +1140,7 @@
             "ĐINH VĂN VƯƠNG"
           ],
           "lich_hoc_pdf": null,
-          "giay_to_xe_link": null
+          "giay_to_xe_link": "https://csdlgtvt.danang.vn/p/#/gp/1378ba10-6a6f-4095-8d18-2570f7e9f635"
         }
       ],
       "ho_so_file": "files/ho_so_gv/48002049.pdf",
@@ -1188,7 +1188,7 @@
             "NGUYỄN PHAN TRƯỜNG THÀNH"
           ],
           "lich_hoc_pdf": "files/lich_hoc/48002K262024.pdf",
-          "giay_to_xe_link": "https://csdlgtvt.danang.gov.vn/p#/p/gp/268b059a-0a98-4cec-bb7c-622c87a79c62"
+          "giay_to_xe_link": "https://csdlgtvt.danang.vn/p/#/gp/268b059a-0a98-4cec-bb7c-622c87a79c62"
         },
         {
           "ma_khoa": "48002K262032",
@@ -1204,7 +1204,7 @@
             "ĐẶNG XUÂN THUẬN"
           ],
           "lich_hoc_pdf": "files/lich_hoc/48002K262032.pdf",
-          "giay_to_xe_link": "https://csdlgtvt.danang.gov.vn/p#/p/gp/268b059a-0a98-4cec-bb7c-622c87a79c62"
+          "giay_to_xe_link": "https://csdlgtvt.danang.vn/p/#/gp/268b059a-0a98-4cec-bb7c-622c87a79c62"
         }
       ],
       "ho_so_file": "files/ho_so_gv/48002052.pdf",
@@ -1230,7 +1230,7 @@
             "NGÔ QUỐC TOẢN"
           ],
           "lich_hoc_pdf": "files/lich_hoc/48002K262032.pdf",
-          "giay_to_xe_link": "https://csdlgtvt.danang.gov.vn/p#/p/gp/4d2f23d0-4340-4ef3-a6b5-e9eb503bb9d3"
+          "giay_to_xe_link": "https://csdlgtvt.danang.vn/p/#/gp/4d2f23d0-4340-4ef3-a6b5-e9eb503bb9d3"
         },
         {
           "ma_khoa": "48002K26C1007",
@@ -1246,7 +1246,7 @@
             "PHẠM VĂN LÂM"
           ],
           "lich_hoc_pdf": null,
-          "giay_to_xe_link": "https://csdlgtvt.danang.gov.vn/p#/p/gp/546adcde-7361-4214-b13b-e31d034aef6e"
+          "giay_to_xe_link": "https://csdlgtvt.danang.vn/p/#/gp/546adcde-7361-4214-b13b-e31d034aef6e"
         }
       ],
       "ho_so_file": "files/ho_so_gv/48002053.pdf",
@@ -1334,7 +1334,7 @@
             "TRƯƠNG QUỐC VIỆT"
           ],
           "lich_hoc_pdf": "files/lich_hoc/48002K262024.pdf",
-          "giay_to_xe_link": null
+          "giay_to_xe_link": "https://csdlgtvt.danang.vn/p/#/gp/4ed66dc5-5d99-4c40-911e-f4e0dedb9e8d"
         },
         {
           "ma_khoa": "48002K262032",
@@ -1350,7 +1350,7 @@
             "TRẦN MINH ĐẠT"
           ],
           "lich_hoc_pdf": "files/lich_hoc/48002K262032.pdf",
-          "giay_to_xe_link": null
+          "giay_to_xe_link": "https://csdlgtvt.danang.vn/p/#/gp/4ed66dc5-5d99-4c40-911e-f4e0dedb9e8d"
         }
       ],
       "ho_so_file": null,
@@ -1398,7 +1398,7 @@
             "HỒ CÔNG HUY"
           ],
           "lich_hoc_pdf": "files/lich_hoc/48002K262024.pdf",
-          "giay_to_xe_link": "https://csdlgtvt.danang.gov.vn/p#/p/gp/d65001be-4659-466f-ac24-37028429794d"
+          "giay_to_xe_link": "https://csdlgtvt.danang.vn/p/#/gp/d65001be-4659-466f-ac24-37028429794d"
         },
         {
           "ma_khoa": "48002K262032",
@@ -1414,7 +1414,7 @@
             "TRẦN THỊ THANH PHƯƠNG"
           ],
           "lich_hoc_pdf": "files/lich_hoc/48002K262032.pdf",
-          "giay_to_xe_link": "https://csdlgtvt.danang.gov.vn/p#/p/gp/d65001be-4659-466f-ac24-37028429794d"
+          "giay_to_xe_link": "https://csdlgtvt.danang.vn/p/#/gp/d65001be-4659-466f-ac24-37028429794d"
         }
       ],
       "ho_so_file": "files/ho_so_gv/48002063.pdf",
@@ -1441,7 +1441,7 @@
             "NGUYỄN DUY LƯƠNG"
           ],
           "lich_hoc_pdf": "files/lich_hoc/48002K262032.pdf",
-          "giay_to_xe_link": null
+          "giay_to_xe_link": "https://csdlgtvt.danang.vn/p/#/gp/87025927-a01a-4a8a-9228-d88171014f44"
         }
       ],
       "ho_so_file": "files/ho_so_gv/48002064.pdf",
