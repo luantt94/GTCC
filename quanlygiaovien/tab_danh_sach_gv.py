@@ -15,11 +15,13 @@ from io import BytesIO
 from pathlib import Path
 
 from PySide6.QtCore import Qt, QThread, Signal
-from PySide6.QtGui import QGuiApplication, QPixmap
+from PySide6.QtGui import QColor, QGuiApplication, QPixmap
 from PySide6.QtWidgets import (
     QComboBox,
+    QDialog,
     QFileDialog,
     QHBoxLayout,
+    QHeaderView,
     QLabel,
     QLineEdit,
     QListWidget,
@@ -28,15 +30,22 @@ from PySide6.QtWidgets import (
     QPushButton,
     QSplitter,
     QStyle,
+    QTableWidget,
+    QTableWidgetItem,
     QTextEdit,
     QVBoxLayout,
     QWidget,
 )
 
+# Màu tô nền cột "Hạng" trong dialog Danh sách chi tiết - để phân biệt rõ đây
+# là dữ liệu nhập/cập nhật trong app, không phải lấy từ file XML.
+_MAU_COT_HANG = QColor("#fff3b0")
+
 # Các hạng lái xe thường gặp - hiện trong danh sách chọn, nhưng vẫn cho gõ
 # tay hạng khác (vd ghép nhiều hạng "B, C1") vì đây là ô combo có thể sửa.
 CAC_HANG_LAI_XE = ["B", "C1", "C", "D1", "D2", "CE"]
 
+import detail_dialog
 import publish_data
 import roster_xml
 from style import icon as _icon
@@ -100,6 +109,12 @@ class DanhSachGiaoVienTab(QWidget):
         left.setMaximumWidth(360)
         left_layout = QVBoxLayout(left)
         left_layout.setContentsMargins(0, 0, 0, 0)
+
+        self.btn_detail_list = QPushButton(
+            _icon(self, QStyle.StandardPixmap.SP_FileDialogDetailedView), "Danh sách chi tiết"
+        )
+        self.btn_detail_list.clicked.connect(self._on_show_detail_list)
+        left_layout.addWidget(self.btn_detail_list)
 
         self.txt_search = QLineEdit()
         self.txt_search.setPlaceholderText("Tìm kiếm giáo viên theo tên hoặc mã GV...")
@@ -212,6 +227,116 @@ class DanhSachGiaoVienTab(QWidget):
 
     def _on_search_changed(self, text):
         self._load_list(text)
+
+    # ---- dialog danh sách chi tiết (toàn bộ GV + toàn bộ thông tin XML) ----
+    def _on_show_detail_list(self):
+        if not self._teachers:
+            QMessageBox.warning(
+                self, "Chưa có DS giáo viên",
+                "Hãy chọn file DSGV_*.xml ở tab CẬP NHẬT WEB rồi khởi động lại app.",
+            )
+            return
+        teachers = sorted(self._teachers.items(), key=lambda kv: _given_name_key(kv[1]["ten"]))
+
+        columns = []
+        seen = set()
+        for _, rec in teachers:
+            for tag in rec.get("extra", {}):
+                if tag not in seen:
+                    seen.add(tag)
+                    columns.append(tag)
+        columns.append("Hạng")
+        hang_col = len(columns) - 1
+
+        dialog = QDialog(self)
+        dialog.setWindowTitle("Danh sách chi tiết giáo viên")
+        dialog.setWindowFlags(
+            dialog.windowFlags()
+            | Qt.WindowMinimizeButtonHint
+            | Qt.WindowMaximizeButtonHint
+        )
+        dialog.resize(1100, 600)
+        layout = QVBoxLayout(dialog)
+        layout.addWidget(QLabel(
+            "Toàn bộ thông tin từ file DSGV_*.xml. Cột \"Hạng\" (tô vàng) là hạng lái "
+            "xe dạy đã cập nhật trong app, không nằm trong file XML."
+        ))
+
+        filter_row = QHBoxLayout()
+        lbl_total = QLabel()
+        filter_row.addWidget(lbl_total)
+        filter_row.addStretch(1)
+        filter_row.addWidget(QLabel("Lọc:"))
+        txt_filter = QLineEdit()
+        txt_filter.setPlaceholderText("Lọc theo bất kỳ cột...")
+        filter_row.addWidget(txt_filter, 1)
+        layout.addLayout(filter_row)
+
+        table = QTableWidget()
+        table.setColumnCount(len(columns))
+        table.setHorizontalHeaderLabels(columns)
+        table.setEditTriggers(QTableWidget.NoEditTriggers)
+        table.setAlternatingRowColors(True)
+        table.setRowCount(len(teachers))
+        for row, (ma_gv, rec) in enumerate(teachers):
+            extra = rec.get("extra", {})
+            for col, tag in enumerate(columns[:-1]):
+                table.setItem(row, col, QTableWidgetItem(extra.get(tag, "")))
+            hang_item = QTableWidgetItem(publish_data.get_hang_lai_xe(ma_gv))
+            hang_item.setBackground(_MAU_COT_HANG)
+            table.setItem(row, hang_col, hang_item)
+        table.setSortingEnabled(True)
+        table.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeToContents)
+        layout.addWidget(table, 1)
+
+        col_key = "giao_vien"
+        saved_hidden = publish_data.get_detail_dialog_hidden_columns(col_key)
+        if saved_hidden is None:
+            hidden_columns = detail_dialog.default_hidden_columns(
+                columns[:-1], [rec.get("extra", {}) for _, rec in teachers], always_visible=("Hạng",)
+            )
+        else:
+            hidden_columns = set(saved_hidden) & set(columns)
+        detail_dialog.apply_column_visibility(table, columns, hidden_columns)
+
+        def _update_total():
+            visible = detail_dialog.filter_table_rows(table, txt_filter.text())
+            lbl_total.setText(f"Tổng: {visible}/{len(teachers)} giáo viên")
+
+        txt_filter.textChanged.connect(_update_total)
+        _update_total()
+
+        def _on_choose_columns():
+            new_hidden = detail_dialog.choose_visible_columns(dialog, columns, hidden_columns)
+            if new_hidden is None:
+                return
+            hidden_columns.clear()
+            hidden_columns.update(new_hidden)
+            detail_dialog.apply_column_visibility(table, columns, hidden_columns)
+            publish_data.set_detail_dialog_hidden_columns(col_key, sorted(hidden_columns))
+
+        bottom_row = QHBoxLayout()
+        btn_columns = QPushButton(
+            _icon(self, QStyle.StandardPixmap.SP_FileDialogListView), "Chọn cột..."
+        )
+        btn_columns.clicked.connect(_on_choose_columns)
+        bottom_row.addWidget(btn_columns)
+        btn_export = QPushButton(
+            _icon(self, QStyle.StandardPixmap.SP_DialogSaveButton), "Xuất Excel"
+        )
+        btn_export.clicked.connect(
+            lambda: detail_dialog.export_table_to_excel(
+                dialog, table, columns, hang_col, "danh_sach_chi_tiet_giao_vien.xlsx", "Giáo viên"
+            )
+        )
+        bottom_row.addWidget(btn_export)
+        bottom_row.addStretch(1)
+        btn_close = QPushButton("Đóng")
+        btn_close.clicked.connect(dialog.accept)
+        bottom_row.addWidget(btn_close)
+        layout.addLayout(bottom_row)
+
+        dialog.exec()
 
     def _on_select(self, current, _previous):
         if not current:

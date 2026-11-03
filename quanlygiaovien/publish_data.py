@@ -81,6 +81,22 @@ def save_app_settings(settings):
     )
 
 
+# ---------------- cột ẩn/hiện đã chọn trong dialog "Danh sách chi tiết" ----------------
+# `key` phân biệt giáo viên/xe (vd "giao_vien", "xe"). Trả None nếu người
+# dùng chưa từng tự chọn cho key này - khi đó dialog tự tính mặc định (ẩn
+# cột không có dữ liệu) thay vì coi là "ẩn tất cả".
+def get_detail_dialog_hidden_columns(key):
+    settings = load_app_settings()
+    return settings.get("detail_dialog_hidden_columns", {}).get(key)
+
+
+def set_detail_dialog_hidden_columns(key, hidden_columns):
+    settings = load_app_settings()
+    hidden_map = settings.setdefault("detail_dialog_hidden_columns", {})
+    hidden_map[key] = list(hidden_columns)
+    save_app_settings(settings)
+
+
 # ---------------- thông tin riêng từng giáo viên (hạng lái xe dạy) ----------------
 # Lưu local theo MaGV, tách khỏi DSGV/DSXTL (những file này lấy từ nguồn của
 # Sở và có thể bị thay thế bất cứ lúc nào) nên không bị mất khi đổi file XML,

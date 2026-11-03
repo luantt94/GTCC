@@ -2,9 +2,11 @@ import re
 from pathlib import Path
 
 from PySide6.QtCore import Qt, QUrl
-from PySide6.QtGui import QDesktopServices
+from PySide6.QtGui import QColor, QDesktopServices
 from PySide6.QtWidgets import (
+    QDialog,
     QHBoxLayout,
+    QHeaderView,
     QLabel,
     QLineEdit,
     QListWidget,
@@ -22,11 +24,16 @@ from PySide6.QtWidgets import (
 )
 
 import attach_files
+import detail_dialog
 import publish_data
 import roster_xml
 from style import icon as _icon
 
 HISTORY_COLUMNS = ["Mã khóa", "Lớp", "Giáo viên", "SĐT", "Thời gian học", "Số HV", "Tình trạng"]
+
+# Màu tô nền cột "Link giấy tờ xe" trong dialog Danh sách chi tiết - để phân
+# biệt rõ đây là dữ liệu nhập/cập nhật trong app, không phải lấy từ file XML.
+_MAU_COT_LINK = QColor("#fff3b0")
 
 
 class TraCuuXeTab(QWidget):
@@ -91,6 +98,12 @@ class TraCuuXeTab(QWidget):
         left.setMaximumWidth(320)
         left_layout = QVBoxLayout(left)
         left_layout.setContentsMargins(0, 0, 0, 0)
+
+        self.btn_detail_list = QPushButton(
+            _icon(self, QStyle.StandardPixmap.SP_FileDialogDetailedView), "Danh sách chi tiết"
+        )
+        self.btn_detail_list.clicked.connect(self._on_show_detail_list)
+        left_layout.addWidget(self.btn_detail_list)
 
         self.txt_search = QLineEdit()
         self.txt_search.setPlaceholderText("Tìm kiếm theo biển số...")
@@ -194,6 +207,119 @@ class TraCuuXeTab(QWidget):
     def _on_search_changed(self, text):
         self._load_list(text)
 
+    # ---- dialog danh sách chi tiết (toàn bộ xe + toàn bộ thông tin XML) ----
+    def _on_show_detail_list(self):
+        if not self.vehicles:
+            QMessageBox.warning(
+                self, "Chưa có DS xe",
+                "Hãy chọn file DSXTL_*.xml ở tab CẬP NHẬT WEB rồi khởi động lại app.",
+            )
+            return
+        vehicles = list(self.vehicles.items())
+
+        columns = []
+        seen = set()
+        for _, v in vehicles:
+            for tag in v.get("extra", {}):
+                if tag == "DUONGDANANH":
+                    continue
+                if tag not in seen:
+                    seen.add(tag)
+                    columns.append(tag)
+        columns.append("Link giấy tờ xe")
+        link_col = len(columns) - 1
+
+        dialog = QDialog(self)
+        dialog.setWindowTitle("Danh sách chi tiết xe")
+        dialog.setWindowFlags(
+            dialog.windowFlags()
+            | Qt.WindowMinimizeButtonHint
+            | Qt.WindowMaximizeButtonHint
+        )
+        dialog.resize(1100, 600)
+        layout = QVBoxLayout(dialog)
+        layout.addWidget(QLabel(
+            "Toàn bộ thông tin từ file DSXTL_*.xml. Cột \"Link giấy tờ xe\" (tô vàng) "
+            "là dữ liệu đã cập nhật trong app, không nằm trong file XML."
+        ))
+
+        filter_row = QHBoxLayout()
+        lbl_total = QLabel()
+        filter_row.addWidget(lbl_total)
+        filter_row.addStretch(1)
+        filter_row.addWidget(QLabel("Lọc:"))
+        txt_filter = QLineEdit()
+        txt_filter.setPlaceholderText("Lọc theo bất kỳ cột...")
+        filter_row.addWidget(txt_filter, 1)
+        layout.addLayout(filter_row)
+
+        table = QTableWidget()
+        table.setColumnCount(len(columns))
+        table.setHorizontalHeaderLabels(columns)
+        table.setEditTriggers(QTableWidget.NoEditTriggers)
+        table.setAlternatingRowColors(True)
+        table.setRowCount(len(vehicles))
+        for row, (plate, v) in enumerate(vehicles):
+            extra = v.get("extra", {})
+            for col, tag in enumerate(columns[:-1]):
+                table.setItem(row, col, QTableWidgetItem(extra.get(tag, "")))
+            link_item = QTableWidgetItem(publish_data.get_xe_link(plate))
+            link_item.setBackground(_MAU_COT_LINK)
+            table.setItem(row, link_col, link_item)
+        table.setSortingEnabled(True)
+        table.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeToContents)
+        layout.addWidget(table, 1)
+
+        col_key = "xe"
+        saved_hidden = publish_data.get_detail_dialog_hidden_columns(col_key)
+        if saved_hidden is None:
+            hidden_columns = detail_dialog.default_hidden_columns(
+                columns[:-1], [v.get("extra", {}) for _, v in vehicles],
+                always_visible=("Link giấy tờ xe",),
+            )
+        else:
+            hidden_columns = set(saved_hidden) & set(columns)
+        detail_dialog.apply_column_visibility(table, columns, hidden_columns)
+
+        def _update_total():
+            visible = detail_dialog.filter_table_rows(table, txt_filter.text())
+            lbl_total.setText(f"Tổng: {visible}/{len(vehicles)} xe")
+
+        txt_filter.textChanged.connect(_update_total)
+        _update_total()
+
+        def _on_choose_columns():
+            new_hidden = detail_dialog.choose_visible_columns(dialog, columns, hidden_columns)
+            if new_hidden is None:
+                return
+            hidden_columns.clear()
+            hidden_columns.update(new_hidden)
+            detail_dialog.apply_column_visibility(table, columns, hidden_columns)
+            publish_data.set_detail_dialog_hidden_columns(col_key, sorted(hidden_columns))
+
+        bottom_row = QHBoxLayout()
+        btn_columns = QPushButton(
+            _icon(self, QStyle.StandardPixmap.SP_FileDialogListView), "Chọn cột..."
+        )
+        btn_columns.clicked.connect(_on_choose_columns)
+        bottom_row.addWidget(btn_columns)
+        btn_export = QPushButton(
+            _icon(self, QStyle.StandardPixmap.SP_DialogSaveButton), "Xuất Excel"
+        )
+        btn_export.clicked.connect(
+            lambda: detail_dialog.export_table_to_excel(
+                dialog, table, columns, link_col, "danh_sach_chi_tiet_xe.xlsx", "Xe"
+            )
+        )
+        bottom_row.addWidget(btn_export)
+        bottom_row.addStretch(1)
+        btn_close = QPushButton("Đóng")
+        btn_close.clicked.connect(dialog.accept)
+        bottom_row.addWidget(btn_close)
+        layout.addLayout(bottom_row)
+
+        dialog.exec()
+
     def _on_xe_changed(self, current, _previous=None):
         plate = current.data(Qt.ItemDataRole.UserRole) if current else None
         v = self.vehicles.get(plate)
@@ -234,7 +360,15 @@ class TraCuuXeTab(QWidget):
         plate = current.data(Qt.ItemDataRole.UserRole) if current else None
         if not plate:
             return
-        publish_data.set_xe_link(plate, self.txt_xe_link.text())
+        link = self.txt_xe_link.text().strip()
+        if link and not re.match(r"^https?://", link, re.IGNORECASE):
+            QMessageBox.warning(
+                self, "Link không hợp lệ",
+                "Link giấy tờ xe phải bắt đầu bằng http:// hoặc https://\n"
+                "(để trống nếu muốn xóa link).",
+            )
+            return
+        publish_data.set_xe_link(plate, link)
         QMessageBox.information(
             self, "Đã lưu",
             "Đã lưu link giấy tờ xe. Bấm 'Cập nhật && Đăng lên web' ở tab CẬP NHẬT WEB "
