@@ -90,13 +90,6 @@ class TraCuuTab(QWidget):
         self.tbl_hoc_vien.horizontalHeader().setStretchLastSection(True)
         self.detail_tabs.addTab(self.tbl_hoc_vien, "Danh sách học viên")
 
-        self.tbl_lich_hoc = QTableWidget()
-        self.tbl_lich_hoc.setColumnCount(5)
-        self.tbl_lich_hoc.setHorizontalHeaderLabels(["Ngày", "Thứ", "Sáng", "Chiều", "Tối"])
-        self.tbl_lich_hoc.setEditTriggers(QTableWidget.NoEditTriggers)
-        self.tbl_lich_hoc.horizontalHeader().setStretchLastSection(True)
-        self.detail_tabs.addTab(self.tbl_lich_hoc, "Lịch học")
-
         detail_layout.addWidget(self.detail_tabs)
         splitter.addWidget(detail_widget)
         splitter.setStretchFactor(0, 1)
@@ -166,7 +159,6 @@ class TraCuuTab(QWidget):
             self._render_detail(rows[0])
         else:
             self.tbl_hoc_vien.setRowCount(0)
-            self.tbl_lich_hoc.setRowCount(0)
 
     def _render_hang_summary(self, rows):
         summary = self.model.summarize_by_hang(rows)
@@ -188,7 +180,6 @@ class TraCuuTab(QWidget):
 
     def _render_detail(self, r):
         self._render_hoc_vien(r["group"])
-        self._render_lich_hoc(r["course"])
 
     def _render_hoc_vien(self, group):
         hoc_vien = group.get("hoc_vien", [])
@@ -198,18 +189,3 @@ class TraCuuTab(QWidget):
             for col, val in enumerate(values):
                 self.tbl_hoc_vien.setItem(row, col, QTableWidgetItem(val))
         self.tbl_hoc_vien.resizeColumnsToContents()
-
-    def _render_lich_hoc(self, course):
-        days = [d for d in course.get("lich_hoc", []) if d["sang"] or d["chieu"] or d["toi"]]
-        self.tbl_lich_hoc.setRowCount(len(days))
-        for row, d in enumerate(days):
-            values = [
-                f"{d['label']} ({d['date']})" if d["label"] else d["date"],
-                d["thu"],
-                d["sang"],
-                d["chieu"],
-                d["toi"],
-            ]
-            for col, val in enumerate(values):
-                self.tbl_lich_hoc.setItem(row, col, QTableWidgetItem(val))
-        self.tbl_lich_hoc.resizeColumnsToContents()
